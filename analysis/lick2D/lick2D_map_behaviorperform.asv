@@ -1,0 +1,46 @@
+function lick2D_map_behaviorperform()
+close all;
+dir_base = fetch1(IMG.Parameters & 'parameter_name="dir_root_save"', 'parameter_value'); 
+
+
+key.subject_id = 463195;
+key.session =3;
+key.number_of_bins=4;
+
+rel = EXP2.BehaviorTrial*EXP2.TrialLickBlock*EXP2.TrialLickPort & key;
+
+B=fetch(rel, '*');
+%% Rescaling, rotation, and binning
+[POS] = fn_rescale_and_rotate_lickport_pos (key);
+pos_x = POS.pos_x;
+pos_z = POS.pos_z;
+
+x_bins = linspace(-1, 1,key.number_of_bins+1);
+x_bins_centers=x_bins(1:end-1)+mean(diff(x_bins))/2;
+
+z_bins = linspace(-1,1,key.number_of_bins+1);
+z_bins_centers=z_bins(1:end-1)+mean(diff(z_bins))/2;
+
+x_bins(1)= -inf;
+x_bins(end)= inf;
+z_bins(1)= -inf;
+z_bins(end)= inf;
+
+
+
+%% Compute maps
+[hhhhh, ~, ~, x_idx, z_idx] = histcounts2(pos_x,pos_z,x_bins,z_bins);
+
+outcome ={B.outcome};
+
+
+    for i_x=1:1:numel(x_bins_centers)
+        for i_z=1:1:numel(z_bins_centers)
+            idx = find((x_idx==i_x)  &  (z_idx==i_z));
+            
+            map_xz_spikes_binned(i_z,i_x) = sum(fr_all(i_roi,idx));
+
+
+
+end
+end
