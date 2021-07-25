@@ -27,8 +27,11 @@ classdef ROIInfluence5 < dj.Computed
     properties
         %         keySource = (EXP2.SessionEpoch & 'flag_photostim_epoch =1' & IMG.ROI & IMG.PlaneCoordinates)& (STIMANAL.SessionEpochsIncluded& 'stimpower_percent=15' & 'flag_include=1')
         %                 keySource = EXP2.SessionEpoch & 'flag_photostim_epoch =1' & IMG.ROI;
-        keySource = (EXP2.SessionEpoch & 'flag_photostim_epoch =1' & IMG.FOVEpoch) & (STIMANAL.SessionEpochsIncluded& 'stimpower_percent=15' & 'flag_include=1') & IMG.Volumetric
         
+        
+%         keySource = (EXP2.SessionEpoch & 'flag_photostim_epoch =1' & IMG.FOVEpoch) & (STIMANAL.SessionEpochsIncluded& 'stimpower_percent=15' & 'flag_include=1') & IMG.Volumetric
+                keySource = (EXP2.SessionEpoch & 'flag_photostim_epoch =1' & IMG.FOVEpoch) & 'subject_id=481102' & IMG.Volumetric
+
     end
     methods(Access=protected)
         function makeTuples(self, key)
@@ -136,6 +139,7 @@ classdef ROIInfluence5 < dj.Computed
                 %                 F=gather(F);
                 
                 parfor i_g = 1:1:numel(group_list)
+%                 for i_g = 1:1:numel(group_list)
                     k1=key;
                     k1.photostim_group_num = group_list(i_g);
                     g_x = fetch1(IMG.PhotostimGroupROI & k1,'photostim_center_x');
@@ -205,6 +209,11 @@ classdef ROIInfluence5 < dj.Computed
                         [StimStat] = fn_compute_photostim_delta_influence5 (f_trace, target_photostim_frames_clean,baseline_frames_clean, timewind_response, time);
                         
                         k_response(i_r).response_mean = StimStat.response_mean;
+                        
+                        if isnan(StimStat.response_mean)
+                           a=1 
+                        end
+                            
                         k_response(i_r).response_std = StimStat.response_std;
                         k_response(i_r).response_coefvar = StimStat.response_coefvar;
                         k_response(i_r).response_fanofactor = StimStat.response_fanofactor;

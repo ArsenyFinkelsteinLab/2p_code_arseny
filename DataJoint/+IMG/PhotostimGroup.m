@@ -15,7 +15,7 @@ classdef PhotostimGroup < dj.Imported
     methods(Access=protected)
         function makeTuples(self, key)
             
-            %% HERE WE ASSUME THAT A PHOTOSTIMULATION HAPPENS BETWEEN "FRAMES", either between single *frames* during single plane imaging, or between *planes* durint volumetric imaging
+            %% HERE WE ASSUME THAT A PHOTOSTIMULATION HAPPENS BETWEEN "FRAMES", either between single *frames* during single plane imaging, or between *planes* during volumetric imaging
             %              photostim_duration_in_frames = 1; % this is experiment dependent. Here the photostim lasts exactly for one frame
             
             % below will also find if the same stimulus was applied for several consequetive frames
@@ -61,7 +61,7 @@ classdef PhotostimGroup < dj.Imported
                 stim_frame= stim_frame - stim_frame(1) +1;  % relative to the beginning of the session epoch, *not* to the entire session
                 
                 seq = seq(1:same_photostim_duration_in_frames:end);
-                seq=[seq seq seq seq seq seq seq seq]; % in case the sequence is too short and has to repeat itself
+                seq=[seq seq seq seq seq seq seq seq seq seq seq seq seq seq seq seq seq seq seq seq seq seq seq]; % in case the sequence is too short and has to repeat itself
                 seq=seq(1:1:numel(stim_frame));
                 stim_sequence = seq;
                 

@@ -1,5 +1,7 @@
 function ANALYSIS_PHOTOSTIM()
 
+photostim_direct_new()
+
 
 populate(STIM.ROIInfluence5); % also populates STIM.ROIInfluenceTrace
 populate(STIM.ROIResponseDirect);

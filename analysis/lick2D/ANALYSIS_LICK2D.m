@@ -1,8 +1,11 @@
 
+% Behavior data
+lick2D_behaviorperform
+lick2D_video_licking_stats
+lick2D_video_yawmemory_across_blocks
 
 
-
-
+% Neural data
 lick2D_map_onFOV_corr
 lick2D_map_onFOV_angles
 lick2D_map_onFOV_clusters
@@ -12,7 +15,8 @@ lick2D_map
 lick2D_map_meso
 lick2D_map_photostim
 
-lick2D_behaviorperform
+
+
 lick2D_map_onFOV_clusters_shapeandselectivity_meso
 lick2D_map_onFOV_clusters_shape_meso
 lick2D_map_onFOV_clusters_selectivity_meso

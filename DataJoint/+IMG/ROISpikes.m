@@ -31,7 +31,7 @@ classdef ROISpikes < dj.Imported
             key_ROITrace=fetch(IMG.ROI&key,'ORDER BY roi_number');
             numberROI=numel(key_ROITrace);
             
-                      
+            
             previous_plane_num =0;
             previous_fov_num =0;
             s2p_roi=0;
@@ -43,8 +43,8 @@ classdef ROISpikes < dj.Imported
             start_frame = fetchn(IMG.SessionEpochFramePlane & key & kkkk,'session_epoch_plane_start_frame');
             end_frame = fetchn(IMG.SessionEpochFramePlane & key & kkkk,'session_epoch_plane_end_frame');
             missing_frames_epoch_plane = fetchn(IMG.SessionEpochFramePlane & key & kkkk,'missing_frames_epoch_plane');
-
-                    
+            
+            
             for iROI=1:1:numberROI
                 iROI;
                 
@@ -61,7 +61,12 @@ classdef ROISpikes < dj.Imported
                         S2P=load([local_path_plane_registered 'Fall.mat']);
                     catch
                         local_path_plane_registered(1)='G';
-                        S2P=load([local_path_plane_registered 'Fall.mat']);
+                        try
+                            S2P=load([local_path_plane_registered 'Fall.mat']);
+                        catch
+                            disp('Suite2p output file not found')
+                            return
+                        end
                     end
                     s2p_roi = 1;
                     

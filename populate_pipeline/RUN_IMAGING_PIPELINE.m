@@ -18,10 +18,11 @@ dir_base_behavior ='G:\Arseny\2p\BPOD_behavior\';
 % dir_behavioral_data = [dir_base_behavior 'anm462455_AF23\'];
 % dir_behavioral_data = [dir_base_behavior 'anm463190_AF26\'];
 % dir_behavioral_data = [dir_base_behavior 'anm463189_AF27\'];
-dir_behavioral_data = [dir_base_behavior 'anm464724_AF28\'];
+% dir_behavioral_data = [dir_base_behavior 'anm464724_AF28\'];
 % dir_behavioral_data = [dir_base_behavior 'anm464725_AF29\'];
 % dir_behavioral_data = [dir_base_behavior 'anm463192_AF25\'];
 % dir_behavioral_data = [dir_base_behavior 'anm464728_AF32\'];
+dir_behavioral_data = [dir_base_behavior 'anm481102_AF33\'];
 
 
 % populate_somatotopy; %populate EXP2.SessionEpochSomatotopy, in case somatopic mapping was done
@@ -54,7 +55,7 @@ flag_multi_session_registration = 0;
 %% STEP 1 - could be run independelty of suite2p
 populate_Session_without_behavior (user_name, rig); % populate session without behavior
 % populate_behavior_WaterCue (dir_behavioral_data, behavioral_protocol_name);
-populate_behavior_Lick2D(dir_behavioral_data, behavioral_protocol_name);
+% populate_behavior_Lick2D(dir_behavioral_data, behavioral_protocol_name);
 
 populate_Session_and_behavior (dir_behavioral_data, user_name, rig); % populate session with behavior
 
@@ -77,7 +78,7 @@ populate(IMG.Volumetric);
 populate(IMG.ROI); %also populates IMG.ROIdepth
 populate(IMG.ROIGood); 
 populate(IMG.ROITrace); 
-% populate(IMG.ROISpikes); 
+populate(IMG.ROISpikes);
 
 populate(IMG.ROIdeltaF); % IMG.ROIdeltaFMean IMG.ROIFMean
 % populate(ANLI.IncludeROI4);
@@ -101,7 +102,10 @@ populate(IMG.PhotostimGroup); % also IMG.PhotostimProtocol
 populate(IMG.PhotostimGroupROI); % also populates IMG.PhotostimDATfile;
 
 populate(STIM.ROIInfluence5); % also populates STIM.ROIInfluenceTrace
-populate(STIM.ROIResponseDirect);
+populate(STIM.ROIResponseDirect);  
+
+%%%% STIMANAL.NeuronOrControl5 requires STIM.ROIResponseDirect5  ==> debug
+populate(STIM.ROIResponseDirect5);  
 
 populate(STIMANAL.NeuronOrControl5);
 populate(STIMANAL.InfluenceDistance55);

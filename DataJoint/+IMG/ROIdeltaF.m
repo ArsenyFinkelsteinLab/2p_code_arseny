@@ -43,8 +43,8 @@ classdef ROIdeltaF < dj.Imported
                 Fs=smoothdata(F,'gaussian',running_window*smooth_window_multiply_factor); % for baseline estimation only
                 
                 running_min=movmin(Fs,[running_window*frame_rate running_window*frame_rate],'Endpoints','fill');
-                baseline=movmax(running_min,[running_window*frame_rate running_window*frame_rate],'Endpoints','fill'); %running max of the running min
-                baseline2=smoothdata(baseline,'gaussian',running_window*frame_rate);
+                baseline=movmax(running_min,[running_window*frame_rate running_window*frame_rate],'Endpoints','fill')+eps; %running max of the running min
+                baseline2=smoothdata(baseline,'gaussian',running_window*frame_rate)+eps;
                 dFF = (F-baseline2)./baseline2; %deltaF over F
                 
                 
@@ -57,11 +57,11 @@ classdef ROIdeltaF < dj.Imported
                 
                 key_mean_dff(iROI).session_epoch_type = key.session_epoch_type;
                 key_mean_dff(iROI).session_epoch_number = key.session_epoch_number;
-                key_mean_dff(iROI).mean_dff = mean(dFF);
+                key_mean_dff(iROI).mean_dff = nanmean(dFF);
                 
                 key_mean_f(iROI).session_epoch_type = key.session_epoch_type;
                 key_mean_f(iROI).session_epoch_number = key.session_epoch_number;
-                key_mean_f(iROI).mean_f = mean(F);
+                key_mean_f(iROI).mean_f = nanmean(F);
 
                 
             end

@@ -3,13 +3,13 @@ close all;
 dir_base = fetch1(IMG.Parameters & 'parameter_name="dir_root_save"', 'parameter_value'); 
 
 
-% key.subject_id = 463195;
-% key.session =3;
+key.subject_id = 464725;
+key.session =6;
 
-key.subject_id = 463190;
-key.session =4;
+% key.subject_id = 463189;
+% key.session =5;
 
-key.number_of_bins=4;
+key.number_of_bins=3;
 
 rel = EXP2.BehaviorTrial*EXP2.TrialLickBlock*EXP2.TrialLickPort & key;
 
