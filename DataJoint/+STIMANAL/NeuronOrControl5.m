@@ -5,7 +5,7 @@ photostim_group_num   : int #
 ---
 neurons_or_control     :boolean              # 1 - neurons, 0 control
 -> IMG.ROI
-num_targets            : boolean             # number of neurons or control sites
+num_targets            : int             # number of neurons or control sites
 %}
 
 

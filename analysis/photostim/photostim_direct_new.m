@@ -36,8 +36,14 @@ close all;
 % key.subject_id = 464728;
 % key.session =2;
 
-key.subject_id = 481102;
-key.session =1;
+key.subject_id = 486673;
+key.session =5;
+
+% key.subject_id = 486668;
+% key.session =5;
+
+% key.subject_id = 481101;
+% key.session =1;
 
 % Take photostim groups from here:
 epoch_list = fetchn(EXP2.SessionEpoch & 'session_epoch_type="spont_photo"' & key, 'session_epoch_number','ORDER BY session_epoch_number');

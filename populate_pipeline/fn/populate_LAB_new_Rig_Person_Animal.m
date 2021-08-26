@@ -13,11 +13,11 @@ function populate_LAB_new_Rig_Person_Animal()
 %% Should be inserted for each new animal
 %-----------------------------------
 
-subject_id=481102;
-cage_num=184879;
+subject_id=481101;
+cage_num=189176;
 dob='2020-09-11';
-sex='M';
-surgery_date='2021-03-03';
+sex='F';
+surgery_date='2021-03-30';
 
 insert(LAB.Subject, {subject_id, 'ars',cage_num ,dob,sex,'Other'} );
 

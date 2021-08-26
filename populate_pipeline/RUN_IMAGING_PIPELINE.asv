@@ -23,9 +23,9 @@ dir_base_behavior ='G:\Arseny\2p\BPOD_behavior\';
 % dir_behavioral_data = [dir_base_behavior 'anm463192_AF25\'];
 % dir_behavioral_data = [dir_base_behavior 'anm464728_AF32\'];
 % dir_behavioral_data = [dir_base_behavior 'anm481102_AF33\'];
-dir_behavioral_data = [dir_base_behavior 'anm486673_AF34\'];
+% dir_behavioral_data = [dir_base_behavior 'anm486673_AF34\'];
 % dir_behavioral_data = [dir_base_behavior 'anm486668_AF35\'];
-% dir_behavioral_data = [dir_base_behavior 'anm481101_AF36\'];
+dir_behavioral_data = [dir_base_behavior 'anm481101_AF36\'];
 
 
 % populate_somatotopy; %populate EXP2.SessionEpochSomatotopy, in case somatopic mapping was done

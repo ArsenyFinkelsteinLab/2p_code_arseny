@@ -5,10 +5,14 @@ dir_current_fig = [dir_base  '\Photostim\photostim_traces\coupled\'];
 
 % key.subject_id = 447991;
 % key.session =10;
-key.subject_id = 462458;
-key.session =1;
+% key.subject_id = 462458;
+% key.session =1;
 % key.subject_id = 445980;
 % key.session =2;
+
+key.subject_id = 486673;
+key.session =1;
+
 epoch_list = fetchn(EXP2.SessionEpoch & 'session_epoch_type="spont_photo"' & key, 'session_epoch_number','ORDER BY session_epoch_number');
 % key.session_epoch_number = epoch_list(end); % to take the photostim groups from
 key.session_epoch_number = epoch_list(3); % to take the photostim groups from
@@ -32,7 +36,7 @@ catch
 end
 min_distance_to_closest_target_pixels=min_distance_to_closest_target/pix2dist;
 
-rel=STIM.ROIResponse & 'response_p_value<=0.05' & sprintf('response_distance_pixels >%.2f', min_distance_to_closest_target_pixels);
+rel=STIM.ROIInfluence5 & 'response_p_value1<=0.05' & sprintf('response_distance_pixels >%.2f', min_distance_to_closest_target_pixels);
 
 if flag_baseline_trial_or_avg==0 %baseline averaged across trials
     dir_suffix= 'baseline_avg';
@@ -140,7 +144,7 @@ for i_g=1:1:numel(group_list)
         xlabel('Time (s)');
         ylabel('\Delta F/F')    
 %         title(sprintf('Coupled responses \n Target # %d   ROI=%d \n Distance = %.1f (um), Amplitude %.2f, p-val=%.6f  \n',G(i_g).photostim_group_num, k2.roi_number, DATA(i_r).response_distance_pixels * pix2dist,  DATA(i_r).response_mean,  DATA(i_r).response_p_value));
-        title(sprintf('Coupled responses \n Target # %d   ROI=%d \n Distance lateral = %.1f (um) \n Distance axial = %.1f (um) \n Distance 3D = %.1f (um)\n Amplitude %.2f, p-val=%.6f  \n',G(i_g).photostim_group_num, k2.roi_number, DATA(i_r).response_distance_lateral_um, DATA(i_r).response_distance_axial_um, DATA(i_r).response_distance_3d_um, DATA(i_r).response_mean,  DATA(i_r).response_p_value));
+        title(sprintf('Coupled responses \n Target # %d   ROI=%d \n Distance lateral = %.1f (um) \n Distance axial = %.1f (um) \n Distance 3D = %.1f (um)\n Amplitude %.2f, p-val=%.6f  \n',G(i_g).photostim_group_num, k2.roi_number, DATA(i_r).response_distance_lateral_um, DATA(i_r).response_distance_axial_um, DATA(i_r).response_distance_3d_um, DATA(i_r).response_mean,  DATA(i_r).response_p_value1));
 
         
 %         title(sprintf('Photostim group=%d    ROI=%d    \n p=%.6f  distance = %.1f (pixels) response mean %.2f',G(i_g).photostim_group_num, k2.roi_number, response_p_value(i_r), response_distance_pixels(i_r), response_mean(i_r)));

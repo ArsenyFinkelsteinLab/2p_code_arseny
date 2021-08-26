@@ -28,8 +28,8 @@ dir_current_fig = [dir_base  '\Photostim\photostim_distance\'];
 % key.subject_id = 464728;
 % key.session =2;
 
-key.subject_id = 481102;
-key.session =1;
+key.subject_id = 486668;
+key.session =3;
 
 
 flag_distance_flag =0; % 0 lateral distance; 1 axial distance;  2  3d distance
@@ -98,7 +98,7 @@ filename = [filename distance_type_name];
 G_controls=(IMG.PhotostimGroupROI -STIM.ROIResponseDirect) & key;
 G_controls = fetch(G_controls,'*');
 % G_neurons=fetch(IMG.PhotostimGroupROI & key  & 'flag_neuron_or_control=1' & sprintf('distance_to_closest_neuron <= %d', distance_to_closest_neuron),'*');
-G_neurons=fetch(IMG.PhotostimGroupROI & (IMG.PhotostimGroup & (STIM.ROIResponseDirect & key & 'response_p_value<0.01')) ,'*');
+G_neurons=fetch(IMG.PhotostimGroupROI & (IMG.PhotostimGroup & (STIM.ROIResponseDirect & key & 'response_p_value1<0.01')) ,'*');
 
 
 
@@ -116,7 +116,7 @@ for i_epoch=1:1:numel(epoch_list)
     %     rel_group_neurons= rel & (IMG.PhotostimGroup & (IMG.PhotostimGroupROI & 'flag_neuron_or_control=1'  & sprintf('distance_to_closest_neuron <= %d', distance_to_closest_neuron) & k1)) ;
     
     %     rel_target_neurons =  IMG.PhotostimGroup &(STIM.ROIResponseDirect & k1 & 'response_p_value<=0.05');
-    rel_target_neurons =  IMG.PhotostimGroup &(STIM.ROIResponseDirect & k1 & 'response_p_value<=0.01');
+    rel_target_neurons =  IMG.PhotostimGroup &(STIM.ROIResponseDirect & k1 & 'response_p_value1<=0.01');
     
     number_of_target_neurons = rel_target_neurons.count;
     rel_group_neurons= rel & rel_target_neurons;
@@ -134,7 +134,7 @@ for i_epoch=1:1:numel(epoch_list)
     hold on;
     %     rel_target_controls =  (IMG.PhotostimGroup & (IMG.PhotostimGroupROI & 'flag_neuron_or_control=0' &  sprintf('distance_to_closest_neuron > %d', min_distance_to_closest_neuron) & k1));
     % rel_target_controls= IMG.PhotostimGroup &((IMG.PhotostimGroupROI -STIM.ROIResponseDirect)& k1) ;
-    rel_target_controls = IMG.PhotostimGroup &(STIM.ROIResponseDirect & k1 & 'response_p_value>0.1');
+    rel_target_controls = IMG.PhotostimGroup &(STIM.ROIResponseDirect & k1 & 'response_p_value1>0.1');
     
     number_of_target_controls = rel_target_controls.count;
     rel_group_controls= rel & rel_target_controls;

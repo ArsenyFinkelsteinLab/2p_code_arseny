@@ -9,7 +9,7 @@ populate(STIM.ROIResponseDirect);
 populate(STIMANAL.NeuronOrControl5);
 populate(STIMANAL.InfluenceDistance55);
 
-
+ populate(STIMANAL.ROIGraphAll)
 
 
 

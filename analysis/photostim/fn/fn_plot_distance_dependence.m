@@ -33,7 +33,7 @@ end
 %% Plotting response from all signficantly influenced neurons as dots
 
 
-S_signif=fetch(rel & sprintf('response_p_value <%.10f',response_p_value),'*');
+S_signif=fetch(rel & sprintf('response_p_value1 <%.10f',response_p_value),'*');
 if flag_distance_flag==0 % lateral distance
     d_sig=[S_signif.response_distance_lateral_um];
 elseif flag_distance_flag==1 % axial distance (depth)

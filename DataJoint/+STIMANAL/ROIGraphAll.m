@@ -15,7 +15,7 @@ photostim_group_num_list          : blob                # (pixels)
 classdef ROIGraphAll < dj.Imported
     properties
         %         keySource = IMG.PhotostimGroup;
-        keySource = EXP2.SessionEpoch & 'flag_photostim_epoch =1' & IMG.FOV & STIM.ROIInfluence5;
+        keySource = EXP2.SessionEpoch & 'flag_photostim_epoch =1' & IMG.FOV & STIM.ROIInfluence5 ;
     end
     methods(Access=protected)
         function makeTuples(self, key)

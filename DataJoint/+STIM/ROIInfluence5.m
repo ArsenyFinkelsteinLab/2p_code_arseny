@@ -30,7 +30,7 @@ classdef ROIInfluence5 < dj.Computed
         
         
 %         keySource = (EXP2.SessionEpoch & 'flag_photostim_epoch =1' & IMG.FOVEpoch) & (STIMANAL.SessionEpochsIncluded& 'stimpower_percent=15' & 'flag_include=1') & IMG.Volumetric
-                keySource = (EXP2.SessionEpoch & 'flag_photostim_epoch =1' & IMG.FOVEpoch) & 'subject_id=481102' & IMG.Volumetric
+                keySource = (EXP2.SessionEpoch & 'flag_photostim_epoch =1' & IMG.FOVEpoch) & 'subject_id=481101' & IMG.Volumetric
 
     end
     methods(Access=protected)
