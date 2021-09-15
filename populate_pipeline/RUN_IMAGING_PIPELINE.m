@@ -23,8 +23,8 @@ dir_base_behavior ='G:\Arseny\2p\BPOD_behavior\';
 % dir_behavioral_data = [dir_base_behavior 'anm463192_AF25\'];
 % dir_behavioral_data = [dir_base_behavior 'anm464728_AF32\'];
 % dir_behavioral_data = [dir_base_behavior 'anm481102_AF33\'];
-dir_behavioral_data = [dir_base_behavior 'anm486673_AF34\'];
-% dir_behavioral_data = [dir_base_behavior 'anm486668_AF35\'];
+% dir_behavioral_data = [dir_base_behavior 'anm486673_AF34\'];
+dir_behavioral_data = [dir_base_behavior 'anm486668_AF35\'];
 % dir_behavioral_data = [dir_base_behavior 'anm481101_AF36\'];
 
 
@@ -58,7 +58,7 @@ flag_multi_session_registration = 0;
 %% STEP 1 - could be run independelty of suite2p
 populate_Session_without_behavior (user_name, rig); % populate session without behavior
 % populate_behavior_WaterCue (dir_behavioral_data, behavioral_protocol_name);
-% populate_behavior_Lick2D(dir_behavioral_data, behavioral_protocol_name);
+populate_behavior_Lick2D(dir_behavioral_data, behavioral_protocol_name);
 
 populate_Session_and_behavior (dir_behavioral_data, user_name, rig); % populate session with behavior
 

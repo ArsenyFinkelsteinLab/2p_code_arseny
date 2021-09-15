@@ -123,6 +123,11 @@ for iFile = 1:1:numel (allFileNames)
         insert(EXP2.TrialRewardSize, data_TrialRewardSize);
         insert(EXP2.TrialLickBlock, data_TrialLickBlock);
         
+%         % for debug purposes: to delete the above tables
+%         del(EXP2.SessionTrial & 'subject_id=486673' & 'session=4')
+%         del(EXP2.SessionTask & 'subject_id=486673' & 'session=4' )
+%         del(EXP2.SessionTraining & 'subject_id=486673' & 'session=4' )
+        
         toc
     end
 end

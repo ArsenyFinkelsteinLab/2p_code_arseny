@@ -4,7 +4,7 @@ close all;
 
 % rel_rois=  IMG.ROIGood & (LICK2D.ROILick2DangleSpikes*LICK2D.ROILick2DPSTHStatsSpikes*LICK2D.ROILick2DmapSpikes  & key  & 'psth_odd_even_corr>0.5' & 'theta_tuning_odd_even_corr>0.5' & 'lickmap_odd_even_corr>0.5' & 'goodness_of_fit_vmises>0.5');
 if flag_spikes==0 % if based on dff
- rel_rois=  (IMG.ROI - IMG.ROIBad) & (LICK2D.ROILick2DQuadrantsSpikes  & key   & 'psth_quadrants_odd_even_corr<=0.25');
+ rel_rois=  (IMG.ROI - IMG.ROIBad) & (LICK2D.ROILick2DQuadrantsSpikes  & key   & 'psth_quadrants_odd_even_corr>=0.25');
     rel_map_and_psth = LICK2D.ROILick2DmapSpikes * LICK2D.ROILick2DSelectivitySpikes * LICK2D.ROILick2DPSTHSpikes * LICK2D.ROILick2DQuadrants  & rel_rois;
     rel_angle = LICK2D.ROILick2DangleSpikes  & rel_rois;
     rel_stats = LICK2D.ROILick2DPSTHStatsSpikes *LICK2D.ROILick2DSelectivityStatsSpikes  & rel_rois; 
@@ -13,7 +13,7 @@ else  % if based on spikes
     %     rel_map_and_psth = LICK2D.ROILick2DmapSpikes * LICK2D.ROILick2DSelectivitySpikes * LICK2D.ROILick2DPSTHSpikes  * rel_rois;
     %     rel_angle = LICK2D.ROILick2DangleSpikes  * rel_rois;
     %     rel_stats = LICK2D.ROILick2DPSTHStatsSpikes*LICK2D.ROILick2DSelectivityStatsSpikes  * rel_rois;
-    rel_rois=  (IMG.ROI - IMG.ROIBad) & (LICK2D.ROILick2DQuadrantsSpikes  & key   & 'psth_quadrants_odd_even_corr<=0.25');
+    rel_rois=  (IMG.ROI - IMG.ROIBad) & (LICK2D.ROILick2DQuadrantsSpikes  & key   & 'psth_quadrants_odd_even_corr>=0.25');
     rel_map_and_psth = LICK2D.ROILick2DmapSpikes * LICK2D.ROILick2DSelectivitySpikes * LICK2D.ROILick2DPSTHSpikes * LICK2D.ROILick2DQuadrantsSpikes  & rel_rois;
     rel_angle = LICK2D.ROILick2DangleSpikes  & rel_rois;
     rel_stats = LICK2D.ROILick2DPSTHStatsSpikes *LICK2D.ROILick2DSelectivityStatsSpikes  & rel_rois;

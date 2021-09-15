@@ -14,8 +14,8 @@ psth_quadrants_time                       : blob   # time vector, for the non-co
 
 classdef ROILick2DQuadrantsSpikes < dj.Imported
     properties
-%         keySource = ((EXP2.SessionEpoch*IMG.FOV)  & IMG.ROI & EXP2.TrialLickPort & 'session_epoch_type="behav_only"') - IMG.Mesoscope;
-        keySource = ((EXP2.SessionEpoch*IMG.FOV)  & IMG.ROI & EXP2.TrialLickPort & 'session_epoch_type="behav_only"') & IMG.Mesoscope;
+        keySource = ((EXP2.SessionEpoch*IMG.FOV)  & IMG.ROI & EXP2.TrialLickPort & 'session_epoch_type="behav_only"') - IMG.Mesoscope;
+%         keySource = ((EXP2.SessionEpoch*IMG.FOV)  & IMG.ROI & EXP2.TrialLickPort & 'session_epoch_type="behav_only"') & IMG.Mesoscope;
 
     end
     methods(Access=protected)

@@ -5,7 +5,14 @@ trigger_imaging_t = obj.RawEvents.Trial{obj_trial}.States.TrigTrialStart(1);
 try
     go_t = obj.RawEvents.Trial{obj_trial}.States.AnswerPeriodFirstLick(1);
 catch
-    go_t = obj.RawEvents.Trial{obj_trial}.States.AnswerPeriodAutoWater(1);
+    try
+        go_t = obj.RawEvents.Trial{obj_trial}.States.AnswerPeriod(1);
+        if isnan(go_t)
+           go_t = obj.RawEvents.Trial{obj_trial}.States.AnswerPeriodAutoWater(1);
+        end
+    catch
+        go_t = obj.RawEvents.Trial{obj_trial}.States.AnswerPeriodAutoWater(1);
+    end
 end
 
 bitcodestart_t=obj.RawEvents.Trial{obj_trial}.States.StartBitcodeTrialNumber(1);
@@ -16,10 +23,10 @@ trial_event_time = [trigger_imaging_t; go_t; bitcodestart_t;trial_end_t];
 
 if isfield(obj.RawEvents.Trial{obj_trial}.States,'LickIn1')
     if ~isnan((obj.RawEvents.Trial{obj_trial}.States.LickIn1(1)))
-    LickIn1_t = obj.RawEvents.Trial{obj_trial}.States.LickIn1(1);
-    trial_event_type {end+1} = 'firstlick';
-    trial_event_time(end+1) = LickIn1_t;
-end
+        LickIn1_t = obj.RawEvents.Trial{obj_trial}.States.LickIn1(1);
+        trial_event_type {end+1} = 'firstlick';
+        trial_event_time(end+1) = LickIn1_t;
+    end
 end
 if isfield(obj.RawEvents.Trial{obj_trial}.States,'RewardConsumption')
     if ~isnan((obj.RawEvents.Trial{obj_trial}.States.RewardConsumption(1)))
