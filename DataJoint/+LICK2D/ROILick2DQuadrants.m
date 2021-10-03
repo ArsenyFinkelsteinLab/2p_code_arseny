@@ -3,7 +3,7 @@
 -> EXP2.SessionEpoch
 -> IMG.ROI
 ---
-psth_quadrants                  : blob   # PSTH concatenated for the 4 different quadrants
+psth_quadrants                            : blob   # PSTH concatenated for the 4 different quadrants
 psth_quadrants_stem                       : blob   #
 psth_quadrants_odd                        : blob   #
 psth_quadrants_even                       : blob   #
@@ -25,7 +25,7 @@ classdef ROILick2DQuadrants < dj.Imported
 
             rel_data = IMG.ROIdeltaF;
 %             fr_interval = [-1, 3]; %s
-                        fr_interval = [-2, 5]; % used it for the mesoscope
+            fr_interval = [-2, 5]; % used it for the mesoscope
             fn_computer_Lick2DQuadrantsPSTH(key,self, rel_data,fr_interval,dir_current_fig);
             
         end

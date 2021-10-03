@@ -31,8 +31,8 @@ classdef ROILick2DmapSpikes < dj.Imported
             
             rel_data = IMG.ROISpikes;
             
-%             fr_interval = [-1, 3]; %s
-            fr_interval = [-2, 5]; % used it for the mesoscope
+            fr_interval = [-1, 3]; %s
+%             fr_interval = [-2, 5]; % used it for the mesoscope
             fn_compute_Lick2D_map_and_selectivity(key,self, rel_data, fr_interval);
             
             

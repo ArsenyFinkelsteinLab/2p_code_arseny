@@ -9,7 +9,7 @@ psth_odd        : blob   #
 psth_even       : blob   #
 
 psth_first=null          : blob   # first trial in block
-psth_begin=null          : blob   #  trials in the beginning of the block
+psth_begin=null          : blob   # trials in the beginning of the block
 psth_mid=null            : blob   # trials in the middle of the block
 psth_end=null            : blob   # trials in the end of the block
 psth_small=null          : blob   # during no rewarded trials
@@ -30,8 +30,8 @@ classdef ROILick2DPSTHSpikes < dj.Imported
         function makeTuples(self, key)
             
             rel_data = IMG.ROISpikes;
-%             fr_interval = [-1, 3]; %s
-            fr_interval = [-2, 5]; % used it for the mesoscope
+            fr_interval = [-1, 3]; %s
+%             fr_interval = [-2, 5]; % used it for the mesoscope
             fn_computer_Lick2DPSTH(key,self, rel_data,fr_interval);
             
         end

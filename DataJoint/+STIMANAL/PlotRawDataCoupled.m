@@ -6,7 +6,7 @@
 
 classdef PlotRawDataCoupled < dj.Imported
     properties
-        keySource = (EXP2.SessionEpoch & 'flag_photostim_epoch =1' & IMG.ROI & STIM.ROIResponseDirect) &  (STIMANAL.SessionEpochsIncluded & 'stimpower_percent=15' & 'flag_include=1' & (STIMANAL.NeuronOrControl & 'neurons_or_control=1' & 'num_targets>30'));
+        keySource = (EXP2.SessionEpoch & 'flag_photostim_epoch =1' & IMG.ROI & STIM.ROIResponseDirect) &  (STIMANAL.SessionEpochsIncluded & 'stimpower=150' & 'flag_include=1' & (STIMANAL.NeuronOrControl & 'neurons_or_control=1' & 'num_targets>30'));
     end
     methods(Access=protected)
         function makeTuples(self, key)

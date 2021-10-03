@@ -27,14 +27,14 @@ position_y1(1)=0.5;
 position_y1(end+1)=position_y1(end)-vertical_dist;
 
 % rel_data = (STIMANAL.InfluenceDistance2 & 'flag_divide_by_std=0' & 'flag_withold_trials=1' & 'flag_normalize_by_total=1') ...
-%     &  (STIMANAL.SessionEpochsIncluded& IMG.Volumetric & 'stimpower_percent=15' & 'flag_include=1' & 'session_epoch_number<=3' ...
+%     &  (STIMANAL.SessionEpochsIncluded& IMG.Volumetric & 'stimpower=150' & 'flag_include=1' & 'session_epoch_number<=3' ...
 %     & (STIMANAL.NeuronOrControl & 'neurons_or_control=1' & 'num_targets>=30') ...
 %     & (STIMANAL.NeuronOrControl & 'neurons_or_control=0' & 'num_targets>=30'));
 
 
 
 rel_data= (STIMANAL.InfluenceDistance & 'flag_divide_by_std=0' & 'flag_withold_trials=1' & 'flag_normalize_by_total=1') ...
-    &  (STIMANAL.SessionEpochsIncluded& IMG.Volumetric & 'stimpower_percent=15' & 'flag_include=1');
+    &  (STIMANAL.SessionEpochsIncluded& IMG.Volumetric & 'stimpower=150' & 'flag_include=1');
 
 key.is_volumetric =1; % 1 volumetric, 1 single plane
 distance_axial_bins=[0,60,90,120];

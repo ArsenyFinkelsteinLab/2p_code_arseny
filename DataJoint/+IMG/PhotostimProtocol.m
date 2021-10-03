@@ -1,5 +1,5 @@
 %{
-# How many times the same stimulus is repeated across consequative frames
+# How many times the same stimulus is repeated across consecutive frames
 -> EXP2.SessionEpoch
 ---
 same_photostim_duration_in_frames               : double     # frames here will refer to frames or planes for single/multi plane imaging, respectively

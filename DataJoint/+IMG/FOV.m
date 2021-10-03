@@ -134,8 +134,9 @@ classdef FOV < dj.Imported
                     %                     k3.imaging_fov_um = header.SI.hRoiManager.imagingFovUm  ;
                     Zs =  header.SI.hFastZ.userZs;
                     if flag_mesoscope==0
-                        Zs = Zs*(-1); %for some reason the Zs on Kayvon's rig are inverted. So the most negative z appears as the deepest. Here we invert it, so that positive numbers mean deeper.
-                        
+                        % the comment above is not true for data recorded after June 2021, so we basically don't invert it anymore
+%                       Zs = Zs*(-1); %for some reason the Zs on Kayvon's rig are inverted. So the most negative z appears as the deepest. Here we invert it, so that positive numbers mean deeper.
+
                         k3.x_pos_relative = 0;
                         k3.y_pos_relative = 0;
                         k3.z_pos_relative = Zs(i_p);

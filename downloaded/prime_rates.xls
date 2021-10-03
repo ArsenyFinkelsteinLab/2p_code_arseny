@@ -1,0 +1,1721 @@
+<?xml version="1.0" encoding="ISO-8859-8"?>
+    <?mso-application progid="Excel.Sheet"?>
+    <Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+     xmlns:o="urn:schemas-microsoft-com:office:office"
+     xmlns:x="urn:schemas-microsoft-com:office:excel"
+     xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+     xmlns:html="http://www.w3.org/TR/REC-html40">
+     <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+      <LastAuthor>a</LastAuthor>
+      <Created>1996-10-14T23:33:28Z</Created>
+      <LastSaved>2007-05-10T04:00:57Z</LastSaved>
+      <Version>11.5606</Version>
+     </DocumentProperties>
+     <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+      <WindowHeight>9300</WindowHeight>
+      <WindowWidth>15135</WindowWidth>
+      <WindowTopX>120</WindowTopX>
+      <WindowTopY>120</WindowTopY>
+      <AcceptLabelsInFormulas/>
+      <ProtectStructure>False</ProtectStructure>
+      <ProtectWindows>False</ProtectWindows>
+     </ExcelWorkbook>
+      <Styles>
+      <Style ss:ID="Default" ss:Name="Normal">
+       <Alignment ss:Vertical="Bottom"/>
+       <Borders/>
+       <Font/>
+       <Interior/>
+       <NumberFormat/>
+       <Protection/>
+      </Style>
+ <Style ss:ID="ריביות פרייםtitle_style">  <Font ss:FontName="Arial"  ss:Size="14"  ss:Color="navy"  ss:Bold="1"  ss:Italic="0" /> <Interior/><Alignment  ss:Horizontal="Center"  ss:WrapText="1"/> </Style>
+ <Style ss:ID="ריביות פרייםcol_header_style">  <Font ss:FontName="Arial"  ss:Size="10"  ss:Color="white"  ss:Bold="1"  ss:Italic="0" /> <Interior ss:Color="#7BA0CD" ss:Pattern="Solid"/><Alignment  ss:Horizontal="Center"  ss:WrapText="1"/> </Style>
+ <Style ss:ID="ריביות פרייםcell_style">  <Borders> 
+                         <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+                          ss:Color="#7BA0CD"/>
+                         <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+                          ss:Color="#7BA0CD"/>
+                         <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+                          ss:Color="#7BA0CD"/>
+                         <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+                          ss:Color="#7BA0CD"/> 
+                       </Borders> <Font ss:FontName="Arial"  ss:Size="10"  ss:Color="black"  ss:Bold="0"  ss:Italic="0" /> <Interior ss:Color="#D3DFEE" ss:Pattern="Solid"/> </Style>
+ <Style ss:ID="ריביות פרייםcell_stylezw">  <Borders> 
+                         <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+                          ss:Color="#7BA0CD"/>
+                         <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+                          ss:Color="#7BA0CD"/>
+                         <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+                          ss:Color="#7BA0CD"/>
+                         <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+                          ss:Color="#7BA0CD"/> 
+                       </Borders> <Font ss:FontName="Arial"  ss:Size="10"  ss:Color="black"  ss:Bold="0"  ss:Italic="0" /> <Interior/> </Style>
+ <Style ss:ID="ריביות פרייםcell_style_href">  <Borders> 
+                         <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+                          ss:Color="#7BA0CD"/>
+                         <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+                          ss:Color="#7BA0CD"/>
+                         <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+                          ss:Color="#7BA0CD"/>
+                         <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+                          ss:Color="#7BA0CD"/> 
+                       </Borders> <Font ss:FontName="Arial"  ss:Size="10"  ss:Color="blue"  ss:Bold="0"  ss:Italic="0"  ss:Underline="Single" /> <Interior ss:Color="#D3DFEE" ss:Pattern="Solid"/> </Style>
+ <Style ss:ID="ריביות פרייםcell_stylezw_href">  <Borders> 
+                         <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"
+                          ss:Color="#7BA0CD"/>
+                         <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"
+                          ss:Color="#7BA0CD"/>
+                         <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"
+                          ss:Color="#7BA0CD"/>
+                         <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"
+                          ss:Color="#7BA0CD"/> 
+                       </Borders> <Font ss:FontName="Arial"  ss:Size="10"  ss:Color="blue"  ss:Bold="0"  ss:Italic="0"  ss:Underline="Single" /> <Interior/> </Style>
+ </Styles>
+<Worksheet ss:Name=" ריביות פריים " ss:RightToLeft="1">
+<Table ss:ExpandedColumnCount="3" ss:ExpandedRowCount="44315" x:FullColumns="1"  x:FullRows="1">
+ <Column ss:Index="1" ss:AutoFitWidth="0" ss:Width="114"/> 
+ <Column ss:Index="2" ss:AutoFitWidth="0" ss:Width="24"/> 
+ <Column ss:Index="3" ss:AutoFitWidth="0" ss:Width="42"/> 
+ <Row ss:Index="1" ss:AutoFitHeight="0" ss:Height="30" >
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםtitle_style" ss:MergeAcross="2" ><Data ss:Type="String">ריבית ממוצעת משוקללת בסיסית בחח"ד (פריים)</Data></Cell>
+  </Row>
+ <Row ss:Index="2">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcol_header_style" ><Data ss:Type="String">שיעור ריבית הפריים</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcol_header_style" ><Data ss:Type="String">שנה</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcol_header_style" ><Data ss:Type="String">חודש</Data></Cell>
+  </Row>
+ <Row ss:Index="3">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2020</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">דצמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="4">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2020</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">נובמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="5">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2020</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוקטובר</Data></Cell>
+  </Row>
+ <Row ss:Index="6">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2020</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ספטמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="7">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2020</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוגוסט</Data></Cell>
+  </Row>
+ <Row ss:Index="8">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2020</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">יולי</Data></Cell>
+  </Row>
+ <Row ss:Index="9">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2020</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">יוני</Data></Cell>
+  </Row>
+ <Row ss:Index="10">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2020</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מאי</Data></Cell>
+  </Row>
+ <Row ss:Index="11">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">1.645</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2020</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אפריל</Data></Cell>
+  </Row>
+ <Row ss:Index="12">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">1.75</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2020</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מרץ</Data></Cell>
+  </Row>
+ <Row ss:Index="13">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">1.75</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2020</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">פברואר</Data></Cell>
+  </Row>
+ <Row ss:Index="14">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">1.75</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2020</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ינואר</Data></Cell>
+  </Row>
+ <Row ss:Index="15">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">1.75</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2019</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">דצמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="16">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">1.75</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2019</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">נובמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="17">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">1.75</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2019</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוקטובר</Data></Cell>
+  </Row>
+ <Row ss:Index="18">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">1.75</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2019</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ספטמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="19">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">1.75</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2019</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוגוסט</Data></Cell>
+  </Row>
+ <Row ss:Index="20">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">1.75</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2019</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">יולי</Data></Cell>
+  </Row>
+ <Row ss:Index="21">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">1.75</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2019</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">יוני</Data></Cell>
+  </Row>
+ <Row ss:Index="22">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">1.75</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2019</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מאי</Data></Cell>
+  </Row>
+ <Row ss:Index="23">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">1.75</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2019</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אפריל</Data></Cell>
+  </Row>
+ <Row ss:Index="24">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">1.75</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2019</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מרץ</Data></Cell>
+  </Row>
+ <Row ss:Index="25">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">1.75</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2019</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">פברואר</Data></Cell>
+  </Row>
+ <Row ss:Index="26">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">1.75</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2019</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ינואר</Data></Cell>
+  </Row>
+ <Row ss:Index="27">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">1.75</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2018</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">דצמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="28">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">1.61</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2018</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">נובמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="29">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2018</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוקטובר</Data></Cell>
+  </Row>
+ <Row ss:Index="30">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2018</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ספטמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="31">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2018</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוגוסט</Data></Cell>
+  </Row>
+ <Row ss:Index="32">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2018</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">יולי</Data></Cell>
+  </Row>
+ <Row ss:Index="33">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2018</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">יוני</Data></Cell>
+  </Row>
+ <Row ss:Index="34">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2018</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מאי</Data></Cell>
+  </Row>
+ <Row ss:Index="35">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2018</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אפריל</Data></Cell>
+  </Row>
+ <Row ss:Index="36">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2018</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מרץ</Data></Cell>
+  </Row>
+ <Row ss:Index="37">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2018</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">פברואר</Data></Cell>
+  </Row>
+ <Row ss:Index="38">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2018</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ינואר</Data></Cell>
+  </Row>
+ <Row ss:Index="39">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2017</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">דצמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="40">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2017</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">נובמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="41">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2017</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוקטובר</Data></Cell>
+  </Row>
+ <Row ss:Index="42">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2017</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ספטמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="43">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2017</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוגוסט</Data></Cell>
+  </Row>
+ <Row ss:Index="44">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2017</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">יולי</Data></Cell>
+  </Row>
+ <Row ss:Index="45">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2017</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">יוני</Data></Cell>
+  </Row>
+ <Row ss:Index="46">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2017</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מאי</Data></Cell>
+  </Row>
+ <Row ss:Index="47">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2017</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אפריל</Data></Cell>
+  </Row>
+ <Row ss:Index="48">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2017</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מרץ</Data></Cell>
+  </Row>
+ <Row ss:Index="49">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2017</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">פברואר</Data></Cell>
+  </Row>
+ <Row ss:Index="50">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2017</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ינואר</Data></Cell>
+  </Row>
+ <Row ss:Index="51">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2016</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">דצמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="52">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2016</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">נובמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="53">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2016</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוקטובר</Data></Cell>
+  </Row>
+ <Row ss:Index="54">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2016</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ספטמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="55">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2016</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוגוסט</Data></Cell>
+  </Row>
+ <Row ss:Index="56">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2016</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">יולי</Data></Cell>
+  </Row>
+ <Row ss:Index="57">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2016</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">יוני</Data></Cell>
+  </Row>
+ <Row ss:Index="58">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2016</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מאי</Data></Cell>
+  </Row>
+ <Row ss:Index="59">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2016</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אפריל</Data></Cell>
+  </Row>
+ <Row ss:Index="60">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2016</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מרץ</Data></Cell>
+  </Row>
+ <Row ss:Index="61">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2016</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">פברואר</Data></Cell>
+  </Row>
+ <Row ss:Index="62">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2016</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ינואר</Data></Cell>
+  </Row>
+ <Row ss:Index="63">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2015</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">דצמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="64">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2015</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">נובמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="65">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2015</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוקטובר</Data></Cell>
+  </Row>
+ <Row ss:Index="66">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2015</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ספטמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="67">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2015</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוגוסט</Data></Cell>
+  </Row>
+ <Row ss:Index="68">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2015</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">יולי</Data></Cell>
+  </Row>
+ <Row ss:Index="69">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2015</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">יוני</Data></Cell>
+  </Row>
+ <Row ss:Index="70">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2015</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מאי</Data></Cell>
+  </Row>
+ <Row ss:Index="71">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2015</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אפריל</Data></Cell>
+  </Row>
+ <Row ss:Index="72">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">1.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2015</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מרץ</Data></Cell>
+  </Row>
+ <Row ss:Index="73">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">1.734</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2015</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">פברואר</Data></Cell>
+  </Row>
+ <Row ss:Index="74">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">1.75</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2015</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ינואר</Data></Cell>
+  </Row>
+ <Row ss:Index="75">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">1.75</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2014</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">דצמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="76">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">1.75</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2014</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">נובמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="77">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">1.75</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2014</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוקטובר</Data></Cell>
+  </Row>
+ <Row ss:Index="78">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">1.75</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2014</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ספטמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="79">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">1.968</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2014</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוגוסט</Data></Cell>
+  </Row>
+ <Row ss:Index="80">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">2.242</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2014</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">יולי</Data></Cell>
+  </Row>
+ <Row ss:Index="81">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">2.25</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2014</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">יוני</Data></Cell>
+  </Row>
+ <Row ss:Index="82">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">2.25</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2014</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מאי</Data></Cell>
+  </Row>
+ <Row ss:Index="83">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">2.25</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2014</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אפריל</Data></Cell>
+  </Row>
+ <Row ss:Index="84">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">2.25</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2014</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מרץ</Data></Cell>
+  </Row>
+ <Row ss:Index="85">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">2.482</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2014</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">פברואר</Data></Cell>
+  </Row>
+ <Row ss:Index="86">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">2.5</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2014</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ינואר</Data></Cell>
+  </Row>
+ <Row ss:Index="87">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">2.5</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2013</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">דצמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="88">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">2.5</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2013</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">נובמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="89">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">2.5</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2013</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוקטובר</Data></Cell>
+  </Row>
+ <Row ss:Index="90">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">2.717</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2013</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ספטמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="91">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">2.75</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2013</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוגוסט</Data></Cell>
+  </Row>
+ <Row ss:Index="92">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">2.75</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2013</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">יולי</Data></Cell>
+  </Row>
+ <Row ss:Index="93">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">2.75</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2013</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">יוני</Data></Cell>
+  </Row>
+ <Row ss:Index="94">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">3.113</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2013</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מאי</Data></Cell>
+  </Row>
+ <Row ss:Index="95">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">3.25</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2013</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אפריל</Data></Cell>
+  </Row>
+ <Row ss:Index="96">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">3.25</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2013</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מרץ</Data></Cell>
+  </Row>
+ <Row ss:Index="97">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">3.25</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2013</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">פברואר</Data></Cell>
+  </Row>
+ <Row ss:Index="98">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">3.25</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2013</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ינואר</Data></Cell>
+  </Row>
+ <Row ss:Index="99">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">3.46</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2012</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">דצמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="100">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">3.5</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2012</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">נובמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="101">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">3.75</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2012</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוקטובר</Data></Cell>
+  </Row>
+ <Row ss:Index="102">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">3.75</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2012</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ספטמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="103">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">3.75</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2012</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוגוסט</Data></Cell>
+  </Row>
+ <Row ss:Index="104">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">3.75</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2012</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">יולי</Data></Cell>
+  </Row>
+ <Row ss:Index="105">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">3.975</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2012</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">יוני</Data></Cell>
+  </Row>
+ <Row ss:Index="106">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">4</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2012</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מאי</Data></Cell>
+  </Row>
+ <Row ss:Index="107">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">4</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2012</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אפריל</Data></Cell>
+  </Row>
+ <Row ss:Index="108">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">4</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2012</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מרץ</Data></Cell>
+  </Row>
+ <Row ss:Index="109">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">4.2</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2012</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">פברואר</Data></Cell>
+  </Row>
+ <Row ss:Index="110">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">4.2</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2012</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ינואר</Data></Cell>
+  </Row>
+ <Row ss:Index="111">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">4.25</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2011</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">דצמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="112">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">4.5</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2011</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">נובמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="113">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">4.51</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2011</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוקטובר</Data></Cell>
+  </Row>
+ <Row ss:Index="114">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">4.75</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2011</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ספטמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="115">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">4.75</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2011</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוגוסט</Data></Cell>
+  </Row>
+ <Row ss:Index="116">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">4.75</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2011</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">יולי</Data></Cell>
+  </Row>
+ <Row ss:Index="117">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">4.75</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2011</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">יוני</Data></Cell>
+  </Row>
+ <Row ss:Index="118">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">4.54</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2011</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מאי</Data></Cell>
+  </Row>
+ <Row ss:Index="119">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">4.5</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2011</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אפריל</Data></Cell>
+  </Row>
+ <Row ss:Index="120">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">4</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2011</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מרץ</Data></Cell>
+  </Row>
+ <Row ss:Index="121">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">3.79</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2011</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">פברואר</Data></Cell>
+  </Row>
+ <Row ss:Index="122">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">3.53</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2011</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ינואר</Data></Cell>
+  </Row>
+ <Row ss:Index="123">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">3.5</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2010</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">דצמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="124">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">3.5</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2010</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">נובמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="125">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">3.48</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2010</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוקטובר</Data></Cell>
+  </Row>
+ <Row ss:Index="126">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">3.25</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2010</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ספטמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="127">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">3.25</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2010</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוגוסט</Data></Cell>
+  </Row>
+ <Row ss:Index="128">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">3.02</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2010</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">יולי</Data></Cell>
+  </Row>
+ <Row ss:Index="129">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">3</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2010</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">יוני</Data></Cell>
+  </Row>
+ <Row ss:Index="130">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">3</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2010</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מאי</Data></Cell>
+  </Row>
+ <Row ss:Index="131">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">2.99</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2010</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אפריל</Data></Cell>
+  </Row>
+ <Row ss:Index="132">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">2.75</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2010</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מרץ</Data></Cell>
+  </Row>
+ <Row ss:Index="133">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">2.75</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2010</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">פברואר</Data></Cell>
+  </Row>
+ <Row ss:Index="134">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">2.75</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2010</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ינואר</Data></Cell>
+  </Row>
+ <Row ss:Index="135">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">2.5</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2009</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">דצמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="136">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">2.27</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2009</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">נובמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="137">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">2.25</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2009</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוקטובר</Data></Cell>
+  </Row>
+ <Row ss:Index="138">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">2.25</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2009</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ספטמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="139">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">2.03</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2009</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוגוסט</Data></Cell>
+  </Row>
+ <Row ss:Index="140">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">2</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2009</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">יולי</Data></Cell>
+  </Row>
+ <Row ss:Index="141">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">2</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2009</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">יוני</Data></Cell>
+  </Row>
+ <Row ss:Index="142">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">2</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2009</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מאי</Data></Cell>
+  </Row>
+ <Row ss:Index="143">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">2</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2009</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אפריל</Data></Cell>
+  </Row>
+ <Row ss:Index="144">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">2.2</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2009</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מרץ</Data></Cell>
+  </Row>
+ <Row ss:Index="145">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">2.47</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2009</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">פברואר</Data></Cell>
+  </Row>
+ <Row ss:Index="146">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">3.18</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2009</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ינואר</Data></Cell>
+  </Row>
+ <Row ss:Index="147">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">4</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2008</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">דצמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="148">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">4.65</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2008</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">נובמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="149">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">5.41</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2008</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוקטובר</Data></Cell>
+  </Row>
+ <Row ss:Index="150">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">5.75</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2008</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ספטמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="151">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">5.52</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2008</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוגוסט</Data></Cell>
+  </Row>
+ <Row ss:Index="152">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">5.25</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2008</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">יולי</Data></Cell>
+  </Row>
+ <Row ss:Index="153">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">5.03</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2008</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">יוני</Data></Cell>
+  </Row>
+ <Row ss:Index="154">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">4.77</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2008</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מאי</Data></Cell>
+  </Row>
+ <Row ss:Index="155">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">4.75</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2008</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אפריל</Data></Cell>
+  </Row>
+ <Row ss:Index="156">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">5.17</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2008</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מרץ</Data></Cell>
+  </Row>
+ <Row ss:Index="157">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">5.72</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2008</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">פברואר</Data></Cell>
+  </Row>
+ <Row ss:Index="158">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">5.75</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2008</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ינואר</Data></Cell>
+  </Row>
+ <Row ss:Index="159">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">5.53</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2007</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">דצמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="160">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">5.5</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2007</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">נובמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="161">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">5.5</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2007</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוקטובר</Data></Cell>
+  </Row>
+ <Row ss:Index="162">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">5.5</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2007</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ספטמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="163">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">5.26</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2007</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוגוסט</Data></Cell>
+  </Row>
+ <Row ss:Index="164">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">5.02</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2007</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">יולי</Data></Cell>
+  </Row>
+ <Row ss:Index="165">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">5</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2007</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">יוני</Data></Cell>
+  </Row>
+ <Row ss:Index="166">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">5.24</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2007</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מאי</Data></Cell>
+  </Row>
+ <Row ss:Index="167">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">5.46</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2007</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אפריל</Data></Cell>
+  </Row>
+ <Row ss:Index="168">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">5.5</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2007</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מרץ</Data></Cell>
+  </Row>
+ <Row ss:Index="169">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">5.75</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2007</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">פברואר</Data></Cell>
+  </Row>
+ <Row ss:Index="170">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2007</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ינואר</Data></Cell>
+  </Row>
+ <Row ss:Index="171">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">6.44</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2006</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">דצמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="172">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">6.74</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2006</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">נובמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="173">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">6.95</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2006</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוקטובר</Data></Cell>
+  </Row>
+ <Row ss:Index="174">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">7</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2006</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ספטמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="175">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">7</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2006</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוגוסט</Data></Cell>
+  </Row>
+ <Row ss:Index="176">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">6.78</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2006</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">יולי</Data></Cell>
+  </Row>
+ <Row ss:Index="177">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">6.75</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2006</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">יוני</Data></Cell>
+  </Row>
+ <Row ss:Index="178">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">6.75</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2006</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מאי</Data></Cell>
+  </Row>
+ <Row ss:Index="179">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">6.52</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2006</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אפריל</Data></Cell>
+  </Row>
+ <Row ss:Index="180">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">6.25</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2006</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מרץ</Data></Cell>
+  </Row>
+ <Row ss:Index="181">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">6.25</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2006</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">פברואר</Data></Cell>
+  </Row>
+ <Row ss:Index="182">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">6.04</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2006</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ינואר</Data></Cell>
+  </Row>
+ <Row ss:Index="183">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">5.98</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2005</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">דצמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="184">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">5.5</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2005</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">נובמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="185">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">5.27</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2005</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוקטובר</Data></Cell>
+  </Row>
+ <Row ss:Index="186">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">5</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2005</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ספטמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="187">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">5</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2005</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוגוסט</Data></Cell>
+  </Row>
+ <Row ss:Index="188">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">5</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2005</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">יולי</Data></Cell>
+  </Row>
+ <Row ss:Index="189">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">5</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2005</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">יוני</Data></Cell>
+  </Row>
+ <Row ss:Index="190">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">5</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2005</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מאי</Data></Cell>
+  </Row>
+ <Row ss:Index="191">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">5</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2005</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אפריל</Data></Cell>
+  </Row>
+ <Row ss:Index="192">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">5</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2005</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מרץ</Data></Cell>
+  </Row>
+ <Row ss:Index="193">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">5</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2005</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">פברואר</Data></Cell>
+  </Row>
+ <Row ss:Index="194">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">5.17</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2005</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ינואר</Data></Cell>
+  </Row>
+ <Row ss:Index="195">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">5.39</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2004</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">דצמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="196">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">5.56</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2004</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">נובמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="197">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">5.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2004</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוקטובר</Data></Cell>
+  </Row>
+ <Row ss:Index="198">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">5.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2004</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ספטמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="199">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">5.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2004</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוגוסט</Data></Cell>
+  </Row>
+ <Row ss:Index="200">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">5.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2004</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">יולי</Data></Cell>
+  </Row>
+ <Row ss:Index="201">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">5.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2004</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">יוני</Data></Cell>
+  </Row>
+ <Row ss:Index="202">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">5.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2004</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מאי</Data></Cell>
+  </Row>
+ <Row ss:Index="203">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">5.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2004</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אפריל</Data></Cell>
+  </Row>
+ <Row ss:Index="204">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">5.8</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2004</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מרץ</Data></Cell>
+  </Row>
+ <Row ss:Index="205">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">5.97</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2004</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">פברואר</Data></Cell>
+  </Row>
+ <Row ss:Index="206">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">6.27</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2004</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ינואר</Data></Cell>
+  </Row>
+ <Row ss:Index="207">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">6.7</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2003</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">דצמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="208">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">7.05</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2003</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">נובמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="209">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">7.57</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2003</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוקטובר</Data></Cell>
+  </Row>
+ <Row ss:Index="210">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">7.92</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2003</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ספטמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="211">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">8.44</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2003</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוגוסט</Data></Cell>
+  </Row>
+ <Row ss:Index="212">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">9</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2003</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">יולי</Data></Cell>
+  </Row>
+ <Row ss:Index="213">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">9.42</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2003</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">יוני</Data></Cell>
+  </Row>
+ <Row ss:Index="214">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">9.86</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2003</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מאי</Data></Cell>
+  </Row>
+ <Row ss:Index="215">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">10.2</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2003</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אפריל</Data></Cell>
+  </Row>
+ <Row ss:Index="216">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">10.37</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2003</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מרץ</Data></Cell>
+  </Row>
+ <Row ss:Index="217">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">10.4</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2003</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">פברואר</Data></Cell>
+  </Row>
+ <Row ss:Index="218">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">10.4</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2003</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ינואר</Data></Cell>
+  </Row>
+ <Row ss:Index="219">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">10.56</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2002</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">דצמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="220">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">10.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2002</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">נובמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="221">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">10.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2002</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוקטובר</Data></Cell>
+  </Row>
+ <Row ss:Index="222">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">10.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2002</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ספטמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="223">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">10.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2002</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוגוסט</Data></Cell>
+  </Row>
+ <Row ss:Index="224">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">10.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2002</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">יולי</Data></Cell>
+  </Row>
+ <Row ss:Index="225">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">8.2</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2002</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">יוני</Data></Cell>
+  </Row>
+ <Row ss:Index="226">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">6.13</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2002</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מאי</Data></Cell>
+  </Row>
+ <Row ss:Index="227">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">5.93</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2002</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אפריל</Data></Cell>
+  </Row>
+ <Row ss:Index="228">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">5.86</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2002</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מרץ</Data></Cell>
+  </Row>
+ <Row ss:Index="229">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">5.3</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2002</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">פברואר</Data></Cell>
+  </Row>
+ <Row ss:Index="230">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">5.3</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2002</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ינואר</Data></Cell>
+  </Row>
+ <Row ss:Index="231">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">6.85</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2001</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">דצמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="232">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">7.58</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2001</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">נובמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="233">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">7.8</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2001</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוקטובר</Data></Cell>
+  </Row>
+ <Row ss:Index="234">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">7.8</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2001</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ספטמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="235">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">7.8</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2001</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוגוסט</Data></Cell>
+  </Row>
+ <Row ss:Index="236">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">7.96</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2001</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">יולי</Data></Cell>
+  </Row>
+ <Row ss:Index="237">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">8.4</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2001</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">יוני</Data></Cell>
+  </Row>
+ <Row ss:Index="238">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">8.7</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2001</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מאי</Data></Cell>
+  </Row>
+ <Row ss:Index="239">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">8.7</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2001</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אפריל</Data></Cell>
+  </Row>
+ <Row ss:Index="240">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">8.97</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2001</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מרץ</Data></Cell>
+  </Row>
+ <Row ss:Index="241">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">9.2</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2001</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">פברואר</Data></Cell>
+  </Row>
+ <Row ss:Index="242">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">9.5</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2001</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ינואר</Data></Cell>
+  </Row>
+ <Row ss:Index="243">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">9.67</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2000</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">דצמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="244">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">9.89</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2000</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">נובמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="245">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">10.06</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2000</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוקטובר</Data></Cell>
+  </Row>
+ <Row ss:Index="246">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">10.37</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2000</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ספטמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="247">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">10.59</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2000</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוגוסט</Data></Cell>
+  </Row>
+ <Row ss:Index="248">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">10.77</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2000</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">יולי</Data></Cell>
+  </Row>
+ <Row ss:Index="249">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">10.8</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2000</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">יוני</Data></Cell>
+  </Row>
+ <Row ss:Index="250">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">10.8</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2000</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מאי</Data></Cell>
+  </Row>
+ <Row ss:Index="251">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">11.06</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2000</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אפריל</Data></Cell>
+  </Row>
+ <Row ss:Index="252">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">11.38</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2000</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מרץ</Data></Cell>
+  </Row>
+ <Row ss:Index="253">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">11.72</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">2000</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">פברואר</Data></Cell>
+  </Row>
+ <Row ss:Index="254">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">12.14</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">2000</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ינואר</Data></Cell>
+  </Row>
+ <Row ss:Index="255">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">12.67</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">1999</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">דצמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="256">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">12.94</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">1999</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">נובמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="257">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">13</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">1999</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוקטובר</Data></Cell>
+  </Row>
+ <Row ss:Index="258">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">13</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">1999</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ספטמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="259">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">13</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">1999</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוגוסט</Data></Cell>
+  </Row>
+ <Row ss:Index="260">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">13.45</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">1999</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">יולי</Data></Cell>
+  </Row>
+ <Row ss:Index="261">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">13.5</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">1999</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">יוני</Data></Cell>
+  </Row>
+ <Row ss:Index="262">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">13.5</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">1999</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מאי</Data></Cell>
+  </Row>
+ <Row ss:Index="263">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">13.98</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">1999</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אפריל</Data></Cell>
+  </Row>
+ <Row ss:Index="264">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">14.5</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">1999</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מרץ</Data></Cell>
+  </Row>
+ <Row ss:Index="265">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">14.93</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">1999</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">פברואר</Data></Cell>
+  </Row>
+ <Row ss:Index="266">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">15</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">1999</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ינואר</Data></Cell>
+  </Row>
+ <Row ss:Index="267">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">14.35</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">1998</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">דצמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="268">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">14.35</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">1998</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">נובמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="269">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">14.35</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">1998</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוקטובר</Data></Cell>
+  </Row>
+ <Row ss:Index="270">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">11</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">1998</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ספטמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="271">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">11.39</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">1998</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוגוסט</Data></Cell>
+  </Row>
+ <Row ss:Index="272">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">12.78</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">1998</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">יולי</Data></Cell>
+  </Row>
+ <Row ss:Index="273">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">13.04</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">1998</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">יוני</Data></Cell>
+  </Row>
+ <Row ss:Index="274">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">13.38</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">1998</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מאי</Data></Cell>
+  </Row>
+ <Row ss:Index="275">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">13.7</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">1998</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אפריל</Data></Cell>
+  </Row>
+ <Row ss:Index="276">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">14.02</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">1998</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מרץ</Data></Cell>
+  </Row>
+ <Row ss:Index="277">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">14.37</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">1998</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">פברואר</Data></Cell>
+  </Row>
+ <Row ss:Index="278">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">14.85</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">1998</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ינואר</Data></Cell>
+  </Row>
+ <Row ss:Index="279">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">14.9</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">1997</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">דצמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="280">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">14.9</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">1997</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">נובמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="281">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">14.9</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">1997</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוקטובר</Data></Cell>
+  </Row>
+ <Row ss:Index="282">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">14.9</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">1997</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ספטמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="283">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">14.27</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">1997</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוגוסט</Data></Cell>
+  </Row>
+ <Row ss:Index="284">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">14.2</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">1997</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">יולי</Data></Cell>
+  </Row>
+ <Row ss:Index="285">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">14.92</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">1997</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">יוני</Data></Cell>
+  </Row>
+ <Row ss:Index="286">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">15.4</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">1997</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מאי</Data></Cell>
+  </Row>
+ <Row ss:Index="287">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">15.4</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">1997</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אפריל</Data></Cell>
+  </Row>
+ <Row ss:Index="288">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">15.4</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">1997</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מרץ</Data></Cell>
+  </Row>
+ <Row ss:Index="289">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">15.68</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">1997</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">פברואר</Data></Cell>
+  </Row>
+ <Row ss:Index="290">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">16.17</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">1997</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ינואר</Data></Cell>
+  </Row>
+ <Row ss:Index="291">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">16.6</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">1996</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">דצמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="292">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">16.7</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">1996</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">נובמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="293">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">16.99</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">1996</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוקטובר</Data></Cell>
+  </Row>
+ <Row ss:Index="294">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">17.25</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">1996</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ספטמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="295">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">17.75</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">1996</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוגוסט</Data></Cell>
+  </Row>
+ <Row ss:Index="296">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">18.5</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">1996</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">יולי</Data></Cell>
+  </Row>
+ <Row ss:Index="297">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">17.13</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">1996</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">יוני</Data></Cell>
+  </Row>
+ <Row ss:Index="298">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">16.3</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">1996</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מאי</Data></Cell>
+  </Row>
+ <Row ss:Index="299">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">15.63</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">1996</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אפריל</Data></Cell>
+  </Row>
+ <Row ss:Index="300">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">15.5</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">1996</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מרץ</Data></Cell>
+  </Row>
+ <Row ss:Index="301">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">15.49</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">1996</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">פברואר</Data></Cell>
+  </Row>
+ <Row ss:Index="302">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">15.2</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">1996</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ינואר</Data></Cell>
+  </Row>
+ <Row ss:Index="303">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">15.64</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">1995</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">דצמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="304">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">15.7</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">1995</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">נובמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="305">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">15.28</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">1995</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוקטובר</Data></Cell>
+  </Row>
+ <Row ss:Index="306">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">14.75</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">1995</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ספטמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="307">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">14.7</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">1995</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוגוסט</Data></Cell>
+  </Row>
+ <Row ss:Index="308">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">14.95</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">1995</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">יולי</Data></Cell>
+  </Row>
+ <Row ss:Index="309">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">15</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">1995</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">יוני</Data></Cell>
+  </Row>
+ <Row ss:Index="310">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">15.5</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">1995</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מאי</Data></Cell>
+  </Row>
+ <Row ss:Index="311">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">16.19</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">1995</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אפריל</Data></Cell>
+  </Row>
+ <Row ss:Index="312">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">17.36</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">1995</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מרץ</Data></Cell>
+  </Row>
+ <Row ss:Index="313">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">18.35</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">1995</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">פברואר</Data></Cell>
+  </Row>
+ <Row ss:Index="314">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">18.5</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">1995</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ינואר</Data></Cell>
+  </Row>
+ <Row ss:Index="315">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">18.45</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">1994</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">דצמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="316">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">17</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">1994</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">נובמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="317">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">17</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">1994</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוקטובר</Data></Cell>
+  </Row>
+ <Row ss:Index="318">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">15.43</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">1994</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ספטמבר</Data></Cell>
+  </Row>
+ <Row ss:Index="319">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">13.87</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">1994</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אוגוסט</Data></Cell>
+  </Row>
+ <Row ss:Index="320">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">13.39</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">1994</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">יולי</Data></Cell>
+  </Row>
+ <Row ss:Index="321">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">12.87</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">1994</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">יוני</Data></Cell>
+  </Row>
+ <Row ss:Index="322">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">12.24</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">1994</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מאי</Data></Cell>
+  </Row>
+ <Row ss:Index="323">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">11.87</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">1994</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">אפריל</Data></Cell>
+  </Row>
+ <Row ss:Index="324">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">11.87</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">1994</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">מרץ</Data></Cell>
+  </Row>
+ <Row ss:Index="325">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="Number">11.87</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">1994</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_style" ><Data ss:Type="String">פברואר</Data></Cell>
+  </Row>
+ <Row ss:Index="326">
+<Cell ss:Index="1" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="Number">11.78</Data></Cell>
+<Cell ss:Index="2" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">1994</Data></Cell>
+<Cell ss:Index="3" ss:StyleID="ריביות פרייםcell_stylezw" ><Data ss:Type="String">ינואר</Data></Cell>
+  </Row>
+  </Table>
+<WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+         <Selected/>
+           <DisplayRightToLeft/>
+           <FreezePanes/>
+           <FrozenNoSplit/>
+           <SplitHorizontal>2</SplitHorizontal>
+           <TopRowBottomPane>2</TopRowBottomPane>
+           <ActivePane>2</ActivePane>          
+           <ProtectObjects>False</ProtectObjects>
+           <ProtectScenarios>False</ProtectScenarios>
+          </WorksheetOptions>
+         </Worksheet>
+</Workbook>

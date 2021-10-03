@@ -4,7 +4,7 @@ close all;
 
 %directionl tuning criteria
 threshold_theta_tuning_odd_even_corr=0.5;
-threshold_goodness_of_fit_vmises=0.5; 
+threshold_goodness_of_fit_vmises=0.5;
 threshold_rayleigh_length=0.1;
 
 column_radius = 20; %in um
@@ -45,8 +45,8 @@ end
 
 
 if flag_spikes==1
-%     rel_data=LICK2D.ROILick2DPSTHStatsSpikes;
-%     rel_stats=LICK2D.ROILick2DPSTHStatsSpikes*LICK2D.ROILick2DangleSpikes;
+    rel_data=LICK2D.ROILick2DPSTHSpikes;
+    rel_stats=LICK2D.ROILick2DRewardStatsSpikes*LICK2D.ROILick2DPSTHStatsSpikes*LICK2D.ROILick2DangleSpikes;
 else
     rel_data=LICK2D.ROILick2DPSTH;
     rel_stats=LICK2D.ROILick2DRewardStats*LICK2D.ROILick2DPSTHStats*LICK2D.ROILick2Dangle;
@@ -65,7 +65,7 @@ switch flag_reward
         filename_suffix = 'SmallVsLarge';
 end
 
-            
+
 session_date = fetch1(EXP2.Session & key,'session_date');
 
 filename = [ 'anm' num2str(key.subject_id) '_s' num2str(key.session) '_' session_date filename_suffix];
@@ -158,33 +158,57 @@ roi_number_all=M_all_all.roi_number;
 x_all = M.roi_centroid_x + M.x_pos_relative;
 y_all = M.roi_centroid_y + M.y_pos_relative;
 
-x_all=x_all/0.75;
-y_all=y_all/0.5;
+mesoscope_check=IMG.Mesoscope & key;
+if count(mesoscope_check) % if mesoscope
+    x_all=x_all/0.75;
+    y_all=y_all/0.5;
+end
 
 x_all_all = M_all_all.roi_centroid_x + M_all_all.x_pos_relative;
 y_all_all = M_all_all.roi_centroid_y + M_all_all.y_pos_relative;
 
+if count(mesoscope_check) % if mesoscope
+    x_all_all=x_all_all/0.75;
+    y_all_all=y_all_all/0.5;
+end
 
-x_all_all=x_all_all/0.75;
-y_all_all=y_all_all/0.5;
-
+% aligning relative to bregma
+bregma_x_mm=1000*fetchn(IMG.Bregma & key,'bregma_x_cm');
+if ~isempty(bregma_x_mm)
+    bregma_y_mm=1000*fetchn(IMG.Bregma & key,'bregma_y_cm');
+    x_all_max= max(x_all);
+    y_all_min= min(y_all);
+    
+    x_all=x_all-[x_all_max - bregma_x_mm]; % anterior posterior
+    y_all=y_all-y_all_min+bregma_y_mm; % medial lateral
+    
+    
+    x_all_all_max= max(x_all_all);
+    y_all_all_min= min(y_all_all);
+    
+    x_all_all=x_all_all-[x_all_all_max - bregma_x_mm]; % anterior posterior
+    y_all_all=y_all_all-y_all_all_min+bregma_y_mm; % medial lateral
+    
+    
+end
+            
 
 %% Distance (lateral, axial) and time
 switch flag_reward
     case 0 %regular versus large
-        x=M.reward_mean_regular;
-        y=M.reward_mean_large;
+        x=M.reward_peak_regular;
+        y=M.reward_peak_large;
     case 1 %regular versus large
-        x=M.reward_mean_small;
-        y=M.reward_mean_regular;
+        x=M.reward_peak_regular;
+        y=M.reward_peak_small;
     case 2 %regular versus large
-        x=M.reward_mean_small;
-        y=M.reward_mean_large;
+        x=M.reward_peak_small;
+        y=M.reward_peak_large;
 end
 
 
 
-change_mean = 100*((y./x)-1);
+change_peak = 100*((y./x)-1);
 
 % time_all_neuropil =M_neuropil.peaktime_psth;
 
@@ -412,7 +436,7 @@ end
 % ylabel('Counts')
 % box off;
 % xlim([-1,1])
-% 
+%
 % axes('position',[position_x2(1), position_y2(4), panel_width2, panel_height2]);
 % b2=histogram(M_neuropil.time_tuning_odd_even_corr,10);
 % title(sprintf('Neuropil'));
@@ -436,7 +460,7 @@ end
 % ylabel('Counts')
 % box off;
 % xlim([0,b1.BinLimits(2)])
-% 
+%
 % axes('position',[position_x2(2), position_y2(4), panel_width2, panel_height2]);
 % b2=histogram(M_neuropil.rayleigh_length,10);
 % title(sprintf('Neuropil'));
@@ -456,7 +480,7 @@ end
 
 %% Map of reward response
 bins1 = [-inf,-100:1:100,inf];
-[N,edges,bin]=histcounts(change_mean,bins1);
+[N,edges,bin]=histcounts(change_peak,bins1);
 ax1=axes('position',[position_x1(1), position_y1(1), panel_width1*2, panel_height1*2]);
 hold on;
 my_colormap=jet(numel(bins1));
@@ -497,7 +521,7 @@ bins2 = [-inf,-80:step:80,inf];
 bins2_centers=[bins2(2)-step/2, bins2(2:end-1)+step/2];
 
 yyaxis left
-a=histogram(change_mean,bins2);
+a=histogram(change_peak,bins2);
 y =100*a.BinCounts/rel_all.count;
 bar(bins2_centers,y,'FaceColor',[0.5 0.5 0.5],'EdgeColor',[0.5 0.5 0.5]);
 % title(sprintf('Response time of tuned neurons'));
@@ -507,12 +531,12 @@ xlabel(sprintf('Reward-modulation (%% increase)'));
 
 %% of directionally tuned cells as a function of preferred PSTH time
 % axes('position',[position_x2(4)+0.15, position_y2(2), panel_width2, panel_height2]);
-    idx_directional = M.theta_tuning_odd_even_corr>threshold_theta_tuning_odd_even_corr & M.goodness_of_fit_vmises>threshold_goodness_of_fit_vmises & M.rayleigh_length>threshold_rayleigh_length;
+idx_directional = M.theta_tuning_odd_even_corr>threshold_theta_tuning_odd_even_corr & M.goodness_of_fit_vmises>threshold_goodness_of_fit_vmises & M.rayleigh_length>threshold_rayleigh_length;
 for ib = 1:1:numel(bins2)-1
-    idx_change_bin = change_mean>=bins2(ib) & change_mean<bins2(ib+1);
+    idx_change_bin = change_peak>=bins2(ib) & change_peak<bins2(ib+1);
     % percentage tuned in each time bin
     if sum(idx_change_bin)>5 % to avoid spurious values
-    tuned_in_change_bins(ib) =100*sum(idx_change_bin&idx_directional)/sum(idx_change_bin);
+        tuned_in_change_bins(ib) =100*sum(idx_change_bin&idx_directional)/sum(idx_change_bin);
     else
         tuned_in_change_bins(ib)=NaN;
     end
@@ -535,7 +559,7 @@ time_bins=floor(psth_time(1)):1:ceil(psth_time(end));
 time_bins_centers=time_bins(1:end-1)+mean(diff(time_bins))/2;
 
 yyaxis left
-idx = change_mean>=0;
+idx = change_peak>=0;
 a=histogram(M.peaktime_psth(idx),time_bins);
 y =100*a.BinCounts/sum(a.BinCounts);
 bar(time_bins_centers,y,'FaceColor',[1 0 0],'EdgeColor',[1 0 0]);
@@ -545,7 +569,7 @@ ylim([0 ceil(max(y))]);
 ylabel(sprintf('Reward-enhanced\n neurons (%%)'),'Color',[1 0 0]);
 
 yyaxis right
-idx = change_mean<0;
+idx = change_peak<0;
 a=histogram(M.peaktime_psth(idx),time_bins);
 y =100*a.BinCounts/sum(a.BinCounts);
 bar(time_bins_centers,y,'FaceColor','none','EdgeColor',[0 0 1]);
@@ -564,62 +588,80 @@ ylim([0 ceil(max(y))]);
 %% PSTHs all
 smooth_bins=1; % one element backward, current element, and one element forward
 
-switch flag_reward
-    case 0 %regular versus large
-PSTH2 = cell2mat(fetchn(rel_psth, 'psth_regular', 'ORDER BY roi_number'));
-PSTH3 = cell2mat(fetchn(rel_psth, 'psth_large', 'ORDER BY roi_number'));
-    case 1 %regular versus large
-PSTH2 = cell2mat(fetchn(rel_psth, 'psth_small', 'ORDER BY roi_number'));
-PSTH3 = cell2mat(fetchn(rel_psth, 'psth_regular', 'ORDER BY roi_number'));
-
-    case 2 %regular versus large
-PSTH2 = cell2mat(fetchn(rel_psth, 'psth_small', 'ORDER BY roi_number'));
-PSTH3 = cell2mat(fetchn(rel_psth, 'psth_large', 'ORDER BY roi_number'));
-end
+PSTH_regular = cell2mat(fetchn(rel_psth, 'psth_regular', 'ORDER BY roi_number'));
+PSTH_small = cell2mat(fetchn(rel_psth, 'psth_small', 'ORDER BY roi_number'));
+PSTH_large = cell2mat(fetchn(rel_psth, 'psth_large', 'ORDER BY roi_number'));
 
 
 ax1=axes('position',[position_x3(1), position_y3(1), panel_width2, panel_height2*1.5]);
-PSTH = cell2mat(fetchn(rel_psth, 'psth', 'ORDER BY roi_number'));
-PSTH = movmean(PSTH ,[smooth_bins smooth_bins], 2,'omitnan', 'Endpoints','shrink');
+PSTH1 = movmean(PSTH_regular ,[smooth_bins smooth_bins], 2,'omitnan', 'Endpoints','shrink');
 % PSTH=PSTH(:,time_idx);
-PSTH_norm = PSTH./nanmax(PSTH,[],2);
+PSTH_norm = PSTH1./nanmax(PSTH1,[],2);
 [~,idx]=max(PSTH_norm,[],2);
 [~,idxs]=sort(idx);
 imagesc(psth_time,1:1:numel(idxs),PSTH_norm(idxs,:));
 xlabel('Time (s)');
 ylabel('Neurons');
-title(sprintf('Normalized responses\n all trials'));
+title(sprintf('Normalized responses\n regular trials'));
 set(gca,'Xtick',[time_bins(1),0,time_bins(end)],'TickLength',[0.05,0.05],'TickDir','out');
+cmp=parula;
+colormap(ax1, cmp)
+caxis([nanmin(PSTH_norm(:)) nanmax(PSTH_norm(:))]);
+
 
 ax2=axes('position',[position_x3(2), position_y3(1), panel_width2, panel_height2*1.5]);
-PSTH2 = movmean(PSTH2 ,[smooth_bins smooth_bins], 2,'omitnan', 'Endpoints','shrink');
+PSTH2 = movmean(PSTH_small ,[smooth_bins smooth_bins], 2,'omitnan', 'Endpoints','shrink');
 % PSTH=PSTH(:,time_idx);
-PSTH2_norm = PSTH2./nanmax(PSTH2,[],2);
+PSTH2_norm = PSTH2./nanmax(PSTH1,[],2);
 imagesc(psth_time,1:1:numel(idxs),PSTH2_norm(idxs,:));
 xlabel('Time (s)');
 ylabel('Neurons');
 title(sprintf('Normalized responses\n smaller reward'));
 set(gca,'Xtick',[time_bins(1),0,time_bins(end)],'TickLength',[0.05,0.05],'TickDir','out');
+cmp=parula;
+colormap(ax2, cmp)
+caxis([nanmin(PSTH_norm(:)) nanmax(PSTH_norm(:))]);
+
+
+
 
 ax3=axes('position',[position_x3(3), position_y3(1), panel_width2, panel_height2*1.5]);
-PSTH3 = movmean(PSTH3 ,[smooth_bins smooth_bins], 2,'omitnan', 'Endpoints','shrink');
+PSTH3 = movmean(PSTH_large ,[smooth_bins smooth_bins], 2,'omitnan', 'Endpoints','shrink');
 % PSTH=PSTH(:,time_idx);
-PSTH3_norm = PSTH3./nanmax(PSTH2,[],2);
+PSTH3_norm = PSTH3./nanmax(PSTH1,[],2);
 imagesc(psth_time,1:1:numel(idxs),PSTH3_norm(idxs,:));
 xlabel('Time (s)');
 ylabel('Neurons');
 title(sprintf('Normalized responses\n larger reward'));
 set(gca,'Xtick',[time_bins(1),0,time_bins(end)],'TickLength',[0.05,0.05],'TickDir','out');
+cmp=parula;
+colormap(ax3, cmp)
+caxis([nanmin(PSTH_norm(:)) nanmax(PSTH_norm(:))]);
+
 
 ax4=axes('position',[position_x3(4), position_y3(1), panel_width2, panel_height2*1.5]);
-PSTH4 = PSTH3_norm-PSTH2_norm;
-% PSTH4 = PSTH4./nanmax(PSTH4,[],2);
+PSTH4 = PSTH2-PSTH1;
+PSTH4 = PSTH4./nanmax(PSTH1,[],2);
 imagesc(psth_time,1:1:numel(idxs),PSTH4(idxs,:));
 xlabel('Time (s)');
 ylabel('Neurons');
-title(sprintf('Larger-Smaller responses'));
+title(sprintf('Smaller-Regular responses'));
 set(gca,'Xtick',[time_bins(1),0,time_bins(end)],'TickLength',[0.05,0.05],'TickDir','out');
+cmp=parula;
+colormap(ax4, cmp)
+caxis([nanmin(PSTH4(:)) nanmax(PSTH4(:))]);
 
+ax5=axes('position',[position_x3(5), position_y3(1), panel_width2, panel_height2*1.5]);
+PSTH5 = PSTH3-PSTH1;
+PSTH5 = PSTH5./nanmax(PSTH1,[],2);
+imagesc(psth_time,1:1:numel(idxs),PSTH5(idxs,:));
+xlabel('Time (s)');
+ylabel('Neurons');
+title(sprintf('Larger-Regular responses'));
+set(gca,'Xtick',[time_bins(1),0,time_bins(end)],'TickLength',[0.05,0.05],'TickDir','out');
+cmp=parula;
+colormap(ax5, cmp)
+caxis([nanmin(PSTH5(:)) nanmax(PSTH5(:))]);
 
 if isempty(dir(dir_current_fig))
     mkdir (dir_current_fig)
@@ -627,7 +669,7 @@ end
 %
 figure_name_out=[ dir_current_fig filename];
 eval(['print ', figure_name_out, ' -dtiff  -r200']);
-% eval(['print ', figure_name_out, ' -dpdf -r200']);
+eval(['print ', figure_name_out, ' -dpdf -r200']);
 
 
 

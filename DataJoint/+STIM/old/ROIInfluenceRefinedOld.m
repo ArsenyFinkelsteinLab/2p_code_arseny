@@ -27,7 +27,7 @@ num_of_target_trials_used        : int                # number of target photost
 
 classdef ROIInfluenceRefinedOld < dj.Computed
     properties
-        keySource = (EXP2.SessionEpoch & 'flag_photostim_epoch =1' & IMG.ROI & IMG.PlaneCoordinates)& (STIMANAL.SessionEpochsIncluded& 'stimpower_percent=15' & 'flag_include=1') & (STIMANAL.NeuronOrControl & 'neurons_or_control=1' & 'num_targets>0')  & (STIMANAL.NeuronOrControl & 'neurons_or_control=0' & 'num_targets>0')
+        keySource = (EXP2.SessionEpoch & 'flag_photostim_epoch =1' & IMG.ROI & IMG.PlaneCoordinates)& (STIMANAL.SessionEpochsIncluded& 'stimpower=150' & 'flag_include=1') & (STIMANAL.NeuronOrControl & 'neurons_or_control=1' & 'num_targets>0')  & (STIMANAL.NeuronOrControl & 'neurons_or_control=0' & 'num_targets>0')
         %                 keySource = EXP2.SessionEpoch & 'flag_photostim_epoch =1' & IMG.ROI;
         
     end

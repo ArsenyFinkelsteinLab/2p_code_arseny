@@ -23,8 +23,8 @@ dir_base_behavior ='G:\Arseny\2p\BPOD_behavior\';
 % dir_behavioral_data = [dir_base_behavior 'anm463192_AF25\'];
 % dir_behavioral_data = [dir_base_behavior 'anm464728_AF32\'];
 % dir_behavioral_data = [dir_base_behavior 'anm481102_AF33\'];
-% dir_behavioral_data = [dir_base_behavior 'anm486673_AF34\'];
-dir_behavioral_data = [dir_base_behavior 'anm486668_AF35\'];
+dir_behavioral_data = [dir_base_behavior 'anm486673_AF34\'];
+% dir_behavioral_data = [dir_base_behavior 'anm486668_AF35\'];
 % dir_behavioral_data = [dir_base_behavior 'anm481101_AF36\'];
 
 
@@ -60,7 +60,7 @@ populate_Session_without_behavior (user_name, rig); % populate session without b
 % populate_behavior_WaterCue (dir_behavioral_data, behavioral_protocol_name);
 populate_behavior_Lick2D(dir_behavioral_data, behavioral_protocol_name);
 
-populate_Session_and_behavior (dir_behavioral_data, user_name, rig); % populate session with behavior
+% populate_Session_and_behavior (dir_behavioral_data, user_name, rig); % populate session with behavior
 
 % should run after populate_behavior_Lick2D
 populate(EXP2.SessionEpoch); % reads info about FOV and trial duration from SI files. Also populates EXP2.SessionEpochDirectory, IMG.SessionEpochFrame, IMG.FrameTime, IMG.FrameStartFile
@@ -71,11 +71,11 @@ populate(EXP2.SessionEpoch); % reads info about FOV and trial duration from SI f
 % 
 
 %% STEP 2 - run suite2p (outside this script)
+% IMG.Bregma
 populate(IMG.FOV); % also populates IMG.Plane, IMG.PlaneCoordinates, IMG.PlaneDirectory, IMG.PlaneSuite2p
 populate(IMG.FOVEpoch); 
 populate(IMG.SessionEpochFramePlane); %deals with missing frames at the end of the session epoch in some planes, due to volumetric imaging
 
-populate(IMG.FOV); % also populates IMG.Plane, IMG.PlaneCoordinates, IMG.PlaneDirectory, IMG.PlaneSuite2p
 populate(IMG.Volumetric);
 
 populate(IMG.ROI); %also populates IMG.ROIdepth
@@ -100,11 +100,13 @@ populate(IMG.ROIdeltaFStatsNeuropil);
 
 %% PHOTOSTIM
 % ANALYSIS_PHOTOSTIM; % this script summarizes all the scripts below:
+STIMANAL.SessionEpochsIncluded  %% manually update session info here
+
 
 populate(IMG.PhotostimGroup); % also IMG.PhotostimProtocol
 populate(IMG.PhotostimGroupROI); % also populates IMG.PhotostimDATfile;
 
-populate(STIM.ROIInfluence5); % also populates STIM.ROIInfluenceTrace    %% DEBUG: currently only populates for  'subject_id=488673'
+populate(STIM.ROIInfluence5); % also populates STIM.ROIInfluenceTrace    
 populate(STIM.ROIResponseDirect);  
 
 %%%% STIMANAL.NeuronOrControl5 requires STIM.ROIResponseDirect5  ==> debug
@@ -112,6 +114,12 @@ populate(STIM.ROIResponseDirect5);
 
 populate(STIMANAL.NeuronOrControl5);
 populate(STIMANAL.InfluenceDistance55);
+
+populate(STIMANAL.OutDegree);
+
+populate(POP.ROICorrLocalPhoto)
+
+
 
 %%% old
 % % % populate(STIM.ROIResponse); % also populates STIM.ROIResponseVector
@@ -134,6 +142,40 @@ populate(POP.DistancePairwiseLateral); %also populates POP.DistancePairwise3D
 
 %% Lick 2D
 % ANALYSIS_LICK2D; % this script summarizes all the scripts below:
+
+
+%based on spikes
+%--------------------------------
+%debug:  exludes all older sessions that do not have EXP2.TrialLickBlock.Debug to include them
+
+populate(LICK2D.ROILick2DangleSpikes);
+populate(LICK2D.ROILick2DQuadrantsSpikes);
+%debug: not all LICK2D.ROILick2DPSTHSpikes have LICK2D.ROILick2DRewardStatsSpikes
+populate(LICK2D.ROILick2DPSTHSpikes); %LICK2D.ROILick2DPSTHStatsSpikes LICK2D.ROILick2DRewardStatsSpikes LICK2D.ROILick2DBlockStatsSpikes
+populate(LICK2D.ROILick2DmapSpikes); %also populates LICK2D.ROILick2DSelectivitySpikes LICK2D.ROILick2DSelectivityStatsSpikes
+
+populate(PLOTS.Cells2DTuningSpikes);
+
+populate(PLOTS.CellsRewardTuningSpikes);
+
+
+populate(LICK2D.ROILick2DPSTHSpikesPoisson);
+populate(PLOTS.CellsRewardTuningSpikesPoisson);
+
+
+populate(PLOTS.Maps2DthetaSpikes);
+% populate(PLOTS.Maps2DPSTHSpikes);
+
+% populate(ANLI.ROILick2DangleShuffle);
+% populate(ANLI.ROILick2DmapShuffle);
+
+
+
+populate(LICK2D.ROILick2DangleSpikesLickingResidual);
+
+populate(LICK2D.ROILick2DPSTHSpikesLickingResidual);
+
+
 %based on dff
 %--------------------------------
 populate(LICK2D.ROILick2Dangle);
@@ -160,22 +202,14 @@ populate(PLOTS.MapsBodypartCorr);
 % populate(PLOTS.Maps2DPSTHpreferred);
 
 
-%based on spikes
+
+% Based on Spikes
 %--------------------------------
-populate(LICK2D.ROILick2DangleSpikes);
-populate(LICK2D.ROILick2DQuadrantsSpikes);
-populate(LICK2D.ROILick2DPSTHSpikes); %LICK2D.ROILick2DPSTHStatsSpikes LICK2D.ROILick2DRewardStatsSpikes LICK2D.ROILick2DBlockStatsSpikes
-populate(LICK2D.ROILick2DmapSpikes); %also populates LICK2D.ROILick2DSelectivitySpikes LICK2D.ROILick2DSelectivityStatsSpikes
-
-populate(PLOTS.Cells2DTuningSpikes);
-
-populate(PLOTS.Maps2DthetaSpikes);
-% populate(PLOTS.Maps2DPSTHSpikes);
-
-% populate(ANLI.ROILick2DangleShuffle);
-% populate(ANLI.ROILick2DmapShuffle);
+populate(PLOTS.Population2DReward);
 
 
+
+%% All 3 Not used (probably could be removed):
 % % populate(ANLI.ROILick2DmapReward);
 % populate(ANLI.ROILick2DPSTHReward);
 % populate(ANLI.ROILick2DPSTHBlock);

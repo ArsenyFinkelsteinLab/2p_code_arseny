@@ -31,8 +31,13 @@ parfor iROI=1:1:size(F,1)
         % if there are cells in the vinicity, even after removing the inner ring
         if sum(idx_other_cells_without_inner_ring)>0
             key_ROI(iROI).corr_local_without_inner_ring = mean(rho(idx_current_cell,idx_other_cells_without_inner_ring));
+            if isnan(mean(rho(idx_current_cell,idx_other_cells_without_inner_ring)))
+                key_ROI(iROI).corr_local_without_inner_ring=0;
+            end
         else
-            key_ROI(iROI).corr_local_without_inner_ring =NaN;
+            %should be NaN, but because this field is not defined with NaN in the existing DJ table, I had to put 0 instead even though its not the right value
+            %             key_ROI(iROI).corr_local_without_inner_ring =NaN;
+            key_ROI(iROI).corr_local_without_inner_ring =0;
         end
         key_ROI(iROI).num_neurons_in_radius = numel(idx_within_radius);
         key_ROI(iROI).num_neurons_in_radius_without_inner_ring = numel(idx_other_cells_without_inner_ring);
@@ -41,7 +46,10 @@ parfor iROI=1:1:size(F,1)
         
     else % if there are no cells in the vicinity
         key_ROI(iROI).corr_local =NaN;
-        key_ROI(iROI).corr_local_without_inner_ring =NaN;
+        %should be NaN, but because this field is not defined with NaN in the existing DJ table, I had to put 0 instead even though its not the right value
+        %             key_ROI(iROI).corr_local_without_inner_ring =NaN;
+        key_ROI(iROI).corr_local_without_inner_ring =0;
+        
         key_ROI(iROI).num_neurons_in_radius =0;
         key_ROI(iROI).num_neurons_in_radius_without_inner_ring = 0;
         

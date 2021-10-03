@@ -4,7 +4,7 @@ dir_base = fetch1(IMG.Parameters & 'parameter_name="dir_root_save"', 'parameter_
 dir_current_fig = [dir_base  '\Lick2D\behavior\lickport_position\'];
 
 LickPort=fetch((EXP2.TrialLickPort & key)-TRACKING.VideoGroomingTrial,'*');
-number_of_bins = sqrt(max([LickPort.lickport_pos_number]));
+number_of_bins = round(sqrt(max([LickPort.lickport_pos_number])));
 idx_trials_for_boundaries = 150:numel(LickPort);
 
 

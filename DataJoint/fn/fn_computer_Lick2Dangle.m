@@ -8,7 +8,7 @@ session_date = fetch1(EXP2.Session & key,'session_date');
 
 
 smooth_window=1; %frames
-timespent_min=20; %in trials
+timespent_min=15; %in trials
 min_num_bins_for_smoothing=7;
 smoothing_window_1D=3; % conditioned on number of bins. If number of bins is <min_num_bins_for_smoothing we set smoothing to 1
 radius_threshold = 0.1;

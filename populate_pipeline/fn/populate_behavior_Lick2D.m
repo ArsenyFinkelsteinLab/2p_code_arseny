@@ -42,10 +42,11 @@ for iFile = 1:1:numel (allFileNames)
                 continue
                 end
             if  sum(currentSubject_id == exisitingSubject_id)>0 % test if to restart the session numbering
-                temp_key.subject_id = key.subject_id;
-                s_n = numel(unique(fetchn(EXP2.BehaviorTrial & temp_key,'session')));
-                currentSession = s_n(end) + 1;
-                       key.session = currentSession;
+%                 % DEBUG: not sure why this is needed:
+%                 temp_key.subject_id = key.subject_id;
+%                 s_n = numel(unique(fetchn(EXP2.BehaviorTrial & temp_key,'session')));
+%                 currentSession = s_n(end) + 1;
+%                 key.session = currentSession;
             else
                 currentSession =1;
             end
@@ -124,9 +125,9 @@ for iFile = 1:1:numel (allFileNames)
         insert(EXP2.TrialLickBlock, data_TrialLickBlock);
         
 %         % for debug purposes: to delete the above tables
-%         del(EXP2.SessionTrial & 'subject_id=486673' & 'session=4')
-%         del(EXP2.SessionTask & 'subject_id=486673' & 'session=4' )
-%         del(EXP2.SessionTraining & 'subject_id=486673' & 'session=4' )
+%         del(EXP2.SessionTrial & 'subject_id=486673' )
+%        del(EXP2.SessionTask & 'subject_id=486673')
+%         del(EXP2.SessionTraining & 'subject_id=486673' )
         
         toc
     end

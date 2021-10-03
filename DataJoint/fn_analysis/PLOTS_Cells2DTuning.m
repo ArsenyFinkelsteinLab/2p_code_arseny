@@ -34,7 +34,6 @@ pos_x_bins_centers =fetch1(rel_map_and_psth  & key,'pos_x_bins_centers','LIMIT 1
 
 
 
-time_bin=[-1,3]; %2 sec
 smooth_bin = 1;
 
 

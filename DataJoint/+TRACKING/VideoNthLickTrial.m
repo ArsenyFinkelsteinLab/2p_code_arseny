@@ -16,9 +16,20 @@ lick_peak_y1=null                                   : double                # to
 lick_peak_y2=null                                   : double                # tongue Anterior-Posterior coordinate at the peak of the lick. Positive is forward. Measured based on tongue center
 lick_peak_z=null                                    : double                # tongue Dorso-Ventral coordinate at the peak of the lick. Positive is downwards. Measured based on tongue tip
 lick_peak_yaw=null                                  : double                # tongue yaw at the peak of the lick. Left negative, Right positive
-lick_peak_yaw_avg_across_licks_with_touch=null         : double                # tongue yaw at the peak, median across all licks with touch
+
+lick_peak_yaw_avg_across_licks_with_touch=null     : double                # tongue yaw at the peak, median across all licks with touch
 lick_peak_yaw_avg_across_licks_before_lickportentrance=null         :double                # tongue yaw at the peak, median across all licks occuring before lickportentrance
 lick_peak_yaw_avg_across_licks_after_lickportentrance=null         :double                # tongue yaw at the peak, median across all licks occuring after lickportentrance
+
+
+lick_touch_x = null            : double              # tongue Medio-Lateral coordinate during electric touch, relative to midline. Left negative, Right positive. Measured based on tongue center
+lick_touch_y1 = null           : double              # tongue Anterior-Posterior coordinate during electric touch. Positive is forward. Measured based on tongue tip
+lick_touch_y2 = null           : double              # tongue Anterior-Posterior coordinate during electric touch. Positive is forward. Measured based on tongue center
+lick_touch_z = null            : double              # tongue Dorso-Ventral coordinate during electric touch. Positive is downwards. Measured based on tongue tip
+lick_touch_yaw = null          : double              # tongue yaw during electric touch. Left negative, Right positive
+
+
+
 
 lick_yaw_lickbout=null                                   : double                # tongue yaw averaged (median) during the entire outbound lick, i.e. from onset to peak
 lick_yaw_lickbout_avg_across_licks_with_touch=null              : double                     # tongue yaw averaged (median) during the entire outbound lick, i.e. from onset to peaktongue yaw at the peak, median across all licks with touch
@@ -78,7 +89,7 @@ classdef VideoNthLickTrial < dj.Computed
             idx_electric_during_lick=[];
             if numel(t_elect)>0
                 for i_l=1:1:totalnum_licks
-                    idx_electric_during_lick = [idx_electric_during_lick,find(  licks_time_onset(i_l)<t_elect & (licks_time_onset(i_l)+licks_duration_total(i_l))>t_elect ,1,'first' )];
+                    idx_electric_during_lick = [idx_electric_during_lick,find(  licks_time_onset(i_l)<=t_elect & (licks_time_onset(i_l)+licks_duration_total(i_l))>=t_elect ,1,'first' )];
                 end
             end
             t_elect = t_elect(idx_electric_during_lick);
@@ -106,24 +117,31 @@ classdef VideoNthLickTrial < dj.Computed
                 key_insert(i_l).lick_time_peak  = licks_time_peak(i_l);
                 key_insert(i_l).lick_duration_total  = licks_duration_total(i_l);
                 
-                if numel(t_elect)>0
-                    idx=find(licks_time_onset(i_l)<t_elect & (licks_time_onset(i_l)+licks_duration_total(i_l))>t_elect);
-                    if ~isempty(idx)
-                        key_insert(i_l).lick_time_electric  = t_elect(idx);
-                        key_insert(i_l).lick_touch_number  = idx;
-                    else
-                        key_insert(i_l).lick_time_electric  = NaN;
-                        key_insert(i_l).lick_touch_number  = -1;
+                idx=find(licks_time_onset(i_l)<=t_elect & t_elect <=(licks_time_onset(i_l)+licks_duration_total(i_l)));
+                if numel(t_elect)>0 & ~isempty(idx)
+                    if numel(idx)>1
+                        a=1;
                     end
+                    key_insert(i_l).lick_time_electric  = t_elect(idx);
+                    key_insert(i_l).lick_touch_number  = idx;
+                    
+                    key_insert(i_l).lick_touch_x =  T.licks_touch_x(idx);
+                    key_insert(i_l).lick_touch_y1 =  T.licks_touch_y1(idx);
+                    key_insert(i_l).lick_touch_y2 =  T.licks_touch_y2(idx);
+                    key_insert(i_l).lick_touch_z =  T.licks_touch_z(idx);
+                    key_insert(i_l).lick_touch_yaw = T.licks_touch_yaw(idx);
+                    
                 else
                     key_insert(i_l).lick_time_electric  = NaN;
                     key_insert(i_l).lick_touch_number  = -1;
+                    
+                    key_insert(i_l).lick_touch_x =  NaN;
+                    key_insert(i_l).lick_touch_y1 =  NaN;
+                    key_insert(i_l).lick_touch_y2 =  NaN;
+                    key_insert(i_l).lick_touch_z =  NaN;
+                    key_insert(i_l).lick_touch_yaw = NaN;
                 end
-                
-                % lick_number_relative_to_firsttouch : double            # first lick with touch is 0, the next lick after it (not necessarily with touch) is 1, etc. the last lick before touch is -1, the one before it -2 etc
-                % lick_number_relative_to_lickport_entrance : double     # first lick after the lickport_entrance is 0, next one is 1 etc; the lick before lickport_entrance cue is -1, the one before it -2, etc
-                % lick_number_relative_to_lickport_exit : double         # first lick after the lickport_exit is 0, next one is 1 etc; the lick before lickport_exit cue is -1, the one before it -2, etc
-                %
+               
                 key_insert(i_l).lick_delta_x = T.licks_delta_x(i_l);
                 key_insert(i_l).lick_delta_y1  = T.licks_delta_y1(i_l);
                 key_insert(i_l).lick_delta_y2  = T.licks_delta_y2(i_l);

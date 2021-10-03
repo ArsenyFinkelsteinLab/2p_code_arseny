@@ -46,7 +46,7 @@ else
     video_resampled_interp=video_resampled; 
 end
 
-%% Dor debug
+%% For debug
 % clf
 % hold on
 % plot(time, video,'-k')

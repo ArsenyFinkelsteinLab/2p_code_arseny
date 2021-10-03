@@ -1,6 +1,6 @@
 function DELETE_FROM_PIPELINE()
 % Relvar - disable user-promt in this script for fast deletion
-key.subject_id = 481101;
+key.subject_id = 486668;
 EXP2.Session & key 
 % key.session = 2;
 

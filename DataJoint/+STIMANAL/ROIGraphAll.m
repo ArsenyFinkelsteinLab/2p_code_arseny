@@ -273,7 +273,7 @@ classdef ROIGraphAll < dj.Imported
             
             %Saving the graph
             
-            dir_current_figure = [dir_save_figure 'anm' num2str(s.subject_id) '\'];
+            dir_current_figure = [dir_save_figure 'anm' num2str(s.subject_id) '_'];
             if isempty(dir(dir_current_figure))
                 mkdir (dir_current_figure)
             end

@@ -1,5 +1,7 @@
 function ANALYSIS_PHOTOSTIM()
 
+STIMANAL.SessionEpochsIncluded  %% manually update session info here
+
 photostim_direct_new()
 
 
@@ -16,7 +18,9 @@ populate(STIMANAL.InfluenceDistance55);
 PLOT_InfluenceDistance5()
 
 PLOT_Network_Degree()
-PLOT_Network_Degree_vs_tuning()
+%requires: populate(POP.ROICorrLocalPhoto)
+PLOT_Network_Degree_vs_tuning() %directional and temporal tuning -- this is what I show in presentations (now animals 486673 and 486668 were added)
+PLOT_Network_Degree_vs_tuning_reward()
 
 PLOT_ConnectionProbabilityDistance()
 

@@ -39,6 +39,7 @@ z_bins(end)= inf;
 
 %plot(pos_x,pos_z,'.')
 
+
 mat_x=repmat(x_bins_centers,key.number_of_bins,1);
 mat_z=repmat(z_bins_centers',1,key.number_of_bins);
 

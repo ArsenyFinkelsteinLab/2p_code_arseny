@@ -77,7 +77,9 @@ for i_roi=1:1:size(S,1)
             psth_all{i_tr}=NaN;
             continue
         end
+        
         s=spikes(start_file(i_tr):end_file(i_tr));
+
         s=movmean(s,[smooth_window_frames 0],'omitnan','Endpoints','shrink');
         time=(1:1:numel(s))/frame_rate + fr_interval(1);
         %         s_interval=s(time>fr_interval(1) & time<=fr_interval(2));

@@ -26,9 +26,9 @@ num_of_target_trials_used        : int                # number of target photost
 
 classdef ROIInfluence6 < dj.Computed
     properties
-        %         keySource = (EXP2.SessionEpoch & 'flag_photostim_epoch =1' & IMG.ROI & IMG.PlaneCoordinates)& (STIMANAL.SessionEpochsIncluded& 'stimpower_percent=15' & 'flag_include=1')
+        %         keySource = (EXP2.SessionEpoch & 'flag_photostim_epoch =1' & IMG.ROI & IMG.PlaneCoordinates)& (STIMANAL.SessionEpochsIncluded& 'stimpower=150' & 'flag_include=1')
         %                 keySource = EXP2.SessionEpoch & 'flag_photostim_epoch =1' & IMG.ROI;
-        keySource = (EXP2.SessionEpoch & 'flag_photostim_epoch =1' & IMG.FOVEpoch) & (STIMANAL.SessionEpochsIncluded& 'stimpower_percent=15' & 'flag_include=1') & IMG.Volumetric & (EXP2.Session & (EXP2.SessionEpoch & 'session_epoch_type = "spont_only"'))
+        keySource = (EXP2.SessionEpoch & 'flag_photostim_epoch =1' & IMG.FOVEpoch) & (STIMANAL.SessionEpochsIncluded& 'stimpower=150' & 'flag_include=1') & IMG.Volumetric & (EXP2.Session & (EXP2.SessionEpoch & 'session_epoch_type = "spont_only"'))
         
     end
     methods(Access=protected)

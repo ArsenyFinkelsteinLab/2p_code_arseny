@@ -6,7 +6,7 @@ radius_size                   : float                               # radius siz
 num_svd_components_removed      : int     # how many of the first svd components were removed
 ---
 corr_local=null   : float                                           # trace (dff or spikes) correlation between a given cell (seed) and all of its neihgbors within radius_size
-corr_local_without_inner_ring : float                              # same as above, but ecxluding neurons within min_lateral_distanceb from the seed
+corr_local_without_inner_ring : float                              # same as above, but ecxluding neurons within min_lateral_distanceb from the seed .   DEBUG: in the future add null option to this field
 
 num_neurons_in_radius =null   : float                               # number of neurons within radius_size from the seed
 num_neurons_in_radius_without_inner_ring =null   : float           # number of neurons within radius size, exluding neurons within min_lateral_distanceb from the seed

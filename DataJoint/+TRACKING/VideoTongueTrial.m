@@ -9,6 +9,14 @@ licks_peak_y2 = null           : blob              # tongue Anterior-Posterior c
 licks_peak_z = null            : blob              # tongue Dorso-Ventral coordinate at the peak of the lick. Positive is downwards. Measured based on tongue tip
 licks_peak_yaw = null          : blob              # tongue yaw at the peak of the lick. Left negative, Right positive
 
+
+licks_touch_x = null            : blob              # tongue Medio-Lateral coordinate during electric touch, relative to midline. Left negative, Right positive. Measured based on tongue center
+licks_touch_y1 = null           : blob              # tongue Anterior-Posterior coordinate during electric touch. Positive is forward. Measured based on tongue tip
+licks_touch_y2 = null           : blob              # tongue Anterior-Posterior coordinate during electric touch. Positive is forward. Measured based on tongue center
+licks_touch_z = null            : blob              # tongue Dorso-Ventral coordinate during electric touch. Positive is downwards. Measured based on tongue tip
+licks_touch_yaw = null          : blob              # tongue yaw during electric touch. Left negative, Right positive
+
+
 licks_yaw_lickbout_avg = null           : blob              # median tongue yaw during the entire outbound lick, i.e. from onset to peak
 
 licks_vel_x_lickbout_avg = null         : blob              # median tongue linear velocity during the entire outbound lick, i.e. from onset to peak
@@ -106,7 +114,7 @@ classdef VideoTongueTrial < dj.Computed
             position_y1(7)=position_y1(6)-vertical_distance1;
             position_y1(8)=position_y1(7)-vertical_distance1;
             position_y1(9)=position_y1(8)-vertical_distance1;
-
+            
             position_x2(1)=0.42;
             position_x2(2)=position_x2(1)+horizontal_distance2;
             position_x2(3)=position_x2(2)+horizontal_distance2;
@@ -211,7 +219,7 @@ classdef VideoTongueTrial < dj.Computed
             insert_key_lickport_position=[];
             
             for ii =1:1:numel(trials)
-  
+                
                 
                 insert_key_licks(ii).subject_id = key.subject_id;
                 insert_key_licks(ii).session = key.session;
@@ -221,7 +229,7 @@ classdef VideoTongueTrial < dj.Computed
                 t_relative_trial_start = [0:(1/frame_rate): (num_frames(ii)-1)/frame_rate] + tracking_start_time(ii);
                 t  =t_relative_trial_start- time_go(ii); % relative to Go cue. We will set it later relative to lickport move onset, in case of moving lickport
                 
-
+                
                 %% Extracting lickport entrance/exit timing, in case there was a moving lickport
                 if flag_moving_lickport ==1
                     time_label = 'Time from Lickport move (s)';
@@ -600,20 +608,60 @@ classdef VideoTongueTrial < dj.Computed
                 %% Insert into structure
                 %parsed by licks
                 
-                xxx=smooth(TONGUE_ML_Cam2,smooth_interpolation_frames); % this is done to interpolate in case there are missing frames at the peak
-                insert_key_licks(ii).licks_peak_x = xxx(idx_licks_peak)';
+                %interpolating values around peak when they are missing frames by taking the average values of the closest visible frames before and after the peak
                 
-                xxx=smooth(TONGUE_AP_Cam1,smooth_interpolation_frames); % this is done to interpolate in case there are missing frames at the peak
-                insert_key_licks(ii).licks_peak_y1 = xxx(idx_licks_peak)';
+                idx_t_electric_valid =[];
+                for i_p=1:1:numel(idx_licks_peak)
+                    temp_idx_peak = idx_licks_peak(i_p);
+                    
+                    max_frames_interp=10;
+                    
+                    [TONGUE_ML_Cam2] = fn_interpolate_lick (TONGUE_ML_Cam2, max_frames_interp, temp_idx_peak);
+                    [TONGUE_AP_Cam1] = fn_interpolate_lick (TONGUE_AP_Cam1, max_frames_interp, temp_idx_peak);
+                    [TONGUE_AP_Cam2] = fn_interpolate_lick (TONGUE_AP_Cam2, max_frames_interp, temp_idx_peak);
+                    [tongue_yaw] = fn_interpolate_lick (tongue_yaw, max_frames_interp, temp_idx_peak);
+                    
+                    
+                    
+                    
+                    t_current_electric =licks_time_electric( find( t(idx_licks_onset(i_p)) <= licks_time_electric     &     licks_time_electric <=      t(idx_licks_end(i_p))));
+                    
+                    for ii_el=1:1:numel(t_current_electric)
+                        [temp,idx_current_t_electric] = min(abs(t-t_current_electric(ii_el)));
+                        idx_t_electric_valid = [idx_t_electric_valid,idx_current_t_electric];
+                        [TONGUE_ML_Cam2] = fn_interpolate_lick (TONGUE_ML_Cam2, max_frames_interp, idx_current_t_electric);
+                        [TONGUE_AP_Cam1] = fn_interpolate_lick (TONGUE_AP_Cam1, max_frames_interp, idx_current_t_electric);
+                        [TONGUE_AP_Cam2] = fn_interpolate_lick (TONGUE_AP_Cam2, max_frames_interp, idx_current_t_electric);
+                        [TONGUE_Z_Cam1] = fn_interpolate_lick (TONGUE_Z_Cam1, max_frames_interp, idx_current_t_electric);
+                        [tongue_yaw] = fn_interpolate_lick (tongue_yaw, max_frames_interp, idx_current_t_electric);
+                    end
+                    
+                    
+                    
+                    
+                end %end loop individual licks
                 
-                xxx=smooth(TONGUE_AP_Cam2,smooth_interpolation_frames); % this is done to interpolate in case there are missing frames at the peak
-                insert_key_licks(ii).licks_peak_y2 = xxx(idx_licks_peak)';
+                insert_key_licks(ii).licks_peak_x = TONGUE_ML_Cam2(idx_licks_peak);
+                insert_key_licks(ii).licks_peak_y1 = TONGUE_AP_Cam1(idx_licks_peak);
+                insert_key_licks(ii).licks_peak_y2 = TONGUE_AP_Cam2(idx_licks_peak);
+                insert_key_licks(ii).licks_peak_z = TONGUE_Z_Cam1(idx_licks_peak);
+                insert_key_licks(ii).licks_peak_yaw = tongue_yaw(idx_licks_peak);
                 
-                xxx=smooth(TONGUE_Z_Cam1,smooth_interpolation_frames); % this is done to interpolate in case there are missing frames at the peak
-                insert_key_licks(ii).licks_peak_z = xxx(idx_licks_peak)';
                 
-                xxx=smooth(tongue_yaw,smooth_interpolation_frames); % this is done to interpolate in case there are missing frames at the peak
-                insert_key_licks(ii).licks_peak_yaw = xxx(idx_licks_peak)';
+                if ~isempty(idx_t_electric_valid)
+                    insert_key_licks(ii).licks_touch_x =  TONGUE_ML_Cam2(idx_t_electric_valid);
+                    insert_key_licks(ii).licks_touch_y1 = TONGUE_AP_Cam1(idx_t_electric_valid);
+                    insert_key_licks(ii).licks_touch_y2 =TONGUE_AP_Cam2(idx_t_electric_valid);
+                    insert_key_licks(ii).licks_touch_z = TONGUE_Z_Cam1(idx_t_electric_valid);
+                    insert_key_licks(ii).licks_touch_yaw = tongue_yaw(idx_t_electric_valid);
+                else
+                    insert_key_licks(ii).licks_touch_x = NaN;
+                    insert_key_licks(ii).licks_touch_y1 = NaN;
+                    insert_key_licks(ii).licks_touch_y2 = NaN;
+                    insert_key_licks(ii).licks_touch_z = NaN;
+                    insert_key_licks(ii).licks_touch_yaw = NaN;
+                end
+                
                 
                 insert_key_licks(ii).licks_yaw_lickbout_avg = licks_yaw_avg';
                 insert_key_licks(ii).licks_vel_x_lickbout_avg = licks_vel_x_avg';
@@ -740,7 +788,7 @@ classdef VideoTongueTrial < dj.Computed
                     %                     xlabel(sprintf('%s', time_label));
                     ylabel(sprintf('Jaw D-V\n Side view (px)'));
                     xlim(xl);
-%                     ylim([0,50]);
+                    %                     ylim([0,50]);
                     num=find([fSession.camera]==1 & strcmp({fSession.label}','jaw')'); % we set the limits based on tongue tip for simplicity because whiskers are estimaged using 3 fiducials
                     ylim([ fSession(num).y_min, fSession(num).y_max   ]);
                     
@@ -754,7 +802,7 @@ classdef VideoTongueTrial < dj.Computed
                     num=find([fSession.camera]==1 & strcmp({fSession.label}','TongueTip')'); % we set the limits based on tongue tip for simplicity because whiskers are estimaged using 3 fiducials
                     ylim([ -fSession(num).x_max*2 , fSession(num).x_max*2   ]);
                     
-                             % Nose, Camera 1
+                    % Nose, Camera 1
                     axes('position',[position_x1(1), position_y1(7), panel_width1, panel_height1]);
                     hold on
                     %                     num=find([fTrial.camera]==1 & strcmp({fTrial.label}','jaw')');
@@ -762,10 +810,10 @@ classdef VideoTongueTrial < dj.Computed
                     %                     xlabel(sprintf('%s', time_label));
                     ylabel(sprintf('Nose D-V\nSide (px)'));
                     xlim(xl);
-%                     ylim([-60,-20]);
+                    %                     ylim([-60,-20]);
                     num=find([fSession.camera]==1 & strcmp({fSession.label}','nosetip')'); % we set the limits based on tongue tip for simplicity because whiskers are estimaged using 3 fiducials
                     ylim([ fSession(num).y_min, fSession(num).y_max   ]);
-
+                    
                     
                     % Paws, Camera2
                     axes('position',[position_x1(1), position_y1(8), panel_width1, panel_height1]);
@@ -779,7 +827,7 @@ classdef VideoTongueTrial < dj.Computed
                     xlim(xl);
                     ylim([-100,100]);
                     
-                               
+                    
                     % Lickport, Camera 1
                     axes('position',[position_x1(1), position_y1(9), panel_width1, panel_height1]);
                     hold on
@@ -965,7 +1013,7 @@ classdef VideoTongueTrial < dj.Computed
                     end
                     figure_name_out=[dir_save_figure_full  filename];
                     eval(['print ', figure_name_out, ' -dtiff -cmyk -r200']);
-%                      eval(['print ', figure_name_out, ' -painters -dpdf -cmyk -r500']);
+                    %                      eval(['print ', figure_name_out, ' -painters -dpdf -cmyk -r500']);
                     
                     clf;
                 end
@@ -983,7 +1031,7 @@ classdef VideoTongueTrial < dj.Computed
             insert(TRACKING.VideoLickportTrial,insert_key_lickport);
             
             insert(TRACKING.VideoLickportPositionTrial,insert_key_lickport_position);
-
+            
             if ~isempty(insert_key_grooming)
                 insert(TRACKING.VideoGroomingTrial,insert_key_grooming);
             end

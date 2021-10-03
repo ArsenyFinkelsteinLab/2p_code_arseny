@@ -15,6 +15,7 @@ theta_tuning_curve_even    : blob   #
 theta_bins_centers         : blob   #
 number_of_theta_not_nan    : int   #
 
+
 %}
 
 
@@ -31,8 +32,8 @@ classdef ROILick2Dangle< dj.Imported
             
             
             rel_data = IMG.ROIdeltaF;
-            fr_interval = [-1, 3]; %s
-            %fr_interval = [-2, 5]; % used it for the mesoscope
+%             fr_interval = [-1, 3]; %s
+            fr_interval = [-2, 5]; % used it for the mesoscope
             flag_threshold_events=0;
             threshold_events_cutoff=0;
             fn_computer_Lick2Dangle(key,self, rel_data,fr_interval,flag_threshold_events,threshold_events_cutoff,dir_current_fig);

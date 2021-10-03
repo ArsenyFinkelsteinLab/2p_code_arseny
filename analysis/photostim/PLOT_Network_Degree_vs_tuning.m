@@ -57,14 +57,16 @@ DATA_SIGNAL_ALL2=[];
 DATA_SIGNAL_ALL3=[];
 
 for i_s = 1:1:rel_session.count
+    
     k_s = sessions(i_s);
-    i_s;
     rel_degree = STIMANAL.OutDegree*STIM.ROIResponseDirect5  & (STIMANAL.NeuronOrControl5 & k_neurons_or_control) & k_degree & k_s;
+    k_s
     DATA_DEGREE = struct2table(fetch(rel_degree, '*'));
     %    numel(unique(DATA_DEGREE.roi_number))
     
     key_epoch = fetch(EXP2.SessionEpoch & k_s & k_corr_local);
     rel_signal1 = LICK2D.ROILick2DangleSpikes  & k_s & key_epoch;
+%     rel_signal2 = LICK2D.ROILick2DRewardStatsSpikes  & k_s & key_epoch;
     rel_signal3 = LICK2D.ROILick2DPSTHStatsSpikes & k_s & key_epoch;
 
     rel_corr_local = POP.ROICorrLocalPhoto  & k_s & k_corr_local & key_epoch;
@@ -87,7 +89,8 @@ for i_s = 1:1:rel_session.count
     
     
     DATA_SIGNAL1 = struct2table(fetch(rel_signal1, 'goodness_of_fit_vmises'));
-    DATA_SIGNAL3 = struct2table(fetch(rel_signal3, 'psth_odd_even_corr'));
+%     DATA_SIGNAL2 = struct2table(fetch(rel_signal2, 'reward_mean_pval_regular_large'));
+    DATA_SIGNAL3 = struct2table(fetch(rel_signal3, '*'));
 
 
     DATA_CORR = struct2table(fetch(rel_corr_local, '*'));
@@ -101,6 +104,7 @@ for i_s = 1:1:rel_session.count
     DATA_DEGREE_ALL =[DATA_DEGREE_ALL; DATA_DEGREE];
     
     DATA_SIGNAL_ALL1 =[DATA_SIGNAL_ALL1; DATA_SIGNAL1(idx,:)];
+%     DATA_SIGNAL_ALL2 =[DATA_SIGNAL_ALL2; DATA_SIGNAL2(idx,:)];
     DATA_SIGNAL_ALL3 =[DATA_SIGNAL_ALL3; DATA_SIGNAL3(idx,:)];
 
 end
@@ -118,6 +122,7 @@ num_neurons_in_radius = DATA_CORR_ALL.num_neurons_in_radius;
 % out_degree=(out_degree./num_neurons_in_radius)*mean(num_neurons_in_radius);
 
 signal1 = DATA_SIGNAL_ALL1.goodness_of_fit_vmises;
+% signal2 = DATA_SIGNAL_ALL2.reward_mean_pval_regular_large;
 signal3 = DATA_SIGNAL_ALL3.psth_odd_even_corr;
 
 out_degree_excitatory = DATA_DEGREE_ALL.out_degree_excitatory;
@@ -129,7 +134,7 @@ out_degree_inhibitory= (out_degree_inhibitory./num_neurons_in_radius)*mean(num_n
 
 
 
-%% Local correlations
+%% Connectivity vs Directional tuning
 ax1=axes('position',[position_x1(1), position_y1(1), panel_width1, panel_height1]);
 hold on
 % excitatory
@@ -149,7 +154,7 @@ box off;
 
 
 
-%% Local correlations
+%% Connectivity vs Temporal tuning
 ax1=axes('position',[position_x1(2), position_y1(1), panel_width1, panel_height1]);
 hold on
 % excitatory
@@ -166,6 +171,24 @@ ylim([min(y_binned_mean-y_binned_stem),max(y_binned_mean+y_binned_stem)])
 box off;
 % text(15,0.01,'Inhibitory','Color',[0 0 1]);
 % text(15,0.03,'Excitatory','Color',[1 0 0]);
+
+% %% Local correlations
+% ax1=axes('position',[position_x1(1), position_y1(2), panel_width1, panel_height1]);
+% hold on
+% % excitatory
+% k =out_degree_excitatory;
+% hist_bins = prctile(k,linspace(0,100,12));
+% hist_bins_centers = hist_bins(1:end-1) + diff(hist_bins)/2;
+% x=k;
+% y=-log10(signal2);
+% [y_binned_mean, y_binned_stem]= fn_bin_data(x,y,hist_bins);
+% shadedErrorBar(hist_bins_centers,y_binned_mean,y_binned_stem,'lineprops',{'.-','Color',[1 0 0]})
+% xlabel('Effective Connections')
+% ylabel('Reward tuning')
+% ylim([min(y_binned_mean-y_binned_stem),max(y_binned_mean+y_binned_stem)])
+% box off;
+% % text(15,0.01,'Inhibitory','Color',[0 0 1]);
+% % text(15,0.03,'Excitatory','Color',[1 0 0]);
 
 if isempty(dir(dir_current_fig))
     mkdir (dir_current_fig)
