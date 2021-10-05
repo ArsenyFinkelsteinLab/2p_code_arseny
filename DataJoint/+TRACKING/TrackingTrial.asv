@@ -8,14 +8,14 @@ tracking_datafile_path = null        : varchar(1000)              #
 tracking_start_time = null           : decimal(8,4)               # (s) from trial start
 tracking_duration = null             : decimal(8,4)               # (s)
 tracking_sampling_rate = null        : decimal(8,4)               # Hz
-tracking_num_samples = null          : int                        #
+tracking_num_samples = null           : int                        #
 %}
 
 
 classdef TrackingTrial < dj.Imported
     properties
-%                 keySource = (EXP2.Session  & IMG.Mesoscope  &  (EXP2.SessionEpoch& 'session_epoch_type="behav_only"') )  * (TRACKING.TrackingDevice & 'tracking_device_id=4 OR tracking_device_id=3');
-        keySource = (EXP2.Session   & EXP2.BehaviorTrial)  * (TRACKING.TrackingDevice & 'tracking_device_id=0 OR tracking_device_id=1');
+        %         keySource = (EXP2.Session  & IMG.Mesoscope  &  (EXP2.SessionEpoch& 'session_epoch_type="behav_only"') )  * (TRACKING.TrackingDevice & 'tracking_device_id=4 OR tracking_device_id=3');
+        keySource = (EXP2.Session  &  (EXP2.SessionEpoch& 'session_epoch_type="behav_only"') )  * (TRACKING.TrackingDevice & 'tracking_device_id=1 OR tracking_device_id=2');
     end
     methods(Access=protected)
         
@@ -73,7 +73,7 @@ classdef TrackingTrial < dj.Imported
 %             end
 % %             FileNames = FileNames(1:1:num_trials);
             
-            for i=1:num_trials
+            parfor i=1:num_trials
                 frames = csvread([dir_data2  FileNames{i}],3,1);
                 num_frames_trials(i)=size(frames,1);
             end
@@ -82,19 +82,18 @@ classdef TrackingTrial < dj.Imported
             idx_trials_behav=num_frames_trials<5000;
 
             num_trials_behav=sum(idx_trials_behav);
-            num_frames_trials_behav = num_frames_trials(idx_trials_behav);
-            FileNames_behav = FileNames (idx_trials_behav);
+            num_frames_trials = num_frames_trials(idx_trials_behav);
+            FileNames = FileNames (idx_trials_behav);
             
             if  num_trials_behav ~=numel(B)
-                warning('Missing\Extra behavioral in video trials');
-                return
+                warining('Missing\Extra behavioral in video trials');
             end
             
             for i=1:num_trials_behav
                 
-                tracking_duration=num_frames_trials_behav(i)/tracking_sampling_rate;
+                tracking_duration=num_frames_trials(i)/tracking_sampling_rate;
 %                 tracking_start_time = B(i).trial_event_time-tracking_duration;
-                tracking_start_time = 2*1/tracking_sampling_rate; %assuming the first two frames are not captured, 
+                tracking_start_time = tracking_duration;
 
                 key(i).subject_id=key(1).subject_id; % repmat((key.subject_id),numel(trial),1);
                 key(i).session=key(1).session;    % repmat(key.session,numel(trial),1);
@@ -102,12 +101,12 @@ classdef TrackingTrial < dj.Imported
                 key(i).rig=key(1).rig; %repmat({key.rig},numel(trial),1);
                 key(i).tracking_device_type=key(1).tracking_device_type;   %repmat({key.tracking_device_type},numel(trial),1);
                 key(i).tracking_device_id=key(1).tracking_device_id; %repmat(key.tracking_device_id,numel(trial),1);
-                key(i).tracking_datafile_num=str2num( FileNames_behav{i}(strfind(FileNames_behav{i},'_v')+2:strfind(FileNames_behav{i},'.csv')-1));
-                key(i).tracking_datafile_path=[dir_data2  FileNames_behav{i}];
+                key(i).tracking_datafile_num=str2num( FileNames{i}(strfind(FileNames{i},'_v')+2:strfind(FileNames{i},'.csv')-1));
+                key(i).tracking_datafile_path=[dir_data2  FileNames{i}];
                 key(i).tracking_start_time=tracking_start_time;
                 key(i).tracking_duration=tracking_duration;
                 key(i).tracking_sampling_rate=tracking_sampling_rate;
-                key(i).tracking_num_samples=num_frames_trials_behav(i);
+                key(i).tracking_num_samples=num_frames_trials(i);
             end
             
             insert(self,key)

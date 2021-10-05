@@ -10,6 +10,39 @@ video_fiducial_description  : varchar(1000)                 #
 classdef VideoFiducialsType < dj.Lookup
     properties
         contents = {
+            
+        
+            'imaging1'    'Camera'                0    'jaw'               'bottom edge of the jaw/mouth'
+            'imaging1'    'Camera'                0    'nosetip'           'anterior edge of the nose'
+            'imaging1'    'Camera'                0    'lickport'          'tip of the port'
+            'imaging1'    'Camera'                0    'tonguemiddle'      'middle of the tongue'
+            'imaging1'    'Camera'                0    'TongueTip'         'tip of the tongue, the most bottom part'
+            'imaging1'    'Camera'                0    'PawL'              'left paw'
+            'imaging1'    'Camera'                0    'PawR'              'right paw'
+            
+            'imaging1'    'Camera'                0    'W1'                 'whisker, one of the frontal whiskers'
+            'imaging1'    'Camera'                0    'W2'                 'whisker, one of the middle whiskers'
+            'imaging1'    'Camera'                0    'W3'                 'whisker, one of the backward whiskers'
+            
+            
+            'imaging1'    'Camera'                1    'jaw'               'bottom edge of the jaw/mouth'
+            'imaging1'    'Camera'                1    'nosetip'           'center of the nose'
+            'imaging1'    'Camera'                1    'lickport'          'tip of the port'
+            
+            'imaging1'    'Camera'                1    'LBtongue'          'left backward edge of the tongue'
+            'imaging1'    'Camera'                1    'LFtongue'          'left frontal edge  of the tongue'
+            'imaging1'    'Camera'                1    'RBtongue'          'right backward edge of the tongue'
+            'imaging1'    'Camera'                1    'RFtongue'          'right frontal edge  of the tongue'
+            'imaging1'    'Camera'                1    'TongueTip'         'tip of the tongue, the most front part'
+            
+            'imaging1'    'Camera'                1    'PawL'              'left paw'
+            'imaging1'    'Camera'                1    'PawR'              'right paw'
+            
+            
+            
+        
+        
+        
             'imaging1'    'Camera'                3    'jaw'               'bottom edge of the jaw/mouth'
             'imaging1'    'Camera'                3    'nosetip'           'anterior edge of the nose'
             'imaging1'    'Camera'                3    'lickport'          'tip of the port'
@@ -35,6 +68,11 @@ classdef VideoFiducialsType < dj.Lookup
             
             'imaging1'    'Camera'                4    'PawL'              'left paw'
             'imaging1'    'Camera'                4    'PawR'              'right paw'
+            
+            
+            
+            
+            
             };
         
         

@@ -5,13 +5,13 @@
 ---
 fiducial_x                 : longblob                   # fiducial coordinate along the X axis of the video image
 fiducial_y                 : longblob                   # fiducial coordinate along the Y axis of the video image
-fiducial_p                          : longblob                   # fiducial probability
+fiducial_p                 : longblob                   # fiducial probability
 fiduical_x_median=null     : double
 fiduical_y_median=null     : double
-fiduical_x_min=null     : double
-fiduical_y_min=null     : double
-fiduical_x_max=null     : double
-fiduical_y_max=null     : double
+fiduical_x_min=null        : double
+fiduical_y_min=null        : double
+fiduical_x_max=null        : double
+fiduical_y_max=null        : double
 %}
 
 
@@ -39,6 +39,7 @@ classdef VideoFiducialsTrial < dj.Imported
             for ii =1:1:length(V) %loops over trials
                 data = csvread(V(ii).tracking_datafile_path,3,1);
                 kk.trial = V(ii).trial;
+                tracking_num_samples = V(ii).tracking_num_samples;
                 
                 % finding the index when the lickport is not moving
                 idx_lickport_stationary = ((1:1:V(ii).tracking_num_samples)*0)';
@@ -56,15 +57,15 @@ classdef VideoFiducialsTrial < dj.Imported
                     fiducials_idx(jj).YColumn=column_idx+1;
                     fiducials_idx(jj).ProbColumn=column_idx+2;
                     
-                    X=data(:,fiducials_idx(jj).XColumn);
-                    Y=data(:,fiducials_idx(jj).YColumn);
+                    X=data(1:1:tracking_num_samples,fiducials_idx(jj).XColumn); %% in some cases one of the cameras will capture more frames then the other camera. If its only more by 1 frame, we take only the number of frames common between the two, and discard the last frame from the camera that took more frame. In this case "tracking_num_samples" which is updated for such problematic trials in TRACKING.TrackingTrialBad will have less frame (by one frame) then the actual number of frames in the CVS file 
+                    Y=data(1:1:tracking_num_samples,fiducials_idx(jj).YColumn);
                     
                     if key.tracking_device_id ==4 % Mesoscope specific setting! For front camera we rotate the image. It results in rotating the image 90 clockwise, and then flipping it along the left/right axis
-                        X=data(:,fiducials_idx(jj).YColumn);
-                        Y=data(:,fiducials_idx(jj).XColumn);
+                        X=data(1:1:tracking_num_samples,fiducials_idx(jj).YColumn);
+                        Y=data(1:1:tracking_num_samples,fiducials_idx(jj).XColumn);
                     end
                     
-                    P=data(:,fiducials_idx(jj).ProbColumn);
+                    P=data(1:1:tracking_num_samples,fiducials_idx(jj).ProbColumn);
                     
                     key_insert(jj).trial=V(ii).trial;
                     key_insert(jj).video_fiducial_name=fiducial_labels{jj};
