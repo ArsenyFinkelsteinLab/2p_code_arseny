@@ -4,7 +4,11 @@ key=[];
 % key.subject_id = 463189;
 % key.subject_id = 464724;
 % key.subject_id = 464725;
-key.subject_id = 463190;
+% key.subject_id = 463190;
+% key.subject_id = 462455; % AF23
+% key.subject_id = 462458; %AF17
+% key.subject_id = 463192; %AF25
+key.subject_id = 463195; %AF24
 
 
 sessions_list = fetchn(EXP2.Session & TRACKING.VideoNthLickTrial & key, 'session');
@@ -79,7 +83,7 @@ for i_s = 1:1:numel(sessions_list)
         k.lickport_pos_number = post_list(i_p);
         
 %         T= fetch((TRACKING.VideoNthLickTrial*EXP2.SessionTrial*TRACKING.VideoLickportPositionTrial*EXP2.TrialLickPort & key & k)-TRACKING.VideoGroomingTrial & 'trial>100' & 'lick_number_relative_to_firsttouch>0','lick_touch_x','lick_touch_z','lickport_x','lickport_z');
-                T= fetch((TRACKING.VideoNthLickTrial*EXP2.SessionTrial*TRACKING.VideoLickportPositionTrial*EXP2.TrialLickPort & key & k)-TRACKING.VideoGroomingTrial & 'trial>100' & 'lick_touch_number=3','lick_touch_x','lick_touch_z','lickport_x','lickport_z');
+                T= fetch((TRACKING.VideoNthLickTrial*EXP2.SessionTrial*TRACKING.VideoLickportPositionTrial*EXP2.TrialLickPort & key & k)-TRACKING.VideoGroomingTrial & 'trial>100' & 'lick_touch_number>=0','lick_touch_x','lick_touch_z','lickport_x','lickport_z');
 
         
         

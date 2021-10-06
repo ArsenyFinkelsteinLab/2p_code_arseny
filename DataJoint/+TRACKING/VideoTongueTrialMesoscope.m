@@ -39,7 +39,7 @@ licks_delta_z = null          : blob               # maximal change in the tongu
 
 classdef VideoTongueTrial < dj.Computed
     properties
-        keySource = (EXP2.Session  & TRACKING.VideoFiducialsTrial - IMG.Mesoscope) ;
+        keySource = (EXP2.Session  & TRACKING.VideoFiducialsTrial) ;
     end
     methods(Access=protected)
         
@@ -47,23 +47,12 @@ classdef VideoTongueTrial < dj.Computed
             
             % Rig specific settings
             %--------------------------------------------------------------
-            
-            
-            %photostim rig settings:
-            k_camera1.tracking_device_id = 0; %side camera
-            k_camera2.tracking_device_id = 1; %bottom (or top/front) camera
-            side_camera_facing = 'right'; %'left' or 'right' mouse-facing direction as seen from the side view camera
+            k_camera1.tracking_device_id = 3; %side camera
+            k_camera2.tracking_device_id = 4; %bottom (or top/front) camera
+            side_camera_facing = 'left'; %'left' or 'right' mouse-facing direction as seen from the side view camera
             bottom_or_front_camera_facing = 'up'; %'up' or 'down' mouse-facing direction as seen from the front/bottom view camera
             % For the Mesoscope (Camera tracking_device_id =4, front) we set mouse-facing direction to 'up', because after intital clockwise 90 rotation in TRACKING.VideoFiducialsTrial the mouse appears to face 'up'
             reverse_cam2_x = -1; % '-1' left/right flip along the midline' '1' - no flip
-            
-            %             %mesoscope settings:
-            %             k_camera1.tracking_device_id = 3; %side camera
-            %             k_camera2.tracking_device_id = 4; %bottom (or top/front) camera
-            %             side_camera_facing = 'left'; %'left' or 'right' mouse-facing direction as seen from the side view camera
-            %             bottom_or_front_camera_facing = 'up'; %'up' or 'down' mouse-facing direction as seen from the front/bottom view camera
-            %             % For the Mesoscope (Camera tracking_device_id =4, front) we set mouse-facing direction to 'up', because after intital clockwise 90 rotation in TRACKING.VideoFiducialsTrial the mouse appears to face 'up'
-            %             reverse_cam2_x = -1; % '-1' left/right flip along the midline' '1' - no flip
             
             camera1_pixels_to_mm = 1; %% UPDATE
             camera2_pixels_to_mm=1; %% UPDATE
@@ -84,10 +73,8 @@ classdef VideoTongueTrial < dj.Computed
             smooth_window_whiskers=3; %whiskers detection is noisy, and we therefore smooth it
             
             %grooming detection, based on side view camera
-            grooming_x_threshold =-50; %if paws are in the specified by quandrant location grooming_x_threshold, grooming_y_threshold we will consider it to be a grooming frame
-            grooming_y_threshold =125;
-            %             grooming_x_threshold =0; %if paws are in the specified by quandrant location grooming_x_threshold, grooming_y_threshold we will consider it to be a grooming frame
-            %             grooming_y_threshold =50;
+            grooming_x_threshold =0; %if paws are in the specified by quandrant location grooming_x_threshold, grooming_y_threshold we will consider it to be a grooming frame
+            grooming_y_threshold =50;
             minimal_num_grooming_frames=25; %if there are more than this number of grooming frames, this trial would be considered as grooming trial
             
             %-------------------------------------------------------------------------------------------------------------
@@ -96,8 +83,7 @@ classdef VideoTongueTrial < dj.Computed
             % Graphics for plotting
             close all;
             if flag_plot==1
-                figure1=figure("Visible",false);
-
+                figure1=figure;
                 set(gcf,'DefaultAxesFontName','helvetica');
                 set(gcf,'PaperUnits','centimeters','PaperPosition',[0.5 7 21 21]);
                 set(gcf,'PaperOrientation','portrait');
@@ -182,11 +168,11 @@ classdef VideoTongueTrial < dj.Computed
             
             
             num=2;
-            k.video_fiducial_name='jaw'; %from Camera2
+            k.video_fiducial_name='TongueTip'; %from Camera2
             offset_cam2_x =  fetchn(rel_fiducials_session_cam2 & k,'fiduical_x_median_session');
             switch bottom_or_front_camera_facing
                 case 'up'
-                    offset_cam2_y =  fetchn(rel_fiducials_session_cam2& k,'fiduical_y_median_session');
+                    offset_cam2_y =  fetchn(rel_fiducials_session_cam2& k,'fiduical_y_max_session');
                     reverse_cam2_y = -1 ; %reverse
                 case 'down'
                     offset_cam2_y =  fetchn(rel_fiducials_session_cam2& k,'fiduical_y_min_session');
@@ -640,11 +626,6 @@ classdef VideoTongueTrial < dj.Computed
                     
                     t_current_electric =licks_time_electric( find( t(idx_licks_onset(i_p)) <= licks_time_electric     &     licks_time_electric <=      t(idx_licks_end(i_p))));
                     
-                    % if there are more then one electric contact detected per lick  we only take the first lick electric.
-                    % So the for loop below the if statement runs only ones. If we comment out the if statement  then potentially more then one electric lickbout will be saved per lick
-                    if ~isempty (t_current_electric)
-                        t_current_electric = t_current_electric(1);
-                    end
                     for ii_el=1:1:numel(t_current_electric)
                         [temp,idx_current_t_electric] = min(abs(t-t_current_electric(ii_el)));
                         idx_t_electric_valid = [idx_t_electric_valid,idx_current_t_electric];
@@ -755,17 +736,13 @@ classdef VideoTongueTrial < dj.Computed
                         plot(licks_time_electric, interp1(t,xxx,licks_time_electric),'og','LineWidth',1)
                     end
                     xlim(xl);
+                    ylim([-15,15]);
                     plot(t(idx_licks_peak),xxx(idx_licks_peak),'xr','LineWidth',1);
                     plot(t(idx_licks_onset),xxx(idx_licks_onset),'xk','LineWidth',1);
                     plot(t(idx_licks_end),xxx(idx_licks_end),'x','LineWidth',1,'Color',[0.5 0.5 0.5]);
                     %                     xlabel(sprintf('%s', time_label));
                     ylabel(sprintf('Tongue M-L\nTop (px)'));
                     plot([xl],[0 0],'-k','LineWidth',1);
-                    num=find([fSession.camera]==2 & strcmp({fSession.label}','TongueTip')');
-                    ylim([ fSession(num).x_min*1.25 , fSession(num).x_max]);
-                    %                     ylim([-50,50]);
-                    
-                    %                     ylim([0,50]);
                     
                     %                     %Tongue Yaw (azimuth) Camera2
                     %                     xxx = tongue_yaw;
@@ -848,9 +825,7 @@ classdef VideoTongueTrial < dj.Computed
                     %                     xlabel(sprintf('%s', time_label));
                     ylabel(sprintf('Paws\nTop (px)'));
                     xlim(xl);
-                    ylim([-300,300]);
-                    %                          num=find([fSession.camera]==1 & strcmp({fSession.label}','PawR')'); % we set the limits based on tongue tip for simplicity because whiskers are estimaged using 3 fiducials
-                    %                     ylim([ fSession(num).y_min, fSession(num).y_max   ]);
+                    ylim([-100,100]);
                     
                     
                     % Lickport, Camera 1
@@ -861,12 +836,11 @@ classdef VideoTongueTrial < dj.Computed
                     xlabel(sprintf('%s', time_label));
                     ylabel(sprintf('Lickport D-V\nSide (px)'));
                     xlim(xl);
-                    ylim([0,220]);
+                    ylim([0,100]);
                     plot(t(idx_lickport_t_entrance_start), fTrial(num).y{ii}(idx_lickport_t_entrance_start),'or','MarkerSize',5,'LineWidth',1); % lickport camera 1
                     plot(t(idx_lickport_t_entrance_end), fTrial(num).y{ii}(idx_lickport_t_entrance_end),'or','MarkerSize',5,'LineWidth',1); % lickport camera 1
                     plot(t(idx_lickport_t_exit_start), fTrial(num).y{ii}(idx_lickport_t_exit_start),'or','MarkerSize',5,'LineWidth',1); % lickport camera 1
                     plot(t(idx_lickport_t_exit_end), fTrial(num).y{ii}(idx_lickport_t_exit_end),'or','MarkerSize',5,'LineWidth',1); % lickport camera 1
-                    %                     ylim([ fSession(num).y_min, fSession(num).y_max]);
                     
                     
                     %% 2D tongue trajectories, before Go cue
@@ -876,7 +850,7 @@ classdef VideoTongueTrial < dj.Computed
                     % Camera 1
                     axes('position',[position_x2(1), position_y2(1), panel_width2, panel_height2]);
                     hold on;
-                    plot(TONGUE_AP_Cam1(idx_t_before_go), TONGUE_Z_Cam1(idx_t_before_go),'.-','Color',[0 0 1]);
+                    plot(TONGUE_AP_Cam1(idx_t_before_go), TONGUE_Z_Cam1(idx_t_before_go),'.-');
                     %                     plot(interp1(t,AP_Cam1,licks_time_electric),interp1(t,Z_Cam1,licks_time_electric),'og','Clipping','off','LineWidth',1);
                     set(gca,'Ydir','reverse')
                     axis equal
@@ -898,13 +872,7 @@ classdef VideoTongueTrial < dj.Computed
                     % Camera 2
                     axes('position',[position_x2(2), position_y2(1), panel_width2, panel_height2]);
                     hold on;
-                    
-                    % jaw-nose midline
-                    num1=find([fSession.camera]==2 & strcmp({fSession.label}','jaw')');
-                    num2=find([fSession.camera]==2 & strcmp({fSession.label}','nosetip')');
-                    plot([fSession(num1).x_median, fSession(num2).x_median],[fSession(num1).y_median, fSession(num2).y_median], 'Color',[ 0 0 0]);
-                    
-                    plot(TONGUE_ML_Cam2(idx_t_before_go), TONGUE_AP_Cam2(idx_t_before_go),'.-','Color',[0 0 1]);
+                    plot(TONGUE_ML_Cam2(idx_t_before_go), TONGUE_AP_Cam2(idx_t_before_go),'.-');
                     %                     plot(interp1(t,ML_Cam2,licks_time_electric),interp1(t,AP_Cam2,licks_time_electric),'og','Clipping','off','LineWidth',1);
                     set(gca,'Ydir','reverse')
                     axis equal
@@ -913,11 +881,8 @@ classdef VideoTongueTrial < dj.Computed
                     ylabel('A-P axis (px)');
                     title('Top view, before t=0');
                     num=find([fSession.camera]==2 & strcmp({fSession.label}','TongueTip')');
-                    xlim([ fSession(num).x_min*1.25 , fSession(num).x_max*1.25   ]);
-                    ylim([  fSession(num).y_min, fSession(num).y_max*1.25  ]);
-                    %                     ylim([0,50]);
-                    %                     xlim([-50,50]);
-                    
+                    ylim([0,50]);
+                    xlim([-20,20]);
                     num=find([fTrial.camera]==2 & strcmp({fTrial.label}','lickport')');
                     if ii>=2
                         plot(LICKPORT_ML_Cam2_mean(ii-1),LICKPORT_AP_Cam2_mean(ii-1),'o','MarkerSize',20,'LineWidth',3, 'Color',[0.75 0.75 0.75]); % lickport position on previos trial
@@ -932,7 +897,7 @@ classdef VideoTongueTrial < dj.Computed
                     % Camera 1
                     axes('position',[position_x2(1), position_y2(2), panel_width2, panel_height2]);
                     hold on;
-                    plot(TONGUE_AP_Cam1(idx_t_after_go), TONGUE_Z_Cam1(idx_t_after_go),'.-','Color',[0 0 1]);
+                    plot(TONGUE_AP_Cam1(idx_t_after_go), TONGUE_Z_Cam1(idx_t_after_go),'.-');
                     plot(interp1(t,TONGUE_AP_Cam1,licks_time_electric),interp1(t,TONGUE_Z_Cam1,licks_time_electric),'og','Clipping','off','LineWidth',1);
                     set(gca,'Ydir','reverse')
                     axis equal
@@ -954,14 +919,7 @@ classdef VideoTongueTrial < dj.Computed
                     % Camera 2
                     axes('position',[position_x2(2), position_y2(2), panel_width2, panel_height2]);
                     hold on;
-                    
-                    % jaw-nose midline
-                    num1=find([fSession.camera]==2 & strcmp({fSession.label}','jaw')');
-                    num2=find([fSession.camera]==2 & strcmp({fSession.label}','nosetip')');
-                    plot([fSession(num1).x_median, fSession(num2).x_median],[fSession(num1).y_median, fSession(num2).y_median], 'Color',[ 0 0 0]);
-                    
-                    
-                    plot(TONGUE_ML_Cam2(idx_t_after_go), TONGUE_AP_Cam2(idx_t_after_go),'.-','Color',[0 0 1]);
+                    plot(TONGUE_ML_Cam2(idx_t_after_go), TONGUE_AP_Cam2(idx_t_after_go),'.-');
                     plot(interp1(t,TONGUE_ML_Cam2,licks_time_electric),interp1(t,TONGUE_AP_Cam2,licks_time_electric),'og','Clipping','off','LineWidth',1);
                     set(gca,'Ydir','reverse')
                     axis equal
@@ -969,23 +927,16 @@ classdef VideoTongueTrial < dj.Computed
                     xlabel('M-L axis (px)');
                     ylabel('A-P axis (px)');
                     title('Top view, after t=0');
-                    num=find([fSession.camera]==2 & strcmp({fSession.label}','TongueTip')');
-                    xlim([  fSession(num).x_min*1.25, fSession(num).x_max*1.25   ]);
-                    ylim([  fSession(num).y_min, fSession(num).y_max*1.25  ]);
-                    %                     ylim([0,50]);
-                    %                     xlim([-50,50]);
+                    %                     num=find([fSession.camera]==2 & strcmp({fSession.label}','TongueTip')');
+                    %                     xlim([  fSession(num).x_min, fSession(num).x_max*1.25   ]);
+                    %                     xlim([  fSession(num).y_min, fSession(num).y_max*1.25  ]);
+                    ylim([0,50]);
+                    xlim([-20,20]);
                     num=find([fTrial.camera]==2 & strcmp({fTrial.label}','lickport')');
                     if ii>=2
                         plot(LICKPORT_ML_Cam2_mean(ii-1),LICKPORT_AP_Cam2_mean(ii-1),'o','MarkerSize',20,'LineWidth',3, 'Color',[0.75 0.75 0.75]); % lickport position on previos trial
                     end
                     plot(LICKPORT_ML_Cam2_mean(ii),LICKPORT_AP_Cam2_mean(ii),'ok','MarkerSize',20,'LineWidth',3); % lickport
-                    
-                    %                     num=find([fSession.camera]==2 & strcmp({fSession.label}','jaw')');
-                    %                         plot(fSession(num).x_median,fSession(num).y_median,'o','MarkerSize',10,'LineWidth',3, 'Color',[1 0 0]); % lickport position on previos trial
-                    %                     num=find([fSession.camera]==2 & strcmp({fSession.label}','nosetip')');
-                    %                         plot(fSession(num).x_median,fSession(num).y_median,'o','MarkerSize',10,'LineWidth',3, 'Color',[0 0 1]); % lickport position on previos trial
-                    
-                    
                     
                     
                     
@@ -994,8 +945,6 @@ classdef VideoTongueTrial < dj.Computed
                     % Camera 1
                     num1=find([fTrial.camera]==1 & strcmp({fTrial.label}','PawL')');
                     num2=find([fTrial.camera]==1 & strcmp({fTrial.label}','PawR')');
-                    num3=find([fTrial.camera]==1 & strcmp({fTrial.label}','nosetip')');
-                    
                     axes('position',[position_x2(1), position_y2(3), panel_width2, panel_height2]);
                     hold on;
                     plot(PAWleft_AP_Cam1, PAWleft_Z_Cam1,'.r');
@@ -1006,14 +955,14 @@ classdef VideoTongueTrial < dj.Computed
                     xlabel('A-P axis (px)');
                     ylabel('D-V axis (px)');
                     title(sprintf('Side view, Front Paws\n %d grooming frames ',num_grooming_frames));
-                    xl=((  [min([fSession(num1).x_min, fSession(num2).x_min, fSession(num3).x_min]), max([fSession(num1).x_max, fSession(num2).x_max, fSession(num3).x_max])]  ));
-                    yl=(([min([fSession(num1).y_min, fSession(num2).y_min, fSession(num3).y_min]), max([fSession(num1).y_max, fSession(num2).y_max, fSession(num3).y_max])]));
-                    %                     xl = [-150,150];
-                    %                     yl=[-150,150];
+                    xl = [-150,150];
+                    yl=[-150,150];
                     xlim(xl);
                     ylim(yl);
                     plot([   grooming_x_threshold, grooming_x_threshold],yl,'-k');
                     plot(xl, [grooming_y_threshold grooming_y_threshold],'-k');
+                    %                     xlim(([min([fSession(num1).x_min, fSession(num2).x_min]), max([fSession(num1).x_max, fSession(num2).x_max])]));
+                    %                     ylim(([min([fSession(num1).y_min, fSession(num2).y_min]), max([fSession(num1).y_max, fSession(num2).y_max])]));
                     
                     
                     
@@ -1021,25 +970,21 @@ classdef VideoTongueTrial < dj.Computed
                     % Camera 2
                     num1=find([fTrial.camera]==2 & strcmp({fTrial.label}','PawL')');
                     num2=find([fTrial.camera]==2 & strcmp({fTrial.label}','PawR')');
-                    num3=find([fTrial.camera]==2 & strcmp({fTrial.label}','nosetip')');
-                    
                     axes('position',[position_x2(2), position_y2(3), panel_width2, panel_height2]);
                     hold on;
                     plot(PAWleft_ML_Cam2, PAWleft_AP_Cam2,'.r');
                     plot(PAWright_ML_Cam2, PAWright_AP_Cam2,'.b');
                     %                     plot(interp1(t,AP_Cam1,licks_time_electric),interp1(t,Z_Cam1,licks_time_electric),'og','Clipping','off','LineWidth',1);
                     set(gca,'Ydir','reverse')
-                    %                     axis equal
+                    axis equal
                     xlabel('M-L axis (px)');
                     ylabel('A-P axis (px)');
                     title('Top view, Front Paws');
                     %                     ylim([-50,50]);
                     %                     xlim([-100,100]);
-                    xl=((  [min([fSession(num1).x_min, fSession(num2).x_min, fSession(num3).x_min]), max([fSession(num1).x_max, fSession(num2).x_max, fSession(num3).x_max])]  ));
-                    yl=(([min([fSession(num1).y_min, fSession(num2).y_min, fSession(num3).x_min]), max([fSession(num1).y_max, fSession(num2).y_max, fSession(num3).y_max])]));
-                    xlim(xl);
-                    ylim(yl);
-                    set(gca,'Ydir','reverse')
+                    xlim(([min([fSession(num1).x_min, fSession(num2).x_min])*1.25, max([fSession(num1).x_max, fSession(num2).x_max])*1.25]));
+                    ylim(([min([fSession(num1).y_min, fSession(num2).y_min]), max([fSession(num1).y_max, fSession(num2).y_max])*1.25]));
+                    
                     
                     
                     %% 2D Whiskers
@@ -1055,7 +1000,7 @@ classdef VideoTongueTrial < dj.Computed
                     title(sprintf('Side view, Whiskers '));
                     %                     ylim([25,75]);
                     %                     xlim([-50,50]);
-                    num=find([fSession.camera]==1 & strcmp({fSession.label}','TongueTip')'); % we set the limits based on tongue tip for simplicity because whiskers are estimated using 3 fiducials
+                    num=find([fSession.camera]==1 & strcmp({fSession.label}','TongueTip')'); % we set the limits based on tongue tip for simplicity because whiskers are estimaged using 3 fiducials
                     xlim([ -fSession(num).x_max*2 , fSession(num).x_max*2   ]);
                     ylim([  fSession(num).y_min, fSession(num).y_max*2   ]);
                     
@@ -1071,12 +1016,6 @@ classdef VideoTongueTrial < dj.Computed
                     %                      eval(['print ', figure_name_out, ' -painters -dpdf -cmyk -r500']);
                     
                     clf;
-                    
-                    
-                    
-                    
-                    
-                    
                 end
                 
             end
@@ -1096,86 +1035,6 @@ classdef VideoTongueTrial < dj.Computed
             if ~isempty(insert_key_grooming)
                 insert(TRACKING.VideoGroomingTrial,insert_key_grooming);
             end
-            
-            
-            %% for debug - show average fiducial positions for this session
-            figure
-            subplot(2,2,1)
-            hold on
-            num=find([fSession.camera]==1 & strcmp({fSession.label}','jaw')');
-            plot(fSession(num).x_median,fSession(num).y_median,'o','MarkerSize',10,'LineWidth',3, 'Color',[1 0 0]);
-            text(fSession(num).x_median,fSession(num).y_median,'jaw', 'Color',[1 0 0])
-            
-            num=find([fSession.camera]==1 & strcmp({fSession.label}','nosetip')');
-            plot(fSession(num).x_median,fSession(num).y_median,'o','MarkerSize',10,'LineWidth',3, 'Color',[0 0 1]);
-            text(fSession(num).x_median,fSession(num).y_median,'nosetip', 'Color',[0 0 1])
-            
-            num=find([fSession.camera]==1 & strcmp({fSession.label}','PawL')');
-            plot(fSession(num).x_median,fSession(num).y_median,'o','MarkerSize',10,'LineWidth',3, 'Color',[0 1 0]);
-            text(fSession(num).x_median,fSession(num).y_median,'PawL', 'Color',[1 1 0])
-            
-            
-            num=find([fSession.camera]==1 & strcmp({fSession.label}','PawR')');
-            plot(fSession(num).x_median,fSession(num).y_median,'o','MarkerSize',10,'LineWidth',3, 'Color',[1 1 0]);
-            text(fSession(num).x_median,fSession(num).y_median,'PawR', 'Color',[1 1 0])
-            
-            num=find([fSession.camera]==1 & strcmp({fSession.label}','lickport')');
-            plot(fSession(num).x_median,fSession(num).y_median,'o','MarkerSize',10,'LineWidth',3, 'Color',[0 0 0]);
-            text(fSession(num).x_median,fSession(num).y_median,'lickport', 'Color',[0 0 0])
-            
-            num=find([fSession.camera]==1 & strcmp({fSession.label}','TongueTip')');
-            plot(fSession(num).x_median,fSession(num).y_min,'o','MarkerSize',10,'LineWidth',3, 'Color',[0 0 0]);
-            text(fSession(num).x_median,fSession(num).y_min,'Tongue miny', 'Color',[1 0 1])
-            plot(fSession(num).x_median,fSession(num).y_max,'o','MarkerSize',10,'LineWidth',3, 'Color',[0 0 0]);
-            text(fSession(num).x_median,fSession(num).y_max,'Tongue maxy', 'Color',[1 0 1])
-            
-            
-            title('Side view');
-            
-            set(gca,'Ydir','reverse')
-            subplot(2,2,2)
-            hold on
-            num=find([fSession.camera]==2 & strcmp({fSession.label}','jaw')');
-            plot(fSession(num).x_median,fSession(num).y_median,'o','MarkerSize',10,'LineWidth',3, 'Color',[1 0 0]);
-            text(fSession(num).x_median,fSession(num).y_median,'jaw', 'Color',[1 0 0])
-            
-            num=find([fSession.camera]==2 & strcmp({fSession.label}','nosetip')');
-            plot(fSession(num).x_median,fSession(num).y_median,'o','MarkerSize',10,'LineWidth',3, 'Color',[0 0 1]);
-            text(fSession(num).x_median,fSession(num).y_median,'nosetip', 'Color',[0 0 1])
-            
-            
-            num=find([fSession.camera]==2 & strcmp({fSession.label}','PawL')');
-            plot(fSession(num).x_median,fSession(num).y_median,'o','MarkerSize',10,'LineWidth',3, 'Color',[0 1 0]);
-            text(fSession(num).x_median,fSession(num).y_median,'PawL', 'Color',[0 1 0])
-            
-            
-            num=find([fSession.camera]==2 & strcmp({fSession.label}','PawR')');
-            plot(fSession(num).x_median,fSession(num).y_median,'o','MarkerSize',10,'LineWidth',3, 'Color',[1 1 0]);
-            text(fSession(num).x_median,fSession(num).y_median,'PawR', 'Color',[1 1 0])
-            
-            
-            num=find([fSession.camera]==2 & strcmp({fSession.label}','lickport')');
-            plot(fSession(num).x_median,fSession(num).y_median,'o','MarkerSize',10,'LineWidth',3, 'Color',[0 0 0]);
-            text(fSession(num).x_median,fSession(num).y_median,'lickport', 'Color',[0 0 0])
-            
-            num=find([fSession.camera]==2 & strcmp({fSession.label}','TongueTip')');
-            plot(fSession(num).x_min,fSession(num).y_median,'o','MarkerSize',10,'LineWidth',3, 'Color',[0 0 0]);
-            text(fSession(num).x_min,fSession(num).y_median,'Tongue minx', 'Color',[1 0 1])
-            plot(fSession(num).x_max,fSession(num).y_median,'o','MarkerSize',10,'LineWidth',3, 'Color',[0 0 0]);
-            text(fSession(num).x_max,fSession(num).y_median,'Tongue maxx', 'Color',[1 0 1])
-            
-            
-            title('Top view');
-            
-            %% Save figure
-            filename = ['average_fiducials_all_session'];
-            dir_save_figure_full=[dir_current_fig 'anm' num2str(key.subject_id) '\' [key.session_date 's' num2str(key.session)] '\'];
-            if isempty(dir(dir_save_figure_full))
-                mkdir (dir_save_figure_full)
-            end
-            figure_name_out=[dir_save_figure_full  filename];
-            eval(['print ', figure_name_out, ' -dtiff -cmyk -r200']);
-            %                      eval(['print ', figure_name_out, ' -painters -dpdf -cmyk -r500']);
             
         end
         

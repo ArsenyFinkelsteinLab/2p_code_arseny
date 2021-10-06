@@ -78,7 +78,7 @@ classdef TrackingTrial < dj.Imported
                 num_frames_trials(i)=size(frames,1);
             end
             
-            idx_trials_spont=num_frames_trials>=5000;
+            idx_trials_spont=num_frames_trials>=5000; % spontaneous trial are longer
             idx_trials_behav=num_frames_trials<5000;
 
             num_trials_behav=sum(idx_trials_behav);

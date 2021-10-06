@@ -237,7 +237,8 @@ classdef VideoNthLickTrial < dj.Computed
                 end
             end
             
-            insert(self,key_insert)
+              insert(self,key_insert)
+
         end
     end
 end
