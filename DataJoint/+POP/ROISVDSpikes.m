@@ -23,7 +23,7 @@ classdef ROISVDSpikes < dj.Computed
             if rel_temp.count>0 % i.e its mesoscope data
                 time_bin_vector=[1.5]; % we will bin the data into these time bins before doing SVD
             else
-                time_bin_vector=[0.5, 1.5]; % we will bin the data into these time bins before doing SVD
+                time_bin_vector=[0.2, 0.5, 1]; % we will bin the data into these time bins before doing SVD
             end
             
             flag_zscore=1; %0 only centering the data (i.e. mean subtraction),  1 zscoring the data

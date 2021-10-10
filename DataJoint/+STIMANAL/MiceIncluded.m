@@ -14,6 +14,8 @@ classdef MiceIncluded < dj.Lookup
             463192
             445980
             445873
+            486673
+            486668
             
             463190
             463189

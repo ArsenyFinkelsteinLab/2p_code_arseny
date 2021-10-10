@@ -73,7 +73,7 @@ classdef TrackingTrial < dj.Imported
 %             end
 % %             FileNames = FileNames(1:1:num_trials);
             
-            for i=1:num_trials
+            parfor i=1:num_trials
                 frames = csvread([dir_data2  FileNames{i}],3,1);
                 num_frames_trials(i)=size(frames,1);
             end

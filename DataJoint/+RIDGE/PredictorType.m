@@ -11,6 +11,10 @@ classdef PredictorType < dj.Lookup
     properties
         contents = {
             
+            'LickPort_pos_x'   'task' 'lickport pos_x from zaber motor'
+            'LickPort_pos_z'   'task' 'lickport pos_z from zaber motor'
+
+        
             'LickPortEntrance'   'task' 'lickport entrance'
             'LickPortExit'       'task' 'lickport exit'
             'LickPortBlockStart' 'task' 'beginning of a new block'

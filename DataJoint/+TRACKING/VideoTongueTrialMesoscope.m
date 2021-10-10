@@ -39,7 +39,7 @@ licks_delta_z = null          : blob               # maximal change in the tongu
 
 classdef VideoTongueTrial < dj.Computed
     properties
-        keySource = (EXP2.Session  & TRACKING.VideoFiducialsTrial) ;
+        keySource = (EXP2.Session  & TRACKING.VideoFiducialsTrial & IMG.Mesoscope) ;
     end
     methods(Access=protected)
         
@@ -83,7 +83,7 @@ classdef VideoTongueTrial < dj.Computed
             % Graphics for plotting
             close all;
             if flag_plot==1
-                figure1=figure;
+                figure1=figure("Visible",false);
                 set(gcf,'DefaultAxesFontName','helvetica');
                 set(gcf,'PaperUnits','centimeters','PaperPosition',[0.5 7 21 21]);
                 set(gcf,'PaperOrientation','portrait');

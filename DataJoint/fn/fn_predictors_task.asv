@@ -21,20 +21,17 @@ switch predictor_name
     
     
     case 'LickPort_pos_x' %front view
-        event_size= fetch1(rel_licport_pos ,'lickport_pos_x')/10000;%
+        event_size= fetch1(rel_licport_pos ,'lickport_pos_x');%
         event_start= fetch1(rel_lickport ,'lickport_t_entrance_relative_to_trial_start');
         event_end= fetch1(rel_lickport.proj('lickport_t_entrance_relative_to_trial_start + lickport_lickable_duration -> t_exit'),'t_exit');
-        idx_event_start = find(time_resampled<=event_start,1,'last');
-        idx_event_end = find(time_resampled>event_end,1,'first')-1;
-        event = time_resampled(idx_event_start:1:idx_event_end);
+        
+        idx_event_start = find(time_resampled<=event_start,1,'last')
+                idx_event_end = find(time_resampled>event_end,1,'last')
 
     case 'LickPort_pos_z' %front view
-        event_size= fetch1(rel_licport_pos ,'lickport_pos_z')/10000;%
+        event_size= fetch1(rel_video_lickport ,'lickport_z');%
         event_start= fetch1(rel_lickport ,'lickport_t_entrance_relative_to_trial_start');
         event_end= fetch1(rel_lickport.proj('lickport_t_entrance_relative_to_trial_start + lickport_lickable_duration -> t_exit'),'t_exit');
-        idx_event_start = find(time_resampled<=event_start,1,'last');
-        idx_event_end = find(time_resampled>event_end,1,'first')-1;
-        event = time_resampled(idx_event_start:1:idx_event_end);
         
     case 'LickPortEntrance'
         event= fetch1(rel_lickport ,'lickport_t_entrance_relative_to_trial_start');
@@ -91,7 +88,7 @@ end
 
 for ii=1:1:numel(time_resampled)-1
     idx_b = event>=time_resampled(ii) & event <time_resampled(ii+1);
-    event_vector(ii) =  sum(idx_b)*event_size; %For each 2p imaging frame we save the number of events that happened in this bin.
+    event_vector(ii) =  sum(idx_b); %For each 2p imaging frame we save the number of events that happened in this bin.
 end
 
 

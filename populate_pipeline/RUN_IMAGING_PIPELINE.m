@@ -288,7 +288,8 @@ populate(PLOTS.MapsBodypartCorr);
 
 %% Ridge regression behavior
 populate(RIDGE.Predictors); %RIDGE.PredictorType RIDGE.PredictorTypeUse
-populate(RIDGE.ROIRidge); %also populates RIDGE.ROIRidgeVarExplained
+
+populate(RIDGE.ROIRidge); %also populates RIDGE.ROIRidgeVarExplained;    Required to run first: POP.ROISVD which also populates the required POP.SVDSingularValues,  POP.SVDTemporalComponents
 populate(RIDGE.ROIRidgeNeuropil); %also populates RIDGE.ROIRidgeVarExplainedNeuropil
 populate(PLOTS.MapsRidge);
 populate(PLOTS.MapsRidgeNeuropil);

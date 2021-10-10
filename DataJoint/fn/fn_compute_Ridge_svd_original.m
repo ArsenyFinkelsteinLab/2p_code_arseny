@@ -1,5 +1,5 @@
-function fn_compute_Ridge_svd(key,self,self2, rel_data1,rel_data2,rel_data3,time_shift_vec, time_bin)
-rel_predictor_type = (RIDGE.PredictorType & RIDGE.PredictorTypeUse);
+function fn_compute_Ridge_svd(key,self,self2, rel_data1,rel_data2,rel_data3,time_shift_vec)
+rel_predictor_type = (RIDGE.PredictorType&RIDGE.PredictorTypeUse);
 
 key_ROI1=fetch(rel_data1 & key,'ORDER BY roi_number'); %
 key_ROI2=key_ROI1; % for variance
@@ -13,8 +13,6 @@ VT = VT.*S(1:num_comp)';
 VT=VT';
 
 
-U = U(:,1:1:num_comp);
-
 rel_start_frame = IMG.FrameStartTrial  & key & RIDGE.Predictors;
 TrialsStartFrame=fetchn(rel_start_frame,'session_epoch_trial_start_frame','ORDER BY trial');
 trial_num=fetchn(rel_start_frame, 'trial','ORDER BY trial');
@@ -27,49 +25,16 @@ end
 
 
 
-imaging_frame_rate = fetch1(IMG.FOVEpoch & key,'imaging_frame_rate','LIMIT 1'); %we assume that all epochs have the same frame rate
-
-
-sesson_epoch_duration_frame =fetchn(IMG.SessionEpochFrame & key,'session_epoch_end_frame') -fetchn(IMG.SessionEpochFrame & key,'session_epoch_start_frame') +1;
-
-%% binning in time
-if time_bin>0
-    bin_size_in_frame=ceil(time_bin*imaging_frame_rate);
-    bins_vector=1:bin_size_in_frame:sesson_epoch_duration_frame;
-else
-   bins_vector=1:1:sesson_epoch_duration_frame;
-end
-
-
 P=struct2table(fetch(RIDGE.Predictors*rel_predictor_type & key,'*','ORDER BY trial'));
-% 
-% idx_frames=[];
-% for i_tr = 1:1:numel(trial_num)
-%     idx=find(P.trial==trial_num(i_tr),1,'first');
-%     if ~isempty(idx) % for some trials the predictors in RIDGE.Predictors are not computed: TRACKING.TrackingTrialBad, (TRACKING.VideoGroomingTrial), so we skip these files
-%     TrialsEndFrame = TrialsStartFrame(i_tr) + numel(P.trial_predictor{idx}) - TrialsStartFrame(1);
-%     idx_frames = [idx_frames, (TrialsStartFrame(i_tr)- TrialsStartFrame(1)+1):1:TrialsEndFrame];
-%     end
-% end
-
-
 
 idx_frames=[];
 for i_tr = 1:1:numel(trial_num)
     idx=find(P.trial==trial_num(i_tr),1,'first');
     if ~isempty(idx) % for some trials the predictors in RIDGE.Predictors are not computed: TRACKING.TrackingTrialBad, (TRACKING.VideoGroomingTrial), so we skip these files
-        idx_binned_frame_start = find(bins_vector-TrialsStartFrame(i_tr)<=0,1,'last');
-        idx_binned_frame_end = idx_binned_frame_start + numel(P.trial_predictor{idx})-1;
-    idx_frames = [idx_frames, idx_binned_frame_start:1:idx_binned_frame_end];
+    TrialsEndFrame = TrialsStartFrame(i_tr) + numel(P.trial_predictor{idx}) - TrialsStartFrame(1);
+    idx_frames = [idx_frames, (TrialsStartFrame(i_tr)- TrialsStartFrame(1)+1):1:TrialsEndFrame];
     end
 end
-
-
-
-
-
-
-
 
 predictor_name = fetchn(rel_predictor_type,'predictor_name', 'ORDER BY predictor_name');
 predictor_category = fetchn(rel_predictor_type,'predictor_category', 'ORDER BY predictor_name');
@@ -117,19 +82,6 @@ end
 
 
 
-% for it=1:1:numel(time_shift_vec)
-%     shift=(time_shift_vec(it));
-%     PM=zeros(size(predictor_mat));
-%     if shift<=0
-%         PM (1:end+shift,:) = predictor_mat(abs(shift)+1:end,:);
-%     elseif shift>0
-%         PM (1+shift:end,:) = predictor_mat(1:end-shift,:);
-%     end
-%     predictor_mat_full=[predictor_mat_full,PM];
-% end
-
-
-
 
 
 %% Ridge regression
@@ -147,14 +99,14 @@ for i_roi=1:1:numel(key_ROI1)
 end
 insert(self2,key_ROI2);
 
-% %% regression coefficient of each predictor for each ROI
-% X=U*dimBeta';
-% num_of_predict = numel(predictor_name);
-% for it=1:1:numel(time_shift_vec)
-%     parfor i_p = 1:1:num_of_predict
-%         fn_insert_ridge_dj(self,key,key_ROI1,predictor_name,i_p,X,it,num_of_predict,time_shift_vec);
-%     end
-% end
+%% regression coefficient of each predictor for each ROI
+X=U*dimBeta';
+num_of_predict = numel(predictor_name);
+for it=1:1:numel(time_shift_vec)
+    parfor i_p = 1:1:num_of_predict
+        fn_insert_ridge_dj(self,key,key_ROI1,predictor_name,i_p,X,it,num_of_predict,time_shift_vec);
+    end
+end
 
 
 end

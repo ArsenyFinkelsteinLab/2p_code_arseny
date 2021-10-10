@@ -267,7 +267,7 @@ classdef VideoTongueTrial < dj.Computed
                     idx_lickport_t_entrance_start = find(LICKPORT_Z_Cam1_smoothed(t>0) < (Z_lickport_before -(Z_lickport_before - Z_lickport_in)*0.2),1,'first') + find(t>0,1,'first')-1;
                     idx_lickport_t_entrance_end = find(LICKPORT_Z_Cam1_smoothed(t>0)< (Z_lickport_in +(Z_lickport_before - Z_lickport_in)*0.2),1,'first') + find(t>0,1,'first')-1;
                     idx_lickport_t_exit_start = find(LICKPORT_Z_Cam1_smoothed(t>1)> (Z_lickport_in +(Z_lickport_before - Z_lickport_in)*0.2),1,'first') + find(t>1,1,'first');
-                    idx_lickport_t_exit_end = find(LICKPORT_Z_Cam1_smoothed(t>1)> (Z_lickport_before -(Z_lickport_before - Z_lickport_in)*0.2),1,'first') + + find(t>1,1,'first');
+                    idx_lickport_t_exit_end = find(LICKPORT_Z_Cam1_smoothed(t>1)> (Z_lickport_before -(Z_lickport_before - Z_lickport_in)*0.2),1,'first') +  find(t>1,1,'first')-1;
                     
                     lickport_t_entrance_avg = nanmean([t(idx_lickport_t_entrance_start);t(idx_lickport_t_entrance_end)]);
                     
@@ -278,9 +278,10 @@ classdef VideoTongueTrial < dj.Computed
                     insert_key_lickport(ii).lickport_t_entrance_relative_to_trial_start = lickport_t_entrance_avg + time_go(ii);
                     insert_key_lickport(ii).lickport_t_entrance_start = t(idx_lickport_t_entrance_start);
                     insert_key_lickport(ii).lickport_t_entrance_end = t(idx_lickport_t_entrance_end);
-                    
                     insert_key_lickport(ii).lickport_lickable_duration =    nanmean([t(idx_lickport_t_exit_start);t(idx_lickport_t_exit_end)]) - lickport_t_entrance_avg;
-                else
+
+                        
+                    else
                     lickport_t_entrance_avg=0;
                     time_label = 'Time from Go cue (s)';
                 end
@@ -639,7 +640,6 @@ classdef VideoTongueTrial < dj.Computed
                     
                     
                     t_current_electric =licks_time_electric( find( t(idx_licks_onset(i_p)) <= licks_time_electric     &     licks_time_electric <=      t(idx_licks_end(i_p))));
-                    
                     % if there are more then one electric contact detected per lick  we only take the first lick electric.
                     % So the for loop below the if statement runs only ones. If we comment out the if statement  then potentially more then one electric lickbout will be saved per lick
                     if ~isempty (t_current_electric)

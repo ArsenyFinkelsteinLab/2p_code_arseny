@@ -21,10 +21,10 @@ classdef ROIRidge < dj.Imported
 
 
             kk.threshold_for_event =0;
-            key.time_bin = 0.2;
+            key.time_bin = 0.5;
             
 %             time_shift_vec=[-2:1:7]; % for 0.5s bins
-            time_shift_vec=[-3:key.time_bin:5]; % for 0.2s bins
+            time_shift_vec=[-2:key.time_bin:5]; % for 0.2s bins
             time_shift_vec=round(time_shift_vec/key.time_bin);
             rel_data1 = (POP.ROISVD & key)& kk;
             rel_data2 = (POP.SVDSingularValues & key) & kk;
