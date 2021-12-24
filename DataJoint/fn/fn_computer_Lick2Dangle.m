@@ -125,6 +125,9 @@ theta_bins = [-180,theta_bins, 180];
 theta_bins =unique(theta_bins);
 
 theta_bins_centers=round(theta_bins(1:end-1)+diff(theta_bins)/2);
+if sum(theta_bins_centers==180)
+    theta_bins_centers(theta_bins_centers==180)=-180; % this is done to avoid some problems later
+end
 [theta_binned,~,theta_idx] = histcounts(theta,theta_bins);
 plot(theta_bins_centers,theta_binned,'.-g')
 ylim([0,max(theta_binned)])

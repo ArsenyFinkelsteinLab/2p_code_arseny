@@ -28,26 +28,26 @@ classdef PredictorTypeUse < dj.Lookup
           'LickPort_pos_x' 
             'LickPort_pos_z'   
         
-%          'LickPortEntrance'   
-%             'LickPortExit'      
-%             'LickPortBlockStart' 
-% 
-%             'AutoWater'          
-%             'RewardDelivery'     
+         'LickPortEntrance'   
+            'LickPortExit'      
+            'LickPortBlockStart' 
+
+            'AutoWater'          
+            'RewardDelivery'     
             'RewardSize'         
-%             'RewardOmission'    
-% 
+            'RewardOmission'    
+
             'Lick'               
             'LickTouch'           
-%             'LickNoTouch'        
-%             'LickTouchReward'    
-%             'LickTouchNoReward'  
-%             'LickTouchNoRewardOmitted'  
-% 
+            'LickNoTouch'        
+            'LickTouchReward'    
+            'LickTouchNoReward'  
+            'LickTouchNoRewardOmitted'  
+
             'FirstLickTouch'    
             'FirstLickReward'   
-%             'PawFrontLeft'       
-%             'PawFrontRight'      
+            'PawFrontLeft'       
+            'PawFrontRight'      
             'Whiskers'           
             'Nose'               
             'Jaw'               

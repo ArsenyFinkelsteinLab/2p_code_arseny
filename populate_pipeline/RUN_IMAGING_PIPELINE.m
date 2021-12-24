@@ -23,9 +23,17 @@ dir_base_behavior ='G:\Arseny\2p\BPOD_behavior\';
 % dir_behavioral_data = [dir_base_behavior 'anm463192_AF25\'];
 % dir_behavioral_data = [dir_base_behavior 'anm464728_AF32\'];
 % dir_behavioral_data = [dir_base_behavior 'anm481102_AF33\'];
-dir_behavioral_data = [dir_base_behavior 'anm486673_AF34\'];
+% dir_behavioral_data = [dir_base_behavior 'anm486673_AF34\'];
 % dir_behavioral_data = [dir_base_behavior 'anm486668_AF35\'];
 % dir_behavioral_data = [dir_base_behavior 'anm481101_AF36\'];
+% dir_behavioral_data = [dir_base_behavior 'anm490663_AF37\'];
+% dir_behavioral_data = [dir_base_behavior 'anm492791_AF38\'];
+% dir_behavioral_data = [dir_base_behavior 'anm480483_AF41\'];
+% dir_behavioral_data = [dir_base_behavior 'anm496552_AF42\'];
+% dir_behavioral_data = [dir_base_behavior 'anm496912_AF43\'];
+dir_behavioral_data = [dir_base_behavior 'anm491362_AF44\'];
+% dir_behavioral_data = [dir_base_behavior 'anm496916_AF45\'];
+
 
 
 % populate_somatotopy; %populate EXP2.SessionEpochSomatotopy, in case somatopic mapping was done
@@ -56,7 +64,7 @@ flag_multi_session_registration = 0;
 % EXP2.SessionEpochType
 % IMG.Zoom2Microns
 %% STEP 1 - could be run independelty of suite2p
-populate_Session_without_behavior (user_name, rig); % populate session without behavior
+ populate_Session_without_behavior (user_name, rig); % populate session without behavior
 % populate_behavior_WaterCue (dir_behavioral_data, behavioral_protocol_name);
 populate_behavior_Lick2D(dir_behavioral_data, behavioral_protocol_name);
 
@@ -100,7 +108,7 @@ populate(IMG.ROIdeltaFStatsNeuropil);
 
 %% PHOTOSTIM
 % ANALYSIS_PHOTOSTIM; % this script summarizes all the scripts below:
-STIMANAL.SessionEpochsIncluded  %% manually update session info here
+STIMANAL.SessionEpochsIncluded;  %% manually update session info here
 
 
 populate(IMG.PhotostimGroup); % also IMG.PhotostimProtocol
@@ -138,7 +146,7 @@ populate(POP.ROICorrLocalPhoto)
 
 
 %% 
-populate(POP.DistancePairwiseLateral); %also populates POP.DistancePairwise3D
+ populate(POP.DistancePairwiseLateral); %also populates POP.DistancePairwise3D
 
 %% Lick 2D
 % ANALYSIS_LICK2D; % this script summarizes all the scripts below:
@@ -160,6 +168,7 @@ populate(PLOTS.CellsRewardTuningSpikes);
 
 
 populate(LICK2D.ROILick2DPSTHSpikesPoisson);
+
 populate(PLOTS.CellsRewardTuningSpikesPoisson);
 
 
@@ -170,10 +179,6 @@ populate(PLOTS.Maps2DthetaSpikes);
 % populate(ANLI.ROILick2DmapShuffle);
 
 
-
-populate(LICK2D.ROILick2DangleSpikesLickingResidual);
-
-populate(LICK2D.ROILick2DPSTHSpikesLickingResidual);
 
 
 %based on dff
@@ -229,6 +234,8 @@ populate(PLOTS.SomatotopyDeltaMeanNeuropil);
 
 
 %% SVD
+% STIMANAL.MiceIncluded
+
 populate(POP.ROISVD); %also populates POP.SVDTemporalComponents POP.SVDSingularValues
 populate(POP.ROISVDSpikes); %also populates POP.SVDTemporalComponentsSpikes POP.SVDSingularValuesSpikes
 populate(POP.ROISVDNeuropil); %also populates POP.SVDTemporalComponentsNeuropil POP.SVDSingularValuesNeuropil

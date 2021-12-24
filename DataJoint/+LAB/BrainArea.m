@@ -12,6 +12,7 @@ classdef BrainArea < dj.Lookup
             'ALM' 'anterior lateral motor cortex'
             'vS1' 'vibrissal primary somatosensory cortex ("barrel cortex")'
             'all' 'all areas'
+            'hippocampus' 'CA1';
             }
     end
 end

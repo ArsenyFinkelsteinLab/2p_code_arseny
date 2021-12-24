@@ -28,7 +28,11 @@ for i_tr = 1:1:numel(trial_num)
     end
     
     if ~isempty(licks)
-        start_file(i_tr)=TrialsStartFrame(i_tr) + floor(licks(1)*frame_rate) + floor(time_bin(1)*frame_rate);
+        try
+            start_file(i_tr)=TrialsStartFrame(i_tr) + floor(licks(1)*frame_rate) + floor(time_bin(1)*frame_rate);
+        catch
+            a=1
+        end
         end_file(i_tr)=start_file(i_tr)+floor([time_bin(2)-time_bin(1)]*frame_rate)-1;
         if start_file(i_tr)<=0
             start_file(i_tr)=NaN;

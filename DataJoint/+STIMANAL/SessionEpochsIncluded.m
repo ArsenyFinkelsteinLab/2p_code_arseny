@@ -181,6 +181,53 @@ classdef SessionEpochsIncluded < dj.Lookup
             486668 6 'spont_photo' 2  1  100   1 'target switches every 4 frames -- 1 time per volume'
             
             %
+            490663 1 'spont_photo' 2  1  100   1 'target switches every 4 frames -- 1 time per volume'
+            490663 2 'spont_photo' 2  1  150   1 'target switches every 4 frames -- 1 time per volume'
+            490663 3 'spont_photo' 2  1  150   1 'target switches every 4 frames -- 1 time per volume'
+            490663 4 'spont_photo' 2  1  150   1 'target switches every 4 frames -- 1 time per volume. Mouse rotated 45 deg in azimuth rightwards from the mouse perspective to control for PSF'
+
+            
+               %
+            492791 1 'spont_photo' 2  1  100   1 'target switches every 4 frames -- 1 time per volume'
+            492791 2 'spont_photo' 2  1  150   1 'target switches every 4 frames -- 1 time per volume'
+            492791 3 'spont_photo' 2  1  150   1 'target switches every 4 frames -- 1 time per volume'
+            492791 4 'spont_photo' 2  1  150   1 'target switches every 4 frames -- 1 time per volume. Mouse rotated 45 deg in azimuth rightwards from the mouse perspective to control for PSF'
+
+            
+            480483 1 'spont_photo' 2  1  170   1 'target switches every 4 frames -- 1 time per volume'
+            480483 2 'spont_photo' 2  1  170   1 'target switches every 4 frames -- 1 time per volume'
+            480483 3 'spont_photo' 2  1  170   1 'target switches every 4 frames -- 1 time per volume'
+            480483 4 'spont_photo' 2  1  170   1 'target switches every 4 frames -- 1 time per volume'
+            480483 5 'spont_photo' 2  1  150   1 'target switches every 4 frames -- 1 time per volume'
+            480483 6 'spont_photo' 2  1  150   1 'target switches every 4 frames -- 1 time per volume'
+            480483 7 'spont_photo' 2  1  150   1 'target switches every 4 frames -- 1 time per volume. Mouse rotated 80 deg in azimuth rightwards from the mouse perspective to control for PSF'
+
+            496552 1 'spont_photo' 2  1  150   1 'target switches every 4 frames -- 1 time per volume'
+            496552 2 'spont_photo' 2  1  150   1 'target switches every 4 frames -- 1 time per volume'
+            496552 3 'spont_photo' 2  1  100   1 'target switches every 4 frames -- 1 time per volume'
+
+            496912 1 'spont_photo' 2  1  100   1 'target switches every 4 frames -- 1 time per volume'
+            496912 2 'spont_photo' 2  1  150   1 'target switches every 4 frames -- 1 time per volume'
+            496912 3 'spont_photo' 2  1  150   1 'target switches every 4 frames -- 1 time per volume'
+            496912 4 'spont_photo' 2  1  100   1 'target switches every 4 frames -- 1 time per volume'
+
+            491362 1 'spont_photo' 2  1  150   1 'target switches every 4 frames -- 1 time per volume'
+            491362 2 'spont_photo' 2  1  150   1 'target switches every 4 frames -- 1 time per volume'
+            491362 2 'spont_photo' 3  1  200   1 'target switches every 4 frames -- 1 time per volume'
+
+            
+            496916 1 'spont_photo' 2  1  100   1 'target switches every 4 frames -- 1 time per volume'
+            496916 2 'spont_photo' 2  1  100   1 'target switches every 4 frames -- 1 time per volume'
+            496916 3 'spont_photo' 2  1  150   1 'target switches every 4 frames -- 1 time per volume'
+            496916 5 'spont_photo' 2  1  150   1 'target switches every 4 frames -- 1 time per volume'
+            496916 6 'spont_photo' 2  1  150   1 'target switches every 4 frames -- 1 time per volume'
+
+            494561 1 'spont_photo' 2  1  100   1 'target switches every 4 frames -- 1 time per volume'
+
+            495875 1 'spont_photo' 2  1  150   1 'target switches every 4 frames -- 1 time per volume'
+                  
+            495876 1 'spont_photo' 2  1  150   1 'target switches every 4 frames -- 1 time per volume'
+
             
             }
         

@@ -13,6 +13,9 @@ lick2D_video_yaw_early_vs_nonearly2
 lick2D_video_yaw_trajectory
 
 % Neural data Reward
+PLOTS_Population2DReward_all_sessions
+PLOTS_Population2DReward_all_sessions___vsPoisson
+PLOTS_Population2DReward_all_sessions___vsPoisson__sum
 
 
 % Neural data

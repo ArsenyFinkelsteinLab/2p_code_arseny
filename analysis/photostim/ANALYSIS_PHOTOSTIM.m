@@ -3,7 +3,7 @@ function ANALYSIS_PHOTOSTIM()
 STIMANAL.SessionEpochsIncluded  %% manually update session info here
 
 photostim_direct_new()
-
+distance_dependence_new()
 
 populate(STIM.ROIInfluence5); % also populates STIM.ROIInfluenceTrace
 populate(STIM.ROIResponseDirect);

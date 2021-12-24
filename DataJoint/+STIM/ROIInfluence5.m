@@ -186,7 +186,7 @@ classdef ROIInfluence5 < dj.Computed
                         
                         
                         target_photostim_frames_clean=target_photostim_frames(~ismember(target_photostim_frames, [allsites_photostim_frames_near-3, allsites_photostim_frames_near-2, allsites_photostim_frames_near-1, allsites_photostim_frames_near, allsites_photostim_frames_near+1]));
-                        if numel(target_photostim_frames_clean)<20
+                        if numel(target_photostim_frames_clean)<15
                             target_photostim_frames_clean=target_photostim_frames;
                             k_response(i_r).num_of_target_trials_used =  0;
                         else

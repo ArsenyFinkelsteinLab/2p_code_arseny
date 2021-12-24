@@ -52,20 +52,8 @@ close all;
 % key.session =2;
 
 
-% key.subject_id = 445980;
-% key.session =2;
-
-% key.subject_id = 480483;
-% key.session =1;
-
-% key.subject_id = 494561;
-% key.session =1;
-
-% key.subject_id = 491362;
-% key.session =1;
-
-key.subject_id = 496916;
-key.session =5;
+key.subject_id = 445980;
+key.session =2;
 
 % Take photostim groups from here:
 epoch_list = fetchn(EXP2.SessionEpoch & 'session_epoch_type="spont_photo"' & key, 'session_epoch_number','ORDER BY session_epoch_number');
@@ -145,7 +133,9 @@ roi_list_direct=[G.roi_number];
 distance=[G.distance_to_closest_neuron]*pix2dist;
 
 
-line_color=copper(numel(epoch_list));
+% line_color=copper(numel(epoch_list));
+line_color=inferno(numel(epoch_list)+4);
+
 % line_color=flip(line_color);
 
 
@@ -182,8 +172,8 @@ for i_g=1:1:numel(roi_list_direct)
             max_epoch(i_epoch)=max(y_smooth);
             min_epoch(i_epoch)=min(y_smooth);
             hold on;
-            plot(time,y_smooth,'Color',line_color(i_epoch,:));
-            shadedErrorBar(time,y_smooth,ystem_smooth,'lineprops',{'-','Color',[0 0 0]})
+%             plot(time,y_smooth,'Color',line_color(i_epoch,:));
+            shadedErrorBar(time,y_smooth,ystem_smooth,'lineprops',{'-','Color',line_color(i_epoch,:)})
 
         end
         ylim ([min([-0.2,min_epoch]),max([1 ,max_epoch])]);
@@ -198,7 +188,8 @@ for i_g=1:1:numel(roi_list_direct)
 
         title(sprintf('anm %d, session %d \n Direct photostimulation \n Target # %d  \n Distance = %.1f um  \n \n \n',k2.subject_id,k2.session,G(i_g).photostim_group_num, distance(i_g)),'FontSize',12);
 
-        
+       xlim([-2,10]);
+
         
 %         pval(i_epoch)=StimStat.p_val;
 %         Fstim_mean(i_epoch)=StimStat.Fstim_mean;

@@ -46,7 +46,7 @@ vertical_dist2=0.25;
 
 position_x2(1)=0.1;
 position_x2(end+1)=position_x2(end)+horizontal_dist2;
-position_x2(end+1)=position_x2(end)+horizontal_dist2;
+position_x2(end+1)=position_x2(end)+horizontal_dist2*0.8;
 position_x2(end+1)=position_x2(end)+horizontal_dist2;
 position_x2(end+1)=position_x2(end)+horizontal_dist2;
 
@@ -259,16 +259,16 @@ count_total=count(rel_all);
 A_count_largereward=count(rel_signif_largereward);
 B_count_smallreward=count(rel_signif_smallreward);
 
-rel_directional = rel_all & 'theta_tuning_odd_even_corr>0.5' & 'goodness_of_fit_vmises>0.5' ;
+rel_directional = rel_all & 'theta_tuning_odd_even_corr>0.25' & 'goodness_of_fit_vmises>0.5' ;
 C_count_directional=count(rel_directional);
 
 rel_signif_largereward=  (rel_all   & 'reward_mean_pval_regular_large<0.05');
 rel_signif_smallreward=  (rel_all   & 'reward_mean_pval_regular_small<0.05');
 
 AB= count(rel_all   & 'reward_mean_pval_regular_large<0.05' & 'reward_mean_pval_regular_small<0.05');
-AC= count(rel_all   & 'reward_mean_pval_regular_large<0.05' & 'theta_tuning_odd_even_corr>0.5' & 'goodness_of_fit_vmises>0.5' );
-BC= count(rel_all   & 'reward_mean_pval_regular_small<0.05' & 'theta_tuning_odd_even_corr>0.5' & 'goodness_of_fit_vmises>0.5' );
-ABC= count(rel_all   & 'reward_mean_pval_regular_large<0.05' & 'reward_mean_pval_regular_small<0.05' & 'theta_tuning_odd_even_corr>0.5' & 'goodness_of_fit_vmises>0.5' );
+AC= count(rel_all   & 'reward_mean_pval_regular_large<0.05' & 'theta_tuning_odd_even_corr>0.25' & 'goodness_of_fit_vmises>0.5' );
+BC= count(rel_all   & 'reward_mean_pval_regular_small<0.05' & 'theta_tuning_odd_even_corr>0.25' & 'goodness_of_fit_vmises>0.5' );
+ABC= count(rel_all   & 'reward_mean_pval_regular_large<0.05' & 'reward_mean_pval_regular_small<0.05' & 'theta_tuning_odd_even_corr>0.25' & 'goodness_of_fit_vmises>0.5' );
 
 
 axes('position',[position_x2(3), position_y2(2), panel_width2*3, panel_width2*3]);
@@ -278,21 +278,20 @@ axes('position',[position_x2(3), position_y2(2), panel_width2*3, panel_width2*3]
 
 %by itself plots circles with total areas A, and intersection area(s) I. 
 % A is a three element vector [c1 c2 c3], and I is a four element vector [i12 i13 i23 i123], specifiying the two-circle intersection areas i12, i13, i23, and the three-circle intersection i123.
-for i_v=1:1:numel(v.ZonePop)
-text(v.ZoneCentroid(i_v,1),v.ZoneCentroid(i_v,2),sprintf('%.1f%%',(100*v.ZonePop(i_v)/count_total)),'Color',[1 1 1]);
+for i_v=1:1:3%numel(v.ZonePop)
+text(v.ZoneCentroid(i_v,1)-v.ZoneCentroid(i_v,1)*0.2,v.ZoneCentroid(i_v,2),sprintf('%.1f%%',(100*v.ZonePop(i_v)/count_total)),'Color',[1 1 1],'FontSize',17,'HorizontalAlignment','left');
 end
 axis off
 box off
 
 
-text(v.Position(1,1),v.Position(1,2)-v.Radius(1)*1.2,sprintf('Reward-increase modulated'),'Color',[1 0.5 0]);
-text(v.Position(2,1),v.Position(2,2)-v.Radius(2)*1.2,sprintf('Reward-omission modulated'),'Color',[0 0.7 0.2]);
-text(v.Position(3,1),v.Position(3,2)+v.Radius(3)*1.2,sprintf('Directionally tuned'),'Color',[0 0 1]);
+text(v.Position(1,1)-v.Radius(1)*1.3,v.Position(1,2)-v.Radius(1)*1.4,sprintf('Reward-increase\n modulated'),'Color',[1 0.5 0],'FontSize',17);
+text(v.Position(2,1)-v.Radius(1)*0.5,v.Position(2,2)-v.Radius(2)*1.6,sprintf('Reward-omission\n modulated'),'Color',[0 0.7 0.2],'FontSize',17);
+text(v.Position(3,1)-v.Radius(1)*1.3,v.Position(3,2)+v.Radius(3)*1.2,sprintf('Directionally tuned'),'Color',[0 0 1],'FontSize',17);
 
 axes('position',[position_x2(1), position_y2(3), panel_width2, panel_width2]);
 
 pt=fetchn(rel_all,'peaktime_psth');
-
 
 %% all neurons peak response time
 a=histogram(pt,time_bins);
@@ -432,8 +431,8 @@ if isempty(dir(dir_current_fig))
 end
 %
 figure_name_out=[ dir_current_fig filename];
-eval(['print ', figure_name_out, ' -dtiff  -r200']);
-% eval(['print ', figure_name_out, ' -dpdf -r200']);
+eval(['print ', figure_name_out, ' -dtiff  -r500']);
+eval(['print ', figure_name_out, ' -dpdf -r200']);
 
 
 

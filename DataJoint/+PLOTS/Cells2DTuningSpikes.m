@@ -19,7 +19,7 @@ classdef Cells2DTuningSpikes < dj.Computed
             
             flag_spikes = 1; % 1 spikes, 0 dff
             
-            plot_one_in_x_cell=20; % e.g. plots one in 20 signficant cell
+            plot_one_in_x_cell=1; % e.g. plots one in 20 signficant cell
             
             PLOTS_Cells2DTuning(key, dir_current_fig,flag_spikes, plot_one_in_x_cell);
             

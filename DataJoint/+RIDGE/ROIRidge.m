@@ -21,7 +21,7 @@ classdef ROIRidge < dj.Imported
 
 
             kk.threshold_for_event =0;
-            key.time_bin = 0.2;
+            key.time_bin = 1;
             
 %             time_shift_vec=[-2:1:7]; % for 0.5s bins
             time_shift_vec=[-3:key.time_bin:5]; % for 0.2s bins

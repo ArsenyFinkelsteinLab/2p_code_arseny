@@ -1,4 +1,4 @@
-function distance_dependence()
+function distance_dependence_new()
 close all;
 dir_base = fetch1(IMG.Parameters & 'parameter_name="dir_root_save"', 'parameter_value'); 
 dir_current_fig = [dir_base  '\Photostim\photostim_distance\'];
@@ -28,9 +28,17 @@ dir_current_fig = [dir_base  '\Photostim\photostim_distance\'];
 % key.subject_id = 464728;
 % key.session =2;
 
-key.subject_id = 486668;
-key.session =3;
+% key.subject_id = 486668;
+% key.session =3;
 
+% key.subject_id = 490663;
+% key.session =2;
+
+% key.subject_id = 492791;
+% key.session =3;
+
+key.subject_id = 480483;
+key.session =1;
 
 flag_distance_flag =0; % 0 lateral distance; 1 axial distance;  2  3d distance
 

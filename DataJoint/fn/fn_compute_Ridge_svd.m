@@ -85,8 +85,8 @@ for i_p = 1:1:numel(predictor_name)
         else
             predictor=predictor>nanmean(predictor);
         end
-    elseif strcmp(predictor_category{i_p},'lick')
-        predictor=predictor>=1;
+%     elseif strcmp(predictor_category{i_p},'lick')
+%         predictor=predictor>=1;
     end
     predictor_mat(:,i_p) = predictor;
     %     %% for debug

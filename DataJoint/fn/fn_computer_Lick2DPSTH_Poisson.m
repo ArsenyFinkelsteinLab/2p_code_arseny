@@ -107,6 +107,9 @@ for i_roi=1:1:size(S,1)
             curr_licks =lick_tr_times_relative_to_first_lick{i_tr};
             
             licks_at_bin = sum(curr_licks>time_new_bins(i_t) & curr_licks<=time_new_bins(i_t+1));
+            if licks_at_bin>=max(lick_number_bins) % all bins with lick number bigger then max lick_number_bins go to the last bin
+                licks_at_bin=max(lick_number_bins);
+            end
             mat_time_licks_spikes(licks_at_bin+1,i_t) =[mat_time_licks_spikes(licks_at_bin+1,i_t) + mean(psth_all{i_tr}(i_t))];
             mat_time_licks_timespent(licks_at_bin+1,i_t) = [mat_time_licks_timespent(licks_at_bin+1,i_t) + 1];
         end
@@ -126,6 +129,9 @@ for i_roi=1:1:size(S,1)
             end
             curr_licks =lick_tr_times_relative_to_first_lick{i_tr};
             licks_at_bin = sum(curr_licks>time_new_bins(i_t) & curr_licks<=time_new_bins(i_t+1));
+            if licks_at_bin>=max(lick_number_bins) % all bins with lick number bigger then max lick_number_bins go to the last bin
+                licks_at_bin=max(lick_number_bins);
+            end
             psth_all_poisson(i_tr,i_t) = poissrnd(tuning_lick_time(licks_at_bin+1,i_t));
         end
     end
