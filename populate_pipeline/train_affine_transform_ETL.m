@@ -1,4 +1,5 @@
-
+function train_affine()
+close all
 % r1 =[1 0 ]
 % r2 =[1 1 ]
 % r3 =[2 0 ]
@@ -13,22 +14,25 @@
 % TT=[t1,1; t2,1; t3,1; t4,1]';
 % %since R=A*T, A= R*inv(T) or just A=R/T (in MATLAB)
 % A=R/T
+file_path='F:\Arseny\2p\ETL_abberations\ETL_all_Dec18th_2021\repeat_1\cropped\';
+ff=imread([file_path '120.jpg']);
+resizedimage = imresize(ff, [512 512]);
 
-ff=imread('C:\Users\scanimage\Downloads\Presentation1\Slide1.PNG');
 figure
-imagesc(ff)
-
-R=ginput(11)
-T=ginput(11)
+imagesc(resizedimage)
+axis equal
+set(gca,'YDir','normal');
+R=ginput()
+T=ginput(size(R,1))
 
 R=R';
 T=T';
 
 R = [R; ones(1,size(R,2))];
 T = [T; ones(1,size(T,2))];
-A=R/T;
+Affine_trasnform=R/T;
 
-Rtrans=A*T;
+Rtrans=Affine_trasnform*T;
 
 R=R(1:2,:);
 T=T(1:2,:);
@@ -40,19 +44,4 @@ plot(R(1,:),R(2,:),'.c')
 plot(T(1,:),T(2,:),'.m')
 plot(Rtrans(1,:),Rtrans(2,:),'.y')
 
-
-ff=imread('C:\Users\scanimage\Downloads\Presentation1\Slide2.PNG');
-figure
-imagesc(ff)
-T_v2=ginput(13)
-T_v2=T_v2';
-T_v2 = [T_v2; ones(1,size(T_v2,2))];
-
-Rtrans_v2=A*T_v2;
-Rtrans_v2=Rtrans_v2(1:2,:);
-
-hold on
-plot(T_v2(1,:),T_v2(2,:),'.m')
-plot(Rtrans_v2(1,:),Rtrans_v2(2,:),'.y')
-
-
+save([file_path 'Affine_transform120.mat'],'Affine_trasnform')

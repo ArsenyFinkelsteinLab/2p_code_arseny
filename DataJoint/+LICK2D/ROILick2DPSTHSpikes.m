@@ -16,7 +16,7 @@ psth_small=null          : blob   # during no rewarded trials
 psth_regular=null        : blob   # during trials with typical reward
 psth_large=null          : blob   # during trials with large reward
 
-psth_time                            : longblob   # time vector
+psth_time                 : longblob   # time vector
 %}
 
 

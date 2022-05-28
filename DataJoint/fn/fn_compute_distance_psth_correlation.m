@@ -1,32 +1,45 @@
-function fn_compute_distance_psth_correlation(rel_roi, rel_data, key,self, dir_save_fig, goodness_of_fit_vmises_threshold)
+function fn_compute_distance_psth_correlation(rel_roi, rel_data, key,self, dir_save_fig, rel_roi_xy,mesoscope_flag)
 
-column_radius(1) =50; % microns
-column_radius(2) =200; % microns
+min_distance_in_xy=5; %to exclude auto-focus flourescence
 
+column_inner_radius =[min_distance_in_xy  min_distance_in_xy  min_distance_in_xy  min_distance_in_xy  25  50   50  100 ]; % microns
+column_outer_radius =[25 50 75 100 50 100 250  250 ]; % microns
 
+lateral_distance_bins=[0,10,20,30:10:260];
 
 
 DefaultFontSize =12;
 
 % set(gcf,'DefaultAxesFontSize',6);
 
-horizontal_dist=0.45;
+horizontal_dist1=0.5;
 vertical_dist=0.35;
 
 panel_width1=0.2;
 panel_height1=0.25;
-position_x1(1)=0.2;
-position_x1(end+1)=position_x1(end)+horizontal_dist;
+position_x1(1)=0.1;
+position_x1(end+1)=position_x1(end)+horizontal_dist1;
 
 position_y1(1)=0.5;
 position_y1(end+1)=position_y1(end)-vertical_dist;
+position_y1(end+1)=position_y1(end)-vertical_dist;
+position_y1(end+1)=position_y1(end)-vertical_dist;
 
 
+panel_width2=0.08;
+panel_height2=0.25;
 
+horizontal_dist2=0.15;
 
+position_x2(1)=0.1;
+position_x2(end+1)=position_x2(end)+horizontal_dist2;
+position_x2(end+1)=position_x2(end)+horizontal_dist2;
+position_x2(end+1)=position_x2(end)+horizontal_dist2;
+position_x2(end+1)=position_x2(end)+horizontal_dist2;
+position_x2(end+1)=position_x2(end)+horizontal_dist2;
+position_x2(end+1)=position_x2(end)+horizontal_dist2;
+position_x2(end+1)=position_x2(end)+horizontal_dist2;
 
-lateral_distance_bins=[0,20,30:10:210];
-min_distance_in_xy=5; %to exclude auto-focus flourescence
 
 session_date = fetch1(EXP2.Session & key,'session_date');
 try
@@ -39,6 +52,9 @@ end
 roi_list=fetchn(rel_roi,'roi_number','ORDER BY roi_number');
 chunk_size=500;
 counter=0;
+if isempty(roi_list)
+    return
+end
 for i_chunk=1:chunk_size:roi_list(end)
     roi_interval = [i_chunk, i_chunk+chunk_size];
     try
@@ -58,16 +74,31 @@ end
 
 %% Distance between all pairs
 
-x_all=fetchn(rel_roi &key,'roi_centroid_x','ORDER BY roi_number');
-y_all=fetchn(rel_roi &key,'roi_centroid_y','ORDER BY roi_number');
+
+if mesoscope_flag>0 %its mesoscpe recordings
+    x_all=fetchn(rel_roi &key,'roi_centroid_x','ORDER BY roi_number');
+    y_all=fetchn(rel_roi &key,'roi_centroid_y','ORDER BY roi_number');
+    
+    x_pos_relative=fetchn(rel_roi*IMG.PlaneCoordinates &key,'x_pos_relative','ORDER BY roi_number');
+    y_pos_relative=fetchn(rel_roi*IMG.PlaneCoordinates &key,'y_pos_relative','ORDER BY roi_number');
+    
+    x_all = x_all + x_pos_relative; x_all = x_all/0.75;
+    y_all = y_all + y_pos_relative; y_all = y_all/0.5;
+    
+else
+    zoom =fetch1(IMG.FOVEpoch & key,'zoom');
+    kkk.scanimage_zoom = zoom;
+    pix2dist=  fetch1(IMG.Zoom2Microns & kkk,'fov_microns_size_x') / fetch1(IMG.FOV & key, 'fov_x_size');
+    
+    x_all=fetchn(rel_roi_xy &key,'roi_centroid_x_corrected','ORDER BY roi_number');
+    y_all=fetchn(rel_roi_xy &key,'roi_centroid_y_corrected','ORDER BY roi_number');
+    
+    x_all=x_all*pix2dist;
+    y_all=y_all*pix2dist;
+    
+end
+
 z_all=fetchn(rel_roi*IMG.PlaneCoordinates & key,'z_pos_relative','ORDER BY roi_number');
-
-x_pos_relative=fetchn(rel_roi*IMG.PlaneCoordinates &key,'x_pos_relative','ORDER BY roi_number');
-y_pos_relative=fetchn(rel_roi*IMG.PlaneCoordinates &key,'y_pos_relative','ORDER BY roi_number');
-
-x_all = x_all + x_pos_relative; x_all = x_all/0.75;
-y_all = y_all + y_pos_relative; y_all = y_all/0.5;
-
 
 
 dXY=zeros(numel(x_all),numel(x_all));
@@ -117,25 +148,20 @@ end
 
 
 % axial within column
-for i_a=1:1:numel(axial_distance_bins)
-    idx_lateral = dXY<=column_radius(1) & dXY>=min_distance_in_xy;
-    idx_axial =  dZ==axial_distance_bins(i_a);
-    distance_corr_axial_inside_column(i_a)=nanmean(rho(idx_axial & idx_lateral));
-end
-
-% axial outside column
-for i_a=1:1:numel(axial_distance_bins)
-    idx_lateral = dXY<=column_radius(2) & dXY>column_radius(1);
-    idx_axial =  dZ==axial_distance_bins(i_a);
-    distance_corr_axial_outside_column(i_a)=nanmean(rho(idx_axial & idx_lateral));
+for i_c=1:1:numel(column_inner_radius)
+    for i_a=1:1:numel(axial_distance_bins)
+        idx_lateral = dXY>=column_inner_radius(i_c) & dXY<column_outer_radius(i_c);
+        idx_axial =  dZ==axial_distance_bins(i_a);
+        distance_corr_axial_columns(i_a, i_c)=nanmean(rho(idx_axial & idx_lateral));
+    end
 end
 
 
-
+%% 2D
 
 ax1=axes('position',[position_x1(1), position_y1(1), panel_width1, panel_height1]);
 
-imagesc(lateral_distance_bins(1:1:end-1), axial_distance_bins, distance_corr_2d')
+imagesc(lateral_distance_bins(1:1:end-1),axial_distance_bins,  distance_corr_2d)
 xlabel('Lateral Distance (um)');
 ylabel('Axial Distance (um)');
 % colorbar
@@ -154,18 +180,97 @@ xlabel([sprintf('Lateral Distance ') '(\mum)']);
 set(gca,'YTick',[axial_distance_bins],'XTick',[0,50:50:200]);
 ylabel([sprintf('Axial      \nDistance ') '(\mum)        ']);
 try
-    title(sprintf('anm%d s%d %s \nodd even corr threshold = %.2f \n',key.subject_id,key.session, session_date, key.odd_even_corr_threshold));
+    title(sprintf('anm%d s%d %s \nodd even corr threshold >= %.2f \n',key.subject_id,key.session, session_date, key.odd_even_corr_threshold));
 catch
-    title(sprintf('anm%d s%d %s \ngoodness of fit vonmises = %.2f \n',key.subject_id,key.session, session_date, goodness_of_fit_vmises_threshold));
+    title(sprintf('anm%d s%d %s \ngoodness of fit Vonmises >= %.2f \n',key.subject_id,key.session, session_date, goodness_of_fit_vmises_threshold));
 end
 
-
+%colorbar
 ax2=axes('position',[position_x1(1)+0.2, position_y1(1)+0.07, panel_width1*0.2, panel_height1*0.45]);
 colormap(ax2, inferno)
 caxis(c_lim);
-cb=colorbar;
-text(12, 0.2, ['Correlation'],'Rotation',90);
+cb1=colorbar;
+text(8, 0.2, ['Correlation'],'Rotation',90);
 axis off
+
+%% 2D thresholded -- only showing negative correlations to check for potential lateral inhibition
+distance_corr_2d_negative=distance_corr_2d;
+distance_corr_2d_negative(distance_corr_2d(:)>=0)=0;
+
+
+ax3=axes('position',[position_x1(2), position_y1(1), panel_width1, panel_height1]);
+
+imagesc(lateral_distance_bins(1:1:end-1),axial_distance_bins,  distance_corr_2d_negative)
+xlabel('Lateral Distance (um)');
+ylabel('Axial Distance (um)');
+% colorbar
+colormap(inferno)
+c_lim(1)=nanmin([distance_corr_2d_negative(:);-0.05]);
+c_lim(2) = nanmax(0);
+caxis([c_lim]);
+
+axis tight
+axis equal
+% set(gca,'XTick',OUT1.distance_lateral_bins_centers)
+xlabel([sprintf('Lateral Distance ') '(\mum)']);
+% ylabel([sprintf('Axial Distance ') '(\mum)']);
+% colorbar
+% set(gca,'YTick',[],'XTick',[20,100:100:500]);
+set(gca,'YTick',[axial_distance_bins],'XTick',[0,50:50:200]);
+ylabel([sprintf('Axial      \nDistance ') '(\mum)        ']);
+
+title(sprintf('Negative correlations thresholded'));
+
+%colorbar
+ax4=axes('position',[position_x1(2)+0.2, position_y1(1)+0.07, panel_width1*0.2, panel_height1*0.45]);
+colormap(ax3, inferno)
+caxis(c_lim);
+cb2=colorbar;
+text(8, 0.2, ['Correlation'],'Rotation',90);
+axis off
+
+
+%Lateral marginal
+axes('position',[position_x2(1), position_y1(2), panel_width2, panel_height2]);
+plot(lateral_distance_bins(1:1:end-1)+mean(diff(lateral_distance_bins))/2,distance_corr_lateral,'.-k')
+xlabel('Lateral Distance (um)');
+ylabel('Correlation');
+
+%Axial marginal, within column
+column_id=1;
+axes('position',[position_x2(2), position_y1(2), panel_width2, panel_height2]);
+plot(axial_distance_bins,distance_corr_axial_columns(:,column_id),'.-k')
+xlabel('Axial Distance (um)');
+title(sprintf('Column radius\n%.0f=<r<%.0fum',column_inner_radius(column_id), column_outer_radius(column_id)))
+
+%Axial marginal, outside column
+column_id=2;
+axes('position',[position_x2(3), position_y1(2), panel_width2, panel_height2]);
+plot(axial_distance_bins,distance_corr_axial_columns(:,column_id),'.-k')
+xlabel('Axial Distance (um)');
+title(sprintf('Column radius\n%.0f<=r<%.0fum',column_inner_radius(column_id), column_outer_radius(column_id)))
+
+%Axial marginal, outside column
+column_id=3;
+axes('position',[position_x2(4), position_y1(2), panel_width2, panel_height2]);
+plot(axial_distance_bins,distance_corr_axial_columns(:,column_id),'.-k')
+xlabel('Axial Distance (um)');
+title(sprintf('Column radius\n%.0f<=r<%.0fum',column_inner_radius(column_id), column_outer_radius(column_id)))
+
+%Axial marginal, outside column
+column_id=6;
+axes('position',[position_x2(5), position_y1(2), panel_width2, panel_height2]);
+plot(axial_distance_bins,distance_corr_axial_columns(:,column_id),'.-k')
+xlabel('Axial Distance (um)');
+title(sprintf('Column radius\n%.0f<=r<%.0fum',column_inner_radius(column_id), column_outer_radius(column_id)))
+
+
+%Axial marginal, outside column
+column_id=8;
+axes('position',[position_x2(6), position_y1(2), panel_width2, panel_height2]);
+plot(axial_distance_bins,distance_corr_axial_columns(:,column_id),'.-k')
+xlabel('Axial Distance (um)');
+title(sprintf('Column radius\n%.0f<=r<%.0fum',column_inner_radius(column_id), column_outer_radius(column_id)))
 
 
 if isempty(dir(dir_save_fig))
@@ -191,9 +296,9 @@ key.lateral_distance_bins=lateral_distance_bins;
 key.num_cells_included = numel(roi_list);
 key.distance_corr_2d=distance_corr_2d;
 key.distance_corr_lateral=distance_corr_lateral;
-key.distance_corr_axial_inside_column = distance_corr_axial_inside_column;
-key.distance_corr_axial_outside_column = distance_corr_axial_outside_column;
-
+key.distance_corr_axial_columns  = distance_corr_axial_columns;         
+key.column_inner_radius = column_inner_radius;              
+key.column_outer_radius = column_outer_radius;      
 insert(self,key);
 
 end

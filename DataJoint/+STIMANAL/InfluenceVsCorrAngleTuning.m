@@ -15,7 +15,7 @@ num_pairs                                       :int     # num pairs included
 
 classdef InfluenceVsCorrAngleTuning < dj.Computed
     properties
-        keySource = EXP2.SessionEpoch & STIMANAL.Target2AllCorrAngleTuning & STIM.ROIInfluence5;
+        keySource = EXP2.SessionEpoch & STIMANAL.Target2AllCorrAngleTuning & STIM.ROIInfluence2;
     end
     methods(Access=protected)
         function makeTuples(self, key)
@@ -37,11 +37,11 @@ classdef InfluenceVsCorrAngleTuning < dj.Computed
             %             bins_influence=bins_influence(4:end);
             
             dir_base = fetch1(IMG.Parameters & 'parameter_name="dir_root_save"', 'parameter_value');
-            dir_fig = [dir_base  '\Photostim\influence_vs_corr\corr_quadrants\'];
+            dir_fig = [dir_base  '\Photostim\influence_vs_corr_new\corr_quadrants\'];
             session_date = fetch1(EXP2.Session & key,'session_date');
             
             rel_data_corr =STIMANAL.Target2AllCorrAngleTuning;
-            rel_data_influence=STIM.ROIInfluence5;
+            rel_data_influence=STIM.ROIInfluence2;
             rel_data_signal = LICK2D.ROILick2DangleSpikes;
 
             k_psth =key;
@@ -51,7 +51,7 @@ classdef InfluenceVsCorrAngleTuning < dj.Computed
             
             for i_n = 1:1:numel(neurons_or_control_flag)
                 key.neurons_or_control = neurons_or_control_flag(i_n);
-                rel_target = IMG.PhotostimGroup & (STIMANAL.NeuronOrControl5 & key);
+                rel_target = IMG.PhotostimGroup & (STIMANAL.NeuronOrControl2 & key);
                 rel_data_influence2=rel_data_influence   & rel_target & 'num_svd_components_removed=0';
                 
                 group_list = fetchn(rel_target,'photostim_group_num','ORDER BY photostim_group_num');
@@ -59,7 +59,7 @@ classdef InfluenceVsCorrAngleTuning < dj.Computed
                     return
                 end
                 
-                rel_target_signif_by_psth = (STIM.ROIResponseDirect5 &  rel_target) &    (IMG.ROI &  (rel_data_signal & k_psth & 'goodness_of_fit_vmises>=0.25'));
+                rel_target_signif_by_psth = (STIM.ROIResponseDirect2 &  rel_target) &    (IMG.ROI &  (rel_data_signal & k_psth & 'goodness_of_fit_vmises>=0.25'));
                 group_list_signif = fetchn(rel_target_signif_by_psth,'photostim_group_num','ORDER BY photostim_group_num');
                 idx_group_list_signif = ismember(group_list,group_list_signif);
                 

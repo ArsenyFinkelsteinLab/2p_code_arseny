@@ -29,10 +29,10 @@ position_x1(end+1)=position_x1(end)+horizontal_dist;
 position_y1(1)=0.5;
 position_y1(end+1)=position_y1(end)-vertical_dist;
 
-rel_data = (STIMANAL.InfluenceDistance55 & 'flag_divide_by_std=0' & 'flag_withold_trials=1' & 'flag_normalize_by_total=1') ...
-    &  (STIMANAL.SessionEpochsIncluded& IMG.Volumetric & 'stimpower=150' & 'flag_include=1' & 'session_epoch_number<=3' ...
-    & (STIMANAL.NeuronOrControl5 & 'neurons_or_control=1' & 'num_targets>=30') ...
-    & (STIMANAL.NeuronOrControl5 & 'neurons_or_control=0' & 'num_targets>=30'));
+rel_data = (STIMANAL.InfluenceDistance222 & 'flag_divide_by_std=0' & 'flag_withold_trials=1' & 'flag_normalize_by_total=1') ...
+    &  (STIMANAL.SessionEpochsIncludedFinal& IMG.Volumetric & 'stimpower=150' & 'flag_include=1'  ...
+     & (STIMANAL.NeuronOrControlNumber2 & 'num_targets_neurons>=50') ...
+    & (STIMANAL.NeuronOrControlNumber2 & 'num_targets_controls>=50'));
 
 key.num_svd_components_removed=0;
 key.is_volumetric =1; % 1 volumetric, 1 single plane
@@ -61,12 +61,12 @@ OUT1=fn_PLOT_ConnectionProbabilityDistance_averaging(D1,D1_all,distance_axial_bi
 xl=[OUT1.distance_lateral_bins_centers(1),OUT1.distance_lateral_bins_centers(end)];
 xl=[0,400];
 
-imagesc(OUT1.distance_lateral_bins_centers, distance_axial_bins_plot,  OUT1.map)
+imagesc(OUT1.distance_lateral_bins_centers(3:end), distance_axial_bins_plot,  OUT1.map(:,3:end))
 axis tight
 axis equal
 cmp = bluewhitered(2048); %
 colormap(ax1, cmp)
-caxis([OUT1.minv OUT1.maxv]);
+caxis([OUT1.minv max(max(OUT1.map(:,3:end)))]);
 % set(gca,'XTick',OUT1.distance_lateral_bins_centers)
 xlabel([sprintf('Lateral Distance ') '(\mum)']);
 % ylabel([sprintf('Axial Distance ') '(\mum)']);
@@ -79,7 +79,7 @@ xlim(xl)
 ax2=axes('position',[position_x1(1)+0.2, position_y1(1)+0.05, panel_width1/5, panel_height1/2]);
 cmp = bluewhitered(512); %
 colormap(ax2, cmp)
-caxis([OUT1.minv OUT1.maxv]);
+caxis([OUT1.minv max(max(OUT1.map(:,3:end)))]);
 colorbar
 axis off
 text(8, 0.1, sprintf('Connection \n Probability'),'Rotation',90);
@@ -112,18 +112,18 @@ OUT2=fn_PLOT_ConnectionProbabilityDistance_averaging(D2,D2_all,distance_axial_bi
 axes('position',[position_x1(1), position_y1(1)+0.18, panel_width1, panel_height1*0.5]);
 hold on
 plot(xl, [0 0],'-k')
-shadedErrorBar(OUT1.distance_lateral_bins_centers,OUT1.marginal_lateral_mean,OUT1.marginal_lateral_stem,'lineprops',{'-','Color',[1 0 1]})
-shadedErrorBar(OUT1.distance_lateral_bins_centers,OUT2.marginal_lateral_mean,OUT2.marginal_lateral_stem,'lineprops',{'-','Color',[0.5 0.5 0.5]})
+shadedErrorBar(OUT1.distance_lateral_bins_centers(3:end),OUT1.marginal_lateral_mean(3:end),OUT1.marginal_lateral_stem(3:end),'lineprops',{'-','Color',[1 0 1]})
+shadedErrorBar(OUT1.distance_lateral_bins_centers(3:end),OUT2.marginal_lateral_mean(3:end),OUT2.marginal_lateral_stem(3:end),'lineprops',{'-','Color',[0.5 0.5 0.5]})
 % yl(1)=-2*abs(min([OUT1.marginal_lateral_mean,OUT2.marginal_lateral_mean]));
 % yl(2)=abs(max([OUT1.marginal_lateral_mean,OUT2.marginal_lateral_mean]));
 yl(1)=-0.05;
-yl(2)=0.5;
-% ylim(yl)
+yl(2)=0.25;
+ylim(yl)
 set(gca,'XTick',[],'XLim',xl);
 box off
 % ylabel([sprintf('         Response\n') '        (z-score)']);
 ylabel(sprintf('Connection \nProbability '));
-% set(gca,'YTick',[0,0.5]);
+set(gca,'YTick',[0,yl(2)]);
 
 % % Marginal distribution - lateral (zoom)
 % axes('position',[position_x1(1)+0.06, position_y1(1)+0.25, panel_width1*0.5, panel_height1*0.5]);

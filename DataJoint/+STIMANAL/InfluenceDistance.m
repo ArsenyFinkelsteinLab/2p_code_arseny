@@ -64,14 +64,14 @@ classdef InfluenceDistance < dj.Computed
             rel=STIM.ROIInfluence;
             distance_lateral_bins = [0:25:500]; % microns
             column_radius(1) =100; % microns
-            column_radius(2) =200; % microns
+            column_radius(2) =250; % microns
             
             minimal_distance=25; % for within column calculations we don't consider responses within minimal_distance
-            num_svd_components_removed_vector = [0, 1, 3, 5];
-            pval=[0.001, 0.01, 0.05, 0.1, 0.2,   1];
+            num_svd_components_removed_vector = [0];
+            pval=[0.01, 0.05,  1];
             neurons_or_control_flag = [1,0];
             flag_withold_trials = [0,1];
-            flag_normalize_by_total = [0,1];
+            flag_normalize_by_total = [1];
             flag_divide_by_std = [0]; % 1 divide the response by std. 0 don't divide
                
 %             minimal_distance=25; % for within column calculations we don't consider responses within minimal_distance
@@ -87,8 +87,14 @@ classdef InfluenceDistance < dj.Computed
                 kkk.neurons_or_control = neurons_or_control_flag(i_n);
                 rel_direct= STIMANAL.NeuronOrControl & kkk;
                 rel_group_targets =  IMG.PhotostimGroup & rel_direct; % we do it to get rid of the roi column
-                DATA_all=fetch((rel & key & rel_group_targets)& 'num_svd_components_removed=0'  & 'num_of_baseline_trials_used>0' & 'num_of_target_trials_used>0','*');
+                DATA_all=fetch((rel & key & rel_group_targets)& 'num_svd_components_removed=0' & 'num_of_target_trials_used>0','*');
+                
+                if isempty(DATA_all)
+                   return; 
+                end
+
                 parfor i_p = 1:1:numel(pval) %parfor
+
                     for i_c = 1:1:numel(num_svd_components_removed_vector)
                         kk=key;
                         kk.num_svd_components_removed=num_svd_components_removed_vector(i_c);

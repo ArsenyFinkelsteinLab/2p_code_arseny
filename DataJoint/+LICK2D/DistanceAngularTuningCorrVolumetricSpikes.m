@@ -15,7 +15,9 @@ num_cells_included                    :int      #
 
 classdef DistanceAngularTuningCorrVolumetricSpikes < dj.Computed
     properties
-        keySource = ((EXP2.SessionEpoch  & IMG.ROI & LICK2D.ROILick2DangleSpikes & IMG.Mesoscope) - EXP2.SessionEpochSomatotopy)&IMG.Volumetric ;
+%         keySource = ((EXP2.SessionEpoch  & IMG.ROI & LICK2D.ROILick2DangleSpikes & IMG.Mesoscope) - EXP2.SessionEpochSomatotopy)&IMG.Volumetric ;
+            keySource = ((EXP2.SessionEpoch  & IMG.ROI & LICK2D.ROILick2DangleSpikes - IMG.Mesoscope) - EXP2.SessionEpochSomatotopy)&IMG.Volumetric ;
+
     end
     methods(Access=protected)
         function makeTuples(self, key)
@@ -31,14 +33,17 @@ classdef DistanceAngularTuningCorrVolumetricSpikes < dj.Computed
             set(gcf,'color',[1 1 1]);
             
             dir_base = fetch1(IMG.Parameters & 'parameter_name="dir_root_save"', 'parameter_value');
-            dir_save_fig = [dir_base  '\Lick2D\population\corr_theta_tuning_psth\'];
+            dir_save_fig = [dir_base  '\Lick2D\population\corr_theta_tuning_psth_notmeso\'];
             
-            goodness_of_fit_vmises_threshold=[0, 0.25, 0.5, 0.75];
+            goodness_of_fit_vmises_threshold=[0, 0.25, 0.5];
+            
+            mesoscope_flag=count(IMG.Mesoscope & key); 
             
             for i_c = 1:1:numel(goodness_of_fit_vmises_threshold)
                 rel_roi = (IMG.ROI - IMG.ROIBad) & key & (LICK2D.ROILick2DangleSpikes & sprintf('goodness_of_fit_vmises>=%.2f',goodness_of_fit_vmises_threshold(i_c)));
+                rel_roi_xy = IMG.ROIPositionETL & rel_roi;
                 rel_data = LICK2D.ROILick2DangleSpikes & rel_roi & key;
-                fn_compute_distance_psth_correlation(rel_roi, rel_data, key,self, dir_save_fig, goodness_of_fit_vmises_threshold(i_c));
+                fn_compute_distance_psth_correlation(rel_roi, rel_data, key,self, dir_save_fig, goodness_of_fit_vmises_threshold(i_c), rel_roi_xy, mesoscope_flag);
             end
             
         end

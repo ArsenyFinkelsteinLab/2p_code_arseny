@@ -11,7 +11,7 @@ rois_corr                        :blob    # correlation between the activity of 
 
 classdef Target2AllCorrTraceSpont < dj.Computed
      properties
-        keySource = (EXP2.SessionEpoch& 'session_epoch_type="spont_photo"') & STIM.ROIInfluence5 & (EXP2.Session & (EXP2.SessionEpoch & 'session_epoch_type="spont_only"')  & (EXP2.SessionEpoch & 'session_epoch_type="spont_photo"'));
+        keySource = (EXP2.SessionEpoch& 'session_epoch_type="spont_photo"') & STIM.ROIInfluence2 & (EXP2.Session & (EXP2.SessionEpoch & 'session_epoch_type="spont_only"')  & (EXP2.SessionEpoch & 'session_epoch_type="spont_photo"'));
     end
     methods(Access=protected)
         function makeTuples(self, key)
@@ -20,7 +20,7 @@ classdef Target2AllCorrTraceSpont < dj.Computed
             
             time_bin=1.5; %s
             threshold_for_event_vector = [0];
-            num_svd_components_removed_vector = [0,1,2,3,4,5,10];
+            num_svd_components_removed_vector = [0,1,5];
             
             keytemp = rmfield(key,'session_epoch_number');
             keytemp.session_epoch_type='spont_only';
@@ -34,8 +34,7 @@ classdef Target2AllCorrTraceSpont < dj.Computed
             
             %% Loading Data
             rel_data = IMG.ROISpikes & rel_roi;
-            rel_photostim =IMG.PhotostimGroup*(STIM.ROIResponseDirect5) & key;
-            rel_photostim=rel_photostim;
+            rel_photostim =IMG.PhotostimGroup*(STIM.ROIResponseDirect2) & key;
             group_list = fetchn(rel_photostim,'photostim_group_num','ORDER BY photostim_group_num');
             target_roi_list = fetchn(rel_photostim,'roi_number','ORDER BY photostim_group_num');
             

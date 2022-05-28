@@ -5,10 +5,21 @@ dir_base = fetch1(IMG.Parameters & 'parameter_name="dir_root_save"', 'parameter_
 dir_current_fig = [dir_base  '\Photostim\Connectivity\'];
 filename = 'infleunce_vs_psth_quadrant';
 
-rel_data = STIMANAL.InfluenceVsCorrQuadrants & 'session_epoch_number<3' & 'num_targets>=30' & 'num_pairs>=2000' ;
-rel_shuffled = STIMANAL.InfluenceVsCorrQuadrantsShuffled  & 'session_epoch_number<3' & 'num_targets>=30' & 'num_pairs>=2000';
-% rel_data = STIMANAL.InfluenceVsCorr & 'session_epoch_number<3';
-% rel_shuffled = STIMANAL.InfluenceVsCorrShuffled  & 'session_epoch_number<3';
+% rel_data = STIMANAL.InfluenceVsCorrQuadrants & 'session_epoch_number<3' & 'num_targets>=30' & 'num_pairs>=2000' ;
+% rel_shuffled = STIMANAL.InfluenceVsCorrQuadrantsShuffled  & 'session_epoch_number<3' & 'num_targets>=30' & 'num_pairs>=2000';
+
+rel_data = STIMANAL.InfluenceVsCorrQuadrants  & 'num_pairs>=2000'  ...
+    &  (STIMANAL.SessionEpochsIncludedFinal & IMG.Volumetric & 'stimpower>=100' & 'flag_include=1')   ...
+    & (STIMANAL.NeuronOrControlNumber2 & 'num_targets_neurons>=0') ...
+    & (STIMANAL.NeuronOrControlNumber2 & 'num_targets_controls>=0');
+
+rel_shuffled = STIMANAL.InfluenceVsCorrQuadrantsShuffled  & 'num_pairs>=2000'  ...
+    &  (STIMANAL.SessionEpochsIncludedFinal & IMG.Volumetric & 'stimpower>=100' & 'flag_include=1')   ...
+    & (STIMANAL.NeuronOrControlNumber2 & 'num_targets_neurons>=0') ...
+    & (STIMANAL.NeuronOrControlNumber2 & 'num_targets_controls>=0');
+
+
+
 key.neurons_or_control=1;
 key.response_p_val=1;
 

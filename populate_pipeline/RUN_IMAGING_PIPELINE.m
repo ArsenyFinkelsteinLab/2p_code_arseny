@@ -91,6 +91,9 @@ populate(IMG.ROIGood);
 populate(IMG.ROITrace); 
 populate(IMG.ROISpikes);
 
+populate(IMG.ROIPositionETL); 
+
+
 populate(IMG.ROIdeltaF); % IMG.ROIdeltaFMean IMG.ROIFMean
 % populate(ANLI.IncludeROI4);
 populate(IMG.ROIdeltaFPeak); 
@@ -114,19 +117,29 @@ STIMANAL.SessionEpochsIncluded;  %% manually update session info here
 populate(IMG.PhotostimGroup); % also IMG.PhotostimProtocol
 populate(IMG.PhotostimGroupROI); % also populates IMG.PhotostimDATfile;
 
-populate(STIM.ROIInfluence5); % also populates STIM.ROIInfluenceTrace    
-populate(STIM.ROIResponseDirect);  
+populate(STIM.ROIInfluence5); % also populates STIM.ROIInfluenceTrace 
+populate(STIM.ROIInfluence5ETL);
 
+populate(STIM.ROIResponseDirect);  
 %%%% STIMANAL.NeuronOrControl5 requires STIM.ROIResponseDirect5  ==> debug
 populate(STIM.ROIResponseDirect5);  
+populate(STIM.ROIResponseDirect5ETL);  
+populate(STIM.ROIResponseDirect5ETL2);  
+
 
 populate(STIMANAL.NeuronOrControl5);
+populate(STIMANAL.NeuronOrControl5ETL);
+populate(STIMANAL.NeuronOrControl5ETL2);
+
 populate(STIMANAL.InfluenceDistance55);
+populate(STIMANAL.InfluenceDistance55ETL);
 
 populate(STIMANAL.OutDegree);
+populate(STIMANAL.OutDegreeETL);
 
 populate(POP.ROICorrLocalPhoto)
 
+populate(STIMANAL.ROIGraphAllETL);
 
 
 %%% old

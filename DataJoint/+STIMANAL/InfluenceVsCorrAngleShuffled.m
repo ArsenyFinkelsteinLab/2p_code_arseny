@@ -15,7 +15,7 @@ num_pairs                                       :int     # num pairs included
 
 classdef InfluenceVsCorrAngleShuffled < dj.Computed
     properties
-        keySource = EXP2.SessionEpoch & STIMANAL.Target2AllCorrAngle & STIM.ROIInfluence;
+        keySource = EXP2.SessionEpoch & STIMANAL.Target2AllCorrAngle & STIM.ROIInfluence2;
     end
     methods(Access=protected)
         function makeTuples(self, key)
@@ -27,29 +27,33 @@ classdef InfluenceVsCorrAngleShuffled < dj.Computed
             minimal_distance=25; %um, lateral;  exlude all cells within minimal distance from target
             maximal_distance=100; %um lateral;  exlude all cells further than maximal distance from target
             
-            
             % bins
-            bins_corr = linspace(-1,1,10); % if there is no SVD component/s subtraction
-            bins_influence = linspace(-0.1,0.1,10);
-            %             bins_influence=bins_influence(4:end);
+            %             bins_corr = linspace(0,180,8);
+            bins_corr = linspace(0,180,6)
+            bins_influence = [-inf,linspace(-0.15,0.15,6),inf];
             
-            distance_lateral_bins = [0,10:20:500,inf]; % microns
+            %             distance_lateral_bins = [0,10:20:500,inf]; % microns
+            distance_lateral_bins = [0:10:500,inf]; % microns
             
             
             
             dir_base = fetch1(IMG.Parameters & 'parameter_name="dir_root_save"', 'parameter_value');
-            dir_fig = [dir_base  '\Photostim\influence_vs_corr\corr_angle\shuffled\'];
+            dir_fig = [dir_base  '\Photostim\influence_vs_corr_new\corr_angle2\shuffled\'];
             session_date = fetch1(EXP2.Session & key,'session_date');
             
             
             rel_data_corr =STIMANAL.Target2AllCorrAngle;
-            rel_data_influence=STIM.ROIInfluence-IMG.ROIBad;
+            rel_data_influence=STIM.ROIInfluence2;
+            k_psth =key;
+            k_psth=rmfield(k_psth,'session_epoch_type');
+            k_psth=rmfield(k_psth,'session_epoch_number');
+            rel_roi = (IMG.ROI - IMG.ROIBad) & key;
             
             
             
             for i_n = 1:1:numel(neurons_or_control_flag)
                 key.neurons_or_control = neurons_or_control_flag(i_n);
-                rel_target = IMG.PhotostimGroup & (STIMANAL.NeuronOrControl & key);
+                rel_target = IMG.PhotostimGroup & (STIMANAL.NeuronOrControl2 & key);
                 rel_data_influence2=rel_data_influence   & rel_target & 'num_svd_components_removed=0';
                 
                 group_list = fetchn(rel_target,'photostim_group_num','ORDER BY photostim_group_num');
@@ -57,9 +61,17 @@ classdef InfluenceVsCorrAngleShuffled < dj.Computed
                     return
                 end
                 
+                %                 rel_target_signif_by_psth = (STIM.ROIResponseDirect & 'flag_zscore=1' &  rel_target) &    (IMG.ROI &  (LICK2D.ROILick2DangleSpikes & k_psth & 'theta_tuning_odd_even_corr>=0.5'));
+                %                 rel_target_signif_by_psth = (STIM.ROIResponseDirect  &  rel_target) &    (IMG.ROI &  (LICK2D.ROILick2DangleSpikes & k_psth & 'rayleigh_length>=0.05'));
+                rel_target_signif_by_psth = (STIM.ROIResponseDirect2  &  rel_target) &    (IMG.ROI &  (LICK2D.ROILick2DangleSpikes & k_psth & 'goodness_of_fit_vmises>=0.5'));
+                
+                group_list_signif = fetchn(rel_target_signif_by_psth,'photostim_group_num','ORDER BY photostim_group_num');
+                idx_group_list_signif = ismember(group_list,group_list_signif);
+                
+                
                 DataStim=cell(numel(group_list),1);
                 DataStim_pval=cell(numel(group_list),1);
-                DataStim_num_of_baseline_trials_used=cell(numel(group_list),1);
+%                 DataStim_num_of_baseline_trials_used=cell(numel(group_list),1);
                 DataStim_num_of_target_trials_used=cell(numel(group_list),1);
                 DataStim_distance_lateral=cell(numel(group_list),1);
                 DataStim_distance_axial=cell(numel(group_list),1);
@@ -68,7 +80,7 @@ classdef InfluenceVsCorrAngleShuffled < dj.Computed
                     rel_data_influence_current = [rel_data_influence2 & ['photostim_group_num=' num2str(group_list(i_g))]];
                     DataStim{i_g} = fetchn(rel_data_influence_current,'response_mean', 'ORDER BY roi_number')';
                     DataStim_pval{i_g} = fetchn(rel_data_influence_current,'response_p_value1', 'ORDER BY roi_number')';
-                    DataStim_num_of_baseline_trials_used{i_g}=fetchn(rel_data_influence_current,'num_of_baseline_trials_used', 'ORDER BY roi_number')';
+%                     DataStim_num_of_baseline_trials_used{i_g}=fetchn(rel_data_influence_current,'num_of_baseline_trials_used', 'ORDER BY roi_number')';
                     DataStim_num_of_target_trials_used{i_g}=fetchn(rel_data_influence_current,'num_of_target_trials_used', 'ORDER BY roi_number')';
                     DataStim_distance_lateral{i_g}=fetchn(rel_data_influence_current,'response_distance_lateral_um', 'ORDER BY roi_number')';
                     DataStim_distance_axial{i_g}=fetchn(rel_data_influence_current,'response_distance_axial_um', 'ORDER BY roi_number')';
@@ -78,13 +90,13 @@ classdef InfluenceVsCorrAngleShuffled < dj.Computed
                 DataStim = cell2mat(DataStim);
                 DataStim_distance_lateral = cell2mat(DataStim_distance_lateral);
                 DataStim_distance_axial = cell2mat(DataStim_distance_axial);
-                DataStim_num_of_baseline_trials_used = cell2mat(DataStim_num_of_baseline_trials_used);
+%                 DataStim_num_of_baseline_trials_used = cell2mat(DataStim_num_of_baseline_trials_used);
                 DataStim_num_of_target_trials_used = cell2mat(DataStim_num_of_target_trials_used);
                 
                 idx_include = true(size(DataStim_distance_lateral));
                 idx_include(DataStim_distance_lateral<=minimal_distance  )=false; %exlude all cells within minimal distance from target
                 idx_include(DataStim_distance_lateral>maximal_distance  )=false; %exlude all cells further than maximal distance from target
-                idx_include(DataStim_num_of_baseline_trials_used==0  )=false;
+%                 idx_include(DataStim_num_of_baseline_trials_used==0  )=false;
                 idx_include(DataStim_num_of_target_trials_used==0  )=false;
                 
                 DataStim(~idx_include)=NaN;
@@ -122,6 +134,21 @@ classdef InfluenceVsCorrAngleShuffled < dj.Computed
                     rel_data_corr_current=rel_data_corr & rel_target ;
                     DataCorr = cell2mat(fetchn(rel_data_corr_current,'rois_corr', 'ORDER BY photostim_group_num'));
                     DataCorr(~idx_include)=NaN;
+                    
+                    
+                    %% exclude based on PSTH significance
+                    %                     roi_psth_signif = fetchn(LICK2D.ROILick2DangleSpikes & k_psth & rel_roi & 'theta_tuning_odd_even_corr>=0.5', 'roi_number', 'ORDER BY roi_number');
+                    %                     roi_psth_signif = fetchn(LICK2D.ROILick2DangleSpikes & k_psth & rel_roi & 'rayleigh_length>=0.05', 'roi_number', 'ORDER BY roi_number');
+                    roi_psth_signif = fetchn(LICK2D.ROILick2DangleSpikes & k_psth & rel_roi & 'goodness_of_fit_vmises>=0.5', 'roi_number', 'ORDER BY roi_number');
+                    
+                    roi_psth_all = fetchn(LICK2D.ROILick2DangleSpikes & k_psth & rel_roi, 'roi_number', 'ORDER BY roi_number');
+                    idx_psth_signif=ismember(roi_psth_all,roi_psth_signif);
+                    
+                    DataCorr =DataCorr(idx_group_list_signif,idx_psth_signif);
+                    idx_include =idx_include(idx_group_list_signif,idx_psth_signif);
+                    idx_DataStim_pval =idx_DataStim_pval(idx_group_list_signif,idx_psth_signif);
+                    DataStim =DataStim(idx_group_list_signif,idx_psth_signif);
+                    %
                     
                     % influence as a funciton of correlation
                     x=DataCorr(idx_DataStim_pval);
@@ -163,7 +190,7 @@ classdef InfluenceVsCorrAngleShuffled < dj.Computed
                     key_insert.bins_corr_edges=bins_corr_to_use;
                     key_insert.bins_influence_edges=bins_influence;
                     key_insert.response_p_val=p_val(i_p);
-                    key_insert.num_targets= numel(group_list);
+                    key_insert.num_targets= numel(group_list(idx_group_list_signif));
                     key_insert.num_pairs=sum(~isnan(x));
                     
                     insert(self, key_insert);

@@ -18,7 +18,7 @@ for i_s = 1:1:numel(sessions_list)
     
     i_s
     clf
-    %     key.session = sessions_list(i_s);
+    key.session = sessions_list(i_s);
     roll = mean(fetchn((EXP2.TrialLickBlock & key) - TRACKING.VideoGroomingTrial,'roll_deg'));
     if isnan(roll) %if there is no roll
         roll=0;
@@ -74,13 +74,12 @@ for i_s = 1:1:numel(sessions_list)
     
     
     
-    subplot(2,2,1)
     for i_p=1:1:numel(post_list)
         k.lickport_pos_number = post_list(i_p);
         
-        %         T= fetch((TRACKING.VideoNthLickTrial*EXP2.SessionTrial*TRACKING.VideoLickportPositionTrial*EXP2.TrialLickPort & key & k)-TRACKING.VideoGroomingTrial & 'trial>100' & 'lick_touch_number>1','lick_peak_x','lick_peak_z','lickport_x','lickport_z');
+        T= fetch((TRACKING.VideoNthLickTrial*EXP2.SessionTrial*TRACKING.VideoLickportPositionTrial*EXP2.TrialLickPort & key & k)-TRACKING.VideoGroomingTrial & 'trial>100' & 'lick_touch_number>1','lick_peak_x','lick_peak_z','lickport_x','lickport_z','lick_yaw_lickbout');
         % %                 T= fetch((TRACKING.VideoNthLickTrial*EXP2.SessionTrial*TRACKING.VideoLickportPositionTrial*EXP2.TrialLickPort & key & k)-TRACKING.VideoGroomingTrial & 'trial>100' & 'lick_touch_number>1','lick_touch_x','lick_touch_z','lickport_x','lickport_z');
-        T= fetch((TRACKING.VideoNthLickTrial*EXP2.SessionTrial*TRACKING.VideoLickportPositionTrial*EXP2.TrialLickPort & key & k)-TRACKING.VideoGroomingTrial & 'trial>100' & 'lick_number_relative_to_lickport_entrance<0','lick_peak_x','lick_peak_z','lickport_x','lickport_z');
+        %         T= fetch((TRACKING.VideoNthLickTrial*EXP2.SessionTrial*TRACKING.VideoLickportPositionTrial*EXP2.TrialLickPort & key & k)-TRACKING.VideoGroomingTrial & 'trial>100' & 'lick_number_relative_to_lickport_entrance<0','lick_peak_x','lick_peak_z','lickport_x','lickport_z');
         
         
         
@@ -114,6 +113,7 @@ for i_s = 1:1:numel(sessions_list)
         
         
         
+        subplot(2,2,1)
         
         hold on
         plot(nanmean(pos_x),nanmean(pos_z),'o','MarkerSize',25,'Color',colors(i_p,:))
@@ -131,5 +131,13 @@ for i_s = 1:1:numel(sessions_list)
         set(gca,'YDir','reverse')
         %                 set(gca,'XDir','reverse')
         axis equal
+        
+        subplot(2,2,2)
+        hold on
+        plot(nanmean(pos_x),nanmean([T.lick_yaw_lickbout]),'.','Color',colors(i_p,:),'MarkerSize',25)
+        xlabel('ML position (pixels)');
+        ylabel('Theta angle (deg)');
+
+        
     end
 end

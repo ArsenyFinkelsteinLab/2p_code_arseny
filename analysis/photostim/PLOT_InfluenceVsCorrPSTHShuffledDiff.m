@@ -6,14 +6,26 @@ dir_current_fig = [dir_base  '\Photostim\Connectivity\'];
 filename = 'infleunce_vs_psth';
 
 
-rel_data = STIMANAL.InfluenceVsCorrPSTH & 'session_epoch_number<3' & 'num_targets>=30' & 'num_pairs>=5000' ;
-rel_shuffled = STIMANAL.InfluenceVsCorrPSTHShuffled  & 'session_epoch_number<3' & 'num_targets>=30' & 'num_pairs>=5000';
-% rel_data = STIMANAL.InfluenceVsCorr & 'session_epoch_number<3';
-% rel_shuffled = STIMANAL.InfluenceVsCorrShuffled  & 'session_epoch_number<3';
+% rel_data = STIMANAL.InfluenceVsCorrPSTH & 'session_epoch_number<3' & 'num_targets>=30' & 'num_pairs>=5000' ;
+% rel_shuffled = STIMANAL.InfluenceVsCorrPSTHShuffled  & 'session_epoch_number<3' & 'num_targets>=30' & 'num_pairs>=5000';
+
+rel_data = STIMANAL.InfluenceVsCorrPSTH  & 'num_pairs>=0'  ...
+    &  (STIMANAL.SessionEpochsIncludedFinal & IMG.Volumetric & 'stimpower>=100' & 'flag_include=1')   ...
+    & (STIMANAL.NeuronOrControlNumber2 & 'num_targets_neurons>=50') ...
+    & (STIMANAL.NeuronOrControlNumber2 & 'num_targets_controls>=50');
+
+rel_shuffled = STIMANAL.InfluenceVsCorrPSTHShuffled  & 'num_pairs>=0'  ...
+    &  (STIMANAL.SessionEpochsIncludedFinal & IMG.Volumetric & 'stimpower>=100' & 'flag_include=1')   ...
+    & (STIMANAL.NeuronOrControlNumber2 & 'num_targets_neurons>=50') ...
+    & (STIMANAL.NeuronOrControlNumber2 & 'num_targets_controls>=50');
+
+
+
+
 key.neurons_or_control=1;
 key.response_p_val=1;
 
-a=fetch(rel_data & key,'*')
+% a=fetch(rel_data & key,'*')
 
 num_svd_components_removed_vector_corr =[0];
 colormap=viridis(numel(num_svd_components_removed_vector_corr));

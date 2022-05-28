@@ -12,10 +12,12 @@ populate(STIMANAL.NeuronOrControl5);
 populate(STIMANAL.InfluenceDistance55);
 
  populate(STIMANAL.ROIGraphAll)
+ populate(STIMANAL.ROIGraphAllETL)
 
 
 
 PLOT_InfluenceDistance5()
+PLOT_InfluenceDistance5ETL()
 
 PLOT_Network_Degree()
 %requires: populate(POP.ROICorrLocalPhoto)

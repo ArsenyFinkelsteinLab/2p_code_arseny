@@ -4,7 +4,7 @@
 -------------
 flag_include                    : boolean          #
 stimpower                       : float            # in mW
-targets_per_volume = null         : int              # if volumetric imaging -- how many different targets are photostimulated per volume scan. NaN if not volumetric NaN
+targets_per_volume = null         : int            # if volumetric imaging -- how many different targets are photostimulated per volume scan. NaN if not volumetric NaN
 session_comment                 : varchar(4000)    # 
 %}
 
@@ -159,7 +159,7 @@ classdef SessionEpochsIncluded < dj.Lookup
             
             %
             486673 1 'spont_photo' 2  1  50    1 'target switches every 4 frames -- 1 time per volume'
-            486673 1 'spont_photo' 3  1  10    1 'target switches every 4 frames -- 1 time per volume'
+            486673 1 'spont_photo' 3  1  100    1 'target switches every 4 frames -- 1 time per volume'
             486673 1 'spont_photo' 4  1  150   1 'target switches every 4 frames -- 1 time per volume'
             
             486673 3 'spont_photo' 2  1  100   1 'target switches every 4 frames -- 1 time per volume'

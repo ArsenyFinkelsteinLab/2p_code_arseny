@@ -1,7 +1,7 @@
 function PLOTS_Population2DReward_all_sessions
 close all;
 
-key = ((EXP2.Session & 'session>=0' )&  LICK2D.ROILick2DRewardStatsSpikes &  LICK2D.ROILick2DangleSpikes) - IMG.Mesoscope ;
+key = ((EXP2.Session & 'session>=0')&  LICK2D.ROILick2DRewardStatsSpikes &  LICK2D.ROILick2DangleSpikes) - IMG.Mesoscope ;
 
 
 

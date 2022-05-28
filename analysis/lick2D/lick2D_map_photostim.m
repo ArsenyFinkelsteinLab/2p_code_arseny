@@ -15,7 +15,7 @@ key.session =3;
 
 epoch_list = fetchn(EXP2.SessionEpoch & 'session_epoch_type="spont_photo"' & key, 'session_epoch_number','ORDER BY session_epoch_number');
 k_photo.session_epoch_number = epoch_list(1); % to take the photostim groups from
-roi_photostim=fetchn((STIM.ROIResponseDirect & key & k_photo & 'response_p_value<0.01'),'roi_number');
+roi_photostim=fetchn((STIM.ROIResponseDirect & key & k_photo & 'response_p_value1<0.01'),'roi_number');
 
 % rel_photostim = (STIM.ROIResponseDirect & key & k_photo & 'response_p_value<0.01');
 % key.subject_id = 445873;

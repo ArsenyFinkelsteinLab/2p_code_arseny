@@ -16,7 +16,7 @@ num_pairs                                       :int     # num pairs included
 
 classdef InfluenceVsCorrTraceSpont < dj.Computed
     properties
-        keySource = EXP2.SessionEpoch & STIMANAL.Target2AllCorrTraceSpont & (EXP2.Session & STIM.ROIInfluence5);
+        keySource = EXP2.SessionEpoch & STIMANAL.Target2AllCorrTraceSpont & (EXP2.Session & STIM.ROIInfluence2);
     end
     methods(Access=protected)
         function makeTuples(self, key)
@@ -25,14 +25,14 @@ classdef InfluenceVsCorrTraceSpont < dj.Computed
             neurons_or_control_flag = [1,0]; % 1 neurons, 0 control sites
             neurons_or_control_label = { 'Neurons','Controls'};
             p_val=[1]; % for influence significance %making it for more significant values requires debugging of the shuffling method
-            num_svd_components_removed_vector_corr = [0,1,3,5,10];
+            num_svd_components_removed_vector_corr = [0,1,5];
             minimal_distance=25; %um exlude all cells within minimal distance from target
             % bins
             bins_corr = [ -0.1,linspace(-0.05,0.05,11),0.1, 0.15, 0.2, 0.3,0.4,0.5, inf]; 
             bins_influence = [-inf, -0.3, linspace(-0.2,0.2,11),0.3, 0.4,0.5,0.75,1,1.25,1.5, inf];
             
             dir_base = fetch1(IMG.Parameters & 'parameter_name="dir_root_save"', 'parameter_value');
-            dir_fig = [dir_base  '\Photostim\influence_vs_corr\corr_trace_spont\'];
+            dir_fig = [dir_base  '\Photostim\influence_vs_corr_new\corr_trace_spont\'];
             session_date = fetch1(EXP2.Session & key,'session_date');
             
             
@@ -43,8 +43,8 @@ classdef InfluenceVsCorrTraceSpont < dj.Computed
             
             for i_n = 1:1:numel(neurons_or_control_flag)
                 key.neurons_or_control = neurons_or_control_flag(i_n);
-                rel_target = IMG.PhotostimGroup & (STIMANAL.NeuronOrControl & key);
-                rel_data_influence=STIM.ROIInfluence5   & rel_target & 'num_svd_components_removed=0';
+                rel_target = IMG.PhotostimGroup & (STIMANAL.NeuronOrControl2 & key);
+                rel_data_influence=STIM.ROIInfluence2   & rel_target & 'num_svd_components_removed=0';
                 
                 group_list = fetchn(rel_target,'photostim_group_num','ORDER BY photostim_group_num');
                 if numel(group_list)<1

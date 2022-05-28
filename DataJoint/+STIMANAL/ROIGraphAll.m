@@ -15,17 +15,17 @@ photostim_group_num_list          : blob                # (pixels)
 classdef ROIGraphAll < dj.Imported
     properties
         %         keySource = IMG.PhotostimGroup;
-        keySource = EXP2.SessionEpoch & 'flag_photostim_epoch =1' & IMG.FOV & STIM.ROIInfluence5 & 'subject_id=495876';
+        keySource = EXP2.SessionEpoch & 'flag_photostim_epoch =1' & IMG.FOV & STIM.ROIInfluence5;
     end
     methods(Access=protected)
         function makeTuples(self, key)
             dir_base =fetch1(IMG.Parameters & 'parameter_name="dir_root_save"', 'parameter_value');
-            dir_save_figure = [dir_base '\photostim\Graph_analysis\Graphs_on_map\'];
+            dir_save_figure = [dir_base '\photostim\Graph_analysis\Graphs_on_map_depth\'];
             
             p_val_threshold =0.05;
             minimal_distance =25; %in microns
             
-            rel_roi = IMG.ROI - IMG.ROIBad;
+            rel_roi = IMG.ROI*IMG.ROIdepth - IMG.ROIBad;
             
             try
                 zoom =fetch1(IMG.FOVEpoch & key,'zoom');
@@ -50,6 +50,8 @@ classdef ROIGraphAll < dj.Imported
             roi_centroid_x_direct = fetchn( rel_roi & (STIMANAL.NeuronOrControl5 & 'neurons_or_control=1') & key,'roi_centroid_x','ORDER BY roi_number')*pix2dist;
             roi_centroid_y_direct = fetchn( rel_roi & (STIMANAL.NeuronOrControl5 & 'neurons_or_control=1') & key,'roi_centroid_y','ORDER BY roi_number')*pix2dist;
             
+                        roi_z=  fetchn( rel_roi  & key,'z_pos_relative','ORDER BY roi_number');
+
             panel_width=0.8;
             panel_height=0.8;
             horizontal_distance=0.7;
@@ -167,9 +169,12 @@ classdef ROIGraphAll < dj.Imported
             
               % label the indirectly stimulate neurons
             hold on
-            plot(roi_centroid_x(idx_indirectly_stimulated),roi_centroid_y(idx_indirectly_stimulated),'.','Color',[0.2 1 0.2],'MarkerSize',10);
+%             plot(roi_centroid_x(idx_indirectly_stimulated),roi_centroid_y(idx_indirectly_stimulated),'.','Color',[0.2 1 0.2],'MarkerSize',10);
 
-            
+            idx_upper_plane = (roi_z==0);
+            scatter(roi_centroid_x(idx_upper_plane),roi_centroid_y(idx_upper_plane),12,[0,0,0],'filled');
+            scatter(roi_centroid_x(~idx_upper_plane),roi_centroid_y(~idx_upper_plane),12,[roi_z(~idx_upper_plane)*0.5,roi_z(~idx_upper_plane),roi_z(~idx_upper_plane)*0.5]./max(roi_z),'filled');
+
             mean_img_enhanced = fetch1(IMG.Plane & key & 'plane_num=1','mean_img_enhanced');
             x_dim = [0:1:(size(mean_img_enhanced,1)-1)]*pix2dist;
             y_dim = [0:1:(size(mean_img_enhanced,2)-1)]*pix2dist;
@@ -198,7 +203,7 @@ classdef ROIGraphAll < dj.Imported
             
             colormap bluewhitered
             h = colorbar;
-            ylabel(h, 'Connectrion strength (\Delta activity z-score)','FontSize',32);
+            ylabel(h, 'Connection strength (\Delta activity z-score)','FontSize',32);
             h.Limits	 = [0,ceil(h.Limits(2))];
             h.Ticks = h.Limits;
             % highlight(p,[1 3])

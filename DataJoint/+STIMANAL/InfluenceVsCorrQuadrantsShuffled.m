@@ -15,7 +15,7 @@ num_pairs                                       :int     # num pairs included
 
 classdef InfluenceVsCorrQuadrantsShuffled < dj.Computed
     properties
-        keySource = EXP2.SessionEpoch & STIMANAL.Target2AllCorrQuadrants & STIM.ROIInfluence5;
+        keySource = EXP2.SessionEpoch & STIMANAL.Target2AllCorrQuadrants & STIM.ROIInfluence2;
     end
     methods(Access=protected)
         function makeTuples(self, key)
@@ -43,12 +43,12 @@ classdef InfluenceVsCorrQuadrantsShuffled < dj.Computed
             
             
             dir_base = fetch1(IMG.Parameters & 'parameter_name="dir_root_save"', 'parameter_value');
-            dir_fig = [dir_base  '\Photostim\influence_vs_corr\corr_quadrants\shuffled\'];
+            dir_fig = [dir_base  '\Photostim\influence_vs_corr_new\corr_quadrants\shuffled\'];
             session_date = fetch1(EXP2.Session & key,'session_date');
             
             
             rel_data_corr =STIMANAL.Target2AllCorrQuadrants;
-            rel_data_influence=STIM.ROIInfluence5;
+            rel_data_influence=STIM.ROIInfluence2;
             rel_data_signal = LICK2D.ROILick2DQuadrantsSpikes;
             k_psth =key;
             k_psth=rmfield(k_psth,'session_epoch_type');
@@ -59,7 +59,7 @@ classdef InfluenceVsCorrQuadrantsShuffled < dj.Computed
             
             for i_n = 1:1:numel(neurons_or_control_flag)
                 key.neurons_or_control = neurons_or_control_flag(i_n);
-                rel_target = IMG.PhotostimGroup & (STIMANAL.NeuronOrControl5 & key);
+                rel_target = IMG.PhotostimGroup & (STIMANAL.NeuronOrControl2 & key);
                 rel_data_influence2=rel_data_influence   & rel_target & 'num_svd_components_removed=0';
                 
                 group_list = fetchn(rel_target,'photostim_group_num','ORDER BY photostim_group_num');
@@ -67,7 +67,7 @@ classdef InfluenceVsCorrQuadrantsShuffled < dj.Computed
                     return
                 end
                 
-                rel_target_signif_by_psth = (STIM.ROIResponseDirect5 &  rel_target) &    (IMG.ROI &  (rel_data_signal & k_psth & 'psth_quadrants_odd_even_corr>=0.5'));
+                rel_target_signif_by_psth = (STIM.ROIResponseDirect2 &  rel_target) &    (IMG.ROI &  (rel_data_signal & k_psth & 'psth_quadrants_odd_even_corr>=0.5'));
                 group_list_signif = fetchn(rel_target_signif_by_psth,'photostim_group_num','ORDER BY photostim_group_num');
                 idx_group_list_signif = ismember(group_list,group_list_signif);
                 

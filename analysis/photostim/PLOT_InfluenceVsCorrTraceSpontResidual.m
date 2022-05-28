@@ -82,7 +82,7 @@ text(0.01,1.2,sprintf('Shuffled'),'Color',[1 0.7 0.5]);
 
 
 subplot(3,3,2)
-yl =[-0.1, 1.5];
+yl =[-0.1, 1];
 hold on
 y=DATA_neurons_residual.influence_binned_by_corr;
 y_mean = nanmean(y,1);
@@ -105,7 +105,7 @@ text(0.01,1.2,sprintf('Control targets'),'Color',[0.5 0.5 0.5]);
 
 
 subplot(3,3,3)
-yl =[-0.01, 0.02];
+yl =[-0.02, 0.03];
 xl = [-0.07, 0.07];
 hold on
 y=DATA_neurons_residual.influence_binned_by_corr;

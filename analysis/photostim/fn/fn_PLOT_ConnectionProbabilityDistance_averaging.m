@@ -45,9 +45,9 @@ for j=1:1:numel(idx_sessions)
             current_map = D(ii).counts_2d_inhibition./D_all(ii).counts_2d;
             current_lateral = sum(D(ii).counts_2d_inhibition,1)./sum(D_all(ii).counts_2d,1);
             current_axial =(sum(D(ii).counts_2d_inhibition,2)./sum(D_all(ii).counts_2d,2));
-      current_axial_in_column =sum(D(ii).counts_2d_inhibition,2)./sum(D_all(ii).counts_2d,2);
+            current_axial_in_column =sum(D(ii).counts_2d_inhibition,2)./sum(D_all(ii).counts_2d,2);
             current_axial_out_column = sum(D(ii).counts_2d_inhibition,2)./sum(D_all(ii).counts_2d,2);
-
+            
         case 3 %absolute
             current_map = D(ii).response_2d_absolute;
             current_lateral = D(ii).response_lateral_absolute;
@@ -72,7 +72,7 @@ for j=1:1:numel(idx_sessions)
             axial_marginal(j,idx_d) = current_axial(i_d,:);
             axial_marginal_in_column(j,idx_d) = current_axial_in_column(i_d,:);
             axial_marginal_out_column(j,idx_d) = current_axial_out_column(i_d,:);
-
+            
         end
     end
 end

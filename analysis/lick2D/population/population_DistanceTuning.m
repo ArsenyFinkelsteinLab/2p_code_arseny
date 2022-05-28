@@ -9,7 +9,7 @@ filename = 'population_summary';
 
 subplot(2,2,1)
 rel_data= LICK2D.DistancePSTHCorrVolumetricSpikes *EXP2.SessionID;
-key.odd_even_corr_threshold=0.75;
+key.odd_even_corr_threshold=0.50;
 
 D=fetch(rel_data	 & key,'*');
 bins_lateral_distance=D(1).lateral_distance_bins;
@@ -21,7 +21,7 @@ end
 d_lateral_mean =  mean(distance_lateral_all,1);
 d_lateral_stem =  std(distance_lateral_all,1)/sqrt(size(D,1));
 
-shadedErrorBar(bins_lateral_distance(1:1:end-1),d_lateral_mean,d_lateral_stem,'lineprops',{'-','Color',[0 0 0]})
+shadedErrorBar(bins_lateral_distance(1:1:end-1),d_lateral_mean,d_lateral_stem,'lineprops',{'.-','Color',[0 0 0]})
 xlabel('Lateral Distance (um)');
 ylabel ('PSTH (correlation)');
 box off
@@ -30,7 +30,7 @@ title('Temporal tuning');
 
 subplot(2,2,2)
 rel_data= LICK2D.DistanceQuadrantsCorrVolumetricSpikes*EXP2.SessionID;
-key.odd_even_corr_threshold=0.75;
+key.odd_even_corr_threshold=0.50;
 
 D=fetch(rel_data	 & key,'*');
 bins_lateral_distance=D(1).lateral_distance_bins;
@@ -42,7 +42,7 @@ end
 d_lateral_mean =  mean(distance_lateral_all,1);
 d_lateral_stem =  std(distance_lateral_all,1)/sqrt(size(D,1));
 
-shadedErrorBar(bins_lateral_distance(1:1:end-1),d_lateral_mean,d_lateral_stem,'lineprops',{'-','Color',[0 0 0]})
+shadedErrorBar(bins_lateral_distance(1:1:end-1),d_lateral_mean,d_lateral_stem,'lineprops',{'.-','Color',[0 0 0]})
 xlabel('Lateral Distance (um)');
 ylabel ('PSTH qudrants (correlation)');
 box off
@@ -51,7 +51,7 @@ title('Temporal and Directional tuning');
 
 subplot(2,2,3)
 rel_data= LICK2D.DistanceAngularTuningCorrVolumetricSpikes *EXP2.SessionID;
-key.odd_even_corr_threshold=0.75;
+key.odd_even_corr_threshold=0.50;
 
 D=fetch(rel_data	 & key,'*');
 bins_lateral_distance=D(1).lateral_distance_bins;
@@ -63,7 +63,7 @@ end
 d_lateral_mean =  mean(distance_lateral_all,1);
 d_lateral_stem =  std(distance_lateral_all,1)/sqrt(size(D,1));
 
-shadedErrorBar(bins_lateral_distance(1:1:end-1),d_lateral_mean,d_lateral_stem,'lineprops',{'-','Color',[0 0 0]})
+shadedErrorBar(bins_lateral_distance(1:1:end-1),d_lateral_mean,d_lateral_stem,'lineprops',{'.-','Color',[0 0 0]})
 xlabel('Lateral Distance (um)');
 ylabel ('Angular tuning (correlation)');
 title('Directional tuning');
@@ -73,7 +73,7 @@ box off
 subplot(2,2,4)
 rel_data= LICK2D.DistanceAngleSpikes*EXP2.SessionID;
 
-key.vn_mises_correlation_treshold=0.75;
+key.vn_mises_correlation_treshold=0.50;
 key.column_radius=50;
 
 D=fetch(LICK2D.DistanceAngleSpikes & key,'*');
@@ -90,7 +90,7 @@ theta_distance_mean_stem =  std(theta_lateral_distance,1)/sqrt(size(theta_latera
 
 % ax1=axes('position',[position_x2(3), position_y2(3), panel_width2, panel_height2]);
 hold on;
-shadedErrorBar(bins_lateral_distance(1:1:end-1),theta_distance_mean,theta_distance_mean_stem,'lineprops',{'-','Color',[0 0 0]})
+shadedErrorBar(bins_lateral_distance(1:1:end-1),theta_distance_mean,theta_distance_mean_stem,'lineprops',{'.-','Color',[0 0 0]})
 
 % plot(bins_lateral_distance(1:1:end-1),theta_lateral_distance_shuffled,'-k')
 ylim([60,90]);

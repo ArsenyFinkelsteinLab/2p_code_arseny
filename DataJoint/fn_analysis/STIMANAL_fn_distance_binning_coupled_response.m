@@ -15,9 +15,9 @@ if flag_divide_by_std==0
     F_mean_odd=[DATA.response_mean_odd]';
     F_mean_even=[DATA.response_mean_even]';
 elseif flag_divide_by_std==1
-    F_mean=[DATA.response_mean_over_std]';
-    F_mean_odd=[DATA.response_mean_over_std_odd]'; % to fix it later
-    F_mean_even=[DATA.response_mean_over_std_even]'; % to fix it later
+    F_mean=[DATA.response_mean]'./([DATA.response_std]+eps)';
+    F_mean_odd=[DATA.response_mean_odd]'./([DATA.response_std]+eps)'; %have to be fixed in later versions to divide by std_odd
+    F_mean_even=[DATA.response_mean_even]'./([DATA.response_std]+eps)';  %have to be fixed in later versions to divide by std_even
 end
 
 if flag_withold_trials==0

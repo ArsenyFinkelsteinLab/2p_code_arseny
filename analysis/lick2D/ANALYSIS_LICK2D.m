@@ -11,6 +11,7 @@ lick2D_video_yawmemory_across_blocks2 % that's what was shown in the original pr
 lick2D_video_yaw_early_vs_nonearly % that's what was shown in the original presentation
 lick2D_video_yaw_early_vs_nonearly2
 lick2D_video_yaw_trajectory
+lick2D_video_yaw_learning
 
 % Neural data Reward
 PLOTS_Population2DReward_all_sessions
