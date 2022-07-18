@@ -6,10 +6,21 @@ dir_current_fig = [dir_base  '\Photostim\Connectivity\'];
 filename = 'infleunce_vs_angular_tuning';
 
 
-rel_data = STIMANAL.InfluenceVsCorrAngleTuning & 'session_epoch_number<3' & 'num_targets>=30' & 'num_pairs>=2000' ;
-rel_shuffled = STIMANAL.InfluenceVsCorrAngleTuningShuffled  & 'session_epoch_number<3' & 'num_targets>=30' & 'num_pairs>=2000';
-% rel_data = STIMANAL.InfluenceVsCorr & 'session_epoch_number<3';
-% rel_shuffled = STIMANAL.InfluenceVsCorrShuffled  & 'session_epoch_number<3';
+% rel_data = STIMANAL.InfluenceVsCorrAngleTuning & 'session_epoch_number<3' & 'num_targets>=30' & 'num_pairs>=2000' ;
+% rel_shuffled = STIMANAL.InfluenceVsCorrAngleTuningShuffled  & 'session_epoch_number<3' & 'num_targets>=30' & 'num_pairs>=2000';
+
+rel_data = STIMANAL.InfluenceVsCorrAngleTuning2  & 'num_pairs>=0' & 'num_targets>=50' ...
+    &  (STIMANAL.SessionEpochsIncludedFinal & IMG.Volumetric & 'stimpower>=100' & 'flag_include=1')   ...;
+%     & (STIMANAL.NeuronOrControlNumber2 & 'num_targets_neurons>=50') ...
+%     & (STIMANAL.NeuronOrControlNumber2 & 'num_targets_controls>=50');
+
+rel_shuffled = STIMANAL.InfluenceVsCorrAngleTuningShuffled2  & 'num_pairs>=0'  & 'num_targets>=50' ...
+    &  (STIMANAL.SessionEpochsIncludedFinal & IMG.Volumetric & 'stimpower>=100' & 'flag_include=1')   ...;
+%     & (STIMANAL.NeuronOrControlNumber2 & 'num_targets_neurons>=50') ...
+%     & (STIMANAL.NeuronOrControlNumber2 & 'num_targets_controls>=50');
+
+
+
 key.neurons_or_control=1;
 key.response_p_val=1;
 
@@ -55,7 +66,7 @@ for i_c = 1:1:numel(num_svd_components_removed_vector_corr)
     subplot(2,2,idx_subplot+2)
     hold on
     y=DATA.influence_binned_by_corr - DATA_SHUFFLED.influence_binned_by_corr;
-    y_mean = nanmean(y,1);
+    y_mean = nanmedian(y,1);
     y_stem = nanstd(y,1)./sqrt(size(DATA,1));
     if i_c ==1
         plot([bins_corr_edges(1),bins_corr_edges(end)],[0,0],'-k');
@@ -63,6 +74,7 @@ for i_c = 1:1:numel(num_svd_components_removed_vector_corr)
             xlim([bins_corr_edges(1), bins_corr_edges(end)]);
     end
     shadedErrorBar(bins_corr_centers,y_mean,y_stem,'lineprops',{'-','Color',colormap(i_c,:)})
+    plot(bins_corr_centers,y_mean,'.-','Color',colormap(i_c,:))
     xlabel('Residual Signal Correlation, r');
     ylabel ('Influence (delta zscore)');
     box off

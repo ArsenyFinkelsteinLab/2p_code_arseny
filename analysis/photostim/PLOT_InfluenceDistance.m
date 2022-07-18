@@ -1,7 +1,7 @@
 function PLOT_InfluenceDistance()
 dir_base = fetch1(IMG.Parameters & 'parameter_name="dir_root_save"', 'parameter_value');
 dir_current_fig = [dir_base  '\Photostim\Connectivity\'];
-filename = 'Distance_Influence_ETL';
+filename = 'Distance_Influence';
 
 clf;
 
@@ -29,9 +29,9 @@ position_y1(1)=0.5;
 position_y1(end+1)=position_y1(end)-vertical_dist;
 
 rel_data = (STIMANAL.InfluenceDistance222 & 'flag_divide_by_std=0' & 'flag_withold_trials=0' & 'flag_normalize_by_total=1') ...
-    &  (STIMANAL.SessionEpochsIncludedFinal & IMG.Volumetric & 'stimpower>=100' & 'flag_include=1'   ...
+    &  (STIMANAL.SessionEpochsIncludedFinal & IMG.Volumetric & 'stimpower>=100' & 'flag_include=1' )  ...
     & (STIMANAL.NeuronOrControlNumber2 & 'num_targets_neurons>=50') ...
-    & (STIMANAL.NeuronOrControlNumber2 & 'num_targets_controls>=50'));
+    & (STIMANAL.NeuronOrControlNumber2 & 'num_targets_controls>=50');
 
 
 key.num_svd_components_removed=0;
@@ -74,12 +74,11 @@ xlim(xl)
 
 ax2=axes('position',[position_x1(1)+0.2, position_y1(1)+0.07, panel_width1*0.2, panel_height1*0.35]);
 % imagesc(OUT1.distance_lateral_bins_centers, distance_axial_bins_plot,  OUT1.map)
-
 cmp = bluewhitered(512); %
 colormap(ax2, cmp)
 caxis([OUT1.minv max(max(OUT1.map(:,3:end)))]);
 colorbar
-text(8, 0.1, ['Influence' newline '(\Delta Activity)'],'Rotation',90);
+text(8, 0.1, ['Connection stength' newline '(\Delta z-score activity)'],'Rotation',90);
 axis off
 
 %% 2D plots - Control sites
@@ -112,13 +111,13 @@ shadedErrorBar(OUT1.distance_lateral_bins_centers(3:end),OUT2.marginal_lateral_m
 % yl(1)=-2*abs(min([OUT1.marginal_lateral_mean,OUT2.marginal_lateral_mean]));
 % yl(2)=abs(max([OUT1.marginal_lateral_mean,OUT2.marginal_lateral_mean]));
 yl(1)=-0.05;
-yl(2)=0.5;
+yl(2)=0.4;
 ylim(yl)
 set(gca,'XTick',[25,100:100:500],'XLim',xl);
 box off
 % ylabel([sprintf('         Response\n') '        (z-score)']);
-ylabel (['Influence' newline '(\Delta Activity)']);
-set(gca,'YTick',[0,0.5]);
+ylabel (['Connection stength' newline '(\Delta z-score activity)']);
+set(gca,'YTick',[0,0.4]);
 xlabel([sprintf('Lateral Distance ') '(\mum)']);
 
 %% Marginal distribution - lateral (zoom)
@@ -133,9 +132,9 @@ yl=[-0.008 0.002];
 ylim(yl)
 set(gca,'XLim',xl);
 box off
-set(gca,'YTick',[yl(1) 0 yl(2)],'XTick',[100 250 500],'XTickLabel',{'100' '     250' '500'},'TickLength',[0.05 0.05]);
-text(150,0.005,'Neuron targets','Color',[1 0 1]);
-text(150,0.003,sprintf('Control targets'),'Color',[0.5 0.5 0.5]);
+set(gca,'YTick',[-0.005  0 yl(2)],'XTick',[100 250 500],'XTickLabel',{'100' '     250' '500'},'TickLength',[0.05 0.05]);
+text(200,0.005,'Neuron targets','Color',[1 0 1]);
+text(200,0.003,sprintf('Control targets'),'Color',[0.5 0.5 0.5]);
 
 
 
@@ -148,9 +147,9 @@ shadedErrorBar(distance_axial_bins,OUT1.marginal_axial_in_column_mean,OUT1.margi
 shadedErrorBar(distance_axial_bins,OUT2.marginal_axial_in_column_mean,OUT2.marginal_axial_in_column_stem,'lineprops',{'.-','Color',[0.5 0.5 0.5]})
 axm.View = [90 90]
 xlabel([sprintf('Axial \nDistance ') '(\mum)']);
-ylabel(['    Influence (\Delta Activity)']);
+ylabel (['Connection stength' newline '(\Delta z-score activity)']);
 set(gca,'XTick',[0 60 120]);
-title([sprintf('25< Lateral <100            \n') '(\mum)'],'FontSize',6)
+title([sprintf('25< Lateral <=100            \n') '(\mum)'],'FontSize',6)
 
 %% Marginal distribution - axial FAR
 axm=axes('position',[position_x1(2)+0.12, position_y1(1)+0.05, panel_width1*0.4, panel_height1*0.4]);
@@ -161,7 +160,7 @@ shadedErrorBar(distance_axial_bins,OUT2.marginal_axial_out_column_mean,OUT2.marg
 axm.View = [90 90]
 % xlabel([sprintf('Axial Distance ') '(\mum)']);
 set(gca,'XTick',[0 60 120],'XTickLabel',[]);
-title([sprintf('            100< Lateral <250\n ') '(\mum)'],'FontSize',6)
+title([sprintf('            100< Lateral <=250\n ') '(\mum)'],'FontSize',6)
 
 % plot( distance_axial_bins_plot, OUT1.marginal_axial_mean, '-b')
 % plot( distance_axial_bins_plot, OUT2.marginal_axial_mean,'-m')

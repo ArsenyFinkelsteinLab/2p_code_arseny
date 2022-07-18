@@ -87,7 +87,7 @@ classdef InfluenceDistance222 < dj.Computed
                 kkk.neurons_or_control = neurons_or_control_flag(i_n);
                 rel_direct= STIMANAL.NeuronOrControl2 & kkk;
                 rel_group_targets =  IMG.PhotostimGroup & rel_direct; % we do it to get rid of the roi column
-                DATA_all=fetch((rel & key & rel_group_targets)& 'num_svd_components_removed=0' & 'num_of_target_trials_used>0','*');
+                DATA_all=fetch((rel & key & rel_group_targets)& 'num_svd_components_removed=0' & 'num_of_target_trials_used>=20','*');
                 
                 if isempty(DATA_all)
                    return; 

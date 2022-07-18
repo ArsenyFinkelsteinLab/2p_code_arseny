@@ -37,7 +37,7 @@ classdef InfluenceVsCorrAngleTuning < dj.Computed
             %             bins_influence=bins_influence(4:end);
             
             dir_base = fetch1(IMG.Parameters & 'parameter_name="dir_root_save"', 'parameter_value');
-            dir_fig = [dir_base  '\Photostim\influence_vs_corr_new\corr_quadrants\'];
+            dir_fig = [dir_base  '\Photostim\influence_vs_corr_new\corr_angle_tuning\'];
             session_date = fetch1(EXP2.Session & key,'session_date');
             
             rel_data_corr =STIMANAL.Target2AllCorrAngleTuning;

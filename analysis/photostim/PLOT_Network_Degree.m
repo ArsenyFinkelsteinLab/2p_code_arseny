@@ -5,16 +5,15 @@ dir_base = fetch1(IMG.Parameters & 'parameter_name="dir_root_save"', 'parameter_
 dir_current_fig = [dir_base  '\Photostim\Connectivity\'];
 filename = 'network_degree_vs_correlations';
 
-k_degree.max_distance_lateral =200;
+k_degree.max_distance_lateral =150;
 k_degree.session_epoch_number=2;
-k_degree.num_svd_components_removed=0;
 k_degree.p_val = 0.05;
 k_neurons_or_control.neurons_or_control=1;
 
 k_corr_local.radius_size=200;
 k_corr_local.session_epoch_type = 'spont_only'; % behav_only spont_only
 k_corr_local.num_svd_components_removed=0;
-rel_session = EXP2.Session & (STIMANAL.OutDegree & IMG.Volumetric) & (EXP2.SessionEpoch& 'session_epoch_type="spont_only"') & (STIMANAL.NeuronOrControl5 & 'neurons_or_control=1' & 'num_targets>=30');
+rel_session = EXP2.Session & (STIMANAL.OutDegree & IMG.Volumetric) & (EXP2.SessionEpoch& 'session_epoch_type="spont_only"') & (STIMANAL.NeuronOrControl2 & 'neurons_or_control=1' & 'num_targets>=30');
 
 
 %Graphics
@@ -55,7 +54,7 @@ DATA_CORR_ALL=[];
 for i_s = 1:1:rel_session.count
     k_s = sessions(i_s);
     i_s;
-    rel_degree = STIMANAL.OutDegree*STIM.ROIResponseDirect5  & (STIMANAL.NeuronOrControl5 & k_neurons_or_control) & k_degree & k_s;
+    rel_degree = STIMANAL.OutDegree*STIM.ROIResponseDirect2  & (STIMANAL.NeuronOrControl2 & k_neurons_or_control) & k_degree & k_s;
     DATA_DEGREE = struct2table(fetch(rel_degree, '*'));
     %    numel(unique(DATA_DEGREE.roi_number))
     

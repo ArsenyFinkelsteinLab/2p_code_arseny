@@ -43,7 +43,7 @@ classdef InfluenceVsCorrPSTHShuffled < dj.Computed
             
             
             dir_base = fetch1(IMG.Parameters & 'parameter_name="dir_root_save"', 'parameter_value');
-            dir_fig = [dir_base  '\Photostim\influence_vs_corr_new\corr_quadrants\shuffled\'];
+            dir_fig = [dir_base  '\Photostim\influence_vs_corr_new\corr_psth\shuffled\'];
             session_date = fetch1(EXP2.Session & key,'session_date');
             
             

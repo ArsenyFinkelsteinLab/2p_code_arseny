@@ -1,4 +1,4 @@
-function PLOT_InfluenceDistance5_with_blue_colorbar()
+function PLOT_InfluenceDistance_with_blue_colorbar()
 dir_base = fetch1(IMG.Parameters & 'parameter_name="dir_root_save"', 'parameter_value');
 dir_current_fig = [dir_base  '\Photostim\Connectivity\'];
 filename = 'Distance_Influence_with_blue_colorbar';
@@ -28,10 +28,10 @@ position_x1(end+1)=position_x1(end)+horizontal_dist;
 position_y1(1)=0.5;
 position_y1(end+1)=position_y1(end)-vertical_dist;
 
-rel_data = (STIMANAL.InfluenceDistance55 & 'flag_divide_by_std=0' & 'flag_withold_trials=0' & 'flag_normalize_by_total=1') ...
-    &  (STIMANAL.SessionEpochsIncluded& IMG.Volumetric & 'stimpower=150' & 'flag_include=1' & 'session_epoch_number<=3' ...
-    & (STIMANAL.NeuronOrControl5 & 'neurons_or_control=1' & 'num_targets>=10') ...
-    & (STIMANAL.NeuronOrControl5 & 'neurons_or_control=0' & 'num_targets>=10'));
+rel_data = (STIMANAL.InfluenceDistance222 & 'flag_divide_by_std=0' & 'flag_withold_trials=0' & 'flag_normalize_by_total=1') ...
+    &  (STIMANAL.SessionEpochsIncludedFinal & IMG.Volumetric & 'stimpower>=100' & 'flag_include=1'   ...
+    & (STIMANAL.NeuronOrControlNumber2 & 'num_targets_neurons>=50') ...
+    & (STIMANAL.NeuronOrControlNumber2 & 'num_targets_controls>=50'));
 
 
 key.num_svd_components_removed=0;
@@ -59,7 +59,7 @@ xl=[0,500];
 M = OUT1.map;
 
 M(M>=0)=0;
-imagesc(OUT1.distance_lateral_bins_centers, distance_axial_bins_plot,  M)
+imagesc(OUT1.distance_lateral_bins_centers(3:end), distance_axial_bins_plot,  M(:,3:end))
 axis tight
 axis equal
 cmp = bluewhitered(512); %
@@ -83,7 +83,7 @@ ax2=axes('position',[position_x1(1)+0.2, position_y1(1)+0.07, panel_width1*0.2, 
 colormap(ax2, cmp)
 caxis([OUT1.minv 0]);
 colorbar
-text(8, 0.1, ['Influence' newline '(\Delta Activity)'],'Rotation',90);
+text(8, 0.1, ['Connection stength' newline '(\Delta z-score activity)'],'Rotation',90);
 axis off
 
 

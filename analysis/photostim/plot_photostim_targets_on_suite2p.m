@@ -5,8 +5,10 @@ dir_base = fetch1(IMG.Parameters & 'parameter_name="dir_root_save"', 'parameter_
 dir_current_fig = [dir_base  '\Photostim\Photostim_targets_map\'];
 % key.subject_id = 447990;
 % key.session =1;
-key.subject_id = 447991;
-key.session= 11;
+key.subject_id = 496916;
+key.session= 1;
+key.plane_num= 1;
+
 epoch_list = fetchn(EXP2.SessionEpoch & 'session_epoch_type="spont_photo"' & key, 'session_epoch_number','ORDER BY session_epoch_number');
 key.session_epoch_number = epoch_list(end); % to take the photostim groups from
 
@@ -32,7 +34,7 @@ G=fetch(IMG.PhotostimGroupROI & key  & 'flag_neuron_or_control=1','*');
 R=fetch((IMG.ROI) & key & IMG.ROIGood,'*');
 
 
-mean_img_enhanced = fetch1(IMG.Plane & key,'mean_img_enhanced');
+mean_img_enhanced = fetch1(IMG.Plane & key,'mean_img');
 
 imagesc(mean_img_enhanced)
 colormap(gray)

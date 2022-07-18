@@ -9,15 +9,15 @@ filename = 'infleunce_vs_psth';
 % rel_data = STIMANAL.InfluenceVsCorrPSTH & 'session_epoch_number<3' & 'num_targets>=30' & 'num_pairs>=5000' ;
 % rel_shuffled = STIMANAL.InfluenceVsCorrPSTHShuffled  & 'session_epoch_number<3' & 'num_targets>=30' & 'num_pairs>=5000';
 
-rel_data = STIMANAL.InfluenceVsCorrPSTH  & 'num_pairs>=0'  ...
-    &  (STIMANAL.SessionEpochsIncludedFinal & IMG.Volumetric & 'stimpower>=100' & 'flag_include=1')   ...
-    & (STIMANAL.NeuronOrControlNumber2 & 'num_targets_neurons>=50') ...
-    & (STIMANAL.NeuronOrControlNumber2 & 'num_targets_controls>=50');
+rel_data = STIMANAL.InfluenceVsCorrPSTH3  & 'num_pairs>=0'  & 'num_targets>=50'...
+    &  (STIMANAL.SessionEpochsIncludedFinal & IMG.Volumetric & 'stimpower>=100' & 'flag_include=1')   ...;
+%         & (STIMANAL.NeuronOrControlNumber2 & 'num_targets_neurons>=50') ...
+%     & (STIMANAL.NeuronOrControlNumber2 & 'num_targets_controls>=50');
 
-rel_shuffled = STIMANAL.InfluenceVsCorrPSTHShuffled  & 'num_pairs>=0'  ...
-    &  (STIMANAL.SessionEpochsIncludedFinal & IMG.Volumetric & 'stimpower>=100' & 'flag_include=1')   ...
-    & (STIMANAL.NeuronOrControlNumber2 & 'num_targets_neurons>=50') ...
-    & (STIMANAL.NeuronOrControlNumber2 & 'num_targets_controls>=50');
+rel_shuffled = STIMANAL.InfluenceVsCorrPSTHShuffled3  & 'num_pairs>=0'  & 'num_targets>=50'...
+    &  (STIMANAL.SessionEpochsIncludedFinal & IMG.Volumetric & 'stimpower>=100' & 'flag_include=1')   ...;
+%         & (STIMANAL.NeuronOrControlNumber2 & 'num_targets_neurons>=50') ...
+%     & (STIMANAL.NeuronOrControlNumber2 & 'num_targets_controls>=50');
 
 
 
@@ -41,8 +41,8 @@ for i_c = 1:1:numel(num_svd_components_removed_vector_corr)
     
     bins_influence_edges = DATA.bins_influence_edges(1,:);
     if bins_influence_edges(1)==-inf
-    bins_influence_edges(1)=bins_influence_edges(2) - (bins_influence_edges(3) - bins_influence_edges(2));
-    bins_influence_edges(end)=bins_influence_edges(end-1) + (bins_influence_edges(end-2) - bins_influence_edges(end-3));
+        bins_influence_edges(1)=bins_influence_edges(2) - (bins_influence_edges(3) - bins_influence_edges(2));
+        bins_influence_edges(end)=bins_influence_edges(end-1) + (bins_influence_edges(end-2) - bins_influence_edges(end-3));
     end
     bins_influence_centers = bins_influence_edges(1:1:end-1) + diff(bins_influence_edges)/2;
     
@@ -71,11 +71,14 @@ for i_c = 1:1:numel(num_svd_components_removed_vector_corr)
     if i_c ==1
         plot([bins_corr_edges(1),bins_corr_edges(end)],[0,0],'-k');
         plot([0,0],[min(y_mean-y_stem),max(y_mean+y_stem)],'-k');
-            xlim([bins_corr_edges(1), bins_corr_edges(end)]);
+        xlim([bins_corr_edges(1), bins_corr_edges(end)]);
     end
-    shadedErrorBar(bins_corr_centers,y_mean,y_stem,'lineprops',{'-','Color',colormap(i_c,:)})
-    xlabel('Residual Signal Correlation, r');
-    ylabel ('Influence (delta zscore)');
+    %     shadedErrorBar(bins_corr_centers,y_mean,y_stem,'lineprops',{'-','Color',colormap(i_c,:)})
+    shadedErrorBar(bins_corr_centers,y_mean,y_stem,'lineprops',{'-','Color',[1 0 0]})
+    plot(bins_corr_centers,y_mean,'.-','Color',[1 0 0])
+    xlabel('Tuning Correlation, \itr');
+    title(sprintf('Tuning to response time\n'));
+    ylabel (['Connection stength' newline '(\Delta z-score activity)']);
     box off
     
 end

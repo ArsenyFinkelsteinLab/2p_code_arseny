@@ -1,11 +1,12 @@
 function fn_compute_distance_psth_correlation(rel_roi, rel_data, key,self, dir_save_fig, rel_roi_xy,mesoscope_flag)
 
-min_distance_in_xy=5; %to exclude auto-focus flourescence
+min_distance_in_xy=10; %to exclude auto-focus flourescence
 
-column_inner_radius =[min_distance_in_xy  min_distance_in_xy  min_distance_in_xy  min_distance_in_xy  25  50   50  100 ]; % microns
-column_outer_radius =[25 50 75 100 50 100 250  250 ]; % microns
+column_inner_radius =[10 10 10 10 10 10 10 10  10  10  10  10  25 25 25  30 30 30 30  30  40  40 40  50  50  60  60  60  60  100 120 120]; % microns
+column_outer_radius =[25 30 40 50 60 75 90 100 120 150 200 250 50 40 100 50 60 75 100 120 60  70 100 100 250 250 100 250 120 250 250 500]; % microns
 
 lateral_distance_bins=[0,10,20,30:10:260];
+% lateral_distance_bins=[5,15,25:10:255];
 
 
 DefaultFontSize =12;
@@ -50,6 +51,10 @@ end
 
 %% Loading Data
 roi_list=fetchn(rel_roi,'roi_number','ORDER BY roi_number');
+if numel(roi_list)<10
+    return
+end
+
 chunk_size=500;
 counter=0;
 if isempty(roi_list)
@@ -63,7 +68,12 @@ for i_chunk=1:chunk_size:roi_list(end)
         try
             temp_F=cell2mat(fetchn(rel_data & key & sprintf('roi_number>=%d',roi_interval(1)) & sprintf('roi_number<%d',roi_interval(2)),'psth','ORDER BY roi_number'));
         catch
-            temp_F=cell2mat(fetchn(rel_data & key & sprintf('roi_number>=%d',roi_interval(1)) & sprintf('roi_number<%d',roi_interval(2)),'theta_tuning_curve','ORDER BY roi_number'));
+            
+            try
+                temp_F=cell2mat(fetchn(rel_data & key & sprintf('roi_number>=%d',roi_interval(1)) & sprintf('roi_number<%d',roi_interval(2)),'psth_position_concat_regularreward','ORDER BY roi_number'));
+            catch
+                temp_F=cell2mat(fetchn(rel_data & key & sprintf('roi_number>=%d',roi_interval(1)) & sprintf('roi_number<%d',roi_interval(2)),'theta_tuning_curve','ORDER BY roi_number'));
+            end
         end
     end
     temp_count=(counter+1):1: (counter + size(temp_F,1));
@@ -113,17 +123,20 @@ parfor iROI=1:1:numel(x_all)
     %                 d3D(iROI,:) = sqrt((x_all-x).^2 + (y_all-y).^2 + (z_all-z).^2); % in um
 end
 
+% temp=logical(tril(dXY));
+% idx_up_triangle=~temp;
+% dZ = dZ(idx_up_triangle);
+% dXY = dXY(idx_up_triangle);
+
+idx_lower_triangle=logical(tril(dXY));
+dZ = dZ(idx_lower_triangle);
+dXY = dXY(idx_lower_triangle);
+
 axial_distance_bins = unique(dZ)';
 key.axial_distance_bins=axial_distance_bins;
 
-temp=logical(tril(dXY));
-idx_up_triangle=~temp;
-dZ = dZ(idx_up_triangle);
-dXY = dXY(idx_up_triangle);
-
 
 %% Computing SVD and correlations
-rho=[];
 F = gpuArray((F));
 try
     rho=corrcoef(F','rows','pairwise');
@@ -132,7 +145,12 @@ catch
     F=gather(F);
     rho=corrcoef(F','rows','pairwise');
 end
-rho = rho(idx_up_triangle);
+% rho = rho(idx_up_triangle);
+rho = rho(idx_lower_triangle);
+
+if isempty(rho)
+    return
+end
 
 distance_corr_2d=zeros(numel(axial_distance_bins),numel(lateral_distance_bins)-1);
 for i_l=1:1:numel(lateral_distance_bins)-1
@@ -160,8 +178,9 @@ end
 %% 2D
 
 ax1=axes('position',[position_x1(1), position_y1(1), panel_width1, panel_height1]);
+bins_lateral_center = lateral_distance_bins(1:end-1) + mean(diff(lateral_distance_bins))/2;
 
-imagesc(lateral_distance_bins(1:1:end-1),axial_distance_bins,  distance_corr_2d)
+imagesc(lateral_distance_bins,axial_distance_bins,  distance_corr_2d)
 xlabel('Lateral Distance (um)');
 ylabel('Axial Distance (um)');
 % colorbar
@@ -200,12 +219,12 @@ distance_corr_2d_negative(distance_corr_2d(:)>=0)=0;
 
 ax3=axes('position',[position_x1(2), position_y1(1), panel_width1, panel_height1]);
 
-imagesc(lateral_distance_bins(1:1:end-1),axial_distance_bins,  distance_corr_2d_negative)
+imagesc(bins_lateral_center,axial_distance_bins,  distance_corr_2d_negative)
 xlabel('Lateral Distance (um)');
 ylabel('Axial Distance (um)');
 % colorbar
 colormap(inferno)
-c_lim(1)=nanmin([distance_corr_2d_negative(:);-0.05]);
+c_lim(1)=nanmin([distance_corr_2d_negative(:);-0.01]);
 c_lim(2) = nanmax(0);
 caxis([c_lim]);
 
@@ -232,41 +251,41 @@ axis off
 
 %Lateral marginal
 axes('position',[position_x2(1), position_y1(2), panel_width2, panel_height2]);
-plot(lateral_distance_bins(1:1:end-1)+mean(diff(lateral_distance_bins))/2,distance_corr_lateral,'.-k')
+plot(bins_lateral_center,distance_corr_lateral,'.-k')
 xlabel('Lateral Distance (um)');
 ylabel('Correlation');
 
-%Axial marginal, within column
-column_id=1;
+%Axial marginal, in various column sizes
+column_id=2;
 axes('position',[position_x2(2), position_y1(2), panel_width2, panel_height2]);
 plot(axial_distance_bins,distance_corr_axial_columns(:,column_id),'.-k')
 xlabel('Axial Distance (um)');
 title(sprintf('Column radius\n%.0f=<r<%.0fum',column_inner_radius(column_id), column_outer_radius(column_id)))
 
-%Axial marginal, outside column
-column_id=2;
+%Axial marginal, in various column sizes
+column_id=3;
 axes('position',[position_x2(3), position_y1(2), panel_width2, panel_height2]);
 plot(axial_distance_bins,distance_corr_axial_columns(:,column_id),'.-k')
 xlabel('Axial Distance (um)');
 title(sprintf('Column radius\n%.0f<=r<%.0fum',column_inner_radius(column_id), column_outer_radius(column_id)))
 
-%Axial marginal, outside column
-column_id=3;
+%Axial marginal, in various column sizes
+column_id=16;
 axes('position',[position_x2(4), position_y1(2), panel_width2, panel_height2]);
 plot(axial_distance_bins,distance_corr_axial_columns(:,column_id),'.-k')
 xlabel('Axial Distance (um)');
 title(sprintf('Column radius\n%.0f<=r<%.0fum',column_inner_radius(column_id), column_outer_radius(column_id)))
 
-%Axial marginal, outside column
-column_id=6;
+%Axial marginal, in various column sizes
+column_id=24;
 axes('position',[position_x2(5), position_y1(2), panel_width2, panel_height2]);
 plot(axial_distance_bins,distance_corr_axial_columns(:,column_id),'.-k')
 xlabel('Axial Distance (um)');
 title(sprintf('Column radius\n%.0f<=r<%.0fum',column_inner_radius(column_id), column_outer_radius(column_id)))
 
 
-%Axial marginal, outside column
-column_id=8;
+%Axial marginal, in various column sizes
+column_id=30;
 axes('position',[position_x2(6), position_y1(2), panel_width2, panel_height2]);
 plot(axial_distance_bins,distance_corr_axial_columns(:,column_id),'.-k')
 xlabel('Axial Distance (um)');
@@ -296,9 +315,9 @@ key.lateral_distance_bins=lateral_distance_bins;
 key.num_cells_included = numel(roi_list);
 key.distance_corr_2d=distance_corr_2d;
 key.distance_corr_lateral=distance_corr_lateral;
-key.distance_corr_axial_columns  = distance_corr_axial_columns;         
-key.column_inner_radius = column_inner_radius;              
-key.column_outer_radius = column_outer_radius;      
+key.distance_corr_axial_columns  = distance_corr_axial_columns;
+key.column_inner_radius = column_inner_radius;
+key.column_outer_radius = column_outer_radius;
 insert(self,key);
 
 end

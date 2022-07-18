@@ -9,7 +9,7 @@ f_trace      : longblob   # fluorescent trace for each frame
 
 classdef ROITraceNeuropil < dj.Imported
     properties
-        keySource = EXP2.SessionEpoch & IMG.ROI & IMG.Mesoscope;
+        keySource = EXP2.SessionEpoch & IMG.ROI & IMG.Volumetric - IMG.Mesoscope;
     end
     methods(Access=protected)
         function makeTuples(self, key)
@@ -90,12 +90,13 @@ classdef ROITraceNeuropil < dj.Imported
                 key_ROITrace(iROI).session_epoch_type = key.session_epoch_type;
                 key_ROITrace(iROI).session_epoch_number = key.session_epoch_number;
                 
-                k2=key_ROITrace(iROI);
-                insert(self, k2);
+%                 k2=key_ROITrace(iROI);
+%                 insert(self, k2);
                 s2p_roi = s2p_roi +1;
                 previous_fov_num = current_fov_num;
                 previous_plane_num = current_plane_num;
             end
+           insert(self, key_ROITrace);
         end
     end
 end

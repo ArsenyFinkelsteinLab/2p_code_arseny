@@ -9,7 +9,7 @@ spikes_trace      : longblob   # (s) deconvolved trace for each frame
 
 classdef ROISpikes < dj.Imported
     properties
-        keySource = EXP2.SessionEpoch & IMG.ROI;
+        keySource = (EXP2.SessionEpoch & IMG.ROI) - IMG.Mesoscope;
     end
     methods(Access=protected)
         function makeTuples(self, key)

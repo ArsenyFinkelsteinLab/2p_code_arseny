@@ -3,8 +3,9 @@ function [start_file, end_file ] = fn_parse_into_trials (key, frame_rate, time_b
 TrialsStartFrame=fetchn((IMG.FrameStartTrial  & key) - TRACKING.VideoGroomingTrial,'session_epoch_trial_start_frame','ORDER BY trial');
 trial_num=fetchn((IMG.FrameStartTrial  & key) - TRACKING.VideoGroomingTrial,'trial','ORDER BY trial');
 if isempty(TrialsStartFrame) % if its not mesoscope recording, but old recording (e.g. photostim) IMG.FrameStartTrial does not contain trial number, but in fact in behavioral session each file correspond to a new trial. 
-    TrialsStartFrame=fetchn((IMG.FrameStartFile & key) - TRACKING.VideoGroomingTrial,'session_epoch_file_start_frame', 'ORDER BY session_epoch_file_num');
+    TrialsStartFrame=fetchn((IMG.FrameStartFile & key),'session_epoch_file_start_frame', 'ORDER BY session_epoch_file_num');
     trial_num=fetchn((EXP2.BehaviorTrial  & key) - TRACKING.VideoGroomingTrial,'trial','ORDER BY trial');
+    TrialsStartFrame = TrialsStartFrame(trial_num);
 end
 
 %We first try to align based on video, if it exists. We align to the first video-detected lick after lickport movement

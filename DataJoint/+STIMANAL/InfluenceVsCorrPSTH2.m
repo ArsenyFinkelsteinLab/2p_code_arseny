@@ -13,7 +13,7 @@ num_pairs                                       :int     # num pairs included
 %}
 
 
-classdef InfluenceVsCorrPSTH < dj.Computed
+classdef InfluenceVsCorrPSTH2 < dj.Computed
     properties
         keySource = EXP2.SessionEpoch & STIMANAL.Target2AllCorrPSTH & STIM.ROIInfluence2;
     end
@@ -28,7 +28,7 @@ classdef InfluenceVsCorrPSTH < dj.Computed
             maximal_distance=100; %um lateral;  exlude all cells further than maximal distance from target
             
             % bins
-            bins_corr = linspace(-1,1,9); % if there is no SVD component/s subtraction
+            bins_corr = linspace(-1,1,8); % if there is no SVD component/s subtraction
             bins_corr(2)=[];
             %             bins_influence = [-inf,linspace(-0.1,0.2,6),inf];
             %             bins_influence = [-inf,linspace(-0.1,0.4,6),inf];
@@ -37,7 +37,7 @@ classdef InfluenceVsCorrPSTH < dj.Computed
             %             bins_influence=bins_influence(4:end);
             
             dir_base = fetch1(IMG.Parameters & 'parameter_name="dir_root_save"', 'parameter_value');
-            dir_fig = [dir_base  '\Photostim\influence_vs_corr_new\corr_quadrants\'];
+            dir_fig = [dir_base  '\Photostim\influence_vs_corr_new\corr_psth2\'];
             session_date = fetch1(EXP2.Session & key,'session_date');
             
             rel_data_corr =STIMANAL.Target2AllCorrPSTH;
@@ -106,9 +106,9 @@ classdef InfluenceVsCorrPSTH < dj.Computed
                     rel_data_corr_current=rel_data_corr & rel_target;
                     DataCorr = cell2mat(fetchn(rel_data_corr_current,'rois_corr', 'ORDER BY photostim_group_num'));
                     
-%                     if numel(DataCorr(:)) ~= numel(DataStim(:))
-%                         a=1
-%                     end
+                    if numel(DataCorr(:)) ~= numel(DataStim(:))
+                        a=1
+                    end
                     
                     %% exclude based on PSTH significance
                     roi_psth_signif = fetchn(rel_data_signal & k_psth & rel_roi & 'psth_odd_even_corr>=0.5', 'roi_number', 'ORDER BY roi_number');

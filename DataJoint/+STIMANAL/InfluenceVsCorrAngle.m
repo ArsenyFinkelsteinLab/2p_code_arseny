@@ -35,7 +35,7 @@ classdef InfluenceVsCorrAngle < dj.Computed
             %             bins_influence=bins_influence(4:end);
             
             dir_base = fetch1(IMG.Parameters & 'parameter_name="dir_root_save"', 'parameter_value');
-            dir_fig = [dir_base  '\Photostim\influence_vs_corr_new\corr_angle2\'];
+            dir_fig = [dir_base  '\Photostim\influence_vs_corr_new\corr_angle\'];
             session_date = fetch1(EXP2.Session & key,'session_date');
             
             rel_data_corr =STIMANAL.Target2AllCorrAngle;
@@ -58,7 +58,7 @@ classdef InfluenceVsCorrAngle < dj.Computed
                 
 %                 rel_target_signif_by_psth = (STIM.ROIResponseDirect & 'flag_zscore=1' &  rel_target) &    (IMG.ROI &  (LICK2D.ROILick2DangleSpikes & k_psth & 'theta_tuning_odd_even_corr>=0.5'));
 %                 rel_target_signif_by_psth = (STIM.ROIResponseDirect  &  rel_target) &    (IMG.ROI &  (LICK2D.ROILick2DangleSpikes & k_psth & 'rayleigh_length>=0.05'));
-                rel_target_signif_by_psth = (STIM.ROIResponseDirect2  &  rel_target) &    (IMG.ROI &  (LICK2D.ROILick2DangleSpikes & k_psth & 'goodness_of_fit_vmises>=0.5'));
+                rel_target_signif_by_psth = (STIM.ROIResponseDirect2  &  rel_target) &    (IMG.ROI &  (LICK2D.ROILick2DangleSpikes & k_psth & 'goodness_of_fit_vmises>=0.25'));
 
                 group_list_signif = fetchn(rel_target_signif_by_psth,'photostim_group_num','ORDER BY photostim_group_num');
                 idx_group_list_signif = ismember(group_list,group_list_signif);
@@ -113,7 +113,7 @@ classdef InfluenceVsCorrAngle < dj.Computed
                     %% exclude based on PSTH significance
 %                     roi_psth_signif = fetchn(LICK2D.ROILick2DangleSpikes & k_psth & rel_roi & 'theta_tuning_odd_even_corr>=0.5', 'roi_number', 'ORDER BY roi_number');
 %                     roi_psth_signif = fetchn(LICK2D.ROILick2DangleSpikes & k_psth & rel_roi & 'rayleigh_length>=0.05', 'roi_number', 'ORDER BY roi_number');
-                    roi_psth_signif = fetchn(LICK2D.ROILick2DangleSpikes & k_psth & rel_roi & 'goodness_of_fit_vmises>=0.5', 'roi_number', 'ORDER BY roi_number');
+                    roi_psth_signif = fetchn(LICK2D.ROILick2DangleSpikes & k_psth & rel_roi & 'goodness_of_fit_vmises>=0.25', 'roi_number', 'ORDER BY roi_number');
 
                     roi_psth_all = fetchn(LICK2D.ROILick2DangleSpikes & k_psth & rel_roi, 'roi_number', 'ORDER BY roi_number');
                     idx_psth_signif=ismember(roi_psth_all,roi_psth_signif);

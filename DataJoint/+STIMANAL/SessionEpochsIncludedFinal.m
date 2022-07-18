@@ -211,9 +211,9 @@ classdef SessionEpochsIncludedFinal < dj.Lookup
             496912 3 'spont_photo' 2  1  150   1 'target switches every 4 frames -- 1 time per volume'
             496912 4 'spont_photo' 2  1  100   1 'target switches every 4 frames -- 1 time per volume'
 
-            491362 1 'spont_photo' 2  1  150   1 'target switches every 4 frames -- 1 time per volume'
-            491362 2 'spont_photo' 2  1  150   1 'target switches every 4 frames -- 1 time per volume'
-            491362 2 'spont_photo' 3  1  200   1 'target switches every 4 frames -- 1 time per volume'
+            491362 1 'spont_photo' 2  0  150   1 'target switches every 4 frames -- 1 time per volume'
+            491362 2 'spont_photo' 2  0  150   1 'target switches every 4 frames -- 1 time per volume'
+            491362 2 'spont_photo' 3  0  200   1 'target switches every 4 frames -- 1 time per volume'
 
             
             496916 1 'spont_photo' 2  1  100   1 'target switches every 4 frames -- 1 time per volume'
@@ -222,11 +222,11 @@ classdef SessionEpochsIncludedFinal < dj.Lookup
             496916 5 'spont_photo' 2  1  150   1 'target switches every 4 frames -- 1 time per volume'
             496916 6 'spont_photo' 2  1  150   1 'target switches every 4 frames -- 1 time per volume'
 
-            494561 1 'spont_photo' 2  1  100   1 'target switches every 4 frames -- 1 time per volume'
+            494561 1 'spont_photo' 2  0  100   1 'target switches every 4 frames -- 1 time per volume'
 
-            495875 1 'spont_photo' 2  1  150   1 'target switches every 4 frames -- 1 time per volume'
+            495875 1 'spont_photo' 2  0  150   1 'target switches every 4 frames -- 1 time per volume'
                   
-            495876 1 'spont_photo' 2  1  150   1 'target switches every 4 frames -- 1 time per volume'
+            495876 1 'spont_photo' 2  0  150   1 'target switches every 4 frames -- 1 time per volume'
 
             
             }

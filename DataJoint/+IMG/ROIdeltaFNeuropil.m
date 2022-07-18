@@ -46,18 +46,18 @@ classdef ROIdeltaFNeuropil < dj.Imported
                 baseline2=smoothdata(baseline,'gaussian',running_window*frame_rate);
                 dFF = (F-baseline2)./baseline2; %deltaF over F
                 
-                k2=key_ROITrace(iROI);
-                k2.dff_trace = dFF;
-                k2.session_epoch_type = key.session_epoch_type;
-                k2.session_epoch_number = key.session_epoch_number;
+                key_ROITrace(iROI).dff_trace = dFF;
+                key_ROITrace(iROI).session_epoch_type = key.session_epoch_type;
+                key_ROITrace(iROI).session_epoch_number = key.session_epoch_number;
                 
                 key_mean_dff(iROI).mean_dff = mean(dFF);
                 key_mean_dff(iROI).session_epoch_type = key.session_epoch_type;
                 key_mean_dff(iROI).session_epoch_number = key.session_epoch_number;
                 
-                insert(self,k2);
-                
+%                 k2=key_ROITrace(iROI);
+%                 insert(self,k2);
             end
+            insert(self,key_ROITrace);
             insert(IMG.ROIdeltaFMeanNeuropil,key_mean_dff);
             
         end

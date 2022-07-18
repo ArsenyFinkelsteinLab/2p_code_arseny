@@ -14,7 +14,7 @@ k_neurons_or_control.neurons_or_control=1;
 k_corr_local.radius_size=100;
 k_corr_local.session_epoch_type = 'behav_only'; % behav_only spont_only
 k_corr_local.num_svd_components_removed=0;
-rel_session = EXP2.Session & (STIMANAL.OutDegree & IMG.Volumetric) & (EXP2.SessionEpoch& 'session_epoch_type="spont_only"') & (STIMANAL.NeuronOrControl5 & 'neurons_or_control=1' & 'num_targets>=30');
+rel_session = EXP2.Session & (STIMANAL.OutDegree & IMG.Volumetric) & (EXP2.SessionEpoch& 'session_epoch_type="spont_only"') & (STIMANAL.NeuronOrControl5 & 'neurons_or_control=1' & 'num_targets>=30') ;
 
 
 %Graphics

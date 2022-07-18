@@ -11,31 +11,34 @@ out_degree_inhibitory               : int                # number of neurons inf
 %}
 
 
-classdef OutDegree < dj.Imported
+classdef OutDegree3temp < dj.Imported
     properties
-        keySource = EXP2.SessionEpoch & STIM.ROIResponseDirect2;
+        keySource = EXP2.SessionEpoch & STIM.ROIResponseDirect3;
     end
     methods(Access=protected)
         function makeTuples(self, key)
             minimal_lateral_distance=25; %  in microns, max distance to direct neuron
-            max_distance_lateral_vec = [50, 100, 150, 200, 500, 1000];
-            p_val=[0.0001, 0.001, 0.01, 0.05];
+            max_distance_lateral_vec = [50,100, 150, 200];
+%             max_distance_lateral_vec = [50, 100, 150, 200]; % 100 already             exists
+
+%             p_val=[0.001, 0.01, 0.05];
+             p_val=[0.01];
+
             
-            
-            rel_group = IMG.PhotostimGroup &   STIM.ROIResponseDirect2 & key;
+            rel_group = IMG.PhotostimGroup &   STIM.ROIResponseDirect3 & key;
             photostim_group = fetch(rel_group,'ORDER BY photostim_group_num');
             
-            key_ROI=fetch(STIM.ROIResponseDirect2 & key,'ORDER BY photostim_group_num');
+            key_ROI=fetch(STIM.ROIResponseDirect3 & key,'ORDER BY photostim_group_num');
             
-            parfor i_d = 1:1:numel(max_distance_lateral_vec)
+           for i_d = 1:1:numel(max_distance_lateral_vec)
                 for i_p = 1:1:numel(p_val)
                     current_p_val = p_val(i_p);
                     key_ROI_current = key_ROI;
-                    for i_g = 1:1: rel_group.count
+                    parfor i_g = 1:1: rel_group.count
                         rel_group_current = photostim_group(i_g);
                         
                         % using t-test p-value as criteria
-                        rel = (STIM.ROIInfluence5 & rel_group_current) & sprintf('response_p_value1<=%.4f',current_p_val) & sprintf('response_distance_lateral_um>%d',minimal_lateral_distance)  & sprintf('response_distance_lateral_um<=%d',(max_distance_lateral_vec(i_d)));
+                        rel = (STIM.ROIInfluence3 & rel_group_current) & sprintf('response_p_value1<=%.4f',current_p_val) & sprintf('response_distance_lateral_um>%d',minimal_lateral_distance)  & sprintf('response_distance_lateral_um<=%d',(max_distance_lateral_vec(i_d)));
                         rel_current = rel ;
                         key_ROI_current(i_g).out_degree_all = rel_current.count;
                         
@@ -62,10 +65,8 @@ classdef OutDegree < dj.Imported
                         %                             key_ROI_current(i_g).num_svd_components_removed = num_svd;
                         key_ROI_current(i_g).p_val = current_p_val;
                         
-                        
-                        
                     end
-                    insert(self,key_ROI_current)
+                    insert(STIMANAL.OutDegree3,key_ROI_current)
                 end
             end
         end

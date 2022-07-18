@@ -30,7 +30,7 @@ position_y1(1)=0.5;
 position_y1(end+1)=position_y1(end)-vertical_dist;
 
 rel_data = (STIMANAL.InfluenceDistance222 & 'flag_divide_by_std=0' & 'flag_withold_trials=1' & 'flag_normalize_by_total=1') ...
-    &  (STIMANAL.SessionEpochsIncludedFinal& IMG.Volumetric & 'stimpower=150' & 'flag_include=1'  ...
+    &  (STIMANAL.SessionEpochsIncludedFinal& IMG.Volumetric & 'stimpower=100' & 'flag_include=1'  ...
      & (STIMANAL.NeuronOrControlNumber2 & 'num_targets_neurons>=50') ...
     & (STIMANAL.NeuronOrControlNumber2 & 'num_targets_controls>=50'));
 
@@ -76,13 +76,13 @@ set(gca,'YTick',[0 60 120],'XTick',[25,100:100:500]);
 ylabel([sprintf('Axial      \nDistance ') '(\mum)        ']);
 xlim(xl)
 
-ax2=axes('position',[position_x1(1)+0.2, position_y1(1)+0.05, panel_width1/5, panel_height1/2]);
+ax2=axes('position',[position_x1(1)+0.2, position_y1(1)+0.09, panel_width1/5, panel_height1/4]);
 cmp = bluewhitered(512); %
 colormap(ax2, cmp)
 caxis([OUT1.minv max(max(OUT1.map(:,3:end)))]);
 colorbar
 axis off
-text(8, 0.1, sprintf('Connection \n Probability'),'Rotation',90);
+text(8, 0.1, sprintf('\n\nConnection \n Probability'),'Rotation',90);
 
 
 
@@ -109,15 +109,15 @@ OUT2=fn_PLOT_ConnectionProbabilityDistance_averaging(D2,D2_all,distance_axial_bi
 
 
 %% Marginal distribution - lateral
-axes('position',[position_x1(1), position_y1(1)+0.18, panel_width1, panel_height1*0.5]);
+axes('position',[position_x1(1), position_y1(1)+0.175, panel_width1, panel_height1*0.5]);
 hold on
-plot(xl, [0 0],'-k')
+% plot(xl, [0 0],'-k')
 shadedErrorBar(OUT1.distance_lateral_bins_centers(3:end),OUT1.marginal_lateral_mean(3:end),OUT1.marginal_lateral_stem(3:end),'lineprops',{'-','Color',[1 0 1]})
 shadedErrorBar(OUT1.distance_lateral_bins_centers(3:end),OUT2.marginal_lateral_mean(3:end),OUT2.marginal_lateral_stem(3:end),'lineprops',{'-','Color',[0.5 0.5 0.5]})
 % yl(1)=-2*abs(min([OUT1.marginal_lateral_mean,OUT2.marginal_lateral_mean]));
 % yl(2)=abs(max([OUT1.marginal_lateral_mean,OUT2.marginal_lateral_mean]));
-yl(1)=-0.05;
-yl(2)=0.25;
+yl(1)=0;
+yl(2)=0.15;
 ylim(yl)
 set(gca,'XTick',[],'XLim',xl);
 box off

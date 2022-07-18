@@ -14,7 +14,6 @@ classdef ROIPositionETL < dj.Imported
     end
     methods(Access=protected)
         function makeTuples(self, key)
-            dir_ETL_transform = 'F:\Arseny\2p\ETL_abberations\';
             D=fetch (IMG.ROI & key, 'roi_centroid_x','roi_centroid_y', 'ORDER BY roi_number');
             roi_centroid_x= [D.roi_centroid_x];
             roi_centroid_y= [D.roi_centroid_y];
@@ -33,8 +32,8 @@ classdef ROIPositionETL < dj.Imported
                 insert(self,D);
                 
             elseif (z_pos_relative==60 ||  z_pos_relative==90 ||  z_pos_relative==120) % affine transform to correct for ETL abberations
-                Affine_transform =load([dir_ETL_transform 'Affine_transform' num2str(z_pos_relative) '.mat']);
-                Affine_transform=Affine_transform.Affine_trasnform;
+                Affine_transform = fetchn(IMG.ETLTransform & key & sprintf('plane_depth=%d',z_pos_relative),'etl_affine_transform');
+                Affine_transform = cell2mat(Affine_transform);
                 XY = [roi_centroid_x;roi_centroid_y; ones(1,size(roi_centroid_x,2))];
                 XY_trans=Affine_transform*XY;
                 for iROI=1:1:numberROI
@@ -44,8 +43,8 @@ classdef ROIPositionETL < dj.Imported
                 insert(self,D);
                 
             elseif z_pos_relative==80
-                Affine_transform =load([dir_ETL_transform 'Affine_transform90.mat']);
-                Affine_transform=Affine_transform.Affine_trasnform;
+                Affine_transform = fetchn(IMG.ETLTransform & key & sprintf('plane_depth=%d',z_pos_relative),'etl_affine_transform');
+                Affine_transform = cell2mat(Affine_transform);
                 XY = [roi_centroid_x;roi_centroid_y; ones(1,size(roi_centroid_x,2))];
                 XY_trans=Affine_transform*XY;
                 for iROI=1:1:numberROI

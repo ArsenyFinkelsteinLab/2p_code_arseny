@@ -6,6 +6,7 @@ close all
 
 rel_data1 = POP.ROISVDDistanceScale  & (IMG.Mesoscope & IMG.Volumetric);
 rel_data2 = POP.SVDSingularValues  & (IMG.Mesoscope & IMG.Volumetric) & 'threshold_for_event=0' & 'time_bin=1.5';
+rel_data3 = POP.SVDTemporalComponentsAutocorr	 & (IMG.Mesoscope & IMG.Volumetric);
 
 smooth_window_scale = 3;
 
@@ -157,6 +158,68 @@ xlim([1 1000])
 % set(gca,'XTick', [1,10,100,1000], 'Ytick', [125 250 500 1000 2000])
 set(gca,'XTick', [1,10,100,1000], 'Ytick', [250 500 1000 2000])
 ylim([200 2000])
+
+fig = gcf;    %or one particular figure whose handle you already know, or 0 to affect all figures
+set( findall(fig, '-property', 'fontsize'), 'fontsize', DefaultFontSize)
+
+
+%% Autocorrelation timescale of the PCs 
+%------------------------------
+
+% Timescales Behavior
+%--------------
+DATA=fetch(rel_data3 & 'session_epoch_type="behav_only"','*');
+num_sessions = numel(DATA);
+num_components_behav = min([DATA.num_components]);
+Scale_behav=[];
+for i=1:1:num_sessions
+    Scale_behav (i,:) = smooth(DATA(i).temporal_component_autocorr_tau(1:1:num_components_behav),smooth_window_scale);
+end
+
+Scale_behav_mean =  mean(Scale_behav,1);
+Scale_behav_stem =  std(Scale_behav,1)./sqrt(num_sessions);
+
+
+%Timescales Spont
+%---------------
+DATA=fetch(rel_data3 & 'session_epoch_type="spont_only"' ,'*');
+num_sessions = numel(DATA);
+num_components_spont = min([DATA.num_components]);
+Scale_spont=[];
+for i=1:1:num_sessions
+    Scale_spont (i,:) = smooth(DATA(i).temporal_component_autocorr_tau(1:1:num_components_spont),smooth_window_scale);
+end
+
+Scale_spont_mean =  mean(Scale_spont,1);
+Scale_spont_stem =  std(Scale_spont,1)./sqrt(num_sessions);
+
+% Spatial scale plot
+%---------------
+x_behav = 1:1:num_components_behav;
+y_behav = Scale_behav_mean;
+err_behav = [Scale_behav_mean+Scale_behav_stem; Scale_behav_mean - Scale_behav_stem];     
+
+x_spont= 1:1:num_components_spont;
+y_spont = Scale_spont_mean;
+err_spont = [Scale_spont_mean+Scale_spont_stem; Scale_spont_mean - Scale_spont_stem];                                                     
+
+subplot(2,2,3)
+hold on
+patch([x_behav, fliplr(x_behav)], [err_behav(1,:), fliplr(err_behav(2,:))], 'b', 'FaceAlpha',0.5, 'EdgeColor', 'none')   % Shaded Confidence Intervals
+plot(x_behav, y_behav,'-b')
+patch([x_spont, fliplr(x_spont)], [err_spont(1,:), fliplr(err_spont(2,:))], 'r', 'FaceAlpha',0.5, 'EdgeColor', 'none')   % Shaded Confidence Intervals
+plot(x_spont, y_spont,'-r')
+set(gca, 'XScale','log', 'YScale','log')
+xlabel('PC dimension');
+ylabel('Temporal scale (\mum)');
+box off
+text(1.5,400,'Behavior', 'Color', [0 0 1]);
+text(1.5,330,'Spontaneous', 'Color', [1 0 0]);
+xlim([1 100])
+% set(gca,'XTick', [1,10,100,1000], 'Ytick', [125 250 500 1000 2000])
+% set(gca,'XTick', [1,10,100,1000], 'Ytick', [250 500 1000 2000])
+% ylim([200 2000])
+set(gca,'XTick', [1,10,100,1000])
 
 fig = gcf;    %or one particular figure whose handle you already know, or 0 to affect all figures
 set( findall(fig, '-property', 'fontsize'), 'fontsize', DefaultFontSize)
