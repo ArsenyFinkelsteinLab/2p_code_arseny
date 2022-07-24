@@ -1,5 +1,6 @@
 %{
 # Photostim Group
+
 -> EXP2.SessionEpoch
 ---
 num_targets_neurons            : int             # number of neurons or control sites

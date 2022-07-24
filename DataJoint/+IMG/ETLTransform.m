@@ -1,5 +1,5 @@
 %{ 
-# Correction based on ETL callibration
+# % XYZ coordinate transform  (same transform across all sessions) for correction of ETL abberations based on ETL callibration
 plane_depth              : double           # imaging plane depth in um
 ---
 etl_affine_transform=null   : blob      #  affine transform to correct for ETL abberations,computed based on ETL callibration with pollen grains

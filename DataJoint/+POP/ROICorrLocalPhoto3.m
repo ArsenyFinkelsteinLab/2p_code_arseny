@@ -1,5 +1,7 @@
 %{
 # Local correlation
+# XYZ coordinate correction of ETL abberations based on anatomical fiducial
+
 -> EXP2.SessionEpoch
 -> IMG.ROI
 radius_size                   : float                               # radius size, in um in lateral dimension

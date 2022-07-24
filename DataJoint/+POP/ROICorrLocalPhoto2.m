@@ -1,5 +1,7 @@
 %{
 # Local correlation
+# XYZ coordinate correction of ETL abberations based on ETL callibration
+
 -> EXP2.SessionEpoch
 -> IMG.ROI
 radius_size                   : float                               # radius size, in um in lateral dimension
@@ -16,7 +18,7 @@ num_neurons_in_radius_without_inner_ring =null   : float           # number of n
 
 classdef ROICorrLocalPhoto2 < dj.Computed
     properties
-        keySource = EXP2.SessionEpoch  & IMG.ROI & IMG.ROISpikes & (EXP2.Session & STIM.ROIResponseDirect) & IMG.Volumetric - IMG.Mesoscope;
+        keySource = EXP2.SessionEpoch  & IMG.ROI & IMG.ROISpikes & (EXP2.Session & STIM.ROIResponseDirect2) & IMG.Volumetric - IMG.Mesoscope;
     end
     methods(Access=protected)
         function makeTuples(self, key)

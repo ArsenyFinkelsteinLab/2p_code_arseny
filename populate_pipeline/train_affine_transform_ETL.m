@@ -15,7 +15,7 @@ close all
 % %since R=A*T, A= R*inv(T) or just A=R/T (in MATLAB)
 % A=R/T
 
-z_pos_relative=60; %or 60 90 120
+z_pos_relative=120; %or 60 90 120
 file_path='F:\Arseny\2p\ETL_abberations\ETL_all_Dec18th_2021\repeat_1\cropped\';
 
 ff=imread([file_path sprintf('%d',z_pos_relative) '.jpg']);
@@ -26,6 +26,12 @@ imagesc(resizedimage)
 axis equal
 set(gca,'YDir','normal');
 R=ginput()
+hold on
+plot(R(:,1),R(:,2),'.c')
+for ir=1:1:size(R,1)
+    text(R(ir,1),R(ir,2),sprintf('%d',ir),'Color','c');
+end
+
 T=ginput(size(R,1))
 
 R=R';
@@ -41,13 +47,12 @@ R=R(1:2,:);
 T=T(1:2,:);
 Rtrans=Rtrans(1:2,:);
 
-hold on
 
-plot(R(1,:),R(2,:),'.c')
+% plot(R(1,:),R(2,:),'.c')
 plot(T(1,:),T(2,:),'.m')
 plot(Rtrans(1,:),Rtrans(2,:),'.y')
 
-save([file_path 'Affine_transform120.mat'],'Affine_trasnform')
+% save([file_path 'Affine_transform120.mat'],'Affine_transform')
 
 key1.etl_affine_transform=Affine_trasnform_across_sess;
 key1.plane_depth=z_pos_relative;

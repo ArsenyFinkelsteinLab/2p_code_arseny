@@ -1,5 +1,7 @@
 %{
 # Taking most responsive neurons
+# XYZ coordinate correction of ETL abberations based on ETL callibration
+
 -> EXP2.SessionEpoch
 ---
 mat_response_mean        : longblob                # (pixels)

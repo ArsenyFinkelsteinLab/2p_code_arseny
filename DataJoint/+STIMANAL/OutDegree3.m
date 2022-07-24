@@ -1,5 +1,7 @@
 %{
 # Out degree of directly stimulated neurons, i.e. number of neurons indirectly influenced by the photostimulation
+# XYZ coordinate correction of ETL abberations based on anatomical fiducial
+
 -> IMG.PhotostimGroup
 -> IMG.ROI
 max_distance_lateral                 : float              # maximum lateral distance (um) to compute pairs within this distance form target neuron

@@ -1,5 +1,6 @@
 %{
 # Photostim Group
+
 -> EXP2.SessionEpoch
 photostim_group_num   : int #
 ---

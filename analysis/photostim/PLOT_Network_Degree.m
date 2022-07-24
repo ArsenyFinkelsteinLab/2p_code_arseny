@@ -5,15 +5,15 @@ dir_base = fetch1(IMG.Parameters & 'parameter_name="dir_root_save"', 'parameter_
 dir_current_fig = [dir_base  '\Photostim\Connectivity\'];
 filename = 'network_degree_vs_correlations';
 
-k_degree.max_distance_lateral =150;
+k_degree.max_distance_lateral =100;
 k_degree.session_epoch_number=2;
 k_degree.p_val = 0.05;
 k_neurons_or_control.neurons_or_control=1;
 
-k_corr_local.radius_size=200;
+k_corr_local.radius_size=100;
 k_corr_local.session_epoch_type = 'spont_only'; % behav_only spont_only
 k_corr_local.num_svd_components_removed=0;
-rel_session = EXP2.Session & (STIMANAL.OutDegree & IMG.Volumetric) & (EXP2.SessionEpoch& 'session_epoch_type="spont_only"') & (STIMANAL.NeuronOrControl2 & 'neurons_or_control=1' & 'num_targets>=30');
+rel_session = EXP2.Session & (STIMANAL.OutDegree & IMG.Volumetric) & (EXP2.SessionEpoch& 'session_epoch_type="spont_only"') &  (STIMANAL.NeuronOrControlNumber2 & 'num_targets_neurons>=50') &  (STIMANAL.SessionEpochsIncludedFinal & IMG.Volumetric & 'stimpower>=100' & 'flag_include=1' );
 
 
 %Graphics
@@ -59,7 +59,7 @@ for i_s = 1:1:rel_session.count
     %    numel(unique(DATA_DEGREE.roi_number))
     
     key_epoch = fetch(EXP2.SessionEpoch & k_s & k_corr_local);
-    rel_corr_local = POP.ROICorrLocalPhoto  & k_s & k_corr_local & key_epoch;
+    rel_corr_local = POP.ROICorrLocalPhoto2  & k_s & k_corr_local & key_epoch;
     
     max_degree_session_excit(i_s)=max([DATA_DEGREE.out_degree_excitatory]);
     mean_degree_session_excit(i_s)=mean([DATA_DEGREE.out_degree_excitatory]);
@@ -88,7 +88,7 @@ for i_s = 1:1:rel_session.count
     DATA_DEGREE_ALL =[DATA_DEGREE_ALL; DATA_DEGREE];
 end
 
-num_neurons_in_radius = DATA_CORR_ALL.num_neurons_in_radius;
+num_neurons_in_radius = DATA_CORR_ALL.num_neurons_in_radius_without_inner_ring;
 
 % if flag_response==0
 %     out_degree = DATA_DEGREE_ALL.out_degree_all1;
@@ -161,9 +161,14 @@ k_prob=k_prob./length(k);
 plot(hist_bins_centers,k_prob,'.-r')
 % poisson
 poisson_prob_at_bins = poisspdf(hist_bins_centers,mean(k));
-poisson_prob_continuous = poisspdf(hist_bins_centers(1):1:hist_bins_centers(end),mean(k));
-poisson_prob = poisson_prob_continuous./sum(poisson_prob_at_bins);
-plot(hist_bins_centers(1):1:hist_bins_centers(end),poisson_prob,'-' ,'Color',[0.5 0.5 0.5])
+continuous_bins=[0:1:max(hist_bins)];
+poisson_prob_continuous = poisspdf(continuous_bins,mean(k));
+poisson_prob_at_bins=[];
+for i_b=2:1:numel(hist_bins)
+    poisson_prob_at_bins(i_b)=sum(poisson_prob_continuous([ceil(hist_bins(i_b-1))+1:1: ceil(hist_bins(i_b))]))
+end
+poisson_prob = max( poisson_prob_at_bins)*(poisson_prob_continuous./max(poisson_prob_continuous));
+plot(continuous_bins,poisson_prob,'-' ,'Color',[0.5 0.5 0.5])
 xlabel('Effective Connections')
 ylabel('Probability')
 title('Excitatory connections', 'Color',[1 0 0]);
@@ -175,12 +180,12 @@ ax1=axes('position',[position_x1(1), position_y1(2), panel_width1, panel_height1
 loglog((hist_bins_centers),(k_prob),'.-r');
 hold on
 %poisson
-loglog(hist_bins_centers(1):1:hist_bins_centers(end),poisson_prob,'-','Color',[0.5 0.5 0.5]);
+loglog(continuous_bins,poisson_prob,'-','Color',[0.5 0.5 0.5]);
 xlabel('Effective Connections')
 ylabel('Probability')
 box off;
-set(gca,'Xtick',[1,10,100], 'Ytick',[0.001, 0.01, 0.1, 1])
-ylim([10^-3.2, 1]);
+set(gca,'Xtick',[1,10,100], 'Ytick',[0.0001, 0.001, 0.01, 0.1, 1])
+ylim([10^-4, 1]);
 xlim([4 100]);
 
 
@@ -196,22 +201,26 @@ hold on
 [k_prob]=histcounts(k,hist_bins);
 k_prob=k_prob./length(k);
 plot(hist_bins_centers,k_prob,'.-b')
-% poisson
 poisson_prob_at_bins = poisspdf(hist_bins_centers,mean(k));
-poisson_prob_continuous = poisspdf(hist_bins_centers(1):1:hist_bins_centers(end),mean(k));
-poisson_prob = poisson_prob_continuous./sum(poisson_prob_at_bins);
-plot(hist_bins_centers(1):1:hist_bins_centers(end),poisson_prob,'-' ,'Color',[0.5 0.5 0.5])
+continuous_bins=[0:1:max(hist_bins)];
+poisson_prob_continuous = poisspdf(continuous_bins,mean(k));
+poisson_prob_at_bins=[];
+for i_b=2:1:numel(hist_bins)
+    poisson_prob_at_bins(i_b)=sum(poisson_prob_continuous([ceil(hist_bins(i_b-1))+1:1: ceil(hist_bins(i_b))]))
+end
+poisson_prob = max( poisson_prob_at_bins)*(poisson_prob_continuous./max(poisson_prob_continuous));
+plot(continuous_bins,poisson_prob,'-' ,'Color',[0.5 0.5 0.5])
 xlabel('Effective Connections')
 ylabel('Probability')
 title('Inhibitory connections','Color', [0 0 1]);
-text(75,0.2,'Observed','Color',[0 0 1]);
+text(35,0.2,'Observed','Color',[0 0 1]);
 
 %log scale
 ax1=axes('position',[position_x1(2), position_y1(2), panel_width1, panel_height1]);
 loglog((hist_bins_centers),(k_prob),'.-b');
 hold on
 %poisson
-loglog(hist_bins_centers(1):1:hist_bins_centers(end),poisson_prob,'-','Color',[0.5 0.5 0.5]);
+loglog(continuous_bins,poisson_prob,'-','Color',[0.5 0.5 0.5]);
 xlabel('Effective Connections')
 ylabel('Probability')
 k_prob(k_prob==0)=NaN;
@@ -240,17 +249,21 @@ hold on
 
 % excitatory
 k =out_degree_excitatory;
-hist_bins = prctile(k,linspace(0,100,12));
-hist_bins_centers = hist_bins(1:end-1) + diff(hist_bins)/2;
+% hist_bins = prctile(k,linspace(1,100,10));
+hist_bins = linspace(1,ceil(max(k)),9);
+hist_bins(end-1)=[];
+hist_bins_centers = hist_bins(1:end-1) + diff(hist_bins(1:1:2))/2;
 x=k;
 y=corr_local;
 [y_binned_mean, y_binned_stem]= fn_bin_data(x,y,hist_bins);
 shadedErrorBar(hist_bins_centers,y_binned_mean,y_binned_stem,'lineprops',{'.-','Color',[1 0 0]})
 xlabel('Effective Connections')
-ylabel('Correlation')
-title(sprintf('Trace correlation with \nneighboring neurons'))
+ylabel('Local Correlation')
+title(sprintf('Trace correlation with \nneighboring neurons\n'))
 % ylim([0,max(y_binned_mean+y_binned_stem)])
-ylim([0.02,max(y_binned_mean+y_binned_stem)])
+% ylim([0.025,max(y_binned_mean+y_binned_stem)])
+ylim([0.025,0.15])
+set(gca, 'Ytick',[0.05, 0.1, 0.15])
 
 box off;
 % text(15,0.01,'Inhibitory','Color',[0 0 1]);

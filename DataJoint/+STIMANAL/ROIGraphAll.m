@@ -1,5 +1,7 @@
 %{
 # Taking most responsive neurons
+
+
 -> EXP2.SessionEpoch
 ---
 mat_response_mean        : longblob                # (pixels)

@@ -1,5 +1,5 @@
 %{
-# Imaging plane
+# % XYZ coordinate transform (unique transform for each session) for correction of ETL abberations based on anatomical fiducial (NOT USED). Populated from external script 
 -> IMG.FOV
 plane_num              : int           # imaging plane within this field of view
 channel_num            : int           # imaging channel (e.g. 1 green, 2 red etc)

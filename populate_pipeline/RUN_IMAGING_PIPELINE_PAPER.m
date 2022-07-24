@@ -91,13 +91,15 @@ populate(IMG.ROIGood);
 populate(IMG.ROITrace); 
 populate(IMG.ROISpikes);
 
-populate(IMG.PlaneETLTransform); %% Correction based on anatomical fiducials -- session by session
-populate(IMG.ETLTransform); %% Correction based on anatomical fiducials  --  an average transform across sessions
 
-populate(IMG.PlaneETLTransform);
+% We use this:
+populate(IMG.ETLTransform);  % XYZ coordinate transform (same transform across all sessions) for correction of ETL abberations based on ETL callibration. Populated from external script.
+populate(IMG.ROIPositionETL);  % XYZ coordinate correction of ETL abberations based on ETL callibration
 
-populate(IMG.ROIPositionETL); %% Correction based on ETL callibration
-populate(IMG.ROIPositionETL2); %% Correction based on anatomical fiducials
+% NOT USED
+populate(IMG.PlaneETLTransform); % XYZ coordinate transform (unique transform for each session) for correction of ETL abberations based on anatomical fiducial (NOT USED).
+populate(IMG.ETLTransform2);   % XYZ coordinate transform (same transform across  all sessions) for correction of ETL abberations based on anatomical fiducial (NOT USED). Populated from external script 
+populate(IMG.ROIPositionETL2); % XYZ coordinate correction of ETL abberations based on anatomical fiducial (NOT USED)
 
 
 populate(IMG.ROIdeltaF); % IMG.ROIdeltaFMean IMG.ROIFMean

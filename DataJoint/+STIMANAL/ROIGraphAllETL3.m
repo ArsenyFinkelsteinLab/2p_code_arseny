@@ -1,5 +1,7 @@
 %{
 # Taking most responsive neurons
+# XYZ coordinate correction of ETL abberations based on anatomical fiducial
+
 -> EXP2.SessionEpoch
 ---
 mat_response_mean        : longblob                # (pixels)
@@ -20,7 +22,7 @@ classdef ROIGraphAllETL3 < dj.Imported
     methods(Access=protected)
         function makeTuples(self, key)
             dir_base =fetch1(IMG.Parameters & 'parameter_name="dir_root_save"', 'parameter_value');
-            dir_save_figure = [dir_base '\photostim\Graph_analysis\Graphs_on_map_ETL_depth3\'];
+            dir_save_figure = [dir_base '\photostim\Graph_analysis\Graphs_on_map_ETL_depth3_ETL_anatomical_fiducial_correction\'];
             
             p_val_threshold =0.05;
             minimal_distance =25; %in microns

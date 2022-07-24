@@ -1,5 +1,6 @@
 %{
-# ROI responses to each photostim group.  Zscoring. Spikes.
+# ROI responses to each photostim group.  Zscoring. Spikes. 
+# XYZ coordinate correction of ETL abberations based on anatomical fiducial
 -> IMG.PhotostimGroup
 -> IMG.ROI
 num_svd_components_removed      : int     # how many of the first svd components were removed
@@ -42,7 +43,8 @@ classdef ROIInfluence3 < dj.Computed
             
             
             rel_roi = (IMG.ROI-IMG.ROIBad)  & key;
-            rel_roi_xy = (IMG.ROIPositionETL2-IMG.ROIBad)  & key; % to correct for ETL abberations
+            rel_roi_xy = (IMG.ROIPositionETL2-IMG.ROIBad)  & key; % % XYZ coordinate correction of ETL abberations based on anatomical fiducial
+
             
             rel_data = (IMG.ROISpikes -IMG.ROIBad)  & key;
             %             rel_data = IMG.ROIdeltaF;

@@ -2,7 +2,7 @@
 # Finds neurons that were directly photostimulated, by taking the closest neuron within a small radius around the photostimulation
 # site and assess its response. This table can include both neurons that responded to direct photostimulation, but also non-responding neurons in case some photostimulation sites did not elicit responses. Photostimulation sites that happen to be too
 # far from actual neurons won't be saved here.
-
+# XYZ coordinate correction of ETL abberations based on anatomical fiducial
 -> IMG.PhotostimGroup
 -> IMG.ROI
 ---

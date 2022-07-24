@@ -1,5 +1,7 @@
 %{
 # Photostim Group
+# XYZ coordinate correction of ETL abberations based on anatomical fiducial
+
 -> EXP2.SessionEpoch
 photostim_group_num   : int #
 ---

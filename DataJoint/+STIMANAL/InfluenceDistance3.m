@@ -1,5 +1,7 @@
 %{
 # Responses of couple neurons to photostimulation, as a function of distance
+# XYZ coordinate correction of ETL abberations based on anatomical fiducial
+
 -> EXP2.SessionEpoch
 neurons_or_control                          : boolean             # 1 - neurons, 0 control
 flag_withold_trials                         : boolean             # 1 define influence significance and sign based on odd trials, but compute the actual response based on even trials, 0 use all trials

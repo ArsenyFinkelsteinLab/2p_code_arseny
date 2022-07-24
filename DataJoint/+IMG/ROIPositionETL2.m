@@ -1,5 +1,5 @@
 %{
-# ROI (Region of interest - e.g. cells)
+# ROI (Region of interest - e.g. cells) % XYZ coordinate correction of ETL abberations based on anatomical fiducial
 -> IMG.Plane
 roi_number                      : int           # roi number (restarts for every session)
 ---

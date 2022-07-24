@@ -1,5 +1,7 @@
 %{
 # Photostim Group
+# XYZ coordinate correction of ETL abberations based on anatomical fiducial
+
 -> EXP2.SessionEpoch
 ---
 num_targets_neurons            : int             # number of neurons or control sites

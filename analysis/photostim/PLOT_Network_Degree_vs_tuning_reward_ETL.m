@@ -14,7 +14,8 @@ k_neurons_or_control.neurons_or_control=1;
 k_corr_local.radius_size=100;
 k_corr_local.session_epoch_type = 'behav_only'; % behav_only spont_only
 k_corr_local.num_svd_components_removed=0;
-rel_session = EXP2.Session & (STIMANAL.OutDegreeETL & IMG.Volumetric) & (EXP2.SessionEpoch& 'session_epoch_type="spont_only"') & (STIMANAL.NeuronOrControl2 & 'neurons_or_control=1' & 'num_targets>=30') & (STIMANAL.NeuronOrControl2 & 'neurons_or_control=1' & 'num_targets>=30') & (STIMANAL.SessionEpochsIncludedFinal & 'flag_include=1') & LICK2D.ROILick2DRewardStatsSpikes ;
+% rel_session = EXP2.Session & (STIMANAL.OutDegreeETL & IMG.Volumetric) & (EXP2.SessionEpoch& 'session_epoch_type="spont_only"') & (STIMANAL.NeuronOrControl2 & 'neurons_or_control=1' & 'num_targets>=30') & (STIMANAL.NeuronOrControl2 & 'neurons_or_control=1' & 'num_targets>=30') & (STIMANAL.SessionEpochsIncludedFinal & 'flag_include=1')
+rel_session = EXP2.Session & (STIMANAL.OutDegree & IMG.Volumetric) & (EXP2.SessionEpoch& 'session_epoch_type="spont_only"') & (STIMANAL.NeuronOrControl2 & 'neurons_or_control=1' & 'num_targets>=50') &  (STIMANAL.SessionEpochsIncludedFinal & IMG.Volumetric & 'stimpower>=100' & 'flag_include=1' ) & LICK2D.ROILick2DRewardStatsSpikes ;
 
 
 %Graphics
@@ -60,7 +61,7 @@ for i_s = 1:1:rel_session.count
     
     k_s = sessions(i_s);
     i_s;
-    rel_degree = STIMANAL.OutDegreeETL*STIM.ROIResponseDirect2  & (STIMANAL.NeuronOrControl2 & k_neurons_or_control) & k_degree & k_s;
+    rel_degree = STIMANAL.OutDegree*STIM.ROIResponseDirect2  & (STIMANAL.NeuronOrControl2 & k_neurons_or_control) & k_degree & k_s;
     k_s;
     DATA_DEGREE = struct2table(fetch(rel_degree, '*'));
     %    numel(unique(DATA_DEGREE.roi_number))
@@ -110,7 +111,7 @@ for i_s = 1:1:rel_session.count
 
 end
 
-num_neurons_in_radius = DATA_CORR_ALL.num_neurons_in_radius;
+num_neurons_in_radius = DATA_CORR_ALL.num_neurons_in_radius_without_inner_ring;
 
 % if flag_response==0
 %     out_degree = DATA_DEGREE_ALL.out_degree_all1;
@@ -140,109 +141,77 @@ out_degree_excitatory = (out_degree_excitatory./num_neurons_in_radius)*mean(num_
 out_degree_inhibitory= (out_degree_inhibitory./num_neurons_in_radius)*mean(num_neurons_in_radius);
 
 
-
-
-%% Connectivity vs Directional tuning
+%% Connectivity vs Reward tuning (large vs regular reward)
 ax1=axes('position',[position_x1(1), position_y1(1), panel_width1, panel_height1]);
 hold on
 % excitatory
 k =out_degree_excitatory;
-hist_bins = prctile(k,linspace(0,100,12));
+hist_bins = prctile(k,linspace(0,100,7));
 hist_bins_centers = hist_bins(1:end-1) + diff(hist_bins)/2;
-x=k;
-y=signal1;
-[y_binned_mean, y_binned_stem]= fn_bin_data(x,y,hist_bins);
-shadedErrorBar(hist_bins_centers,y_binned_mean,y_binned_stem,'lineprops',{'.-','Color',[0 0 1]})
-xlabel('Effective Connections')
-ylabel('Directional tuning')
-ylim([min(y_binned_mean-y_binned_stem),max(y_binned_mean+y_binned_stem)])
-box off;
-% text(15,0.01,'Inhibitory','Color',[0 0 1]);
-% text(15,0.03,'Excitatory','Color',[1 0 0]);
-
-
-
-%% Connectivity vs Temporal tuning
-ax1=axes('position',[position_x1(2), position_y1(1), panel_width1, panel_height1]);
-hold on
-% excitatory
-k =out_degree_excitatory;
-hist_bins = prctile(k,linspace(0,100,12));
-hist_bins_centers = hist_bins(1:end-1) + diff(hist_bins)/2;
-x=k;
-y=signal3;
-[y_binned_mean, y_binned_stem]= fn_bin_data(x,y,hist_bins);
-shadedErrorBar(hist_bins_centers,y_binned_mean,y_binned_stem,'lineprops',{'.-','Color',[1 0 0]})
-xlabel('Effective Connections')
-ylabel('Temporal tuning')
-ylim([min(y_binned_mean-y_binned_stem),max(y_binned_mean+y_binned_stem)])
-box off;
-% text(15,0.01,'Inhibitory','Color',[0 0 1]);
-% text(15,0.03,'Excitatory','Color',[1 0 0]);
-
-%% Connectivity vs Reward tuning (large vs regular reard)
-ax1=axes('position',[position_x1(1), position_y1(2), panel_width1, panel_height1]);
-hold on
-% excitatory
-k =out_degree_excitatory;
-hist_bins = prctile(k,linspace(0,100,12));
-hist_bins_centers = hist_bins(1:end-1) + diff(hist_bins)/2;
+% hist_bins = linspace(0,ceil(max(k(idx_positive))),9);
+% hist_bins(end-2:end-1)=[];
+% hist_bins_centers = hist_bins(1:end-1) + diff(hist_bins(1:1:2))/2;
 x=k;
 % y=-log10(signal2);
 y=signal2_abs;
 [y_binned_mean, y_binned_stem]= fn_bin_data(x,y,hist_bins);
-shadedErrorBar(hist_bins_centers,y_binned_mean,y_binned_stem,'lineprops',{'.-','Color',[0 0.7 0.2]})
+shadedErrorBar(hist_bins_centers,y_binned_mean,y_binned_stem,'lineprops',{'.-','Color',[1 0.5 0]})
 xlabel('Effective Connections')
-ylabel('Reward-increase modulation (%)')
+ylabel(sprintf('Reward-increase \n modulation (%%)'))
 ylim([min(y_binned_mean-y_binned_stem),max(y_binned_mean+y_binned_stem)])
-
 box off;
 % text(15,0.01,'Inhibitory','Color',[0 0 1]);
 % text(15,0.03,'Excitatory','Color',[1 0 0]);
 
-% Scatter
-ax1=axes('position',[position_x1(1), position_y1(3), panel_width1, panel_height1]);
-hold on
-% excitatory
-k =out_degree_excitatory;
-x=k;
-y=signal2;
-plot(x,y,'.','Color',[0 0.7 0.2]);
-xlabel('Effective Connections')
-ylabel('Reward-increase modulation (%)')
-box off;
+% % Scatter
+% ax1=axes('position',[position_x1(1), position_y1(3), panel_width1, panel_height1]);
+% hold on
+% % excitatory
+% k =out_degree_excitatory;
+% x=k;
+% y=signal2;
+% plot(x,y,'.','Color',[1 0.5 0]);
+% xlabel('Effective Connections')
+% ylabel(sprintf('Reward-increase \n modulation (%%)'))
+% box off;
+% 
 
-
-%% Connectivity vs Reward tuning  (small vs regular reard)
+%% Connectivity vs Reward tuning  (small vs regular reward)
 ax1=axes('position',[position_x1(2), position_y1(2), panel_width1, panel_height1]);
 hold on
 % excitatory
 k =out_degree_excitatory;
-hist_bins = prctile(k,linspace(0,100,12));
+hist_bins = prctile(k,linspace(0,100,7));
 hist_bins_centers = hist_bins(1:end-1) + diff(hist_bins)/2;
+% hist_bins = linspace(0,ceil(max(k)),8);
+% hist_bins(end-2:end-1)=[];
+% hist_bins_centers = hist_bins(1:end-1) + diff(hist_bins(1:1:2))/2;
 x=k;
 % y=-log10(signal2);
 y=signal22_abs;
 [y_binned_mean, y_binned_stem]= fn_bin_data(x,y,hist_bins);
-shadedErrorBar(hist_bins_centers,y_binned_mean,y_binned_stem,'lineprops',{'.-','Color',[1 0.5 0]})
+shadedErrorBar(hist_bins_centers,y_binned_mean,y_binned_stem,'lineprops',{'.-','Color',[0 0.7 0.2]})
 xlabel('Effective Connections')
-ylabel('Reward-omission modulation (%)')
+ylabel(sprintf('Reward-omission \n modulation (%%)'))
 ylim([min(y_binned_mean-y_binned_stem),max(y_binned_mean+y_binned_stem)])
 box off;
 % text(15,0.01,'Inhibitory','Color',[0 0 1]);
 % text(15,0.03,'Excitatory','Color',[1 0 0]);
 
-% Scatter
-ax1=axes('position',[position_x1(2), position_y1(3), panel_width1, panel_height1]);
-hold on
-% excitatory
-k =out_degree_excitatory;
-x=k;
-y=signal22;
-plot(x,y,'.','Color',[1 0.5 0]);
-xlabel('Effective Connections')
-ylabel('Reward-omission modulation (%)')
-box off;
+% % Scatter
+% ax1=axes('position',[position_x1(2), position_y1(3), panel_width1, panel_height1]);
+% hold on
+% % excitatory
+% k =out_degree_excitatory;
+% x=k;
+% y=signal22;
+% plot(x,y,'.','Color',[0 0.7 0.2]);
+% xlabel('Effective Connections')
+% ylabel(sprintf('Reward-omission \n modulation (%%)'))
+% box off;
+
+
+
 
 
 if isempty(dir(dir_current_fig))
