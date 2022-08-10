@@ -77,38 +77,8 @@ r=fetchn(rel_all ,'psth_position_concat_regularreward_odd_even_corr');
 
 subplot(2,2,1)
 histogram(r)
-theta_bins=-180:40:180;
-theta_bins_centers=theta_bins(1:end-1)+mean(diff(theta_bins))/2;
-a=histogram(preferred_theta_vmises,theta_bins);
-BinCounts=a.BinCounts;
-polarplot(deg2rad([theta_bins_centers,theta_bins_centers(1)]),[BinCounts, BinCounts(1)]);
-title(sprintf('Preferred direction \nof tuned neurons'));
-ax=gca;
-ax.ThetaTick = [0 90 180 270];
-ax.ThetaTickLabel = [0 90 180 -90];
-ax.RTick=[max(BinCounts)];
-
-
-
-preferred_bin=fetchn(rel_all ,'preferred_bin');
-
-x_bins = linspace(-1, 1,number_of_bins+1);
-x_bins_centers=x_bins(1:end-1)+mean(diff(x_bins))/2;
-
-z_bins = linspace(-1,1,number_of_bins+1);
-z_bins_centers=z_bins(1:end-1)+mean(diff(z_bins))/2;
-
-
-preferred_bin_x = ceil(preferred_bin/number_of_bins);
-preferred_bin_z = mod(preferred_bin,number_of_bins)+1;
-
-
-[preferred_2d, ~, ~, x_idx, z_idx] = histcounts2(preferred_bin_x,preferred_bin_z,[1:1:number_of_bins+1],[1:1:number_of_bins+1]);
-
-subplot(2,2,2)
-imagesc(preferred_2d)
-
-
+xlabel('2D tuning stability, r')
+ylabel('Counts')
 %% Reward preference histogram
 
 %% Regular Reward versus large Reward

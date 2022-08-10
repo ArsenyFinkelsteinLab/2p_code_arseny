@@ -1,7 +1,7 @@
 %{
 # Flourescent trace
 -> EXP2.SessionEpoch
--> IMG.ROI
+-> IMGROI
 ---
 mean_dff   : double                          #
 min_dff   : double                           #

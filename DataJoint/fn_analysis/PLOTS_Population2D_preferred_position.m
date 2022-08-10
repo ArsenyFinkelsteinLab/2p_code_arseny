@@ -104,12 +104,12 @@ preferred_bin_x = ceil(preferred_bin/number_of_bins);
 preferred_bin_z = mod(preferred_bin,number_of_bins)+1;
 
 
-[preferred_2d, ~, ~, x_idx, z_idx] = histcounts2(preferred_bin_x,preferred_bin_z,[1:1:number_of_bins+1],[1:1:number_of_bins+1]);
+[preferred_2d, ~, ~, x_idx, z_idx] = histcounts2(preferred_bin_z,preferred_bin_x,[1:1:number_of_bins+1],[1:1:number_of_bins+1]);
 
 subplot(2,2,2)
 imagesc(preferred_2d)
-
-
+colorbar
+title(sprintf('Preffered tuning\nposition'))
 %% Reward preference histogram
 
 %% Regular Reward versus large Reward
