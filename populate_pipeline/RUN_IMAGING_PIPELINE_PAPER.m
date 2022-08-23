@@ -62,8 +62,9 @@ IMG.Parameters; %configure the path to your data folder here
 % EXP2.EpochName2;
 % EXP2.SessionEpochType
 % IMG.Zoom2Microns
+
 %% STEP 1 - could be run independelty of suite2p
- populate_Session_without_behavior (user_name, rig); % populate session without behavior
+populate_Session_without_behavior (user_name, rig); % populate session without behavior
 % populate_behavior_WaterCue (dir_behavioral_data, behavioral_protocol_name);
 populate_behavior_Lick2D(dir_behavioral_data, behavioral_protocol_name);
 
@@ -90,6 +91,7 @@ populate(IMG.ROIBrainArea); % requires IMG.Bregma  Assigns brain area in Allen B
 populate(IMG.ROIGood); 
 populate(IMG.ROITrace); 
 populate(IMG.ROISpikes);
+populate(IMG.ROITraceNeuropil); 
 
 
 % We use this:
@@ -109,7 +111,6 @@ populate(IMG.ROIBadSessionEpoch);
 populate(IMG.ROIBad); 
 
 
-populate(IMG.ROITraceNeuropil); 
 populate(IMG.ROIdeltaFNeuropil); % IMG.ROIdeltaFMeanNeuropil
 populate(IMG.ROIdeltaFNeuropilSubtr);
 populate(IMG.ROIdeltaFStatsNeuropil);
