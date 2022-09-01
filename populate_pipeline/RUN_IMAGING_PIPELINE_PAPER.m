@@ -170,6 +170,12 @@ populate(LICK2D.ROILick2DQuadrantsSpikes);
 populate(LICK2D.ROILick2DPSTHSpikes); %LICK2D.ROILick2DPSTHStatsSpikes LICK2D.ROILick2DRewardStatsSpikes LICK2D.ROILick2DBlockStatsSpikes
 populate(LICK2D.ROILick2DmapSpikes); %also populates LICK2D.ROILick2DSelectivitySpikes LICK2D.ROILick2DSelectivityStatsSpikes
 
+
+populate(LICK2D.ROILick2Dmap2Spikes); %also populates LICK2D.ROILick2DSelectivitySpikes LICK2D.ROILick2DSelectivityStatsSpikes
+populate(LICK2D.ROILick2DmapStatsSpikes)
+
+
+
 populate(LICK2D.ROILick2DContactenated); %based on dFF
 populate(LICK2D.ROILick2DContactenatedSpikes);
 populate(LICK2D.ROILick2DContactenatedSpikes2);

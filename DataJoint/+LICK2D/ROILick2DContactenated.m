@@ -5,9 +5,9 @@
 number_of_bins            : int   #
 ---
 psth_position_concat                                  : longblob   # PSTH computed for each target position and then concatenated across all target positions. Computed for all trials, including trials with large or no reward
-psth_position_concat_odd_even_corr=null                    : double     # 
+psth_position_concat_odd_even_corr=null               : double     # 
 psth_position_concat_regularreward                    : longblob   # Same as above using only regular reward trials
-psth_position_concat_regularreward_odd_even_corr=null      : double     #
+psth_position_concat_regularreward_odd_even_corr=null : double     #
 pos_x_bins_centers        : blob       #
 pos_z_bins_centers        : blob       #
 psthmap_time              : blob   #

@@ -1,5 +1,5 @@
-function [field_density_XY, field_density_XY_with_NaN, field_density_smoothed_XY_with_NaN, information_per_spike_XY, information_per_spike_XY_smoothed, count_XY_video, count_XY_video_with_NaN, count_XY_spikes] ...
-    = fn_compute_generic_2D_field2 ...
+function [field_density_XY, field_density_XY_with_NaN, field_density_smoothed_XY_with_NaN, information_per_spike_XY, information_per_spike_XY_smoothed, count_XY_video, count_XY_video_with_NaN, count_XY_spikes, field_size, field_size_without_baseline, centroid, centroid_without_baseline] ...
+    = fn_compute_generic_2D_field3 ...
     (X_position_bins_vector, Y_position_bins_vector, count_XY_video, count_XY_spikes, time_spent_minimum_for_2D_bins, sigma, hsize, legalize_by_neighbor_bins_flag)
 
 % to avoid negative "firing rates" -- which can be if instead of spikes we use df/f imaging traces
@@ -78,3 +78,31 @@ end;
 
 % On smoothed field:
 [information_per_spike_XY_smoothed] = fn_compute_spatial_info (count_XY_video_smoothed_with_NaN, field_density_smoothed_XY_with_NaN);
+
+    %% Field Size
+
+    M = field_density_XY_with_NaN;
+    max_m=nanmax(M (:));
+    field_size=100*sum(M (:)>max_m*0.5)/size(M (:),1);
+    
+    %% Centroid
+
+    props = regionprops(true(size(M )), M , 'WeightedCentroid');
+    centroid(1)=props.WeightedCentroid(1);
+    centroid(2)=props.WeightedCentroid(2);
+%     clf
+%     imagesc(m);
+%     hold on
+%     plot(x_centroid(i),y_centroid(i),'*');
+
+    %% Field Size without baseline
+    M =field_density_XY_with_NaN-nanmin(field_density_XY_with_NaN(:));
+    max_m=nanmax(M (:));
+    field_size_without_baseline =100*sum(M (:)>max_m*0.5)/size(M (:),1);
+    
+    %% Centroid without baseline
+    M(isnan(M ))=0;
+    M (M <max_m*0.5)=0;
+    props = regionprops(true(size(M )), M , 'WeightedCentroid');
+    centroid_without_baseline(1)=props.WeightedCentroid(1);
+    centroid_without_baseline(2)=props.WeightedCentroid(2);

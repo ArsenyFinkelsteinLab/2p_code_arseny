@@ -8,7 +8,7 @@ function   [information_per_spike] = fn_compute_spatial_info (timespent_binned,f
 %    Information_per_spike = sum( p_i * ( r_i / r ) * log2( r_i / r ) )
 %    Where:
 %       r_i = firing rate in bin i ;
-%       p_i = occupancy probability of bin i = time-spent by bat in bin i / total time spent in all bins ;
+%       p_i = occupancy probability of bin i = time-spent by an animal in bin i / total time spent in all bins ;
 %       r = mean( r_i ) = overall mean firing rate (mean over all the pixels)
 % See: Skaggs WE, McNaughton BL, Wilson MA, Barnes CA, Hippocampus 6(2), 149-172 (1996).
 

@@ -145,47 +145,47 @@ for i_th = 1:1:numel(threshold_for_event_vector)
     
     
     
-                   %% PCA cross validation by dividing the data in time into test/train set
-                   %----------------------------------------------------------------------
-                   D=gather(F_thresholded);
-                   D=D';   % time (rows) by neurons (columns)
-
-                   Dtrain = D(idx_train',:);
-                   Dtest = D(idx_test',:);
+    %% PCA cross validation by dividing the data in time into test/train set
+    %----------------------------------------------------------------------
+    D=gather(F_thresholded);
+    D=D';   % time (rows) by neurons (columns)
     
-                   Dtrain = Dtrain - mean(Dtrain);
-                   Dtest = Dtest - mean(Dtest);
+    Dtrain = D(idx_train',:);
+    Dtest = D(idx_test',:);
     
-                   [loadings_train,PCs_train,~, ~, explained_train] = pca(Dtrain);
-                   [loadings_test,PCs_test,~, ~, explained_test] = pca(Dtest);
-
-                   % PCs: time( rows) by PCs (columns; same as number of neurons)
-                   % Loadings: neurons( rows) by PCs (columns; same as number of neurons)
+    Dtrain = Dtrain - mean(Dtrain);
+    Dtest = Dtest - mean(Dtest);
     
-                   % Measuring shared variance
-                   % --------------------------------------------------
-                   % This is useful if we want to use a test set to reconstruct the PCs using loadings fromt he training set,
-                   % and measure how much  variance do the PCs identified in
-                   % the training set explains in the test set.
-                   % Training/Test set can also be spontaneous/behavior sessions
+    [loadings_train,PCs_train,~, ~, explained_train] = pca(Dtrain);
+    [loadings_test,PCs_test,~, ~, explained_test] = pca(Dtest);
     
-                   PCs_reconstructed_test = Dtest* loadings_train;
+    % PCs: time( rows) by PCs (columns; same as number of neurons)
+    % Loadings: neurons( rows) by PCs (columns; same as number of neurons)
     
-                   var_explained_train =var(PCs_train)/sum(var(PCs_train));
-                   var_explained_test =var(PCs_test)/sum(var(PCs_test));
-                   var_explained_test_reconst =var(PCs_reconstructed_test)/sum(var(PCs_reconstructed_test));
-                   %                    shared_variance1=var_explained_test./var_explained_train; % proportion of variance explained
-
-%                    shared_variance1=var_explained_test./var_explained_train; % proportion of variance explained
-%                    shared_variance2=var_explained_test-var_explained_train; % proportion of variance explained
-%                    shared_variance3=  1 - (var_explained_test-var_explained_train); % proportion of variance explained
-%                        my_shared_variance5= 1- (var_explained_test_reconst)./(var_explained_test_reconst+var_explained_train); % proportion of variance explained
-%                    my_shared_variance=  1 - (var_explained_test_reconst-var_explained_train)./(var_explained_test_reconst+var_explained_train); % proportion of variance explained
-
-                         shared_variance6=var_explained_test_reconst./var_explained_test; % proportion of variance explained
-
-                             shared_variance7=var(PCs_reconstructed_test)./var(PCs_train); % proportion of variance explained
-
+    % Measuring shared variance
+    % --------------------------------------------------
+    % This is useful if we want to use a test set to reconstruct the PCs using loadings fromt he training set,
+    % and measure how much  variance do the PCs identified in
+    % the training set explains in the test set.
+    % Training/Test set can also be spontaneous/behavior sessions
+    
+    PCs_reconstructed_test = Dtest* loadings_train;
+    
+    var_explained_train =var(PCs_train)/sum(var(PCs_train));
+    var_explained_test =var(PCs_test)/sum(var(PCs_test));
+    var_explained_test_reconst =var(PCs_reconstructed_test)/sum(var(PCs_reconstructed_test));
+    %                    shared_variance1=var_explained_test./var_explained_train; % proportion of variance explained
+    
+    %                    shared_variance1=var_explained_test./var_explained_train; % proportion of variance explained
+    %                    shared_variance2=var_explained_test-var_explained_train; % proportion of variance explained
+    %                    shared_variance3=  1 - (var_explained_test-var_explained_train); % proportion of variance explained
+    %                        my_shared_variance5= 1- (var_explained_test_reconst)./(var_explained_test_reconst+var_explained_train); % proportion of variance explained
+    %                    my_shared_variance=  1 - (var_explained_test_reconst-var_explained_train)./(var_explained_test_reconst+var_explained_train); % proportion of variance explained
+    
+    shared_variance6=var_explained_test_reconst./var_explained_test; % proportion of variance explained
+    
+    shared_variance7=var(PCs_reconstructed_test)./var(PCs_train); % proportion of variance explained
+    
     
     
     %% Shared variance explained based on Stringer et al. Science 2019
@@ -201,22 +201,22 @@ for i_th = 1:1:numel(threshold_for_event_vector)
     [sneur, varneur, u, v] = SVCA(D, npc, ntrain, ntest, itrain, itest);
     %     sneur (shared variance of each covariance component)
     %     vneur (total variance of each covariance component)
-%     semilogx(sneur./varneur)
+    %     semilogx(sneur./varneur)
     
     
-SharedVarainceCalc_Ran(D(ntrain,itrain),D(ntest,itest))
+    SharedVarainceCalc_Ran(D(ntrain,itrain),D(ntest,itest))
     
     %% Populating
     key_insert=key;
     key_insert.shared_variance_stringer= gather(sneur);
     key_insert.total_variance_stringer= gather(varneur);
     
-        key_insert.var_explained_train= var_explained_train;
-        key_insert.var_explained_test= var_explained_test_reconst;
-        key_insert.my_shared_variance= my_shared_variance;
-
-
-      
+    key_insert.var_explained_train= var_explained_train;
+    key_insert.var_explained_test= var_explained_test_reconst;
+    key_insert.my_shared_variance= my_shared_variance;
+    
+    
+    
     insert(self,key_insert);
     
 end
