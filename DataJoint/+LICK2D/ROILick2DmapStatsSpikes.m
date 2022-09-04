@@ -4,9 +4,25 @@
 -> IMG.ROI
 number_of_bins            : int   #
 ---
-lickmap_regular_odd_vs_even_corr            : double   # 2D map correlation across odd vs even regular trials
-lickmap_regular_vs_small_corr=null          : double   # 2D map correlation across regular reward versus no reward trials
-lickmap_regular_vs_large_corr=null          : double   # 2D map correlation across regular reward versus large reward trials
+number_of_response_trials                 : int      # number of trials with responses
+lickmap_regular_odd_vs_even_corr          : double   # 2D map correlation across odd vs even regular trials
+lickmap_regular_vs_small_corr=null        : double   # 2D map correlation across regular reward versus no reward trials
+lickmap_regular_vs_large_corr=null        : double   # 2D map correlation across regular reward versus large reward trials
+
+lickmap_first_vs_begin_corr=null          : double   # 
+lickmap_first_vs_mid_corr=null            : double   # 
+lickmap_first_vs_end_corr=null            : double   # 
+lickmap_begin_vs_end_corr=null            : double   # 
+lickmap_begin_vs_mid_corr=null            : double   #
+lickmap_mid_vs_end_corr=null              : double   #
+
+psth_position_concat_regular_odd_even_corr    : double   # correlation of the PSTH concatenated across all positions, across trials with typical reward
+psth_position_concat_small_odd_even_corr=null : double   #
+psth_position_concat_large_odd_even_corr=null : double   #
+psth_position_concat_first_odd_even_corr=null : double   #
+psth_position_concat_begin_odd_even_corr=null : double   #
+psth_position_concat_mid_odd_even_corr=null   : double   #
+psth_position_concat_end_odd_even_corr=null   : double   #
 
 information_per_spike_regular=null          : double   # Spatial Information per spike (Skaags et al 1996) for 2D map computed across trials with typical reward
 information_per_spike_small=null            : double   # across no rewarded trials
@@ -51,7 +67,14 @@ centroid_without_baseline_first=null        : blob     #
 centroid_without_baseline_begin=null        : blob     #
 centroid_without_baseline_mid=null          : blob     #
 centroid_without_baseline_end=null          : blob     #
-
+ 
+percent_2d_map_coverage_regular             : double   #
+percent_2d_map_coverage_small=null          : double   #
+percent_2d_map_coverage_large=null          : double   #
+percent_2d_map_coverage_first=null          : double   #
+percent_2d_map_coverage_begin=null          : double   #
+percent_2d_map_coverage_mid=null            : double   #
+percent_2d_map_coverage_end=null            : double   #
 
 %}
 

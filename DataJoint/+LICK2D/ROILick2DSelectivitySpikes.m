@@ -17,11 +17,8 @@ selectivity_first=null            : blob   # across first trials in block
 selectivity_begin=null            : blob   # across trials in the beginning of the block
 selectivity_mid=null              : blob   # across trials in the middle of the block
 selectivity_end=null              : blob   # across trials in the end of the block
-psth_preferred_regular_stem             : blob   # standard error of the mean
-psth_non_preferred_regular_stem         : blob   # standard error of the mean
-
-psth_time                         : blob   # time vector
-
+psth_preferred_regular_stem       : blob   # standard error of the mean
+psth_non_preferred_regular_stem   : blob   # standard error of the mean
 %}
 
 

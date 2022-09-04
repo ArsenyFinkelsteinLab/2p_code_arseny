@@ -2,7 +2,7 @@ function fn_compute_Lick2D_map_and_selectivity2(key,self, rel_data, fr_interval)
 
 smooth_window_sec=0.2; %frames for PSTH
 timespent_min=5; %in trials
-timespent_min_partial=3; %in trials, for partial conditions (e.g. reward modulation, and trial number in block )
+timespent_min_partial=2; %in trials, for partial conditions (e.g. reward modulation, and trial number in block )
 min_percent_coverage=50; % minimal coverage needed for 2D map calculation
 %Smoothing parameters for 2D maps
 sigma=1;
@@ -93,14 +93,14 @@ try
     idx_even_regular = find(idx_regular);
     idx_even_regular = idx_even_regular(2:2:sum(idx_regular));
     idx_even_regular = ismember(1:1:num_trials,idx_even_regular);
-catch
+ catch
     idx_regular = 1:1:num_trials  & idx_response;
     idx_odd_regular = ismember(1:1:num_trials,1:2:num_trials) & idx_response;
     idx_even_regular =  ismember(1:1:num_trials,2:2:num_trials) & idx_response;
 end
 
 try
-    % idx order in a block
+       % idx order in a block
     num_trials_in_block=mode([Block.num_trials_in_block]); %the most frequently occurring number of trials per block (in case num trials in block change within session)
     begin_mid_end_bins = linspace(2,num_trials_in_block,4);
     idx_first = [Block.current_trial_num_in_block]==1 & idx_response & idx_regular;
@@ -193,9 +193,31 @@ for i_roi=1:1:size(S,1)
             end
         end
     end
+    psth_position_concat_regular_odd_even_corr    : single   # correlation of the PSTH concatenated across all positions, across trials with typical reward
+psth_position_concat_small_odd_even_corr=null : single   #
+psth_position_concat_large_odd_even_corr=null : single   #
+psth_position_concat_first_odd_even_corr=null : single   #
+psth_position_concat_begin_odd_even_corr=null : single   #
+psth_position_concat_mid_odd_even_corr=null   : single   #
+psth_position_concat_end_odd_even_corr=null   : single   #
+
+        % Compute correlation across all target position bins
+    r=corr([psth_per_position_regular_odd(:),psth_per_position_regular_even(:)],'Rows' ,'pairwise');
+    key_ROI3(i_roi).psth_position_concat_regular_odd_even_corr.=r(2);
     
+     r=corr([psth_per_position_regular_odd(:),psth_per_position_regular_even(:)],'Rows' ,'pairwise');
+    key_ROI3(i_roi).psth_position_concat_regular_odd_even_corr.=r(2);
+     r=corr([psth_per_position_regular_odd(:),psth_per_position_regular_even(:)],'Rows' ,'pairwise');
+    key_ROI3(i_roi).psth_position_concat_regular_odd_even_corr.=r(2);
     
-    
+     r=corr([psth_per_position_regular_odd(:),psth_per_position_regular_even(:)],'Rows' ,'pairwise');
+    key_ROI3(i_roi).psth_position_concat_regular_odd_even_corr=r(2);
+     r=corr([psth_per_position_regular_odd(:),psth_per_position_regular_even(:)],'Rows' ,'pairwise');
+    key_ROI3(i_roi).psth_position_concat_regular_odd_even_corr=r(2);
+     r=corr([psth_per_position_regular_odd(:),psth_per_position_regular_even(:)],'Rows' ,'pairwise');
+    key_ROI3(i_roi).psth_position_concat_regular_odd_even_corr=r(2);
+     r=corr([psth_per_position_regular_odd(:),psth_per_position_regular_even(:)],'Rows' ,'pairwise');
+    key_ROI3(i_roi).psth_position_concat_regular_odd_even_corr=r(2);
     
     %% Actual 2D map calculation
     [~, lickmap_fr_regular, ~, information_per_spike_regular, ~, ~, ~, ~, field_size_regular, field_size_without_baseline_regular, ~, centroid_without_baseline_regular, percent_2d_map_coverage_regular] ...
@@ -274,8 +296,8 @@ for i_roi=1:1:size(S,1)
     catch
     end
     
-    
-    
+
+
     
     %% Preferred bin and radius on the 2D map (radius refers to when transforming the 2D tuning into polar plot)
     
@@ -326,7 +348,7 @@ for i_roi=1:1:size(S,1)
         key_ROI1(i_roi).lickmap_fr_end = lickmap_fr_end;
     catch
     end
-    
+
     key_ROI1(i_roi).pos_x_bins_centers = x_bins_centers;
     key_ROI1(i_roi).pos_z_bins_centers = z_bins_centers;
     
@@ -343,12 +365,12 @@ for i_roi=1:1:size(S,1)
     
     try
         key_ROI2(i_roi).psth_per_position_small = psth_per_position_small;
-        key_ROI2(i_roi).psth_per_position_small_odd = psth_per_position_small_odd;
+                key_ROI2(i_roi).psth_per_position_small_odd = psth_per_position_small_odd;
         key_ROI2(i_roi).psth_per_position_small_even = psth_per_position_small_even;
         key_ROI2(i_roi).psth_per_position_small_stem = psth_per_position_small_stem;
-        
+
         key_ROI2(i_roi).psth_per_position_large = psth_per_position_large;
-        key_ROI2(i_roi).psth_per_position_large_odd = psth_per_position_large_odd;
+       key_ROI2(i_roi).psth_per_position_large_odd = psth_per_position_large_odd;
         key_ROI2(i_roi).psth_per_position_large_even = psth_per_position_large_even;
         key_ROI2(i_roi).psth_per_position_large_stem = psth_per_position_large_stem;
     catch
@@ -365,7 +387,7 @@ for i_roi=1:1:size(S,1)
         key_ROI2(i_roi).psth_per_position_end_stem = psth_per_position_end_stem;
     catch
     end
-    
+
     
     
     
@@ -383,10 +405,6 @@ for i_roi=1:1:size(S,1)
     key_ROI3(i_roi).field_size_without_baseline_regular = field_size_without_baseline_regular;
     key_ROI3(i_roi).centroid_without_baseline_regular = centroid_without_baseline_regular;
     key_ROI3(i_roi).percent_2d_map_coverage_regular = percent_2d_map_coverage_regular;
-    
-    % Compute correlation across all target position bins
-    r=corr([psth_per_position_regular_odd(:),psth_per_position_regular_even(:)],'Rows' ,'pairwise');
-    key_ROI3(i_roi).psth_position_concat_regular_odd_even_corr=r(2);
     
     try
         key_ROI3(i_roi).lickmap_regular_vs_small_corr = lickmap_regular_vs_small_corr;
@@ -413,13 +431,6 @@ for i_roi=1:1:size(S,1)
         
         key_ROI3(i_roi).percent_2d_map_coverage_small = percent_2d_map_coverage_small;
         key_ROI3(i_roi).percent_2d_map_coverage_large = percent_2d_map_coverage_large;
-        
-        % Compute correlation across all target position bins
-        r=corr([psth_per_position_small_odd(:),psth_per_position_small_even(:)],'Rows' ,'pairwise');
-        key_ROI3(i_roi).psth_position_concat_small_odd_even_corr=r(2);
-        r=corr([psth_per_position_large_odd(:),psth_per_position_large_even(:)],'Rows' ,'pairwise');
-        key_ROI3(i_roi).psth_position_concat_large_odd_even_corr=r(2);
-        
     catch
     end
     
@@ -461,16 +472,6 @@ for i_roi=1:1:size(S,1)
         key_ROI3(i_roi).percent_2d_map_coverage_mid = percent_2d_map_coverage_mid;
         key_ROI3(i_roi).percent_2d_map_coverage_end = percent_2d_map_coverage_end;
         
-        % Compute correlation across all target position bins
-        r=corr([psth_per_position_first_odd(:),psth_per_position_first_even(:)],'Rows' ,'pairwise');
-        key_ROI3(i_roi).psth_position_concat_first_odd_even_corr=r(2);
-        r=corr([psth_per_position_begin_odd(:),psth_per_position_begin_even(:)],'Rows' ,'pairwise');
-        key_ROI3(i_roi).psth_position_concat_begin_odd_even_corr=r(2);
-        r=corr([psth_per_position_mid_odd(:),psth_per_position_mid_even(:)],'Rows' ,'pairwise');
-        key_ROI3(i_roi).psth_position_concat_mid_odd_even_corr=r(2);
-        r=corr([psth_per_position_end_odd(:),psth_per_position_end_even(:)],'Rows' ,'pairwise');
-        key_ROI3(i_roi).psth_position_concat_end_odd_even_corr=r(2);
-        
     catch
     end
     
@@ -494,6 +495,8 @@ for i_roi=1:1:size(S,1)
     
     psth_non_preferred_regular_odd =  nanmean(cell2mat(psth_all(i_roi, idx_non_preferred_trials_regular & idx_odd_regular)'),1);
     psth_non_preferred_regular_even = nanmean(cell2mat(psth_all(i_roi,idx_non_preferred_trials_regular  & idx_even_regular)'),1);
+    
+    
     
     
     %% DJ insetion of selectivity

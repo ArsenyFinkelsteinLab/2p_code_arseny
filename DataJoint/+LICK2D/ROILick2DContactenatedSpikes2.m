@@ -6,10 +6,10 @@ number_of_bins            : int   #
 ---
 psth_position_concat                                          : longblob   # PSTH computed for each target position and then concatenated across all target positions. Computed for all trials, including trials with large or no reward
 psth_position_concat_odd_even_corr                            : double     # 
-psth_position_concat_odd_even_corr_binwise                    : double     # corr is computed separately for each target position bin and then averaged across bins. This is too counteract effect of direction and camture only temporal tuning
+psth_position_concat_odd_even_corr_binwise                    : double     # corr is computed separately for each target position bin and then averaged across bins. This is too counteract effect of direction and capture only temporal tuning
 psth_position_concat_regularreward                            : longblob   # Same as above using only regular reward trials
 psth_position_concat_regularreward_odd_even_corr              : double     #
-psth_position_concat_regularreward_odd_even_corr_binwise      : double     #  corr is computed separately for each target position bin and then averaged across bins. This is too counteract effect of direction and camture only temporal tuning
+psth_position_concat_regularreward_odd_even_corr_binwise      : double     #  corr is computed separately for each target position bin and then averaged across bins. This is too counteract effect of direction and capture only temporal tuning
 pos_x_bins_centers        : blob       #
 pos_z_bins_centers        : blob       #
 psthmap_time              : blob   #

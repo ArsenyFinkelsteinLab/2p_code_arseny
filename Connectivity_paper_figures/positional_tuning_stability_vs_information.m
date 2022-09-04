@@ -2,8 +2,8 @@ function positional_tuning_stability_vs_information
 close all;
 
 rel_roi=((IMG.ROI & IMG.ROIGood)-IMG.ROIBad) -IMG.Mesoscope;
-rel= LICK2D.ROILick2DmapStatsSpikes & rel_roi & 'lickmap_regular_odd_vs_even_corr>0.7';
-number_of_bins=3;
+rel= LICK2D.ROILick2DmapSpikes*LICK2D.ROILick2DmapStatsSpikes & rel_roi & 'lickmap_regular_odd_vs_even_corr>0.7';
+number_of_bins=4;
 D=fetch(rel & sprintf('number_of_bins=%d',number_of_bins),'*');
 
 dir_base = fetch1(IMG.Parameters & 'parameter_name="dir_root_save"', 'parameter_value');
@@ -67,35 +67,35 @@ position_y3(end+1)=position_y3(end)-vertical_dist2;
 position_y3(end+1)=position_y3(end)-vertical_dist2;
 %---------------------------------
 
-% for i=1:1:size(D,1)
-%     m=D(i).lickmap_fr;
-%     max_m=nanmax(m(:));
-%     field_size(i)=100*sum(m(:)>max_m*0.5)/size(m(:),1);
-%     props = regionprops(true(size(m)), m, 'WeightedCentroid');
-%     x_centroid(i)=props.WeightedCentroid(1);
-%     y_centroid(i)=props.WeightedCentroid(2);
-% %     clf
-% %     imagesc(m);
-% %     hold on
-% %     plot(x_centroid(i),y_centroid(i),'*');
-% 
-%     
-%     %without baseline
-%     m=m-nanmin(m(:));
-%     max_m=nanmax(m(:));
-%     field_size_without_baseline(i) =100*sum(m(:)>max_m*0.5)/size(m(:),1);
-%     m(isnan(m))=0;
-%     
-%     m(m<max_m*0.5)=0;
-%     props = regionprops(true(size(m)), m, 'WeightedCentroid');
-%     x_centroid_without_baseline(i)=props.WeightedCentroid(1);
-%     y_centroid_without_baseline(i)=props.WeightedCentroid(2);
-% %     clf
-% %     imagesc(m);
-% %     hold on
-% %     plot(x_centroid_without_baseline(i),y_centroid_without_baseline(i),'*');
-%     
-% end
+for i=1:1:size(D,1)
+    m=D(i).lickmap_fr_regular;
+    max_m=nanmax(m(:));
+    field_size(i)=100*sum(m(:)>max_m*0.5)/size(m(:),1);
+    props = regionprops(true(size(m)), m, 'WeightedCentroid');
+    x_centroid(i)=props.WeightedCentroid(1);
+    y_centroid(i)=props.WeightedCentroid(2);
+%     clf
+%     imagesc(m);
+%     hold on
+%     plot(x_centroid(i),y_centroid(i),'*');
+
+    
+    %without baseline
+    m=m-nanmin(m(:));
+    max_m=nanmax(m(:));
+    field_size_without_baseline(i) =100*sum(m(:)>max_m*0.5)/size(m(:),1);
+    m(isnan(m))=0;
+    
+    m(m<max_m*0.5)=0;
+    props = regionprops(true(size(m)), m, 'WeightedCentroid');
+    x_centroid_without_baseline(i)=props.WeightedCentroid(1);
+    y_centroid_without_baseline(i)=props.WeightedCentroid(2);
+    clf
+    imagesc(m);
+    hold on
+    plot(x_centroid_without_baseline(i),y_centroid_without_baseline(i),'*');
+    
+end
 
 
 

@@ -1,0 +1,82 @@
+%{
+# Stats on 2D tuning maps
+-> EXP2.SessionEpoch
+-> IMG.ROI
+number_of_bins            : int   #
+---
+number_of_response_trials                   : int      # number of trials with responses
+lickmap_regular_odd_vs_even_corr            : single   # 2D map correlation across odd vs even regular trials
+lickmap_regular_vs_small_corr=null          : single   # 2D map correlation across regular reward versus no reward trials
+lickmap_regular_vs_large_corr=null          : single   # 2D map correlation across regular reward versus large reward trials
+
+psth_position_concat_regular_odd_even_corr  : single   # correlation of the PSTH concatenated across all positions, across trials with typical reward
+psth_position_concat_small_odd_even_corr  : single   #
+psth_position_concat_large_odd_even_corr  : single   #
+psth_position_concat_first_odd_even_corr  : single   #
+psth_position_concat_begin_odd_even_corr  : single   #
+psth_position_concat_mid_odd_even_corr  : single   #
+psth_position_concat_regular_odd_even_corr  : single   #
+psth_position_concat_regular_odd_even_corr  : single   #
+
+information_per_spike_regular=null          : single   # Spatial Information per spike (Skaags et al 1996) for 2D map computed across trials with typical reward
+information_per_spike_small=null            : single   # across no rewarded trials
+information_per_spike_large=null            : single   # across trials with large reward
+information_per_spike_first=null            : single   # across first trial in block
+information_per_spike_begin=null            : single   # across trials in the beginning of the block
+information_per_spike_mid=null              : single   # across trials in the middle of the block
+information_per_spike_end=null              : single   # across trials in the end of the block
+
+preferred_bin_regular=null                  : single   #
+preferred_bin_small=null                    : single   #
+preferred_bin_large=null                    : single   #
+preferred_bin_first=null                    : single   #
+preferred_bin_begin=null                    : single   #
+preferred_bin_mid=null                      : single   #
+preferred_bin_end=null                      : single   #
+
+preferred_radius_regular=null               : single   #
+preferred_radius_small=null                 : single   #
+preferred_radius_large=null                 : single   #
+
+field_size_regular=null                     : single   # 2D Field size at half max, expressed as percentage
+field_size_small=null                       : single   #
+field_size_large=null                       : single   #
+field_size_first=null                       : single   # 
+field_size_begin=null                       : single   # 
+field_size_mid=null                         : single   # 
+field_size_end=null                         : single   # 
+
+field_size_without_baseline_regular=null    : single   # 2D Field size at half max, expressed as percentage, computed after removing the baseline firing rate
+field_size_without_baseline_small=null      : single   #
+field_size_without_baseline_large=null      : single   #
+field_size_without_baseline_first=null      : single   #
+field_size_without_baseline_begin=null      : single   #
+field_size_without_baseline_mid=null        : single   #
+field_size_without_baseline_end=null        : single   #
+
+centroid_without_baseline_regular=null      : blob     # Centroid of the 2D field, computed after removing the baseline firing rate
+centroid_without_baseline_small=null        : blob     #
+centroid_without_baseline_large=null        : blob     #
+centroid_without_baseline_first=null        : blob     #
+centroid_without_baseline_begin=null        : blob     #
+centroid_without_baseline_mid=null          : blob     #
+centroid_without_baseline_end=null          : blob     #
+ 
+percent_2d_map_coverage_regular             : single   #
+percent_2d_map_coverage_small=null          : single   #
+percent_2d_map_coverage_large=null          : single   #
+percent_2d_map_coverage_first=null          : single   #
+percent_2d_map_coverage_begin=null          : single   #
+percent_2d_map_coverage_mid=null            : single   #
+percent_2d_map_coverage_end=null            : single   #
+
+%}
+
+
+classdef ROILick2DmapStatsSpikes < dj.Computed
+    methods(Access=protected)
+        function makeTuples(self, key)
+            % Computed in Lick2D.ROILick2DmapSpikes
+        end
+    end
+end

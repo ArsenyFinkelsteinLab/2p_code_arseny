@@ -14,6 +14,19 @@ psth_per_position_end=null              : longblob   # averaged across trials in
 
 psth_per_position_regular_odd           : longblob   # averaged across trials with typical reward  -- only odd trials
 psth_per_position_regular_even          : longblob   # averaged across trials with typical reward  -- only even trials
+psth_per_position_small_odd=null        : longblob   # 
+psth_per_position_small_even=null       : longblob   # 
+psth_per_position_large_odd=null        : longblob   # 
+psth_per_position_large_even=null       : longblob   # 
+psth_per_position_first_odd=null        : longblob   # 
+psth_per_position_first_even=null       : longblob   # 
+psth_per_position_begin_odd=null        : longblob   # 
+psth_per_position_begin_even=null       : longblob   # 
+psth_per_position_mid_odd=null          : longblob   # 
+psth_per_position_mid_even=null         : longblob   # 
+psth_per_position_end_odd=null          : longblob   # 
+psth_per_position_end_even=null         : longblob   # 
+
 
 psth_per_position_regular_stem          : longblob   # standard error of the mean, across trials with typical reward
 psth_per_position_small_stem=null       : longblob   # standard error of the mean, across trials with small reward
@@ -22,11 +35,7 @@ psth_per_position_first_stem=null       : longblob   # standard error of the mea
 psth_per_position_begin_stem=null       : longblob   # standard error of the mean, across trials in the beginning of the block
 psth_per_position_mid_stem=null         : longblob   # standard error of the mean, across trials in the middle of the block
 psth_per_position_end_stem=null         : longblob   # standard error of the mean, across trials in the end of the block
-
 psthmap_time                            : blob       #
-pos_x_bins_centers                      : blob       #
-pos_z_bins_centers                      : blob       #
-
 %}
 
 

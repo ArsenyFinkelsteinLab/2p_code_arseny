@@ -166,9 +166,12 @@ populate(STIMANAL.ROIGraphAllETL);
 
 populate(LICK2D.ROILick2DangleSpikes);
 populate(LICK2D.ROILick2DQuadrantsSpikes);
-populate(LICK2D.ROILick2DPSTHSpikes); % also populates LICK2D.ROILick2DPSTHStatsSpikes LICK2D.ROILick2DPSTHBlockSpikes LICK2D.ROILick2DPSTHBlockStatsSpikes
-populate(LICK2D.ROILick2DmapSpikes); %also populates LICK2D.ROILick2DmapPSTHSpikes LICK2D.ROILick2DmapStatsSpikes LICK2D.ROILick2DSelectivitySpikes LICK2D.ROILick2DSelectivityStatsSpikes
+%debug: not all LICK2D.ROILick2DPSTHSpikes have LICK2D.ROILick2DRewardStatsSpikes
+populate(LICK2D.ROILick2DPSTHSpikes); %LICK2D.ROILick2DPSTHStatsSpikes LICK2D.ROILick2DPSTHBlockSpikes LICK2D.ROILick2DPSTHBlockStatsSpikes
+populate(LICK2D.ROILick2DmapSpikes); %also populates % ROILick2DmapPSTHSpikes  % ROILick2DmapStatsSpikes LICK2D.ROILick2DSelectivitySpikes LICK2D.ROILick2DSelectivityStatsSpikes
 
+
+populate(LICK2D.ROILick2Dmap2Spikes); %also populates LICK2D.ROILick2DSelectivitySpikes LICK2D.ROILick2DSelectivityStatsSpikes
 populate(LICK2D.ROILick2DmapStatsSpikes)
 
 
