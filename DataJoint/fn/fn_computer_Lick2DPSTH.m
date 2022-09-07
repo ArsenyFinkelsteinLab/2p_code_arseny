@@ -1,4 +1,4 @@
-function fn_computer_Lick2DPSTH(key,self, rel_data, fr_interval)
+function fn_computer_Lick2DPSTH(key,self, rel_data, fr_interval,fr_interval_limit)
 
 smooth_window_sec=0.2; %frames for PSTH
 
@@ -31,9 +31,9 @@ if isfield(S,'spikes_trace') % to be able to run the code both on dff and on dec
     self3=LICK2D.ROILick2DPSTHBlockSpikes;
     self4=LICK2D.ROILick2DPSTHBlockStatsSpikes;
 else
-    self2=LICK2D.ROILick2DPSTHStatsSpikes;
-    self3=LICK2D.ROILick2DPSTHBlockSpikes;
-    self4=LICK2D.ROILick2DPSTHBlockStatsSpikes;
+%     self2=LICK2D.ROILick2DPSTHStatsSpikes;
+%     self3=LICK2D.ROILick2DPSTHBlockSpikes;
+%     self4=LICK2D.ROILick2DPSTHBlockStatsSpikes;
 end
 
 % num_trials = numel(TrialsStartFrame);
@@ -184,9 +184,8 @@ for i_roi=1:1:size(S,1)
         [~,idx_peak_large]=max(psth_large);
         key_ROI2(i_roi).peaktime_psth_large = time(idx_peak_large);
         
-        % single trials, averaged across all time duration after the  licport onset (t>=0)
-        idx_onset = time>=0;
-        
+        % single trials, averaged across all time duration in a specific time interval (e.g. after the  licport onset (t>=0))
+        idx_onset = time>=fr_interval_limit(1) & time <fr_interval_limit(2);
         temp=cell2mat(psth_all(idx_regular)');
         psth_regular_trials =  nanmean(temp(:,idx_onset),2);
         temp=cell2mat(psth_all(idx_small)');
@@ -318,12 +317,18 @@ for i_roi=1:1:size(S,1)
         [~,idx_peak_end]=max(psth_end);
         key_ROI4(i_roi).peaktime_psth_end = time(idx_peak_end);
         
-        % single trials, averaged across all time duration after the  licport onset (t>=0)
-        psth_first_trials =  nanmean(cell2mat(psth_all(idx_first)'),2);
-        psth_begin_trials =  nanmean(cell2mat(psth_all(idx_begin)'),2);
-        psth_mid_trials =  nanmean(cell2mat(psth_all(idx_mid)'),2);
-        psth_end_trials =  nanmean(cell2mat(psth_all(idx_end)'),2);
+        % single trials, averaged across all time duration in a specific time interval (e.g. after the  licport onset (t>=0))
+        idx_onset = time>=fr_interval_limit(1) & time <fr_interval_limit(2);
+        temp=cell2mat(psth_all(idx_first)');
+        psth_first_trials =  nanmean(temp(:,idx_onset),2);
+        temp=cell2mat(psth_all(idx_begin)');
+        psth_begin_trials =  nanmean(temp(:,idx_onset),2);
+        temp=cell2mat(psth_all(idx_mid)');
+        psth_mid_trials =  nanmean(temp(:,idx_onset),2);
+        temp=cell2mat(psth_all(idx_end)');
+        psth_end_trials =  nanmean(temp(:,idx_onset),2);
         
+
         key_ROI4(i_roi).block_mean_first = nanmean(psth_first_trials);
         key_ROI4(i_roi).block_mean_begin = nanmean(psth_begin_trials);
         key_ROI4(i_roi).block_mean_mid = nanmean(psth_mid_trials);

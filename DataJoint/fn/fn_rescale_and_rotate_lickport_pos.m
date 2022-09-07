@@ -87,10 +87,6 @@ ylabel('Z');
 title('Rotated position','FontSize',10);
 
 
-if isempty(dir(dir_current_fig))
-    mkdir (dir_current_fig)
-end
-
 
 if isempty(dir(dir_current_fig))
     mkdir (dir_current_fig)

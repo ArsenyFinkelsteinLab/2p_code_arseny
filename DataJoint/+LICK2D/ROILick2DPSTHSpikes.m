@@ -25,9 +25,8 @@ psth_time                : longblob   # time vector
 
 classdef ROILick2DPSTHSpikes < dj.Imported
     properties
-%         keySource = ((EXP2.SessionEpoch*IMG.FOV) & IMG.ROI & IMG.ROISpikes & EXP2.TrialLickPort & 'session_epoch_type="behav_only"' & EXP2.TrialLickBlock) - IMG.Mesoscope;
-        
-                keySource = (EXP2.SessionEpoch*IMG.FOV)  & IMG.ROI & IMG.ROISpikes & EXP2.TrialLickPort & 'session_epoch_type="behav_only"' & EXP2.TrialLickBlock & IMG.Mesoscope;
+        keySource = ((EXP2.SessionEpoch*IMG.FOV) & IMG.ROI & IMG.ROISpikes & EXP2.TrialLickPort & 'session_epoch_type="behav_only"' & EXP2.TrialLickBlock) - IMG.Mesoscope;
+%                 keySource = (EXP2.SessionEpoch*IMG.FOV)  & IMG.ROI & IMG.ROISpikes & EXP2.TrialLickPort & 'session_epoch_type="behav_only"' & EXP2.TrialLickBlock & IMG.Mesoscope;
     end
     methods(Access=protected)
         function makeTuples(self, key)
@@ -37,11 +36,13 @@ classdef ROILick2DPSTHSpikes < dj.Imported
             rel_temp = IMG.Mesoscope & key;
             if rel_temp.count>0 % if its mesoscope data
                 fr_interval = [-2, 5]; % used it for the mesoscope
+                fr_interval_limit= [-2, 5]; % for comparing firing rates between conditions and computing firing-rate maps
             else  % if its not mesoscope data
-                fr_interval = [-1, 3]; 
+                fr_interval = [-1, 4];
+                fr_interval_limit= [0, 3]; % for comparing firing rates between conditions and computing firing-rate maps
             end
             
-            fn_computer_Lick2DPSTH(key,self, rel_data,fr_interval);
+            fn_computer_Lick2DPSTH(key,self, rel_data,fr_interval, fr_interval_limit);
             
             %Also populates: 
             %LICK2D.ROILick2DPSTHStatsSpikes

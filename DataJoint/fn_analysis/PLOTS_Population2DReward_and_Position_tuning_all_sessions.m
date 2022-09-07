@@ -1,4 +1,4 @@
-function PLOTS_Population2DReward_all_sessions
+function PLOTS_Population2DReward_and_Position_tuning_all_sessions
 close all;
 
 key = ((EXP2.Session & 'session>=0')&  LICK2D.ROILick2DPSTHStatsSpikes &  LICK2D.ROILick2DangleSpikes) - IMG.Mesoscope ;
@@ -8,13 +8,44 @@ key = ((EXP2.Session & 'session>=0')&  LICK2D.ROILick2DPSTHStatsSpikes &  LICK2D
 dir_base = fetch1(IMG.Parameters & 'parameter_name="dir_root_save"', 'parameter_value');
 dir_current_fig = [dir_base  '\Lick2D\population\reward_not_meso\'];
 
-filename=['all_sessions_spikes'];
+filename=['all_sessions_spikes_positional'];
 
 flag_spikes = 1; % 1 spikes, 0 dff
 
 %directionl tuning criteria
-threshold_theta_tuning_odd_even_corr=0.5;
-threshold_goodness_of_fit_vmises=0.5;
+lickmap_regular_odd_vs_even_corr=0.5;
+information_per_spike_regular=0;
+reward_mean_pval_regular_large=0.01;
+reward_mean_pval_regular_small=0.01;
+psth_position_concat_regular_odd_even_corr=0.25;
+if flag_spikes==1
+    rel_psth=LICK2D.ROILick2DPSTHSpikes & key;
+    rel_all=LICK2D.ROILick2DmapStatsSpikes*LICK2D.ROILick2DPSTHStatsSpikes & key;
+
+else
+%     rel_psth=LICK2D.ROILick2DPSTH & key;
+%     rel_all=LICK2D.ROILick2DRewardStats*LICK2D.ROILick2DPSTHStats*LICK2D.ROILick2Dangle & key;
+end
+key_large =   sprintf('reward_mean_pval_regular_large<=%.2f',reward_mean_pval_regular_large);
+key_small =   sprintf('reward_mean_pval_regular_small<=%.2f',reward_mean_pval_regular_small);
+key_position = sprintf('lickmap_regular_odd_vs_even_corr>=%.2f AND information_per_spike_regular>=%.2f',lickmap_regular_odd_vs_even_corr,information_per_spike_regular);
+key_concat =   sprintf('psth_position_concat_regular_odd_even_corr>=%.2f',psth_position_concat_regular_odd_even_corr);
+rel_signif_largereward=  rel_all  & key_large;
+rel_signif_smallreward=  rel_all  & key_small;
+rel_positional = rel_all & key_position & key_concat;
+
+%% Venn all
+
+count_total=count(rel_all);
+A_count_largereward=count(rel_signif_largereward);
+B_count_smallreward=count(rel_signif_smallreward);
+C_count_positional=count(rel_positional);
+
+AB= count(rel_all   & key_large & key_small);
+AC= count(rel_all   & key_large & key_position);
+BC= count(rel_all   & key_small & key_position);
+ABC= count(rel_all  & key_large & key_small & key_position );
+
 
 
 %Graphics
@@ -71,29 +102,20 @@ position_y3(end+1)=position_y3(end)-vertical_dist2;
 
 
 
-if flag_spikes==1
-    rel_psth=LICK2D.ROILick2DPSTHSpikes & key;
-    rel_all=LICK2D.ROILick2DPSTHStatsSpikes*LICK2D.ROILick2DangleSpikes & key;
 
-else
-%     rel_psth=LICK2D.ROILick2DPSTH & key;
-%     rel_all=LICK2D.ROILick2DRewardStats*LICK2D.ROILick2DPSTHStats*LICK2D.ROILick2Dangle & key;
-end
-
-
-rel_signif_largereward=  (rel_all   & 'reward_mean_pval_regular_large<=0.05');
-rel_signif_smallreward=  (rel_all   & 'reward_mean_pval_regular_small<=0.05');
-     
 Slarge_signif=struct2table(fetch(rel_signif_largereward ,'*'));
 
 Ssmall_signif=struct2table(fetch(rel_signif_smallreward ,'*'));
 
 % rel_psth_signif = rel_psth & rel_signif;
 
+change_peak_largereward_signif = 100*((Slarge_signif.reward_mean_large./Slarge_signif.reward_mean_regular)-1);
 
-change_peak_largereward_signif = 100*((Slarge_signif.reward_peak_large./Slarge_signif.reward_peak_regular)-1);
+change_peak_smallreward_signif = 100*((Ssmall_signif.reward_mean_small./Ssmall_signif.reward_mean_regular)-1);
 
-change_peak_smallreward_signif = 100*((Ssmall_signif.reward_peak_small./Ssmall_signif.reward_peak_regular)-1);
+% change_peak_largereward_signif = 100*((Slarge_signif.reward_peak_large./Slarge_signif.reward_peak_regular)-1);
+% 
+% change_peak_smallreward_signif = 100*((Ssmall_signif.reward_peak_small./Ssmall_signif.reward_peak_regular)-1);
 
 
 
@@ -103,8 +125,10 @@ change_peak_smallreward_signif = 100*((Ssmall_signif.reward_peak_small./Ssmall_s
 
 %% Regular Reward versus large Reward
 axes('position',[position_x2(1), position_y2(1), panel_width2, panel_height2]);
-step=40;
-bins2 = [-inf,-160:step:160,inf];
+% step=40;
+% bins2 = [-inf,-160:step:160,inf];
+step=20;
+bins2 = [-inf,-100:step:100,inf];
 bins2_centers=[bins2(2)-step/2, bins2(2:end-1)+step/2];
 
 yyaxis left
@@ -117,15 +141,15 @@ ylabel(sprintf('Reward-modulated\n neurons (%%)'),'Color',[0.5 0.5 0.5]);
 xlabel(sprintf('Activity change (%%)\n [Large reward - Regular reward] '));
 title(sprintf('Neurons modulated\n by reward increase\n'),'Color',[1 0.5 0]);
 
-% of directionally tuned cells as a function of reward modulation
+% of positionally tuned cells as a function of reward modulation
 %-----------------------------------------------------------------
-idx_directional = Slarge_signif.theta_tuning_odd_even_corr>threshold_theta_tuning_odd_even_corr & Slarge_signif.goodness_of_fit_vmises>threshold_goodness_of_fit_vmises;
+idx_positional = Slarge_signif.lickmap_regular_odd_vs_even_corr>=lickmap_regular_odd_vs_even_corr & Slarge_signif.information_per_spike_regular>=information_per_spike_regular & Slarge_signif.psth_position_concat_regular_odd_even_corr>=psth_position_concat_regular_odd_even_corr;
 tuned_in_change_bins=[];
 for ib = 1:1:numel(bins2)-1
     idx_change_bin = change_peak_largereward_signif>=bins2(ib) & change_peak_largereward_signif<bins2(ib+1);
     % percentage tuned in each time bin
-    if sum(idx_change_bin)>20 % to avoid spurious values
-        tuned_in_change_bins(ib) =100*sum(idx_change_bin&idx_directional)/sum(idx_change_bin);
+    if sum(idx_change_bin)>25 % to avoid spurious values
+        tuned_in_change_bins(ib) =100*sum(idx_change_bin&idx_positional)/sum(idx_change_bin);
     else
         tuned_in_change_bins(ib)=NaN;
     end
@@ -134,10 +158,12 @@ yyaxis right
 
 plot(bins2_centers,tuned_in_change_bins,'.-','LineWidth',2,'MarkerSize',15,'Color',[0 0 1],'Clipping','off')
 % xlabel(sprintf('Response time of neurons\n relative to first lickport contact (s)'));
-ylabel(sprintf('Directionally tuned\n neurons (%%)'),'Color',[0 0 1]);
-set(gca,'Xtick',[-200,0,200],'TickLength',[0.05,0.05],'TickDir','out');
+ylabel(sprintf('Position tuned\n neurons (%%)'),'Color',[0 0 1]);
+% set(gca,'Xtick',[-200,0,200],'TickLength',[0.05,0.05],'TickDir','out');
+set(gca,'Xtick',[-100,0,100],'TickLength',[0.05,0.05],'TickDir','out');
 box off
-xlim([-200,200]);
+% xlim([-200,200]);
+xlim([-125,125]);
 ylim([0 ceil(max(tuned_in_change_bins))]);
 
 
@@ -145,7 +171,7 @@ ylim([0 ceil(max(tuned_in_change_bins))]);
 
 %% Regular reward versus Reward omission
 axes('position',[position_x2(2), position_y2(1), panel_width2, panel_height2]);
-step=25;
+step=20;
 bins2 = [-inf,-100:step:100,inf];
 bins2_centers=[bins2(2)-step/2, bins2(2:end-1)+step/2];
 
@@ -159,15 +185,15 @@ ylabel(sprintf('Reward-modulated\n neurons (%%)'),'Color',[0.5 0.5 0.5]);
 xlabel(sprintf('Activity change (%%)\n [Reward omission - Regular reward] '));
 title(sprintf('Neurons modulated\n by reward omission\n'),'Color',[0 0.7 0.2]);
 
-% of directionally tuned cells as a function of reward modulation
+% of positionally tuned cells as a function of reward modulation
 %-----------------------------------------------------------------
-idx_directional = Ssmall_signif.theta_tuning_odd_even_corr>threshold_theta_tuning_odd_even_corr & Ssmall_signif.goodness_of_fit_vmises>threshold_goodness_of_fit_vmises ;
+idx_positional = Ssmall_signif.lickmap_regular_odd_vs_even_corr>=lickmap_regular_odd_vs_even_corr & Ssmall_signif.information_per_spike_regular>=information_per_spike_regular & Ssmall_signif.psth_position_concat_regular_odd_even_corr>=psth_position_concat_regular_odd_even_corr;
 tuned_in_change_bins=[];
 for ib = 1:1:numel(bins2)-1
     idx_change_bin = change_peak_smallreward_signif>=bins2(ib) & change_peak_smallreward_signif<bins2(ib+1);
     % percentage tuned in each time bin
     if sum(idx_change_bin)>20 % to avoid spurious values
-        tuned_in_change_bins(ib) =100*sum(idx_change_bin&idx_directional)/sum(idx_change_bin);
+        tuned_in_change_bins(ib) =100*sum(idx_change_bin&idx_positional)/sum(idx_change_bin);
     else
         tuned_in_change_bins(ib)=NaN;
     end
@@ -176,7 +202,7 @@ yyaxis right
 
 plot(bins2_centers,tuned_in_change_bins,'.-','LineWidth',2,'MarkerSize',15,'Color',[0 0 1],'Clipping','off')
 % xlabel(sprintf('Response time of neurons\n relative to first lickport contact (s)'));
-ylabel(sprintf('Directionally tuned\n neurons (%%)'),'Color',[0 0 1]);
+ylabel(sprintf('Position tuned\n neurons (%%)'),'Color',[0 0 1]);
 set(gca,'Xtick',[-100,0,100],'TickLength',[0.05,0.05],'TickDir','out');
 box off
 xlim([-125,125]);
@@ -199,7 +225,7 @@ yyaxis left
 idx = change_peak_largereward_signif>=0;
 a=histogram(Slarge_signif.peaktime_psth_regular(idx),time_bins);
 y1 =100*a.BinCounts/sum(a.BinCounts);
-bar(time_bins_centers,y1,'FaceColor',[1 0 1],'EdgeColor',[1 0 1],'BarWidth',0.8);
+bar(time_bins_centers,y1,'FaceColor',[1 0 1],'EdgeColor',[1 0 1],'BarWidth',1,'LineWidth',1);
 % title(sprintf('Response time of tuned neurons'));
 xlim([time_bins(1),time_bins(end)]);
 % ylim([0 ceil(max(y1))]);
@@ -209,10 +235,10 @@ yyaxis right
 idx = change_peak_largereward_signif<0;
 a=histogram(Slarge_signif.peaktime_psth_regular(idx),time_bins);
 y2 =100*a.BinCounts/sum(a.BinCounts);
-bar(time_bins_centers,y2,'FaceColor','none','EdgeColor',[0.5 0 0.5],'BarWidth',0.5,'LineWidth',2);
+bar(time_bins_centers,y2,'FaceColor','none','EdgeColor',[0.25 0 0.25],'BarWidth',1,'LineWidth',1);
 % title(sprintf('Response time of tuned neurons'));
 xlabel(sprintf('Peak response time of neurons\n relative to first lickport contact (s)'));
-ylabel(sprintf('Suppressed\n neurons (%%)'),'Color',[0.5 0 0.5]);
+ylabel(sprintf('Suppressed\n neurons (%%)'),'Color',[0.25 0 0.25]);
 set(gca,'Xtick',[time_bins(1),0,time_bins(end)],'TickLength',[0.05,0.05],'TickDir','out');
 box off
 xlim([time_bins(1),time_bins(end)]);
@@ -233,7 +259,7 @@ yyaxis left
 idx = change_peak_smallreward_signif>=0;
 a=histogram(Ssmall_signif.peaktime_psth_regular(idx),time_bins);
 y1 =100*a.BinCounts/sum(a.BinCounts);
-bar(time_bins_centers,y1,'FaceColor',[1 0 1],'EdgeColor',[1 0 1],'BarWidth',0.8);
+bar(time_bins_centers,y1,'FaceColor',[1 0 1],'EdgeColor',[1 0 1],'BarWidth',1,'LineWidth',1);
 % title(sprintf('Response time of tuned neurons'));
 xlim([time_bins(1),time_bins(end)]);
 % ylim([0 ceil(max(y1))]);
@@ -243,43 +269,29 @@ yyaxis right
 idx = change_peak_smallreward_signif<0;
 a=histogram(Ssmall_signif.peaktime_psth_regular(idx),time_bins);
 y2 =100*a.BinCounts/sum(a.BinCounts);
-bar(time_bins_centers,y2,'FaceColor','none','EdgeColor',[0.5 0 0.5],'BarWidth',0.5,'LineWidth',2);
+bar(time_bins_centers,y2,'FaceColor','none','EdgeColor',[0.25 0 0.25],'BarWidth',1,'LineWidth',1);
 % title(sprintf('Response time of tuned neurons'));
 xlabel(sprintf('Peak response time of neurons\n relative to first lickport contact (s)'));
-ylabel(sprintf('Suppressed\n neurons (%%)'),'Color',[0.5 0 0.5]);
+ylabel(sprintf('Suppressed\n neurons (%%)'),'Color',[0.25 0 0.25]);
 set(gca,'Xtick',[time_bins(1),0,time_bins(end)],'TickLength',[0.05,0.05],'TickDir','out');
 box off
 xlim([time_bins(1),time_bins(end)]);
 ylim([0 ceil(max([y1,y2]))]);
 title(sprintf('Neurons modulated\n by reward omission\n'),'Color',[0 0.7 0.2]);
 
-
-
-count_total=count(rel_all);
-A_count_largereward=count(rel_signif_largereward);
-B_count_smallreward=count(rel_signif_smallreward);
-
-rel_directional = rel_all & 'theta_tuning_odd_even_corr>0.25' & 'goodness_of_fit_vmises>0.5' ;
-C_count_directional=count(rel_directional);
-
-rel_signif_largereward=  (rel_all   & 'reward_mean_pval_regular_large<0.05');
-rel_signif_smallreward=  (rel_all   & 'reward_mean_pval_regular_small<0.05');
-
-AB= count(rel_all   & 'reward_mean_pval_regular_large<0.05' & 'reward_mean_pval_regular_small<0.05');
-AC= count(rel_all   & 'reward_mean_pval_regular_large<0.05' & 'theta_tuning_odd_even_corr>0.25' & 'goodness_of_fit_vmises>0.5' );
-BC= count(rel_all   & 'reward_mean_pval_regular_small<0.05' & 'theta_tuning_odd_even_corr>0.25' & 'goodness_of_fit_vmises>0.5' );
-ABC= count(rel_all   & 'reward_mean_pval_regular_large<0.05' & 'reward_mean_pval_regular_small<0.05' & 'theta_tuning_odd_even_corr>0.25' & 'goodness_of_fit_vmises>0.5' );
-
+%% Venn diagram plot
 
 axes('position',[position_x2(3), position_y2(2), panel_width2*3, panel_width2*3]);
 
-% [h,v]=venn([A_count_largereward,B_count_smallreward,C_count_directional], [AB, AC, BC, ABC],'FaceColor',{[1 0.5 0],[0 0.5 1],[1 0 1]}) 
-[h,v]=venn([A_count_largereward,B_count_smallreward,C_count_directional], [AB, AC, BC, ABC],'FaceColor',{[1 0.5 0],[0 0.7 0.2],[0 0 1]}) 
+% [h,v]=venn([A_count_largereward,B_count_smallreward,C_count_positional], [AB, AC, BC, ABC],'FaceColor',{[1 0.5 0],[0 0.5 1],[1 0 1]}) 
+[h,v]=venn([A_count_largereward,B_count_smallreward,C_count_positional], [AB, AC, BC, ABC],'FaceColor',{[1 0.5 0],[0 0.7 0.2],[0 0 1]}) ;
 
 %by itself plots circles with total areas A, and intersection area(s) I. 
 % A is a three element vector [c1 c2 c3], and I is a four element vector [i12 i13 i23 i123], specifiying the two-circle intersection areas i12, i13, i23, and the three-circle intersection i123.
 for i_v=1:1:3%numel(v.ZonePop)
-text(v.ZoneCentroid(i_v,1)-v.ZoneCentroid(i_v,1)*0.2,v.ZoneCentroid(i_v,2),sprintf('%.1f%%',(100*v.ZonePop(i_v)/count_total)),'Color',[1 1 1],'FontSize',17,'HorizontalAlignment','left');
+% text(v.ZoneCentroid(i_v,1)-v.ZoneCentroid(i_v,1)*0.2,v.ZoneCentroid(i_v,2),sprintf('%.1f%%',(100*v.ZonePop(i_v)/count_total)),'Color',[1 1 1],'FontSize',17,'HorizontalAlignment','left');
+text(v.ZoneCentroid(i_v,1)-v.ZoneCentroid(i_v,1)*0.2,v.ZoneCentroid(i_v,2),sprintf('%.1f%%',(100*v.CirclePop(i_v)/count_total)),'Color',[1 1 1],'FontSize',17,'HorizontalAlignment','left');
+
 end
 axis off
 box off
@@ -287,13 +299,14 @@ box off
 
 text(v.Position(1,1)-v.Radius(1)*1.3,v.Position(1,2)-v.Radius(1)*1.4,sprintf('Reward-increase\n modulated'),'Color',[1 0.5 0],'FontSize',17);
 text(v.Position(2,1)-v.Radius(1)*0.5,v.Position(2,2)-v.Radius(2)*1.6,sprintf('Reward-omission\n modulated'),'Color',[0 0.7 0.2],'FontSize',17);
-text(v.Position(3,1)-v.Radius(1)*1.3,v.Position(3,2)+v.Radius(3)*1.2,sprintf('Directionally tuned'),'Color',[0 0 1],'FontSize',17);
+text(v.Position(3,1)-v.Radius(1)*1.3,v.Position(3,2)+v.Radius(3)*1.2,sprintf('Position tuned'),'Color',[0 0 1],'FontSize',17);
+
+%% all neurons peak response time
 
 axes('position',[position_x2(1), position_y2(3), panel_width2, panel_width2]);
 
-pt=fetchn(rel_all,'peaktime_psth_regular');
+pt=fetchn(rel_all&key_concat,'peaktime_psth_regular');
 
-%% all neurons peak response time
 a=histogram(pt,time_bins);
 y2 =100*a.BinCounts/sum(a.BinCounts);
 bar(time_bins_centers,y2,'FaceColor','none','EdgeColor',[0 0 0],'BarWidth',1,'LineWidth',2);

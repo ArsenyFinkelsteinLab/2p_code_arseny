@@ -23,7 +23,7 @@ psthmap_time                            : blob       #
 %}
 
 
-classdef ROILick2DmapPSTHSpikes < dj.Computed
+classdef ROILick2DmapPSTHSpikes3bins < dj.Computed
     properties
     end
     methods(Access=protected)

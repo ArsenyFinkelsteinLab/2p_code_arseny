@@ -2,3 +2,6 @@ function Connectivity_paper_figures()
 
 positional_tuning_stability_vs_information
 
+PLOTS_Population2DReward_all_sessions % reward and directional tuning
+
+PLOTS_Population2DReward_and_Position_tuning_all_sessions % reward and positional tuning

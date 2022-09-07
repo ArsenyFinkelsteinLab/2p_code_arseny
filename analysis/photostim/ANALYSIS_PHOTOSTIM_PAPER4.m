@@ -20,6 +20,7 @@ PLOT_InfluenceDistance()
 PLOT_ConnectionProbabilityDistance()
 PLOT_Network_Degree() % and also degree versus correlation with neighborhood
 PLOT_Network_Degree_vs_tuning_ETL() %directional, temporal, and reward tuning -- this is what I show in presentations
+PLOT_Network_Degree_vs_tuning_ETL() %directional, temporal, and reward tuning -- this is what I show in presentations
 
 %% Influence versus noise correlations 
 populate(STIMANAL.Target2AllCorrTraceSpont);%based on spikes
