@@ -21,7 +21,7 @@ theta_tuning_large_even=null    : blob   #
 theta_tuning_large_vmises=null  : blob   #
 theta_tuning_large_stem=null    : blob   #
 
-theta_bins_centers                 : blob   #
+theta_bins_centers              : blob   #
 
 %}
 
@@ -39,16 +39,17 @@ classdef ROILick2DangleSpikes3bins< dj.Imported
             rel_data = IMG.ROISpikes;
             rel_meso = IMG.Mesoscope & key;
             if rel_meso.count>0 % if its mesoscope data
-                fr_interval = [-2, 5]; % used it for the mesoscope
+                fr_interval = [0, 5]; % used it for the mesoscope
             else  % if its not mesoscope data
                 fr_interval = [0, 3];
             end
 
-            fn_computer_Lick2Dangle_3bins(key, self, rel_data, fr_interval, dir_current_fig);
+            fn_computer_Lick2Dangle_3bins(key, self, rel_data, fr_interval);
             
             % % also populates
             %     self2=LICK2D.ROILick2DangleStatsSpikes3bins;
-            %     self3=LICK2D.ROILick2DangleStatsSpikes3bins;
+            %     self3=LICK2D.ROILick2DangleBlockSpikes3bins ;
+            %     self4=LICK2D.ROILick2DangleBlockStatsSpikes3bins;
 
             
         end

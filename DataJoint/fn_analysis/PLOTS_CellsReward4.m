@@ -18,7 +18,7 @@ else  % if based on spikes
     %         ('information_per_spike_regular>=0.05 OR information_per_spike_small>=0.05 OR information_per_spike_large>=0.05') &...
 
     rel_map_and_psth = LICK2D.ROILick2DmapSpikes *LICK2D.ROILick2DmapPSTHSpikes*LICK2D.ROILick2DmapPSTHStabilitySpikes *LICK2D.ROILick2DmapStatsSpikes * LICK2D.ROILick2DPSTHSpikes  & rel_rois;
-    rel_angle = LICK2D.ROILick2DangleSpikes  & rel_rois;
+    rel_angle = LICK2D.ROILick2DangleSpikes3bins*LICK2D.ROILick2DangleStatsSpikes3bins  & rel_rois;
     rel_stats = LICK2D.ROILick2DPSTHStatsSpikes *LICK2D.ROILick2DmapStatsSpikes & rel_rois;
 end
 
@@ -380,20 +380,24 @@ for i_roi=1:plot_one_in_x_cell:numel(roi_number)
     %% Angular tuning
     axes('position',[position_x2(3),position_y2(1), panel_width2, panel_height2])
     hold on;
-    xxx=M_angle(i_roi).theta_bins_centers;
-    yyy=M_angle(i_roi).theta_tuning_curve;
-    yyy_max = nanmax(yyy);
+    theta_bins_centers=M_angle(i_roi).theta_bins_centers;
+    yyy=M_angle(i_roi).theta_tuning_regular;
+    yyy_stem=M_angle(i_roi).theta_tuning_regular_stem;
+    yyy_odd=M_angle(i_roi).theta_tuning_regular_odd;
+    yyy_even=M_angle(i_roi).theta_tuning_regular_even;
+
+    yyy_max = nanmax([yyy(:)+yyy_stem(:);yyy_odd;yyy_even]);
     yyy=yyy./yyy_max;
-    yyy_vnmises=(M_angle(i_roi).theta_tuning_curve_vmises)/yyy_max;
-    plot([-180:1:179],yyy_vnmises,'-g','LineWidth',2);
-    plot(xxx,yyy,'-b','LineWidth',2);
-    plot(xxx,M_angle(i_roi).theta_tuning_curve_odd/yyy_max,'-','Color',[0 0 0]);
-    plot(xxx,M_angle(i_roi).theta_tuning_curve_even/yyy_max,'-','Color',[0.5 0.5 0.5]);
+    yyy_vnmises=(M_angle(i_roi).theta_tuning_regular_vmises)/yyy_max;
+    plot(theta_bins_centers,yyy_vnmises,'-g','LineWidth',2);
+    shadedErrorBar(theta_bins_centers,yyy, yyy_stem,'lineprops',{'-','Color',[ 1 0 1],'linewidth',1});
+    plottheta_bins_centers,M_angle(i_roi).theta_tuning_regular_odd/yyy_max,'-','Color',[0 0 0]);
+    plot(theta_bins_centersM_angle(i_roi).theta_tuning_regular_even/yyy_max,'-','Color',[0.5 0.5 0.5]);
     
     %     try
     %         title(sprintf('Directional tuning \n RV = %.2f p-val = %.2f \n r = %.2f  p-val = %.4f \n theta = %d thetaVM = %d deg',M(i_roi).rayleigh_length,M(i_roi).pval_rayleigh_length, M(i_roi).theta_tuning_odd_even_corr,  M(i_roi).pval_theta_tuning_odd_even_corr, floor(M(i_roi).preferred_theta), floor(M(i_roi).preferred_theta_vmises)), 'FontSize',10);
     %     catch
-    title(sprintf('Directional tuning \n RV = %.2f\n r = %.2f  r^2 fit VM = %.2f \n theta = %d VM = %d deg',M_angle(i_roi).rayleigh_length, M_angle(i_roi).theta_tuning_odd_even_corr, M_angle(i_roi).goodness_of_fit_vmises,  floor(M_angle(i_roi).preferred_theta), floor(M_angle(i_roi).preferred_theta_vmises)), 'FontSize',10);
+    title(sprintf('Directional tuning \n RV = %.2f\n r = %.2f  r^2 fit VM = %.2f \n theta = %d VM = %d deg',M_angle(i_roi).rayleigh_length_regular, M_angle(i_roi).theta_tuning_odd_even_corr_regular, M_angle(i_roi).goodness_of_fit_vmises_regular,  floor(M_angle(i_roi).preferred_theta_regular), floor(M_angle(i_roi).preferred_theta_vmises_regular)), 'FontSize',10);
     %     end
     xlim([-180,180])
     ylim([0, 1])

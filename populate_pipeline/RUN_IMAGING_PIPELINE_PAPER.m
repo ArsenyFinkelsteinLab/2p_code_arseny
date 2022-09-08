@@ -165,7 +165,7 @@ populate(STIMANAL.ROIGraphAllETL);
 %debug:  exludes all older sessions that do not have EXP2.TrialLickBlock.Debug to include them
 
 populate(LICK2D.ROILick2DangleSpikes);
-populate(LICK2D.ROILick2DangleSpikes3bins); %also populates LICK2D.ROILick2DangleBlockSpikes3bins LICK2D.ROILick2DangleStatsSpikes3bins
+populate(LICK2D.ROILick2DangleSpikes3bins); %also populates LICK2D.ROILick2DangleBlockSpikes3bins LICK2D.ROILick2DangleStatsSpikes3bins LICK2D.ROILick2DangleBlockStatsSpikes3bins
 
 populate(LICK2D.ROILick2DQuadrantsSpikes);
 populate(LICK2D.ROILick2DPSTHSpikes); % also populates LICK2D.ROILick2DPSTHStatsSpikes LICK2D.ROILick2DPSTHBlockSpikes LICK2D.ROILick2DPSTHBlockStatsSpikes
@@ -201,7 +201,6 @@ populate(PLOTS.Maps2DthetaSpikes);
 
 %based on dff
 %--------------------------------
-populate(LICK2D.ROILick2Dangle);
 populate(LICK2D.ROILick2DangleNeuropil);
 populate(LICK2D.ROILick2DPSTH); %LICK2D.ROILick2DPSTHStats LICK2D.ROILick2DRewardStats LICK2D.ROILick2DBlockStats
 populate(LICK2D.ROILick2Dmap); %also populates LICK2D.ROILick2DSelectivity LICK2D.ROILick2DSelectivityStats
