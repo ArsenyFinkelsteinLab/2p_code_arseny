@@ -3,26 +3,29 @@
 -> EXP2.SessionEpoch
 -> IMG.ROI
 ---
-theta_tuning_regular            : blob   #
-theta_tuning_regular_odd        : blob   #
-theta_tuning_regular_even       : blob   #
-theta_tuning_regular_vmises     : blob   #
-theta_tuning_regular_stem       : blob   #
+theta_tuning_first=null         : blob   #
+theta_tuning_first_odd=null     : blob   #
+theta_tuning_first_even=null    : blob   #
+theta_tuning_first_vmises=null  : blob   #
+theta_tuning_first_stem=null    : blob   #
 
-theta_tuning_small=null         : blob   #
-theta_tuning_small_odd=null     : blob   #
-theta_tuning_small_even=null    : blob   #
-theta_tuning_small_vmises=null  : blob   #
-theta_tuning_small_stem=null    : blob   #
+theta_tuning_begin=null         : blob   #
+theta_tuning_begin_odd=null     : blob   #
+theta_tuning_begin_even=null    : blob   #
+theta_tuning_begin_vmises=null  : blob   #
+theta_tuning_begin_stem=null    : blob   #
 
-theta_tuning_large=null         : blob   #
-theta_tuning_large_odd=null     : blob   #
-theta_tuning_large_even=null    : blob   #
-theta_tuning_large_vmises=null  : blob   #
-theta_tuning_large_stem=null    : blob   #
+theta_tuning_mid=null         : blob   #
+theta_tuning_mid_odd=null     : blob   #
+theta_tuning_mid_even=null    : blob   #
+theta_tuning_mid_vmises=null  : blob   #
+theta_tuning_mid_stem=null    : blob   #
 
-theta_bins_centers                 : blob   #
-
+theta_tuning_end=null         : blob   #
+theta_tuning_end_odd=null     : blob   #
+theta_tuning_end_even=null    : blob   #
+theta_tuning_end_vmises=null  : blob   #
+theta_tuning_end_stem=null    : blob   #
 %}
 
 
@@ -48,8 +51,6 @@ classdef ROILick2DangleSpikes3bins< dj.Imported
             
             % % also populates
             %     self2=LICK2D.ROILick2DangleStatsSpikes3bins;
-            %     self2=LICK2D.ROILick2DangleStatsSpikes3bins;
-
             
         end
     end

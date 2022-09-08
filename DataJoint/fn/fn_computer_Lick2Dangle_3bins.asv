@@ -21,7 +21,7 @@ z_bins_centers=[-1,0,1];
 pos_x = x_bins_centers(x_idx);
 pos_z = z_bins_centers(z_idx);
 [theta, radius] = cart2pol(pos_x,pos_z);
-theta=rad2deg(theta);
+theta=rad2deg(theta); 
 
 theta_bins = [-135, -90, -45, 0, 45, 90, 135, 180, inf];
 theta_bins_centers=theta_bins(1:end-1);
@@ -36,7 +36,7 @@ theta_idx(idx_center)=NaN;
 frame_rate = fetchn(IMG.FOVEpoch & key,'imaging_frame_rate');
 
 [TRIAL_IDX, num_trials, start_file, end_file] = ...
-    fn_parse_2Dlicking_into_trial_types(key,fr_interval);
+  fn_parse_2Dlicking_into_trial_types(key,fr_interval);
 
 
 
@@ -73,24 +73,24 @@ for i_roi=1:1:size(S,1)
     
     [THETA_TUNING] = fn_compute_angular_tuning_mean_and_stem (fr_all, i_roi, num_trials,  TRIAL_IDX.idx_regular, timespent_min, theta_bins_centers, theta_idx, smoothing_window_1D);
     
-    THETA_TUNING.theta_tuning_mean=theta_tuning_mean;
-    THETA_TUNING.theta_tuning_stem=theta_tuning_stem;
-    
-    THETA_TUNING.theta_tuning_mean_odd=theta_tuning_odd;
-    THETA_TUNING.theta_tuning_mean_even=theta_tuning_even;
-    
-    THETA_TUNING.theta_tuning_stem_odd=theta_tuning_stem_odd;
-    THETA_TUNING.theta_tuning_stem_even=theta_tuning_stem_even;
-    
-    THETA_TUNING.preferred_direction=preferred_theta;
-    THETA_TUNING.preferred_direction_vmises=preferred_direction_vmises;
-    THETA_TUNING.goodness_of_fit_vmises=goodness_of_fit_vmises;
-    THETA_TUNING.theta_tuning_odd_even_corr=r_odd_even;
-    THETA_TUNING.rayleigh_length = rayleigh_length;
-    
+THETA_TUNING.theta_tuning_mean=theta_tuning_mean;
+THETA_TUNING.theta_tuning_stem=theta_tuning_stem;
+
+THETA_TUNING.theta_tuning_mean_odd=theta_tuning_odd;
+THETA_TUNING.theta_tuning_mean_even=theta_tuning_even;
+
+THETA_TUNING.theta_tuning_stem_odd=theta_tuning_stem_odd;
+THETA_TUNING.theta_tuning_stem_even=theta_tuning_stem_even;
+
+THETA_TUNING.preferred_direction=preferred_theta;
+THETA_TUNING.preferred_direction_vmises=preferred_direction_vmises;
+THETA_TUNING.goodness_of_fit_vmises=goodness_of_fit_vmises;
+THETA_TUNING.theta_tuning_odd_even_corr=r_odd_even;
+THETA_TUNING.rayleigh_length = rayleigh_length;
+
     clear THETA_TUNING
-    
-    
+
+
     key_ROI1(i_roi).session_epoch_type = key.session_epoch_type;
     key_ROI1(i_roi).session_epoch_number = key.session_epoch_number;
     key_ROI1(i_roi).theta_curve = theta_firing_rate_smoothed;

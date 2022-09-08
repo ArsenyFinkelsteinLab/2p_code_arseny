@@ -1,7 +1,13 @@
-function fn_parse_2Dlicking_into_2Dbins(key,number_of_bins)
+% function [x_idx, z_idx, mat_x, mat_z, x_bins, z_bins, pos_x, pos_z] = fn_parse_2Dlicking_into_2Dbins(key,number_of_bins)
+function [x_idx, z_idx, mat_x, mat_z, x_bins_centers, z_bins_centers, pos_x, pos_z] = fn_parse_2Dlicking_into_2Dbins(key,number_of_bins)
 
 %% Rescaling, rotation, and binning
-[POS, ~] = fn_rescale_and_rotate_lickport_pos (key);
+
+if isempty(number_of_bins) % if number_of_bins is not given, compute it from here:
+    [POS, number_of_bins] = fn_rescale_and_rotate_lickport_pos (key);
+else % or use the number_of_bins provided by the fn_parse_2Dlicking_into_2Dbins function
+    [POS, ~] = fn_rescale_and_rotate_lickport_pos (key);
+end
 key.number_of_bins=number_of_bins;
 pos_x = POS.pos_x;
 pos_z = POS.pos_z;
@@ -21,7 +27,7 @@ z_bins(end)= inf;
 
 %% Compute coverage, for subsampling
 session_date = fetch1(EXP2.Session & key,'session_date');
-filename = [ 'anm' num2str(key.subject_id) '_s' num2str(key.session) '_' session_date]
+filename = [ 'anm' num2str(key.subject_id) '_s' num2str(key.session) '_' session_date];
 
 rand_x_jitter=pos_x+(rand(1,numel(pos_x))-0.5)./3;
 rand_z_jitter=pos_z+(rand(1,numel(pos_x))-0.5)./3;
