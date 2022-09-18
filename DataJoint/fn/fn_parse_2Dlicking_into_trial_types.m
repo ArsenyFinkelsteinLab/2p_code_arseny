@@ -1,12 +1,12 @@
 function [TRIAL_IDX, num_trials, start_file, end_file] = ...
-    fn_parse_2Dlicking_into_trial_types(key, fr_interval)
+    fn_parse_2Dlicking_into_trial_types(key, fr_interval, flag_electric_video)
 
 frame_rate = fetchn(IMG.FOVEpoch & key,'imaging_frame_rate');
 
 R=fetch((EXP2.TrialRewardSize & key) - TRACKING.VideoGroomingTrial,'*','ORDER BY trial');
 Block=fetch((EXP2.TrialLickBlock & key) - TRACKING.VideoGroomingTrial,'*','ORDER BY trial');
 
-[start_file, end_file ] = fn_parse_into_trials (key,frame_rate, fr_interval);
+[start_file, end_file ] = fn_parse_into_trials_and_get_lickrate (key,frame_rate, fr_interval , flag_electric_video);
 
 num_trials =numel(start_file);
 TRIAL_IDX.idx_response = (~isnan(start_file));

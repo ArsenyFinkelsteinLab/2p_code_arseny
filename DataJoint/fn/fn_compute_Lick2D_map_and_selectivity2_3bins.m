@@ -1,4 +1,4 @@
-function fn_compute_Lick2D_map_and_selectivity2_3bins(key,self, rel_data, fr_interval, fr_interval_limit)
+function fn_compute_Lick2D_map_and_selectivity2_3bins(key,self, rel_data, fr_interval, fr_interval_limit, flag_electric_video)
 number_of_bins=3;
 smooth_window_sec=0.2; %frames for PSTH
 timespent_min=5; %in trials
@@ -117,7 +117,7 @@ else
 end
 
 % num_trials = numel(TrialsStartFrame);
-[start_file, end_file ] = fn_parse_into_trials (key,frame_rate, fr_interval);
+[start_file, end_file ] = fn_parse_into_trials_and_get_lickrate (key,frame_rate, fr_interval, flag_electric_video);
 
 num_trials =numel(start_file);
 idx_response = (~isnan(start_file));

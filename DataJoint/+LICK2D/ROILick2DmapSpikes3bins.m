@@ -26,7 +26,7 @@ keySource = (EXP2.SessionEpoch*IMG.FOV) & IMG.ROI & IMG.ROISpikes & EXP2.TrialLi
     end
     methods(Access=protected)
         function makeTuples(self, key)
-            
+           flag_electric_video = 1; %detect licks with electric contact or video (if available) 1 - electric, 2 - video
             rel_data = IMG.ROISpikes;
             
             rel_meso = IMG.Mesoscope & key;
@@ -37,7 +37,7 @@ keySource = (EXP2.SessionEpoch*IMG.FOV) & IMG.ROI & IMG.ROISpikes & EXP2.TrialLi
                 fr_interval = [-1, 4]; 
                 fr_interval_limit= [0, 3]; % for comparing firing rates between conditions and computing firing-rate maps
             end
-            fn_compute_Lick2D_map_and_selectivity2_3bins (key,self, rel_data, fr_interval, fr_interval_limit);
+            fn_compute_Lick2D_map_and_selectivity2_3bins (key,self, rel_data, fr_interval, fr_interval_limit, flag_electric_video);
             
             % % also populates
             %     self2=LICK2D.ROILick2DmapPSTHSpikes3bins;

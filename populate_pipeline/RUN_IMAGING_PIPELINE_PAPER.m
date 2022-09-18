@@ -93,6 +93,13 @@ populate(IMG.ROITrace);
 populate(IMG.ROISpikes);
 populate(IMG.ROITraceNeuropil); 
 
+populate(IMG.ROIdeltaF); % IMG.ROIdeltaFMean IMG.ROIFMean
+populate(IMG.ROIdeltaFPeak); 
+populate(IMG.ROIdeltaFStats);
+populate(IMG.ROIBadSessionEpoch);
+populate(IMG.ROIBad); 
+
+populate(IMG.ROIInclude);
 
 % We use this:
 populate(IMG.ETLTransform);  % XYZ coordinate transform (same transform across all sessions) for correction of ETL abberations based on ETL callibration. Populated from external script.
@@ -104,11 +111,6 @@ populate(IMG.ETLTransform2);   % XYZ coordinate transform (same transform across
 populate(IMG.ROIPositionETL2); % XYZ coordinate correction of ETL abberations based on anatomical fiducial (NOT USED)
 
 
-populate(IMG.ROIdeltaF); % IMG.ROIdeltaFMean IMG.ROIFMean
-populate(IMG.ROIdeltaFPeak); 
-populate(IMG.ROIdeltaFStats);
-populate(IMG.ROIBadSessionEpoch);
-populate(IMG.ROIBad); 
 
 
 populate(IMG.ROIdeltaFNeuropil); % IMG.ROIdeltaFMeanNeuropil
@@ -164,30 +166,19 @@ populate(STIMANAL.ROIGraphAllETL);
 %--------------------------------
 %debug:  exludes all older sessions that do not have EXP2.TrialLickBlock.Debug to include them
 
-populate(LICK2D.ROILick2DangleSpikes);
 populate(LICK2D.ROILick2DangleSpikes3bins); %also populates LICK2D.ROILick2DangleBlockSpikes3bins LICK2D.ROILick2DangleStatsSpikes3bins LICK2D.ROILick2DangleBlockStatsSpikes3bins
-
-populate(LICK2D.ROILick2DQuadrantsSpikes);
 populate(LICK2D.ROILick2DPSTHSpikes); % also populates LICK2D.ROILick2DPSTHStatsSpikes LICK2D.ROILick2DPSTHBlockSpikes LICK2D.ROILick2DPSTHBlockStatsSpikes
 populate(LICK2D.ROILick2DmapSpikes); %also populates LICK2D.ROILick2DmapPSTHSpikes LICK2D.ROILick2DmapPSTHStabilitySpikes LICK2D.ROILick2DmapStatsSpikes LICK2D.ROILick2DSelectivitySpikes LICK2D.ROILick2DSelectivityStatsSpikes
-
 populate(LICK2D.ROILick2DmapSpikes3bins); %also populates LICK2D.ROILick2DmapPSTHSpikes3bins LICK2D.ROILick2DmapPSTHStabilitySpikes3bins LICK2D.ROILick2DmapStatsSpikes3bins LICK2D.ROILick2DSelectivitySpikes3bins LICK2D.ROILick2DSelectivityStatsSpikes3bins
-
-
-populate(LICK2D.ROILick2DContactenated); %based on dFF
-populate(LICK2D.ROILick2DContactenatedSpikes);
-populate(LICK2D.ROILick2DContactenatedSpikes2);
-
-populate(LICK2D.ROILick2DContactenatedNeuropil);
+populate(LICK2D.ROILick2DPSTHSpikesPoisson); % also populates LICK2D.ROILick2DPSTHStatsSpikesPoisson LICK2D.ROILick2DPSTHBlockSpikesPoisson LICK2D.ROILick2DPSTHBlockStatsSpikesPoisson
+populate(LICK2D.ROILick2DPSTHSpikesResampledlikePoisson); % also populates LICK2D.ROILick2DPSTHStatsSpikesResampledlikePoisson LICK2D.ROILick2DPSTHBlockSpikesResampledlikePoisson LICK2D.ROILick2DPSTHBlockStatsSpikesResampledlikePoisson
 
 populate(PLOTS.Cells2DTuningSpikes);
+populate(PLOTS.Cells2DTuningSpikesRewardSignif);
 
-populate(PLOTS.CellsRewardTuningSpikes);
+populate(PLOTS.Cells2DTuningSpikesPhotostimulated);
 
-
-populate(LICK2D.ROILick2DPSTHSpikesPoisson);
-
-populate(PLOTS.CellsRewardTuningSpikesPoisson);
+populate(PLOTS.MultipleCells2DTuningSpikes); %Multiple 2D tunings map on cells
 
 
 populate(PLOTS.Maps2DthetaSpikes);
@@ -204,7 +195,7 @@ populate(PLOTS.Maps2DthetaSpikes);
 populate(LICK2D.ROILick2DangleNeuropil);
 populate(LICK2D.ROILick2DPSTH); %LICK2D.ROILick2DPSTHStats LICK2D.ROILick2DRewardStats LICK2D.ROILick2DBlockStats
 populate(LICK2D.ROILick2Dmap); %also populates LICK2D.ROILick2DSelectivity LICK2D.ROILick2DSelectivityStats
-populate(LICK2D.ROILick2DQuadrants);
+
 
 
 populate(LICK2D.ROILick2DLickRate);

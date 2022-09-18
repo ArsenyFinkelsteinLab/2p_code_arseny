@@ -1,4 +1,4 @@
-function fn_computer_Lick2Dangle_3bins(key,self, rel_data, fr_interval)
+function fn_computer_Lick2Dangle_3bins(key,self, rel_data, fr_interval, flag_electric_video)
 
 rel_ROI = (IMG.ROI - IMG.ROIBad) & key;
 key_ROI1=fetch(rel_ROI,'ORDER BY roi_number');
@@ -36,7 +36,7 @@ theta_idx(idx_center)=NaN;
 
 frame_rate = fetchn(IMG.FOVEpoch & key,'imaging_frame_rate');
 
-[TRIAL_IDX, num_trials, start_file, end_file] = fn_parse_2Dlicking_into_trial_types(key,fr_interval);
+[TRIAL_IDX, num_trials, start_file, end_file] = fn_parse_2Dlicking_into_trial_types(key,fr_interval, flag_electric_video);
 
 
 
@@ -242,9 +242,9 @@ for i_roi=1:1:size(S,1)
         key_ROI4(i_roi).preferred_theta_vmises_end_even = THETA_TUNING_end.preferred_direction_vmises_even;
         key_ROI4(i_roi).goodness_of_fit_vmises_end = THETA_TUNING_end.goodness_of_fit_vmises;
         key_ROI4(i_roi).theta_tuning_odd_even_corr_end = THETA_TUNING_end.theta_tuning_odd_even_corr;
-        key_ROI4(i_roi).percent_theta_coverage_even = THETA_TUNING_end.percent_theta_coverage;
-        key_ROI4(i_roi).percent_theta_coverage_even_odd   = THETA_TUNING_end.percent_theta_coverage_odd;
-        key_ROI4(i_roi).percent_theta_coverage_even_even  = THETA_TUNING_end.percent_theta_coverage_even;
+        key_ROI4(i_roi).percent_theta_coverage_end = THETA_TUNING_end.percent_theta_coverage;
+        key_ROI4(i_roi).percent_theta_coverage_end_odd   = THETA_TUNING_end.percent_theta_coverage_odd;
+        key_ROI4(i_roi).percent_theta_coverage_end_even  = THETA_TUNING_end.percent_theta_coverage_even;
     catch
     end
     %     k2=key_ROI1(i_roi);

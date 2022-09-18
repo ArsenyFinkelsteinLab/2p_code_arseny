@@ -16,9 +16,7 @@ num_cells_included                   :int       #
 
 classdef DistanceCorrConcatSpikes2 < dj.Computed
     properties
-                keySource = ((EXP2.SessionEpoch  & IMG.ROI & LICK2D.ROILick2DContactenatedSpikes - IMG.Mesoscope) - EXP2.SessionEpochSomatotopy)&IMG.Volumetric ;
-%         keySource = ((EXP2.SessionEpoch  & IMG.ROI & LICK2D.ROILick2DContactenatedSpikes) - EXP2.SessionEpochSomatotopy)&IMG.Volumetric ;
-        
+                keySource = (EXP2.SessionEpoch  & IMG.ROI & LICK2D.ROILick2DmapStatsSpikes3bins - IMG.Mesoscope) & IMG.Volumetric ;
     end
     methods(Access=protected)
         function makeTuples(self, key)
@@ -26,7 +24,7 @@ classdef DistanceCorrConcatSpikes2 < dj.Computed
             close all;
             %Graphics
             %---------------------------------
-            figure;
+            figure('visible','off')
             set(gcf,'DefaultAxesFontName','helvetica');
             set(gcf,'PaperUnits','centimeters','PaperPosition',[0 0 23 30]);
             set(gcf,'PaperOrientation','portrait');
@@ -35,21 +33,20 @@ classdef DistanceCorrConcatSpikes2 < dj.Computed
             
             dir_base = fetch1(IMG.Parameters & 'parameter_name="dir_root_save"', 'parameter_value');
             
-            psth_position_concat_regularreward_odd_even_corr=[-1, 0, 0.25, 0.5];
+            psth_position_concat_regular_odd_even_corr=[-1, 0, 0.25, 0.5];
             
             mesoscope_flag=count(IMG.Mesoscope & key);
-            if mesoscope_flag==1
-                dir_save_fig = [dir_base  '\Lick2D\population\corr_distance_concat_meso_spikes\'];
+           if mesoscope_flag==1
+                dir_save_fig = [dir_base  '\Lick2D\population\TUNING_vs_DISTANCE\single_sessions\tuning_by_concatenated_psth\'];
             else
-                dir_save_fig = [dir_base  '\Lick2D\population\corr_distance_concat_notmeso_spikes_ETL2\'];
-                
+                dir_save_fig = [dir_base  '\Lick2D\population\TUNING_vs_DISTANCE\single_sessions_mesoscope\tuning_by_concatenated_psth\'];
             end
             
-            for i_c = 1:1:numel(psth_position_concat_regularreward_odd_even_corr)
-                rel_roi = (IMG.ROI - IMG.ROIBad) & key & (LICK2D.ROILick2DContactenatedSpikes & sprintf('psth_position_concat_regularreward_odd_even_corr>=%.2f',psth_position_concat_regularreward_odd_even_corr(i_c)));
-                rel_roi_xy = IMG.ROIPositionETL2 & rel_roi;
-                rel_data = LICK2D.ROILick2DContactenatedSpikes & rel_roi & key;
-                key.odd_even_corr_threshold = psth_position_concat_regularreward_odd_even_corr(i_c);
+            for i_c = 1:1:numel(psth_position_concat_regular_odd_even_corr)
+                rel_roi = (IMG.ROI - IMG.ROIBad) & key & (LICK2D.ROILick2DmapStatsSpikes3bins & sprintf('psth_position_concat_regular_odd_even_corr>=%.2f',psth_position_concat_regular_odd_even_corr(i_c)));
+                rel_roi_xy = IMG.ROIPositionETL & rel_roi;
+                rel_data = LICK2D.ROILick2DmapPSTHSpikes3bins & rel_roi & key;
+                key.odd_even_corr_threshold = psth_position_concat_regular_odd_even_corr(i_c);
                 fn_compute_distance_psth_correlation(rel_roi, rel_data, key,self, dir_save_fig, rel_roi_xy, mesoscope_flag);
             end
             

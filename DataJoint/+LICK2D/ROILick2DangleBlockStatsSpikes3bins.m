@@ -16,7 +16,7 @@ theta_tuning_odd_even_corr_first = null   : double   #
 preferred_theta_begin=null                : double   #
 preferred_theta_begin_odd=null            : double   #
 preferred_theta_begin_even=null           : double   #
-rayleigh_length_begin=null=null           : double   #
+rayleigh_length_begin=null                : double   #
 preferred_theta_vmises_begin=null         : double   #
 preferred_theta_vmises_begin_odd=null     : double   #
 preferred_theta_vmises_begin_even=null    : double   #

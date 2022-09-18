@@ -9,7 +9,7 @@ rois_corr                        :blob    # correlation between the activity of 
 
 classdef Target2AllCorrAngleTuning < dj.Computed
     properties
-        keySource = (EXP2.SessionEpoch& 'session_epoch_type="spont_photo"') & (EXP2.Session & (EXP2.SessionEpoch & 'session_epoch_type="behav_only"')  & (EXP2.SessionEpoch & LICK2D.ROILick2DangleSpikes)) & STIM.ROIResponseDirect2;
+        keySource = (EXP2.SessionEpoch& 'session_epoch_type="spont_photo"') & (EXP2.Session & (EXP2.SessionEpoch & 'session_epoch_type="behav_only"')  & (EXP2.SessionEpoch & LICK2D.ROILick2DangleSpikes3bins)) & STIM.ROIResponseDirect2;
     end
     methods(Access=protected)
         function makeTuples(self, key)
@@ -21,16 +21,16 @@ classdef Target2AllCorrAngleTuning < dj.Computed
             keytemp.session_epoch_type='behav_only';
             key_behav = fetch(EXP2.SessionEpoch & keytemp,'LIMIT 1');
             
-            rel_data = LICK2D.ROILick2DangleSpikes & rel_roi;
+            rel_data = LICK2D.ROILick2DangleSpikes3bins & rel_roi;
 
             
             %% Loading Data
-            rel_photostim =IMG.PhotostimGroup*(STIM.ROIResponseDirect2) & key;
+            rel_photostim =(IMG.PhotostimGroup*STIM.ROIResponseDirect2) & key & rel_roi;
             group_list = fetchn(rel_photostim,'photostim_group_num','ORDER BY photostim_group_num');
             target_roi_list = fetchn(rel_photostim,'roi_number','ORDER BY photostim_group_num');
             
             roi_list=fetchn(rel_data &key_behav,'roi_number','ORDER BY roi_number');
-            PSTH=cell2mat(fetchn(rel_data,'theta_tuning_curve','ORDER BY roi_number'));
+            PSTH=cell2mat(fetchn(rel_data,'theta_tuning_regular','ORDER BY roi_number'));
             
        
             rho=corr(PSTH','rows','pairwise');

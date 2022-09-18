@@ -30,9 +30,8 @@ classdef ROILick2DPSTHSpikes < dj.Imported
     end
     methods(Access=protected)
         function makeTuples(self, key)
-            
+           flag_electric_video = 1; %detect licks with electric contact or video (if available) 1 - electric, 2 - video
             rel_data = IMG.ROISpikes;
-            
             rel_temp = IMG.Mesoscope & key;
             if rel_temp.count>0 % if its mesoscope data
                 fr_interval = [-2, 5]; % used it for the mesoscope
@@ -41,8 +40,8 @@ classdef ROILick2DPSTHSpikes < dj.Imported
                 fr_interval = [-1, 4];
                 fr_interval_limit= [0, 3]; % for comparing firing rates between conditions and computing firing-rate maps
             end
-            
-            fn_computer_Lick2DPSTH(key,self, rel_data,fr_interval, fr_interval_limit);
+            time_resample_bin=[];
+            fn_computer_Lick2DPSTH(key,self, rel_data,fr_interval, fr_interval_limit, flag_electric_video, time_resample_bin);
             
             %Also populates: 
             %LICK2D.ROILick2DPSTHStatsSpikes

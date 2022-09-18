@@ -25,12 +25,12 @@ classdef Target2AllCorrPSTH < dj.Computed
 
             
             %% Loading Data
-            rel_photostim =IMG.PhotostimGroup*(STIM.ROIResponseDirect2) & key;
+            rel_photostim =(IMG.PhotostimGroup*STIM.ROIResponseDirect2) & key & rel_roi;
             group_list = fetchn(rel_photostim,'photostim_group_num','ORDER BY photostim_group_num');
             target_roi_list = fetchn(rel_photostim,'roi_number','ORDER BY photostim_group_num');
             
             roi_list=fetchn(rel_data &key_behav,'roi_number','ORDER BY roi_number');
-            PSTH=cell2mat(fetchn(rel_data,'psth','ORDER BY roi_number'));
+            PSTH=cell2mat(fetchn(rel_data,'psth_regular','ORDER BY roi_number'));
             
        
             rho=corr(PSTH','rows','pairwise');

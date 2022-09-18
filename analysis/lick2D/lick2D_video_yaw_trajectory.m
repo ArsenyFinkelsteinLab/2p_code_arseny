@@ -11,6 +11,10 @@ key.subject_id = 462458; %AF17
 % key.subject_id = 463195; %AF24
 % key.subject_id = 464728; %AF32
 
+key.subject_id = 462455; 463192
+key.subject_id = 462458; %AF17
+key.subject_id = 463192;  %AF25
+
 
 sessions_list = fetchn(EXP2.Session & TRACKING.VideoNthLickTrial & key, 'session');
 

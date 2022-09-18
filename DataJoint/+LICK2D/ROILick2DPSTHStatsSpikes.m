@@ -4,12 +4,12 @@
 -> IMG.ROI
 ---
 psth_regular_odd_vs_even_corr               : float   # stability
-psth_small_odd_vs_even_corr=null                 : float   # stability
-psth_large_odd_vs_even_corr=null                 : float   # stability
+psth_small_odd_vs_even_corr=null            : float   # stability
+psth_large_odd_vs_even_corr=null            : float   # stability
 
-psth_regular_vs_small_corr=null                  : float   # correlation
-psth_regular_vs_large_corr=null                  : float   # correlation
-psth_small_vs_large_corr=null                  : float   # correlation
+psth_regular_vs_small_corr=null             : float   # correlation
+psth_regular_vs_large_corr=null             : float   # correlation
+psth_small_vs_large_corr=null               : float   # correlation
 
 peaktime_psth_regular                       : float   # peak time of the psth during regular reward trials
 peaktime_psth_regular_odd                   : float   #

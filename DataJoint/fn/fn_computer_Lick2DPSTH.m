@@ -1,4 +1,4 @@
-function fn_computer_Lick2DPSTH(key,self, rel_data, fr_interval,fr_interval_limit)
+function fn_computer_Lick2DPSTH(key,self, rel_data, fr_interval,fr_interval_limit, flag_electric_video, time_resample_bin)
 
 smooth_window_sec=0.2; %frames for PSTH
 
@@ -27,9 +27,15 @@ S=fetch(rel_data,'*');
 if isfield(S,'spikes_trace') % to be able to run the code both on dff and on deconvulted "spikes" data
     [S.dff_trace] = S.spikes_trace;
     S = rmfield(S,'spikes_trace');
-    self2=LICK2D.ROILick2DPSTHStatsSpikes;
-    self3=LICK2D.ROILick2DPSTHBlockSpikes;
-    self4=LICK2D.ROILick2DPSTHBlockStatsSpikes;
+    if isempty(time_resample_bin)
+        self2=LICK2D.ROILick2DPSTHStatsSpikes;
+        self3=LICK2D.ROILick2DPSTHBlockSpikes;
+        self4=LICK2D.ROILick2DPSTHBlockStatsSpikes;
+    else
+        self2=LICK2D.ROILick2DPSTHStatsSpikesResampledlikePoisson;
+        self3=LICK2D.ROILick2DPSTHBlockSpikesResampledlikePoisson;
+        self4=LICK2D.ROILick2DPSTHBlockStatsSpikesResampledlikePoisson;
+    end
 else
 %     self2=LICK2D.ROILick2DPSTHStatsSpikes;
 %     self3=LICK2D.ROILick2DPSTHBlockSpikes;
@@ -37,7 +43,7 @@ else
 end
 
 % num_trials = numel(TrialsStartFrame);
-[start_file, end_file ] = fn_parse_into_trials (key, frame_rate, fr_interval);
+[start_file, end_file ] = fn_parse_into_trials_and_get_lickrate (key, frame_rate, fr_interval, flag_electric_video);
 
 num_trials =numel(start_file);
 idx_response = (~isnan(start_file));
@@ -101,19 +107,39 @@ for i_roi=1:1:size(S,1)
     
     %% PSTH
     spikes=S(i_roi).dff_trace;
-    for i_tr = 1:1:numel(start_file)
-        if idx_response(i_tr)==0 %its an ignore trial
-            psth_all{i_tr}=NaN;
-            continue
+
+    if isempty(time_resample_bin)
+        for i_tr = 1:1:numel(start_file)
+            if idx_response(i_tr)==0 %its an ignore trial
+                psth_all{i_tr}=NaN;
+                continue
+            end
+            s=spikes(start_file(i_tr):end_file(i_tr));
+            s=movmean(s,[smooth_window_frames 0],'omitnan','Endpoints','shrink');
+            time=(1:1:numel(s))/frame_rate + fr_interval(1);
+            %         s_interval=s(time>fr_interval(1) & time<=fr_interval(2));
+            %         fr_all(i_roi,i_tr)= max(s_interval); %taking the max
+            psth_all{i_tr}=s;
         end
-        s=spikes(start_file(i_tr):end_file(i_tr));
-        s=movmean(s,[smooth_window_frames 0],'omitnan','Endpoints','shrink');
-        time=(1:1:numel(s))/frame_rate + fr_interval(1);
-        %         s_interval=s(time>fr_interval(1) & time<=fr_interval(2));
-        %         fr_all(i_roi,i_tr)= max(s_interval); %taking the max
-        psth_all{i_tr}=s;
+    else
+        time_new_bins = [fr_interval(1):time_resample_bin:fr_interval(end)];
+        time_new = time_new_bins(1:end-1)+mean(diff(time_new_bins)/2);
+        for i_tr = 1:1:numel(start_file)
+            if idx_response(i_tr)==0 %its an ignore trial
+                psth_all{i_tr}=NaN;
+                continue
+            end
+            s=spikes(start_file(i_tr):end_file(i_tr));
+            s=movmean(s,[smooth_window_frames 0],'omitnan','Endpoints','shrink');
+            time=(1:1:numel(s))/frame_rate + fr_interval(1);
+            for i_t = 1:numel(time_new_bins)-1
+                idx_t = time>time_new_bins(i_t) & time<=time_new_bins(i_t+1);
+                s_resampled(i_t) = mean(s(idx_t));
+            end
+            psth_all{i_tr}=s_resampled;
+        end
+        time = time_new;
     end
-    
     
     psth_regular = mean(cell2mat(psth_all(idx_regular)'),1);
     psth_regular_stem = std(cell2mat(psth_all(idx_regular)'),1)/sqrt(numel(idx_regular));

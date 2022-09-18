@@ -1,7 +1,7 @@
 function PLOTS_Population2DReward_all_sessions___vsPoisson__sum
 close all;
 
-key = ((EXP2.Session & 'session>=0' )&  LICK2D.ROILick2DRewardStatsSpikes &  LICK2D.ROILick2DangleSpikes) - IMG.Mesoscope ;
+key = ((EXP2.Session & 'session>=0' ) & LICK2D.ROILick2DPSTHStatsSpikesPoisson & LICK2D.ROILick2DPSTHStatsSpikes) - IMG.Mesoscope ;
 
 
 
@@ -72,112 +72,46 @@ position_y3(end+1)=position_y3(end)-vertical_dist2;
 
 
 if flag_spikes==1
-    rel_psth=LICK2D.ROILick2DPSTHSpikes & key;
-    rel_all=LICK2D.ROILick2DRewardStatsSpikes*LICK2D.ROILick2DPSTHStatsSpikes*LICK2D.ROILick2DangleSpikes & key;
-
+    rel_all=LICK2D.ROILick2DPSTHStatsSpikes * LICK2D.ROILick2DPSTHStatsSpikesPoisson & key;
 else
-    rel_psth=LICK2D.ROILick2DPSTH & key;
-    rel_all=LICK2D.ROILick2DRewardStats*LICK2D.ROILick2DPSTHStats*LICK2D.ROILick2Dangle & key;
+%     rel_all=LICK2D.ROILick2DRewardStats*LICK2D.ROILick2DPSTHStats*LICK2D.ROILick2Dangle & key;
 end
 
 
 
 subplot(2,2,1)
+rel_signif=  (rel_all   & 'reward_mean_pval_regular_large<1');
+PSTH = fetch(rel_signif,'*');
+large = [PSTH.reward_mean_large]-[PSTH.reward_mean_regular]./([PSTH.reward_mean_large]+[PSTH.reward_mean_regular]);
+large_poisson = [PSTH.reward_mean_large_poisson]-[PSTH.reward_mean_regular_poisson]./([PSTH.reward_mean_large_poisson]+[PSTH.reward_mean_regular_poisson]);
 
-rel_signif_largereward=  (rel_all   & 'reward_mean_pval_regular_large<0.01');
-
-
-PSTH = fetch(LICK2D.ROILick2DPSTHSpikesPoisson &rel_signif_largereward,'*');
-
-for i=1:1:length(PSTH)
-    sum_PSTH= sum(PSTH(i).psth);
-    large_peak_real(i) = sum(PSTH(i).psth_large)./sum_PSTH;
-    large_peak_posson(i) =  sum(PSTH(i).psth_large_poisson)./sum_PSTH;
-end
-
-
-plot(large_peak_real,large_peak_posson,'.','Color',[1 0.5 0])
-    hold on
-    plot([0 2],[0 2])
-    xlabel(sprintf('Data'))
-    ylabel(sprintf('Poisson model'))
-    title('Reward increase modulation');
+% large = [PSTH.reward_mean_large]./[PSTH.reward_mean_regular];
+% large_poisson = [PSTH.reward_mean_large_poisson]./[PSTH.reward_mean_regular_poisson];
+plot(large,large_poisson,'.','Color',[1 0.5 0])
+hold on
+plot([0 2],[0 2])
+xlabel(sprintf('Data'))
+ylabel(sprintf('Poisson model'))
+title('Reward increase modulation');
 axis equal
 set(gca,'FontSize',12)
-
-
-
 
 subplot(2,2,2)
-rel_signif_smallreward=  (rel_all   & 'reward_mean_pval_regular_small<0.01');
+rel_signif =  (rel_all   & 'reward_mean_pval_regular_small<1');
+PSTH = fetch(rel_signif,'*');
+small = [PSTH.reward_mean_small]-[PSTH.reward_mean_regular]./([PSTH.reward_mean_small]+[PSTH.reward_mean_regular]);
+small_poisson = [PSTH.reward_mean_small_poisson]-[PSTH.reward_mean_regular_poisson]./([PSTH.reward_mean_small_poisson]+[PSTH.reward_mean_regular_poisson]);
 
-PSTH = fetch(LICK2D.ROILick2DPSTHSpikesPoisson &rel_signif_smallreward,'*');
-
-for i=1:1:length(PSTH)
-    sum_PSTH= sum(PSTH(i).psth);
-    small_peak_real(i) =  sum(PSTH(i).psth_small)./sum_PSTH;
-    small_peak_posson(i) =  sum(PSTH(i).psth_small_poisson)./sum_PSTH;
-end
-
-plot(small_peak_real,small_peak_posson,'.','Color',[0 0.7 0.2])
-    hold on
-    plot([0 2],[0 2])
-
-    xlabel(sprintf('Data'))
-    ylabel(sprintf('Poisson model'))
-    title('Reward omission modulation');
+% small = [PSTH.reward_mean_small]./[PSTH.reward_mean_regular];
+% small_poisson = [PSTH.reward_mean_small_poisson]./[PSTH.reward_mean_regular_poisson];
+plot(small,small_poisson,'.','Color',[0 0.5 0])
+hold on
+plot([0 2],[0 2])
+xlabel(sprintf('Data'))
+ylabel(sprintf('Poisson model'))
+title('Reward Omission modulation');
 axis equal
 set(gca,'FontSize',12)
-
-
-
-
-% subplot(2,2,3)
-% 
-% rel_nonsignif_largereward=  (rel_all   & 'reward_mean_pval_regular_large>0.5');
-% 
-% 
-% PSTH = fetch(LICK2D.ROILick2DPSTHSpikesPoisson &rel_nonsignif_largereward,'*');
-% 
-% for i=1:1:length(PSTH)
-%     sum_PSTH= sum(PSTH(i).psth);
-%     large_peak_real(i) = sum(PSTH(i).psth_large)./sum_PSTH;
-%     large_peak_posson(i) =  sum(PSTH(i).psth_large_poisson)./sum_PSTH;
-% end
-% 
-% plot(large_peak_real,large_peak_posson,'.','Color',[1 0.5 0])
-%     hold on
-%     plot([0 2],[0 2])
-%     xlabel(sprintf('Data'))
-%     ylabel(sprintf('Poisson model'))
-%     title('Reward increase modulation');
-% axis equal
-% set(gca,'FontSize',12)
-% 
-% 
-% 
-% subplot(2,2,4)
-% rel_nonsignif_smallreward=  (rel_all   & 'reward_mean_pval_regular_small>0.5');
-% 
-% PSTH = fetch(LICK2D.ROILick2DPSTHSpikesPoisson &rel_nonsignif_smallreward,'*');
-% 
-% for i=1:1:length(PSTH)
-%     sum_PSTH= sum(PSTH(i).psth);
-%     small_peak_real(i) =  sum(PSTH(i).psth_small)./sum_PSTH;
-%     small_peak_posson(i) =  sum(PSTH(i).psth_small_poisson)./sum_PSTH;
-% end
-% 
-% 
-% plot(small_peak_real,small_peak_posson,'.','Color',[0 0.7 0.2])
-%     hold on
-%     plot([0 2],[0 2])
-% 
-%     xlabel(sprintf('Data'))
-%     ylabel(sprintf('Poisson model'))
-%     title('Reward omission modulation');
-% axis equal
-% set(gca,'FontSize',12)
-
 
 
 if isempty(dir(dir_current_fig))

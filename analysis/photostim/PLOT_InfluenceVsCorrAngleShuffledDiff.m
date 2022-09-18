@@ -3,21 +3,21 @@ close all
 
 
 dir_base = fetch1(IMG.Parameters & 'parameter_name="dir_root_save"', 'parameter_value');
-dir_current_fig = [dir_base  '\Photostim\Connectivity\'];
-filename = 'infleunce_vs_angle';
+dir_current_fig = [dir_base  '\Photostim\Connectivity_vs_Tuning\'];
+filename = 'connnectivity_vs_preferred_direction';
 
 
 % rel_data = STIMANAL.InfluenceVsCorrAngle & 'session_epoch_number<3' & 'num_targets>=5' & 'num_pairs>=100' ;
 % rel_shuffled = STIMANAL.InfluenceVsCorrAngleShuffled  & 'session_epoch_number<3' & 'num_targets>=5' & 'num_pairs>=100';
 
-rel_data = STIMANAL.InfluenceVsCorrAngle33  & 'num_pairs>=0'  & 'num_targets>=50'...
+rel_data = STIMANAL.InfluenceVsCorrAngle  & 'num_pairs>=0'  & 'num_targets>=50'...
     &  (STIMANAL.SessionEpochsIncludedFinal & IMG.Volumetric & 'stimpower>=100' & 'flag_include=1' )   ...;
-%         & (STIMANAL.NeuronOrControlNumber2 & 'num_targets_neurons>=50') ...
+    %         & (STIMANAL.NeuronOrControlNumber2 & 'num_targets_neurons>=50') ...
 %     & (STIMANAL.NeuronOrControlNumber2 & 'num_targets_controls>=50');
 
-rel_shuffled = STIMANAL.InfluenceVsCorrAngleShuffled33  & 'num_pairs>=0' & 'num_targets>=50' ...
+rel_shuffled = STIMANAL.InfluenceVsCorrAngleShuffled  & 'num_pairs>=0' & 'num_targets>=50' ...
     &  (STIMANAL.SessionEpochsIncludedFinal & IMG.Volumetric & 'stimpower>=100' & 'flag_include=1')   ...;
-%         & (STIMANAL.NeuronOrControlNumber2 & 'num_targets_neurons>=50') ...
+    %         & (STIMANAL.NeuronOrControlNumber2 & 'num_targets_neurons>=50') ...
 %     & (STIMANAL.NeuronOrControlNumber2 & 'num_targets_controls>=50');
 
 
@@ -27,7 +27,8 @@ key.response_p_val=1;
 a=fetch(rel_data & key,'*')
 
 num_svd_components_removed_vector_corr =[0];
-colormap=viridis(numel(num_svd_components_removed_vector_corr));
+% colormap=viridis(numel(num_svd_components_removed_vector_corr));
+colormap=[0 0 1];
 
 for i_c = 1:1:numel(num_svd_components_removed_vector_corr)
     key.num_svd_components_removed_corr=num_svd_components_removed_vector_corr(i_c);
@@ -57,8 +58,8 @@ for i_c = 1:1:numel(num_svd_components_removed_vector_corr)
         plot([0,0],[min(y_mean-y_stem),max(y_mean+y_stem)],'-k');
     end
     shadedErrorBar(bins_influence_centers,y_mean,y_stem,'lineprops',{'-','Color',colormap(i_c,:)})
-    xlabel ('Influence (delta zscore)');
-    ylabel('Residual Delta Angle (deg)');
+    xlabel (['Connection stength' newline '(\Delta z-score activity)']);
+    ylabel('\Delta Preferred target direction (\circ)');
     box off
     xlim([bins_influence_edges(1), bins_influence_edges(end)]);
     
@@ -67,20 +68,24 @@ for i_c = 1:1:numel(num_svd_components_removed_vector_corr)
     y=DATA.influence_binned_by_corr - DATA_SHUFFLED.influence_binned_by_corr;
     y_mean = nanmean(y,1);
     y_stem = nanstd(y,1)./sqrt(size(DATA,1));
+    y_min_max=[-0.006, 0.01];
+    y_min_max_tick=[-0.005, 0.01];
     if i_c ==1
         plot([bins_corr_edges(1),bins_corr_edges(end)],[0,0],'-k');
-%         plot([0,0],[min(y_mean-y_stem),max(y_mean+y_stem)],'-k');
+        %         plot([0,0],[min(y_mean-y_stem),max(y_mean+y_stem)],'-k');
+        plot([0,0],[y_min_max(1),y_min_max(2)],'-k');
         xlim([bins_corr_edges(1), bins_corr_edges(end)]);
     end
     %     shadedErrorBar(bins_corr_centers,y_mean,y_stem,'lineprops',{'-','Color',colormap(i_c,:)})
     shadedErrorBar(bins_corr_centers,y_mean,y_stem,'lineprops',{'-','Color',[0 0 1]})
     plot(bins_corr_centers,y_mean,'.-','Color',[0 0 1])
-    xlabel('\Delta Preferred target angle (\circ)');
+    xlabel('\Delta Preferred target direction (\circ)');
     ylabel (['Connection stength' newline '(\Delta z-score activity)']);
-    title(sprintf('Tuning to target direction\n'));
+    title(sprintf('Target preferred direction\n'));
     box off
     set(gca,'XTick',[0 45 90 135 180],'XTickLabel',[0 45 90 135 180]);
-
+    ylim(y_min_max)
+    set(gca,'Ytick',[y_min_max_tick(1), 0, y_min_max_tick(2)])
 end
 
 if isempty(dir(dir_current_fig))

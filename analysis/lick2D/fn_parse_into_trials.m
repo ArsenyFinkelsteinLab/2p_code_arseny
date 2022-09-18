@@ -13,7 +13,7 @@ LICK_VIDEO= fetch(((TRACKING.VideoNthLickTrial& key) - TRACKING.VideoGroomingTri
 
 
 %If there is no video, we align based on electric lickport contact.  We align to the first electric-lickport detected lick after Go cue (there is some lag between GO cue and lickport movement)
-go_time=fetchn(((EXP2.BehaviorTrialEvent & key) - TRACKING.VideoGroomingTrial) & 'trial_event_type="go"','trial_event_time','LIMIT 1');
+go_time=fetchn(((EXP2.BehaviorTrialEvent & key) - TRACKING.VideoGroomingTrial) & 'trial_event_type="go"','trial_event_time');
 LICK_ELECTRIC=fetch(((EXP2.ActionEvent & key) - TRACKING.VideoGroomingTrial),'*');
 
 
@@ -25,15 +25,11 @@ for i_tr = 1:1:numel(trial_num)
         end
     else %use electric
         licks=[LICK_ELECTRIC(find([LICK_ELECTRIC.trial]==trial_num(i_tr))).action_event_time];
-        licks=licks(licks>go_time);
+        licks=licks(licks>go_time(i_tr));
     end
     
     if ~isempty(licks)
-        try
-            start_file(i_tr)=TrialsStartFrame(i_tr) + floor(licks(1)*frame_rate) + floor(time_bin(1)*frame_rate);
-        catch
-            a=1
-        end
+        start_file(i_tr)=TrialsStartFrame(i_tr) + floor(licks(1)*frame_rate) + floor(time_bin(1)*frame_rate);
         end_file(i_tr)=start_file(i_tr)+floor([time_bin(2)-time_bin(1)]*frame_rate)-1;
         if start_file(i_tr)<=0
             start_file(i_tr)=NaN;

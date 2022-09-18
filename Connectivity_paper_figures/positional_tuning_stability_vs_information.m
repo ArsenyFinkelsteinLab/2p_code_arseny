@@ -2,8 +2,8 @@ function positional_tuning_stability_vs_information
 close all;
 
 rel_roi=((IMG.ROI & IMG.ROIGood)-IMG.ROIBad) -IMG.Mesoscope;
-rel= LICK2D.ROILick2DmapSpikes*LICK2D.ROILick2DmapStatsSpikes & rel_roi & 'lickmap_regular_odd_vs_even_corr>0.7';
-number_of_bins=4;
+rel= LICK2D.ROILick2DmapSpikes3bins*LICK2D.ROILick2DmapStatsSpikes3bins & rel_roi & 'lickmap_regular_odd_vs_even_corr>0.7';
+number_of_bins=3;
 D=fetch(rel & sprintf('number_of_bins=%d',number_of_bins),'*');
 
 dir_base = fetch1(IMG.Parameters & 'parameter_name="dir_root_save"', 'parameter_value');
@@ -133,16 +133,16 @@ ylabel(sprintf('Field size (%%)'))
 
 subplot(3,3,7)
 centroid_without_baseline_regular=cell2mat({D.centroid_without_baseline_regular}');
-[centroids_mat] = histcounts2(centroid_without_baseline_regular(:,1),centroid_without_baseline_regular(:,2),linspace(1,number_of_bins,10),linspace(1,number_of_bins,10));
-imagesc(1:number_of_bins,1:number_of_bins,centroids_mat)
+[centroids_mat] = histcounts2(centroid_without_baseline_regular(:,2),centroid_without_baseline_regular(:,1),linspace(1,number_of_bins,9),linspace(1,number_of_bins,9));
+imagesc(1:number_of_bins,1:number_of_bins,centroids_mat);
 title('Centroids without baseline');
 
 subplot(3,3,8)
-bin_mat_coordinate_x= repmat([1:1:number_of_bins],number_of_bins,1)
-bin_mat_coordinate_y= repmat([1:1:number_of_bins]',1,number_of_bins)
+bin_mat_coordinate_x= repmat([1:1:number_of_bins],number_of_bins,1);
+bin_mat_coordinate_y= repmat([1:1:number_of_bins]',1,number_of_bins);
 
-[preferred_bin_mat] = histcounts2(bin_mat_coordinate_x([D.preferred_bin_regular]),bin_mat_coordinate_y([D.preferred_bin_regular]),[1:1:number_of_bins+1],[1:1:number_of_bins+1]);
-imagesc(1:number_of_bins,1:number_of_bins,preferred_bin_mat)
+[preferred_bin_mat] = histcounts2(bin_mat_coordinate_y([D.preferred_bin_regular]),bin_mat_coordinate_x([D.preferred_bin_regular]),[1:1:number_of_bins+1],[1:1:number_of_bins+1]);
+imagesc(1:number_of_bins,1:number_of_bins,preferred_bin_mat);
 title('Preferred position');
 
 % subplot(2,2,2)

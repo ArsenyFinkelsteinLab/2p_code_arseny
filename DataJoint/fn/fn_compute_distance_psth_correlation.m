@@ -5,7 +5,7 @@ min_distance_in_xy=10; %to exclude auto-focus flourescence
 column_inner_radius =[10 10 10 10 10 10 10 10  10  10  10  10  25 25 25  30 30 30 30  30  40  40 40  50  50  60  60  60  60  100 120 120]; % microns
 column_outer_radius =[25 30 40 50 60 75 90 100 120 150 200 250 50 40 100 50 60 75 100 120 60  70 100 100 250 250 100 250 120 250 250 500]; % microns
 
-lateral_distance_bins=[0,10,20,30:10:260];
+lateral_distance_bins=[0,10,20,30:10:500];
 % lateral_distance_bins=[5,15,25:10:255];
 
 
@@ -63,14 +63,23 @@ end
 for i_chunk=1:chunk_size:roi_list(end)
     roi_interval = [i_chunk, i_chunk+chunk_size];
     try
-        temp_F=cell2mat(fetchn(rel_data & key & sprintf('roi_number>=%d',roi_interval(1)) & sprintf('roi_number<%d',roi_interval(2)),'psth_quadrants','ORDER BY roi_number'));
+        temp=fetchn(rel_data & key & sprintf('roi_number>=%d',roi_interval(1)) & sprintf('roi_number<%d',roi_interval(2)),'lickmap_fr_regular','ORDER BY roi_number');
+        temp_F=[];
+        for i=1:1:numel(temp)
+            temp_F(i,:) = temp{i}(:)';
+        end
     catch
         try
-            temp_F=cell2mat(fetchn(rel_data & key & sprintf('roi_number>=%d',roi_interval(1)) & sprintf('roi_number<%d',roi_interval(2)),'psth','ORDER BY roi_number'));
+            temp_F=cell2mat(fetchn(rel_data & key & sprintf('roi_number>=%d',roi_interval(1)) & sprintf('roi_number<%d',roi_interval(2)),'psth_regular','ORDER BY roi_number'));
         catch
             
             try
-                temp_F=cell2mat(fetchn(rel_data & key & sprintf('roi_number>=%d',roi_interval(1)) & sprintf('roi_number<%d',roi_interval(2)),'psth_position_concat_regularreward','ORDER BY roi_number'));
+                temp=fetchn(rel_data & key & sprintf('roi_number>=%d',roi_interval(1)) & sprintf('roi_number<%d',roi_interval(2)),'psth_per_position_regular','ORDER BY roi_number');
+                temp_F=[];
+                for i=1:1:numel(temp)
+                    temp2 = cell2mat(temp{i}(:))';
+                    temp_F(i,:) = temp2(:)';
+                end
             catch
                 temp_F=cell2mat(fetchn(rel_data & key & sprintf('roi_number>=%d',roi_interval(1)) & sprintf('roi_number<%d',roi_interval(2)),'theta_tuning_curve','ORDER BY roi_number'));
             end
