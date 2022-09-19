@@ -16,10 +16,13 @@ populate(STIMANAL.ROIGraphAllETL2)
 populate(STIMANAL.OutDegree)
 populate(POP.ROICorrLocalPhoto2);
 
+populate(STIM.ROIResponseDirectUnique);
+
 PLOT_InfluenceDistance()
 PLOT_ConnectionProbabilityDistance()
 
 PLOT_Network_Degree_vs_tuning_ETL__final_with_shuffle() %directional, temporal, and reward tuning -- this is what I show in presentations
+PLOT_Network_Degree_vs_tuning_ETL__final_with_shuffle2() %directional, temporal, and reward tuning -- this is what I show in presentations
 
 
 %% Influence versus noise correlations 

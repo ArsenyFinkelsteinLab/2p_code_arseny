@@ -7,7 +7,7 @@
 classdef Cells2DTuningSpikesPhotostimulated < dj.Computed
     properties
         
-      keySource = (EXP2.Session  & STIMANAL.OutDegree  &  (STIMANAL.SessionEpochsIncludedFinal & IMG.Volumetric & 'stimpower>=100' & 'flag_include=1' ) &  LICK2D.ROILick2DmapSpikes & LICK2D.ROILick2DPSTHStatsSpikes & LICK2D.ROILick2DPSTHSpikesPoisson & LICK2D.ROILick2DPSTHSpikesResampledlikePoisson & (LICK2D.ROILick2DmapStatsSpikes & 'percent_2d_map_coverage_small>=75' & 'number_of_response_trials>=500')) -  IMG.Mesoscope ;
+      keySource = (EXP2.Session  & STIMANAL.OutDegree  & STIM.ROIResponseDirectUnique &  (STIMANAL.SessionEpochsIncludedFinal & IMG.Volumetric & 'stimpower>=100' & 'flag_include=1' ) &  LICK2D.ROILick2DmapSpikes & LICK2D.ROILick2DPSTHStatsSpikes & LICK2D.ROILick2DPSTHSpikesPoisson & LICK2D.ROILick2DPSTHSpikesResampledlikePoisson & (LICK2D.ROILick2DmapStatsSpikes & 'percent_2d_map_coverage_small>=75' & 'number_of_response_trials>=500')) -  IMG.Mesoscope ;
 %       keySource = (EXP2.Session   &  LICK2D.ROILick2DPSTHSpikes) &  IMG.Mesoscope;
 
     end
@@ -20,7 +20,7 @@ classdef Cells2DTuningSpikesPhotostimulated < dj.Computed
             flag_spikes = 1; % 1 spikes, 0 dff
             
             if flag_spikes==1
-                rel_rois=  (IMG.ROI - IMG.ROIBad) & (STIMANAL.OutDegree & 'max_distance_lateral=100' & 'p_val=0.05' & 'session_epoch_number=2') &  (STIMANAL.NeuronOrControl2 & 'neurons_or_control=1') &  key;
+                rel_rois=  (IMG.ROI - IMG.ROIBad) & (STIM.ROIResponseDirectUnique & 'session_epoch_number=2') &  (STIMANAL.NeuronOrControl2 & 'neurons_or_control=1') &  key;
             end
             
             plot_one_in_x_cell=1; % e.g. plots one in 20 signficant cell

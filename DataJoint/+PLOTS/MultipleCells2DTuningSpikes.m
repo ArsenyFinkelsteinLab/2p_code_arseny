@@ -12,7 +12,7 @@ classdef MultipleCells2DTuningSpikes < dj.Computed
         function makeTuples(self, key)
             
             dir_base = fetch1(IMG.Parameters & 'parameter_name="dir_root_save"', 'parameter_value');
-            dir_current_fig = [dir_base  '\Lick2D\Cells_Multiple\not_mesoscope\'];
+            dir_current_fig = [dir_base  '\Lick2D\Cells\Cells_Multiple\not_mesoscope\'];
             
             flag_spikes = 1; % 1 spikes, 0 dff
             

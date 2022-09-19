@@ -184,9 +184,8 @@ populate(PLOTS.Cells2DTuningSpikesPhotostimulated2);
 populate(PLOTS.MultipleCells2DTuningSpikes); %Multiple 2D tunings map on cells
 
 populate(LICK2D.ROILick2DmapRewardSpikes3bins);
-populate(LICK2D.ROILick2DmapRewardStatsSpikes3bins);
-populate(LICK2D.ROILick2DPSTHSimilarityAcrossPositionsSpikes);
-
+populate(LICK2D.ROILick2DmapReward
+SSpikes3bins);
 
 populate(PLOTS.Maps2DthetaSpikes);
 % populate(PLOTS.Maps2DPSTHSpikes);

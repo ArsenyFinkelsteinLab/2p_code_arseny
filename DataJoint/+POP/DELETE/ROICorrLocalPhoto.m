@@ -1,7 +1,5 @@
 %{
 # Local correlation
-# XYZ coordinate correction of ETL abberations based on ETL callibration
-
 -> EXP2.SessionEpoch
 -> IMG.ROI
 radius_size                   : float                               # radius size, in um in lateral dimension
@@ -18,24 +16,22 @@ num_neurons_in_radius_without_inner_ring =null   : float           # number of n
 
 classdef ROICorrLocalPhoto < dj.Computed
     properties
-        keySource = EXP2.SessionEpoch  & IMG.ROI & IMG.ROISpikes & (EXP2.Session & STIM.ROIResponseDirect2) & IMG.Volumetric - IMG.Mesoscope;
+        keySource = EXP2.SessionEpoch  & IMG.ROI & IMG.ROISpikes & (EXP2.Session & STIM.ROIResponseDirect) & IMG.Volumetric;
     end
     methods(Access=protected)
         function makeTuples(self, key)
            
-            num_svd_components_removed_vector = [0];
+            num_svd_components_removed_vector = [0, 1 , 10,  100];
 
             time_bin=1; %s
             min_lateral_distance =25;
             
             rel_roi = (IMG.ROI - IMG.ROIBad) & key;
-            rel_data = IMG.ROIdeltaF	 & rel_roi & key;
-            rel_roi_xy = (IMG.ROIPositionETL-IMG.ROIBad)  & key; % to correct for ETL abberations
-
+            rel_data = IMG.ROISpikes & rel_roi & key;
+            
             %             radius_size_vector=[25,50,75,100, 125, 150, 175, 200];
-%             radius_size_vector=[50,100,150, 200];
-            radius_size_vector=[100];
-
+            radius_size_vector=[50,100,200];
+            
             try
                 frame_rate= fetch1(IMG.FOVEpoch & key, 'imaging_frame_rate');
             catch
@@ -48,9 +44,10 @@ classdef ROICorrLocalPhoto < dj.Computed
             
             
             key_ROI=fetch(rel_roi,'ORDER BY roi_number');
-            x_all = fetchn(rel_roi_xy ,'roi_centroid_x_corrected','ORDER BY roi_number');
-            y_all = fetchn(rel_roi_xy ,'roi_centroid_y_corrected','ORDER BY roi_number');
-
+            
+            x_all=fetchn(rel_roi,'roi_centroid_x','ORDER BY roi_number');
+            y_all=fetchn(rel_roi,'roi_centroid_y','ORDER BY roi_number');
+            
             x_all = x_all * pix2dist;
             y_all = y_all * pix2dist;
             

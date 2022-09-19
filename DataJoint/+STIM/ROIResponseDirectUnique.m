@@ -29,47 +29,31 @@ num_of_target_trials_used        : int                # number of target photost
 classdef ROIResponseDirectUnique < dj.Imported
     properties
         %         keySource = IMG.PhotostimGroup;
-        keySource = EXP2.SessionEpoch & 'flag_photostim_epoch =1' & STIMANAL.OutDegree & (IMG.FOV & STIM.ROIInfluence2) & (STIMANAL.SessionEpochsIncludedFinal & 'flag_include=1');
+        keySource = EXP2.SessionEpoch & STIM.ROIResponseDirect2;
     end
     methods(Access=protected)
         function makeTuples(self, key)
-            distance_to_closest_neuron=25; %  in microns, max distance to direct neuron
-            p_value = 0.05; % threshod for direct neuron response
 
-            rel_data = STIM.ROIInfluence2;
+            rel_direct = STIM.ROIResponseDirect2 & key;
             
-            group_num=  fetchn(IMG.PhotostimGroup & key,'photostim_group_num','ORDER BY photostim_group_num');
-            
-            temp = fetch(IMG.Plane & key);
-            key.fov_num =  temp.fov_num;
-            key.plane_num =  1;
-            key.channel_num =  temp.channel_num;
-            
-            
-            parfor i_g = 1:1:numel(group_num) %parfor
-                    k1=key;
-                    k1.photostim_group_num = group_num(i_g);
-                    
-                    
-                    C=fetch(rel_data & k1  & sprintf('response_distance_lateral_um <%.2f', distance_to_closest_neuron),'*', 'ORDER BY response_distance_lateral_um'); % We sort neurons according to the distance from the photostimulation coordinate
-                    if ~isempty(C) % if there are no neurons in the vicinity of the photostimulation coordinate, we don't populate the entry for this PhotostimGroup
-                        if C(1).response_p_value1<=p_value & C(1).response_mean>0 % checking if the neuron most close C(1) to the photostimulation coordinate has a significant and positive response
-                            DIRECT=C(1); % if yes, we take it as our directly targeted neuron
-                        else % if not, we check if other neurons in the neiborhood have a significant and positive response
-                            C_remaining=C;
-                            C_remaining = C_remaining([C.response_p_value1]<=p_value & [C.response_mean]>0);
-                            if ~isempty(C_remaining) % if such neurons exist we take (from those remaining neurons)  the neuron that is closest to the photostimulation coordinate. Neurons are sortex by proximity, hence the index 1 in  C_remaining(1)
-                                DIRECT=C_remaining(1);
-                            else
-                                DIRECT=C(1); % if no neuron has a significant and positve response, we take the closest neuron to the stimulation site as target, regardless of the signifcance or sign/magnitude of its response
-                            end
-                        end
-                        DIRECT=rmfield(DIRECT,'num_svd_components_removed'); %this field is not needed, hence removed
-                        insert(self, DIRECT); 
-                    end
+            C_direct=fetch(rel_direct,'*', 'ORDER BY photostim_group_num');
+
+            roi_all = [C_direct.roi_number];
+            roi_unique = unique([C_direct.roi_number]);
+            for i=1:1:numel(roi_unique)
+                idx_roi = find(roi_all==roi_unique(i));
+                C_current = C_direct(idx_roi);
+                if numel(C_current)>1
+                [~,idx_pval] = sort([C_current.response_p_value1], 'ascend');
+                    insert(self,C_current(idx_pval(1)));
+                else
+                    insert(self,C_direct(idx_roi));
+                end
             end
+            
         end
-        
     end
+    
 end
+
 

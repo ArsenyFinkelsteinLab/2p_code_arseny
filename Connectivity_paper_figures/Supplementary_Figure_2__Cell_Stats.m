@@ -1,9 +1,10 @@
 function Supplementary_Figure_2__Cell_Stats
 close all;
 
-rel_roi=((IMG.ROI & IMG.ROIGood)-IMG.ROIBad) -IMG.Mesoscope;
-rel= LICK2D.ROILick2DmapStatsSpikes3bins*LICK2D.ROILick2DangleStatsSpikes3bins*LICK2D.ROILick2DPSTHStatsSpikes & rel_roi';
-D=fetch(rel,'lickmap_regular_odd_vs_even_corr','psth_position_concat_regular_odd_even_corr','theta_tuning_odd_even_corr_regular','information_per_spike_regular','rayleigh_length_regular','field_size_without_baseline_regular','centroid_without_baseline_regular','preferred_bin_regular', 'psth_regular_odd_vs_even_corr', 'preferred_theta_regular_odd','preferred_theta_regular_even');
+rel_roi=(IMG.ROI-IMG.ROIBad) -IMG.Mesoscope;
+rel= LICK2D.ROILick2DmapStatsSpikes3bins*LICK2D.ROILick2DangleStatsSpikes3bins*LICK2D.ROILick2DPSTHStatsSpikes* LICK2D.ROILick2DPSTHSimilarityAcrossPositionsSpikes & rel_roi';
+% rel=rel & 'psth_position_concat_regular_odd_even_corr>0.5';
+D=fetch(rel,'lickmap_regular_odd_vs_even_corr','psth_position_concat_regular_odd_even_corr','theta_tuning_odd_even_corr_regular','information_per_spike_regular','rayleigh_length_regular','field_size_regular','centroid_without_baseline_regular','preferred_bin_regular', 'psth_regular_odd_vs_even_corr', 'preferred_theta_regular_odd','preferred_theta_regular_even','psth_corr_across_position_regular');
 
 dir_base = fetch1(IMG.Parameters & 'parameter_name="dir_root_save"', 'parameter_value');
 dir_current_fig = [dir_base  '\Connectivity_paper_figures\plots\'];
@@ -102,7 +103,7 @@ xlabel(sprintf('Directiona tuning\nRayleigh vector lengh'))
 ylabel('Counts');
 
 subplot(4,4,7)
-histogram([D.field_size_without_baseline_regular],8);
+histogram([D.field_size_regular],8);
 xlabel(sprintf('Field size (%%)'))
 ylabel('Counts');
 
@@ -126,6 +127,10 @@ histogram([[D.preferred_theta_regular_odd] - [D.preferred_theta_regular_even]],8
 xlabel(sprintf('Delta Preferred direction \n odd minus even'))
 ylabel('Counts');
 
+subplot(4,4,11)
+histogram([D.psth_corr_across_position_regular]);
+xlabel(sprintf('Tuning similarity across positions\nr'))
+ylabel('Counts');
 
 % subplot(2,2,2)
 % histogram(field_size_without_baseline);

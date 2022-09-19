@@ -1,4 +1,4 @@
-function PLOTS_Cells2DTuning_Photostimulated (key, dir_current_fig, flag_spikes, plot_one_in_x_cell , rel_rois)
+function PLOTS_Cells2DTuning_Photostimulated2 (key, dir_current_fig, flag_spikes, plot_one_in_x_cell , rel_rois)
 close all;
 
 
@@ -17,7 +17,7 @@ else  % if based on spikes
     rel_stats = LICK2D.ROILick2DPSTHStatsSpikes *LICK2D.ROILick2DmapStatsSpikes & rel_rois;
     rel_poisson = LICK2D.ROILick2DPSTHSpikesPoisson*LICK2D.ROILick2DPSTHStatsSpikesPoisson & rel_rois;
     rel_resampled_likepoisson = LICK2D.ROILick2DPSTHSpikesResampledlikePoisson*LICK2D.ROILick2DPSTHStatsSpikesResampledlikePoisson & rel_rois;
-    rel_photostimulated = (STIMANAL.OutDegree & 'max_distance_lateral=100' & 'p_val<=0.05') & rel_rois;
+    rel_photostimulated = (STIMANAL.OutDegree & 'max_distance_lateral=100' & 'p_val=0.05' & 'session_epoch_number=2') & (STIM.ROIResponseDirectUnique & 'session_epoch_number=2') & rel_rois;
 end
 
 session_date = fetch1(EXP2.Session & key,'session_date');
@@ -108,7 +108,6 @@ set(gcf,'PaperOrientation','portrait');
 set(gcf,'Units','centimeters','Position',get(gcf,'paperPosition')+[3 0 0 0]);
 set(gcf,'color',[1 1 1]);
 
-% M.psth_stem=[fetchn(rel_map_and_psth,'psth_stem','ORDER BY roi_number')];
 M.psth=[fetchn(rel_map_and_psth,'psth_regular','ORDER BY roi_number')];
 M.psth_per_position_regular =[fetchn(rel_map_and_psth,'psth_per_position_regular','ORDER BY roi_number')];
 M.psth_per_position_regular_stem =[fetchn(rel_map_and_psth,'psth_per_position_regular_stem','ORDER BY roi_number')];
@@ -199,7 +198,9 @@ M_resampled_likepoisson.reward_mean_pval_regular_small=[fetchn(rel_resampled_lik
 M_resampled_likepoisson.reward_mean_pval_regular_large=[fetchn(rel_resampled_likepoisson,'reward_mean_pval_regular_large','ORDER BY roi_number')];
 M_resampled_likepoisson = struct2table(M_resampled_likepoisson);
 
+M_photostim.out_degree_excitatory=[fetchn(rel_photostimulated,'out_degree_excitatory','ORDER BY roi_number')];
 
+ 
 
 for i_roi=1:plot_one_in_x_cell:numel(roi_number)
     
@@ -212,7 +213,7 @@ for i_roi=1:plot_one_in_x_cell:numel(roi_number)
     hold on;
     plot_legend_flag=1;
     fn_plot_psth_by_reward_size (M,psth_time,i_roi, plot_legend_flag)
-    title(sprintf('ROI %d \nROI unique=%d\n anm%d s%d\n%s\nStability PSTH regular %.2f\nStability PSTH small %.2f\nStability PSTH large %.2f \nReward Omission p = %.3f \nReward Increase p = %.3f\n\n',roi_number(i_roi),roi_uid(i_roi),key.subject_id,key.session, session_date, M.psth_regular_odd_vs_even_corr(i_roi),M.psth_small_odd_vs_even_corr(i_roi),M.psth_large_odd_vs_even_corr(i_roi), M.reward_mean_pval_regular_small(i_roi),M.reward_mean_pval_regular_large(i_roi)), 'FontSize',10);
+    title(sprintf('ROI %d \nROI unique=%d\n anm%d s%d\n%s\n Out degree %d \n Max Out degree in session %d \nStability PSTH regular %.2f\nStability PSTH small %.2f\nStability PSTH large %.2f \nReward Omission p = %.3f \nReward Increase p = %.3f\n\n',roi_number(i_roi),roi_uid(i_roi),key.subject_id,key.session, session_date, M_photostim.out_degree_excitatory(i_roi),max(M_photostim.out_degree_excitatory), M.psth_regular_odd_vs_even_corr(i_roi),M.psth_small_odd_vs_even_corr(i_roi),M.psth_large_odd_vs_even_corr(i_roi), M.reward_mean_pval_regular_small(i_roi),M.reward_mean_pval_regular_large(i_roi)), 'FontSize',10);
     
     % POISSON simulated tuning
     axes('position',[position_x2(2)+0.1,position_y2(1), panel_width2, panel_height2])
