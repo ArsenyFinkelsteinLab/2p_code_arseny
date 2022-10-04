@@ -65,6 +65,7 @@ set(gcf,'PaperOrientation','portrait');
 set(gcf,'Units','centimeters','Position',get(gcf,'paperPosition')+[3 0 0 0]);
 set(gcf,'color',[1 1 1]);
 
+M.roi_number=[fetchn(rel_map_and_psth,'roi_number','ORDER BY roi_number')];
 M.lickmap_fr_regular=[fetchn(rel_map_and_psth,'lickmap_fr_regular','ORDER BY roi_number')];
 M.lickmap_fr_regular_odd=[fetchn(rel_map_and_psth,'lickmap_fr_regular_odd','ORDER BY roi_number')];
 M.lickmap_fr_regular_even=[fetchn(rel_map_and_psth,'lickmap_fr_regular_even','ORDER BY roi_number')];
@@ -102,6 +103,7 @@ for i_y=1:1:cells_in_column
         caxis([0 max_map]); % Scale the lowest value (deep blue) to 0
         colormap(inferno)
         axis xy
+        axis equal
         axis tight
         set(gca,'YDir','normal');
         set(gca, 'FontSize',10);
@@ -120,6 +122,7 @@ for i_y=1:1:cells_in_column
         caxis([0 max_map]); % Scale the lowest value (deep blue) to 0
         colormap(inferno)
         axis xy
+        axis equal
         axis tight
         set(gca,'YDir','normal');
         set(gca, 'FontSize',10);
@@ -138,6 +141,7 @@ for i_y=1:1:cells_in_column
         caxis([0 max_map]); % Scale the lowest value (deep blue) to 0
         colormap(inferno)
         axis xy
+        axis equal
         axis tight
         set(gca,'YDir','normal');
         set(gca, 'FontSize',10);

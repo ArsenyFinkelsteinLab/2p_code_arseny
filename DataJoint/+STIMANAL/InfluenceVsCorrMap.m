@@ -15,7 +15,7 @@ num_pairs                                       :int     # num pairs included
 
 classdef InfluenceVsCorrMap < dj.Computed
     properties
-        keySource = EXP2.SessionEpoch & STIMANAL.Target2AllCorrMap & STIM.ROIInfluence2;
+        keySource = EXP2.SessionEpoch & STIMANAL.Target2AllCorrMap & STIM.ROIInfluence2 & STIMANAL.NeuronOrControl;
     end
     methods(Access=protected)
         function makeTuples(self, key)
@@ -29,10 +29,8 @@ classdef InfluenceVsCorrMap < dj.Computed
             maximal_distance=100; %um lateral;  exlude all cells further than maximal distance from target
             
             % bins
-            bins_corr = linspace(-1,1,6); % if there is no SVD component/s subtraction
-            bins_influence = [-inf,linspace(-0.2,0.5,6),inf];
-            
-            %             bins_influence=bins_influence(4:end);
+            bins_corr = linspace(-1,1,6); 
+            bins_influence = [-inf, 0, 0.25, 0.5, 0.75, inf];
             
             dir_base = fetch1(IMG.Parameters & 'parameter_name="dir_root_save"', 'parameter_value');
             dir_fig = [dir_base  '\Photostim\Connectivity_vs_Tuning\single_sessions\tuning_by_map_stability\'];
@@ -49,7 +47,7 @@ classdef InfluenceVsCorrMap < dj.Computed
             
             for i_n = 1:1:numel(neurons_or_control_flag)
                 key.neurons_or_control = neurons_or_control_flag(i_n);
-                rel_target = IMG.PhotostimGroup & (STIMANAL.NeuronOrControl2 & key & rel_include);
+                rel_target = IMG.PhotostimGroup & (STIMANAL.NeuronOrControl & key & rel_include);
                 rel_data_influence2=rel_data_influence   & rel_target & 'num_svd_components_removed=0';
                 
                 group_list = fetchn(rel_target,'photostim_group_num','ORDER BY photostim_group_num');
@@ -57,7 +55,7 @@ classdef InfluenceVsCorrMap < dj.Computed
                     return
                 end
                 
-                rel_target_signif_by_psth = (STIM.ROIResponseDirect2 &  rel_target) &    (IMG.ROI &  (rel_data_signal & k_psth & 'lickmap_regular_odd_vs_even_corr>=0.25'));
+                rel_target_signif_by_psth = (STIM.ROIResponseDirectUnique &  rel_target) &    (IMG.ROI &  (rel_data_signal & k_psth & 'lickmap_regular_odd_vs_even_corr>=0'));
                 group_list_signif = fetchn(rel_target_signif_by_psth,'photostim_group_num','ORDER BY photostim_group_num');
                 idx_group_list_signif = ismember(group_list,group_list_signif);
                 
@@ -109,7 +107,7 @@ classdef InfluenceVsCorrMap < dj.Computed
                     end
                     
                     %% exclude based on PSTH significance
-                    roi_psth_signif = fetchn(rel_data_signal & k_psth & rel_roi & 'lickmap_regular_odd_vs_even_corr>=0.25', 'roi_number', 'ORDER BY roi_number');
+                    roi_psth_signif = fetchn(rel_data_signal & k_psth & rel_roi & 'lickmap_regular_odd_vs_even_corr>=0', 'roi_number', 'ORDER BY roi_number');
                     roi_psth_all = fetchn(rel_data_signal & k_psth & rel_roi, 'roi_number', 'ORDER BY roi_number');
                     idx_psth_signif=ismember(roi_psth_all,roi_psth_signif);
                     

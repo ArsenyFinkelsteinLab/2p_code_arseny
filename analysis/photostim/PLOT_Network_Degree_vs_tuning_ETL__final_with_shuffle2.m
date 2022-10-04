@@ -16,7 +16,7 @@ k_corr_local.radius_size=100;
 k_corr_local.session_epoch_type = 'behav_only'; % behav_only spont_only
 k_corr_local.num_svd_components_removed=0;
 rel_session = EXP2.Session & (STIMANAL.OutDegree & IMG.Volumetric) & (EXP2.SessionEpoch& 'session_epoch_type="spont_only"')...
-    & (STIMANAL.NeuronOrControl2 & 'neurons_or_control=1' & 'num_targets>=50')...
+    & (STIMANAL.NeuronOrControl & 'neurons_or_control=1' & 'num_targets>=50')...
     &  (STIMANAL.SessionEpochsIncludedFinal & IMG.Volumetric & 'stimpower>=100' & 'flag_include=1' ) ...
     & (LICK2D.ROILick2DmapStatsSpikes3bins);
 
@@ -64,7 +64,7 @@ DATA_SIGNAL_ALL4=[];
 for i_s = 1:1:rel_session.count
     
     k_s = sessions(i_s);
-    rel_degree = STIMANAL.OutDegree*STIM.ROIResponseDirectUnique	 & (STIMANAL.NeuronOrControl2 & k_neurons_or_control) & k_degree & k_s & rel_include;
+    rel_degree = STIMANAL.OutDegree*STIM.ROIResponseDirectUnique	 & (STIMANAL.NeuronOrControl & k_neurons_or_control) & k_degree & k_s & rel_include;
     k_s;
     DATA_DEGREE = struct2table(fetch(rel_degree, '*'));
     %    numel(unique(DATA_DEGREE.roi_number))
@@ -78,7 +78,7 @@ for i_s = 1:1:rel_session.count
     
     key_epoch2=key_epoch;
     
-    rel_corr_local = POP.ROICorrLocalPhoto  & k_s & k_corr_local & key_epoch & rel_include;
+    rel_corr_local = POP.ROICorrLocalPhoto2  & k_s & k_corr_local & key_epoch & rel_include;
     
     if rel_corr_local.count==0
         continue
@@ -116,6 +116,8 @@ signal1.psth_concat_stability = DATA_SIGNAL_ALL1.psth_position_concat_regular_od
 signal2.psth_stability = DATA_SIGNAL_ALL2.psth_regular_odd_vs_even_corr;
 signal2.reward_increase=100*((DATA_SIGNAL_ALL2.reward_peak_large-DATA_SIGNAL_ALL2.reward_peak_regular)./DATA_SIGNAL_ALL2.reward_peak_regular);
 signal2.reward_omission=100*((DATA_SIGNAL_ALL2.reward_peak_small-DATA_SIGNAL_ALL2.reward_peak_regular)./DATA_SIGNAL_ALL2.reward_peak_regular);
+% signal2.reward_increase=100*(DATA_SIGNAL_ALL2.reward_peak_large./DATA_SIGNAL_ALL2.reward_peak_regular);
+% signal2.reward_omission=100*(DATA_SIGNAL_ALL2.reward_peak_small./DATA_SIGNAL_ALL2.reward_peak_regular);
 
 signal3.rayleigh = DATA_SIGNAL_ALL3.rayleigh_length_regular;
 

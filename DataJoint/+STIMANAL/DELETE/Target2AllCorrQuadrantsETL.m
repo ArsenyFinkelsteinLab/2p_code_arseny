@@ -7,9 +7,8 @@ rois_corr                        :blob    # correlation between the activity of 
 %}
 
 
-classdef Target2AllCorrQuadrants < dj.Computed
+classdef Target2AllCorrQuadrantsETL < dj.Computed
     properties
-        keySource = (EXP2.SessionEpoch& 'session_epoch_type="spont_photo"') & (EXP2.Session & (EXP2.SessionEpoch & 'session_epoch_type="behav_only"')  & (EXP2.SessionEpoch & LICK2D.ROILick2DQuadrantsSpikes)) & STIM.ROIResponseDirect2;
     end
     methods(Access=protected)
         function makeTuples(self, key)
@@ -25,7 +24,7 @@ classdef Target2AllCorrQuadrants < dj.Computed
 
             
             %% Loading Data
-            rel_photostim =IMG.PhotostimGroup*(STIM.ROIResponseDirect2) & key;
+            rel_photostim =IMG.PhotostimGroup*(STIM.ROIResponseDirect5ETL2) & key;
             group_list = fetchn(rel_photostim,'photostim_group_num','ORDER BY photostim_group_num');
             target_roi_list = fetchn(rel_photostim,'roi_number','ORDER BY photostim_group_num');
             

@@ -90,7 +90,7 @@ if percent_coverage>=min_percent_coverage % minimal coverage needed for calculat
     max_m=nanmax(M (:));
     field_size=100*sum(M (:)>max_m*0.5)/size(M (:),1);
     
-    % Centroid
+    %% Centroid
     props = regionprops(true(size(M )), M , 'WeightedCentroid');
     centroid(1)=props.WeightedCentroid(1);
     centroid(2)=props.WeightedCentroid(2);

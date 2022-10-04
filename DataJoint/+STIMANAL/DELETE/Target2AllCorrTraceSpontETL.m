@@ -11,7 +11,6 @@ rois_corr                        :blob    # correlation between the activity of 
 
 classdef Target2AllCorrTraceSpontETL < dj.Computed
      properties
-        keySource = (EXP2.SessionEpoch& 'session_epoch_type="spont_photo"') & STIM.ROIInfluence5ETL & (EXP2.Session & (EXP2.SessionEpoch & 'session_epoch_type="spont_only"')  & (EXP2.SessionEpoch & 'session_epoch_type="spont_photo"'));
     end
     methods(Access=protected)
         function makeTuples(self, key)

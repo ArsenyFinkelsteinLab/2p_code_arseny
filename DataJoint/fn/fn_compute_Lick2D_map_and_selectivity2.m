@@ -40,7 +40,7 @@ z_bins(end)= inf;
 
 
 %% Compute maps
-[hhhhh, ~, ~, x_idx, z_idx] = histcounts2(pos_x,pos_z,x_bins,z_bins);
+[hhh, ~, ~, z_idx, x_idx] = histcounts2(pos_z,pos_x,z_bins,x_bins);
 
 %plot(pos_x,pos_z,'.')
 

@@ -17,14 +17,16 @@ psth_corr_across_position_end=null              : double   # averaged across tri
 
 classdef ROILick2DPSTHSimilarityAcrossPositionsSpikes < dj.Computed
     properties
-        keySource = (EXP2.SessionEpoch*IMG.FOV) & LICK2D.ROILick2DmapPSTHSpikes3bins - IMG.Mesoscope;
+        keySource = (EXP2.SessionEpoch*IMG.FOV) & LICK2D.ROILick2DmapPSTHSpikes - IMG.Mesoscope;
+%         keySource = (EXP2.SessionEpoch*IMG.FOV) & LICK2D.ROILick2DmapPSTHSpikes & IMG.Mesoscope;
+
     end
     methods(Access=protected)
         function makeTuples(self, key)
             min_modulation = 0.25; %every PSTH below this modulation is ignored
             
-            key_roi = fetch(LICK2D.ROILick2DmapPSTHSpikes3bins & key);
-            D = fetch(LICK2D.ROILick2DmapPSTHSpikes3bins & key,'psth_per_position_regular','psth_per_position_large','psth_per_position_small','psth_per_position_first','psth_per_position_begin','psth_per_position_mid','psth_per_position_end');
+            key_roi = fetch(LICK2D.ROILick2DmapPSTHSpikes & key);
+            D = fetch(LICK2D.ROILick2DmapPSTHSpikes & key,'psth_per_position_regular','psth_per_position_large','psth_per_position_small','psth_per_position_first','psth_per_position_begin','psth_per_position_mid','psth_per_position_end');
             
             for i_roi = 1:1:numel(key_roi)
                 key_roi(i_roi).psth_corr_across_position_regular = fn_compute_correlations_between_positions(D(i_roi).psth_per_position_regular, min_modulation);

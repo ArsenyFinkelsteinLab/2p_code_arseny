@@ -15,12 +15,12 @@ num_pairs                                       :int     # num pairs included
 
 classdef InfluenceVsCorrMapShuffled < dj.Computed
     properties
-        keySource = EXP2.SessionEpoch & STIMANAL.Target2AllCorrMap & STIM.ROIInfluence2;
+        keySource = EXP2.SessionEpoch & STIMANAL.Target2AllCorrMap & STIM.ROIInfluence2 & STIMANAL.NeuronOrControl;
     end
     methods(Access=protected)
         function makeTuples(self, key)
             close all;
-                        figure('visible','off')
+            figure('visible','off')
             rel_include = IMG.ROI-IMG.ROIBad;
             neurons_or_control_flag = [1]; % 1 neurons, 0 control sites
             neurons_or_control_label = { 'Neurons','Controls'};
@@ -30,15 +30,7 @@ classdef InfluenceVsCorrMapShuffled < dj.Computed
             
             % bins
             bins_corr = linspace(-1,1,6); % if there is no SVD component/s subtraction
-            %             bins_corr([2,4])=[];
-            
-            
-            %             bins_influence = [-inf,linspace(-0.1,0.2,6),inf];
-            %             bins_influence = [-inf,linspace(-0.1,0.4,6),inf];
-            
-            bins_influence = [-inf,linspace(-0.2,0.5,6),inf];
-            
-            %             bins_influence=bins_influence(4:end);
+            bins_influence = [-inf, 0, 0.25, 0.5, 0.75, inf];
             
             distance_lateral_bins = [0:10:500,inf]; % microns
             
@@ -61,7 +53,7 @@ classdef InfluenceVsCorrMapShuffled < dj.Computed
             
             for i_n = 1:1:numel(neurons_or_control_flag)
                 key.neurons_or_control = neurons_or_control_flag(i_n);
-                rel_target = IMG.PhotostimGroup & (STIMANAL.NeuronOrControl2 & rel_include & key);
+                rel_target = IMG.PhotostimGroup & (STIMANAL.NeuronOrControl & rel_include & key);
                 rel_data_influence2=rel_data_influence   & rel_target & 'num_svd_components_removed=0';
                 
                 group_list = fetchn(rel_target,'photostim_group_num','ORDER BY photostim_group_num');
@@ -69,7 +61,7 @@ classdef InfluenceVsCorrMapShuffled < dj.Computed
                     return
                 end
                 
-                rel_target_signif_by_psth = (STIM.ROIResponseDirect2 &  rel_target) &    (IMG.ROI &  (rel_data_signal & k_psth & 'lickmap_regular_odd_vs_even_corr>=0.25'));
+                rel_target_signif_by_psth = (STIM.ROIResponseDirectUnique &  rel_target) &    (IMG.ROI &  (rel_data_signal & k_psth & 'lickmap_regular_odd_vs_even_corr>=0'));
                 group_list_signif = fetchn(rel_target_signif_by_psth,'photostim_group_num','ORDER BY photostim_group_num');
                 idx_group_list_signif = ismember(group_list,group_list_signif);
                 
@@ -142,7 +134,7 @@ classdef InfluenceVsCorrMapShuffled < dj.Computed
                     
                     
                     %% exclude based on PSTH significance
-                    roi_psth_signif = fetchn(rel_data_signal & k_psth & rel_roi & 'lickmap_regular_odd_vs_even_corr>=0.25', 'roi_number', 'ORDER BY roi_number');
+                    roi_psth_signif = fetchn(rel_data_signal & k_psth & rel_roi & 'lickmap_regular_odd_vs_even_corr>=0', 'roi_number', 'ORDER BY roi_number');
                     roi_psth_all = fetchn(rel_data_signal & k_psth & rel_roi, 'roi_number', 'ORDER BY roi_number');
                     idx_psth_signif=ismember(roi_psth_all,roi_psth_signif);
                     

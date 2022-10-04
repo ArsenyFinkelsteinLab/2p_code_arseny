@@ -175,6 +175,11 @@ populate(LICK2D.ROILick2DmapSpikes3bins); %also populates LICK2D.ROILick2DmapPST
 populate(LICK2D.ROILick2DPSTHSpikesPoisson); % also populates LICK2D.ROILick2DPSTHStatsSpikesPoisson LICK2D.ROILick2DPSTHBlockSpikesPoisson LICK2D.ROILick2DPSTHBlockStatsSpikesPoisson
 populate(LICK2D.ROILick2DPSTHSpikesResampledlikePoisson); % also populates LICK2D.ROILick2DPSTHStatsSpikesResampledlikePoisson LICK2D.ROILick2DPSTHBlockSpikesResampledlikePoisson LICK2D.ROILick2DPSTHBlockStatsSpikesResampledlikePoisson
 
+populate(IMG.ROIExample);
+populate(LICK2D.ROILick2DPSTHSpikesExample); 
+populate(LICK2D.ROILick2DmapSpikesExample);  %also populates LICK2D.ROILick2DmapPSTHSpikesExample LICK2D.ROILick2DmapPSTHStabilitySpikesExample
+
+
 populate(PLOTS.Cells2DTuningSpikes);
 populate(PLOTS.Cells2DTuningSpikesRewardSignif);
 
@@ -183,9 +188,11 @@ populate(PLOTS.Cells2DTuningSpikesPhotostimulated2);
 
 populate(PLOTS.MultipleCells2DTuningSpikes); %Multiple 2D tunings map on cells
 
-populate(LICK2D.ROILick2DmapRewardSpikes3bins);
-populate(LICK2D.ROILick2DmapRewardStatsSpikes3bins);
+populate(LICK2D.ROILick2DmapRewardSpikes); %populating also LICK2D.ROILick2DmapRewardStatsSpikes
+populate(LICK2D.ROILick2DmapRewardSpikes3bins); %populating also LICK2D.ROILick2DmapRewardStatsSpikes3bins
+
 populate(LICK2D.ROILick2DPSTHSimilarityAcrossPositionsSpikes);
+populate(LICK2D.ROILick2DPSTHSimilarityAcrossPositionsSpikes3bins);
 
 
 populate(PLOTS.Maps2DthetaSpikes);
@@ -194,6 +201,7 @@ populate(PLOTS.Maps2DthetaSpikes);
 % populate(ANLI.ROILick2DangleShuffle);
 % populate(ANLI.ROILick2DmapShuffle);
 
+populate(PLOTS.Maps2Dtheta);
 
 
 
@@ -211,7 +219,6 @@ populate(LICK2D.ROILick2DangleEvents);
 populate(LICK2D.ROIBodypartCorr);
 
 % populate(PLOTS.Cells2DTuning);
-populate(PLOTS.Maps2Dtheta);
 populate(PLOTS.Maps2DPSTH);
 populate(PLOTS.Maps2DReward);
 populate(PLOTS.Maps2DBlock);
@@ -233,6 +240,10 @@ populate(PLOTS.Population2DReward);
 % STIMANAL.MiceIncluded
 
 populate(POP.ROISVD); %also populates POP.SVDTemporalComponents POP.SVDSingularValues
+
+populate(POP.ROISVDPython); %also populates POP.SVDTemporalComponentsPython POP.SVDSingularValuesPython
+
+
 populate(POP.ROISVDSpikes); %also populates POP.SVDTemporalComponentsSpikes POP.SVDSingularValuesSpikes
 populate(POP.ROISVDNeuropil); %also populates POP.SVDTemporalComponentsNeuropil POP.SVDSingularValuesNeuropil
 populate(POP.ROISVDNeuropilSubtr); %also populates POP.SVDTemporalComponentsNeuropilSubtract POP.SVDSingularValuesNeuropilSubtract

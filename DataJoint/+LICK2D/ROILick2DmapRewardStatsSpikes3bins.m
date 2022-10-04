@@ -19,11 +19,11 @@ preferred_bin_deltamap_regular_vs_small=null                     : double   #
 centroid_without_baseline_deltamap_regular_vs_large=null         : blob     #
 centroid_without_baseline_deltamap_regular_vs_small=null         : blob     #
 
-field_size_deltamap_regular_vs_large=null                        : double   # 2D Field size at half max, expressed as percentage
-field_size_deltamap_regular_vs_small=null                        : double   # 2D Field size at half max, expressed as percentage
+field_size_deltamap_regular_vs_large=null                        : double   #
+field_size_deltamap_regular_vs_small=null                        : double   # 
 
-modulation_percent_regular_vs_large=null                              : double   # modulation percentage
-modulation_percent_regular_vs_small=null                              : double   #
+modulation_percent_regular_vs_large=null                         : double   # modulation percentage, 100*(mean_fr_large/mean_fr_regular) - 100
+modulation_percent_regular_vs_small=null                         : double   # modulation percentage, 100*(mean_fr_small/mean_fr_regular) - 100
 
 
 %}

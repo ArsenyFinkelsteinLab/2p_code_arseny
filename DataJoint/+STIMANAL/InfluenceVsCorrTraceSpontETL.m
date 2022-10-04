@@ -16,7 +16,6 @@ num_pairs                                       :int     # num pairs included
 
 classdef InfluenceVsCorrTraceSpontETL < dj.Computed
     properties
-        keySource = EXP2.SessionEpoch & STIMANAL.Target2AllCorrTraceSpontETL & (EXP2.Session & STIM.ROIInfluence5ETL);
     end
     methods(Access=protected)
         function makeTuples(self, key)

@@ -15,7 +15,7 @@ num_pairs                                       :int     # num pairs included
 
 classdef InfluenceVsCorrAngleTuning < dj.Computed
     properties
-        keySource = EXP2.SessionEpoch & STIMANAL.Target2AllCorrAngleTuning & STIM.ROIInfluence2;
+        keySource = EXP2.SessionEpoch & STIMANAL.Target2AllCorrAngleTuning & STIM.ROIInfluence2 & STIMANAL.NeuronOrControl;
     end
     methods(Access=protected)
         function makeTuples(self, key)
@@ -52,7 +52,7 @@ classdef InfluenceVsCorrAngleTuning < dj.Computed
             
             for i_n = 1:1:numel(neurons_or_control_flag)
                 key.neurons_or_control = neurons_or_control_flag(i_n);
-                rel_target = IMG.PhotostimGroup & (STIMANAL.NeuronOrControl2 & key & rel_include);
+                rel_target = IMG.PhotostimGroup & (STIMANAL.NeuronOrControl & key & rel_include);
                 rel_data_influence2=rel_data_influence   & rel_target & 'num_svd_components_removed=0';
                 
                 group_list = fetchn(rel_target,'photostim_group_num','ORDER BY photostim_group_num');
@@ -60,7 +60,7 @@ classdef InfluenceVsCorrAngleTuning < dj.Computed
                     return
                 end
                 
-                rel_target_signif_by_psth = (STIM.ROIResponseDirect2 &  rel_target) &    (IMG.ROI &  (rel_data_signal & k_psth & 'theta_tuning_odd_even_corr_regular>=0.25'));
+                rel_target_signif_by_psth = (STIM.ROIResponseDirectUnique &  rel_target) &    (IMG.ROI &  (rel_data_signal & k_psth & 'theta_tuning_odd_even_corr_regular>=0.25'));
                 group_list_signif = fetchn(rel_target_signif_by_psth,'photostim_group_num','ORDER BY photostim_group_num');
                 idx_group_list_signif = ismember(group_list,group_list_signif);
                 

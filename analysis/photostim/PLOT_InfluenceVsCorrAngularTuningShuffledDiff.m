@@ -3,18 +3,18 @@ close all
 
 dir_base = fetch1(IMG.Parameters & 'parameter_name="dir_root_save"', 'parameter_value');
 dir_current_fig = [dir_base  '\Photostim\Connectivity_vs_Tuning\'];
-filename = 'influence_vs_tuning_by_tuning_stability';
+filename = 'connectivity_vs_tuning_by_tuning_stability';
 
 
 % rel_data = STIMANAL.InfluenceVsCorrAngleTuning & 'session_epoch_number<3' & 'num_targets>=30' & 'num_pairs>=2000' ;
 % rel_shuffled = STIMANAL.InfluenceVsCorrAngleTuningShuffled  & 'session_epoch_number<3' & 'num_targets>=30' & 'num_pairs>=2000';
 
-rel_data = STIMANAL.InfluenceVsCorrAngleTuning  & 'num_pairs>=0' & 'num_targets>=50' ...
+rel_data = STIMANAL.InfluenceVsCorrAngleTuning  & 'num_pairs>=0' & 'num_targets>=25' ...
     &  (STIMANAL.SessionEpochsIncludedFinal & IMG.Volumetric & 'stimpower>=100' & 'flag_include=1')   ...;
     %     & (STIMANAL.NeuronOrControlNumber2 & 'num_targets_neurons>=50') ...
 %     & (STIMANAL.NeuronOrControlNumber2 & 'num_targets_controls>=50');
 
-rel_shuffled = STIMANAL.InfluenceVsCorrAngleTuningShuffled  & 'num_pairs>=0'  & 'num_targets>=50' ...
+rel_shuffled = STIMANAL.InfluenceVsCorrAngleTuningShuffled  & 'num_pairs>=0'  & 'num_targets>=25' ...
     &  (STIMANAL.SessionEpochsIncludedFinal & IMG.Volumetric & 'stimpower>=100' & 'flag_include=1')   ...;
     %     & (STIMANAL.NeuronOrControlNumber2 & 'num_targets_neurons>=50') ...
 %     & (STIMANAL.NeuronOrControlNumber2 & 'num_targets_controls>=50');

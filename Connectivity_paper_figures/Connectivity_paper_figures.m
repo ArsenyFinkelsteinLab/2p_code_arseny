@@ -1,5 +1,7 @@
 function Connectivity_paper_figures()
 
+Figure1
+
 Supplementary_Figure_2__Cell_Stats
 
 positional_tuning_stability_vs_information

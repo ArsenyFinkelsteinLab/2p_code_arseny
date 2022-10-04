@@ -9,7 +9,7 @@ rois_corr                        :blob    # correlation between the activity of 
 
 classdef Target2AllCorrMap < dj.Computed
     properties
-        keySource = (EXP2.SessionEpoch& 'session_epoch_type="spont_photo"') & (EXP2.Session & (EXP2.SessionEpoch & 'session_epoch_type="behav_only"')  & (EXP2.SessionEpoch & LICK2D.ROILick2DmapSpikes3bins)) & STIM.ROIResponseDirect2;
+        keySource = (EXP2.SessionEpoch& 'session_epoch_type="spont_photo"') & (EXP2.Session & (EXP2.SessionEpoch & 'session_epoch_type="behav_only"')  & (EXP2.SessionEpoch & LICK2D.ROILick2DmapSpikes3bins)) & STIM.ROIResponseDirectUnique;
     end
     methods(Access=protected)
         function makeTuples(self, key)
@@ -25,7 +25,7 @@ classdef Target2AllCorrMap < dj.Computed
 
             
             %% Loading Data
-            rel_photostim =(IMG.PhotostimGroup*STIM.ROIResponseDirect2) & key & rel_roi;
+            rel_photostim =(IMG.PhotostimGroup*STIM.ROIResponseDirectUnique) & key & rel_roi;
             group_list = fetchn(rel_photostim,'photostim_group_num','ORDER BY photostim_group_num');
             target_roi_list = fetchn(rel_photostim,'roi_number','ORDER BY photostim_group_num');
             

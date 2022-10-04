@@ -21,30 +21,32 @@ classdef InfluenceVsCorrTraceSpont < dj.Computed
     methods(Access=protected)
         function makeTuples(self, key)
             close all;
-            
+            figure('visible','off')
+            rel_include = IMG.ROI-IMG.ROIBad;
             neurons_or_control_flag = [1,0]; % 1 neurons, 0 control sites
             neurons_or_control_label = { 'Neurons','Controls'};
             p_val=[1]; % for influence significance %making it for more significant values requires debugging of the shuffling method
-            num_svd_components_removed_vector_corr = [0,1,5];
+%             num_svd_components_removed_vector_corr = [0,1,5];
+            num_svd_components_removed_vector_corr = [0];
             minimal_distance=25; %um exlude all cells within minimal distance from target
             % bins
             bins_corr = [ -0.1,linspace(-0.05,0.05,11),0.1, 0.15, 0.2, 0.3,0.4,0.5, inf]; 
             bins_influence = [-inf, -0.3, linspace(-0.2,0.2,11),0.3, 0.4,0.5,0.75,1,1.25,1.5, inf];
             
             dir_base = fetch1(IMG.Parameters & 'parameter_name="dir_root_save"', 'parameter_value');
-            dir_fig = [dir_base  '\Photostim\influence_vs_corr_new\corr_trace_spont\'];
+            dir_fig = [dir_base  '\Photostim\Connectivity_vs_Tuning\single_sessions\tuning_by_trace_correlation\'];
             session_date = fetch1(EXP2.Session & key,'session_date');
             
-            
-            
-            
+            rel_roi = rel_include & key;
+            rel_data_influence=STIM.ROIInfluence2  & rel_include;
+
             
             colormap=viridis(numel(num_svd_components_removed_vector_corr));
             
             for i_n = 1:1:numel(neurons_or_control_flag)
                 key.neurons_or_control = neurons_or_control_flag(i_n);
-                rel_target = IMG.PhotostimGroup & (STIMANAL.NeuronOrControl2 & key);
-                rel_data_influence=STIM.ROIInfluence2   & rel_target & 'num_svd_components_removed=0';
+                rel_target = IMG.PhotostimGroup & (STIMANAL.NeuronOrControl & key & rel_include);
+                rel_data_influence2=rel_data_influence   & rel_target & 'num_svd_components_removed=0';
                 
                 group_list = fetchn(rel_target,'photostim_group_num','ORDER BY photostim_group_num');
                 if numel(group_list)<1
@@ -57,7 +59,7 @@ classdef InfluenceVsCorrTraceSpont < dj.Computed
                 DataStim_distance_lateral=cell(numel(group_list),1);
 
                 for i_g = 1:1:numel(group_list)
-                    rel_data_influence_current = [rel_data_influence & ['photostim_group_num=' num2str(group_list(i_g))]];
+                    rel_data_influence_current = [rel_data_influence2 & ['photostim_group_num=' num2str(group_list(i_g))]];
                     DataStim{i_g} = fetchn(rel_data_influence_current,'response_mean', 'ORDER BY roi_number')';
                     DataStim_pval{i_g} = fetchn(rel_data_influence_current,'response_p_value1', 'ORDER BY roi_number')';
                     DataStim_num_of_target_trials_used{i_g} = fetchn(rel_data_influence_current,'num_of_target_trials_used', 'ORDER BY roi_number')';
@@ -89,11 +91,11 @@ classdef InfluenceVsCorrTraceSpont < dj.Computed
                         
                        
                         
-                        rel_data_corr=STIMANAL.Target2AllCorrTraceSpont & rel_target & 'threshold_for_event=0' & key_component_corr;
+                        rel_data_corr=STIMANAL.Target2AllCorrTraceSpont & rel_target & 'threshold_for_event=0' & key_component_corr &rel_roi;
                         DataCorr = cell2mat(fetchn(rel_data_corr,'rois_corr', 'ORDER BY photostim_group_num'));
                         
                         if numel(DataCorr(:)) ~= numel(DataStim(:))
-                            a=1
+                            fprintf('Data mismatch')
                         end
                         
                         DataCorr(~idx_include)=NaN;
