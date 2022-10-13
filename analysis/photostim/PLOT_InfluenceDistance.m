@@ -30,8 +30,8 @@ position_y1(end+1)=position_y1(end)-vertical_dist;
 
 rel_data = (STIMANAL.InfluenceDistance & 'flag_divide_by_std=0' & 'flag_withold_trials=0' & 'flag_normalize_by_total=1') ...
     &  (STIMANAL.SessionEpochsIncludedFinal & IMG.Volumetric & 'stimpower>=100' & 'flag_include=1' )  ...
-    & (STIMANAL.NeuronOrControlNumber2 & 'num_targets_neurons>=50') ...
-    & (STIMANAL.NeuronOrControlNumber2 & 'num_targets_controls>=50');
+    & (STIMANAL.NeuronOrControlNumber & 'num_targets_neurons>=50') ...
+    & (STIMANAL.NeuronOrControlNumber & 'num_targets_controls>=50');
 
 
 key.num_svd_components_removed=0;
@@ -184,4 +184,4 @@ end
 %
 figure_name_out=[ dir_current_fig filename];
 eval(['print ', figure_name_out, ' -dtiff  -r500']);
-% eval(['print ', figure_name_out, ' -dpdf -r200']);
+eval(['print ', figure_name_out, ' -dpdf -r200']);

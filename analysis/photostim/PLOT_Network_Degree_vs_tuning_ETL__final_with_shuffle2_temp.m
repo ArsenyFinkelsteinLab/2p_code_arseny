@@ -383,5 +383,5 @@ end
 %
 figure_name_out=[ dir_current_fig filename];
 eval(['print ', figure_name_out, ' -dtiff  -r300']);
-% eval(['print ', figure_name_out, ' -dpdf -r200']);
+eval(['print ', figure_name_out, ' -dpdf -r200']);
 
