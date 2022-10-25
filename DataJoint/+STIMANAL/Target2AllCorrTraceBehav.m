@@ -10,46 +10,41 @@ rois_corr                        :blob    # correlation between the activity of 
 
 
 classdef Target2AllCorrTraceBehav < dj.Computed
-    properties
-        keySource = (EXP2.SessionEpoch& 'session_epoch_type="spont_photo"') & STIM.ROIInfluence5 & (EXP2.Session & (EXP2.SessionEpoch & 'session_epoch_type="behav_only"')  & (EXP2.SessionEpoch & 'session_epoch_type="spont_photo"'));
+     properties
+        keySource = (EXP2.SessionEpoch& 'session_epoch_type="spont_photo"') & STIM.ROIInfluence2 & (EXP2.Session & (EXP2.SessionEpoch & 'session_epoch_type="behav_only"')  & (EXP2.SessionEpoch & 'session_epoch_type="spont_photo"'))  & STIM.ROIResponseDirectUnique;
     end
     methods(Access=protected)
         function makeTuples(self, key)
             
             rel_roi = (IMG.ROI - IMG.ROIBad) & key;
-            rel_data = IMG.ROISpikes & rel_roi;
-
+            
             time_bin=1.5; %s
             threshold_for_event_vector = [0];
-%             num_svd_components_removed_vector = [0,1,2,3,4,5,10,20,50,100];
-            num_svd_components_removed_vector = [0,1,3,5,10];
+%             num_svd_components_removed_vector = [0,1,5];
+            num_svd_components_removed_vector = [0];
 
             keytemp = rmfield(key,'session_epoch_number');
             keytemp.session_epoch_type='behav_only';
-            key_behav = fetch(EXP2.SessionEpoch & keytemp,'LIMIT 1');
+            key_spont = fetch(EXP2.SessionEpoch & keytemp,'LIMIT 1');
             
             try
-                imaging_frame_rate= fetch1(IMG.FOVEpoch & key_behav, 'imaging_frame_rate');
+                imaging_frame_rate= fetch1(IMG.FOVEpoch & key_spont, 'imaging_frame_rate');
             catch
-                imaging_frame_rate = fetch1(IMG.FOV & key_behav, 'imaging_frame_rate');
+                imaging_frame_rate = fetch1(IMG.FOV & key_spont, 'imaging_frame_rate');
             end
             
             %% Loading Data
-            rel_photostim =IMG.PhotostimGroup*(STIM.ROIResponseDirect) & key;
-            rel_photostim=rel_photostim;
+            rel_data = IMG.ROISpikes & rel_roi;
+            rel_photostim =IMG.PhotostimGroup*(STIM.ROIResponseDirectUnique) & key;
             group_list = fetchn(rel_photostim,'photostim_group_num','ORDER BY photostim_group_num');
             target_roi_list = fetchn(rel_photostim,'roi_number','ORDER BY photostim_group_num');
             
-            roi_list=fetchn(rel_data &key_behav,'roi_number','ORDER BY roi_number');
+            roi_list=fetchn(rel_data &key_spont,'roi_number','ORDER BY roi_number');
             chunk_size=500;
             counter=0;
             for i_chunk=1:chunk_size:roi_list(end)
                 roi_interval = [i_chunk, i_chunk+chunk_size];
-                try
                 temp_F=cell2mat(fetchn(rel_data & key & sprintf('roi_number>=%d',roi_interval(1)) & sprintf('roi_number<%d',roi_interval(2)),'spikes_trace','ORDER BY roi_number'));
-                catch
-                                    temp_F=cell2mat(fetchn(rel_data & key & sprintf('roi_number>=%d',roi_interval(1)) & sprintf('roi_number<%d',roi_interval(2)),'dff_trace','ORDER BY roi_number'));
-                end
                 temp_count=(counter+1):1: (counter + size(temp_F,1));
                 Fall(temp_count,:)=temp_F;
                 counter = counter + size(temp_F,1);
@@ -89,7 +84,7 @@ classdef Target2AllCorrTraceBehav < dj.Computed
                         
                         singular_values =diag(S);
                         
-%                         variance_explained=singular_values.^2/sum(singular_values.^2); % a feature of SVD. proportion of variance explained by each component
+                        variance_explained=singular_values.^2/sum(singular_values.^2); % a feature of SVD. proportion of variance explained by each component
                         %                         cumulative_variance_explained=cumsum(variance_explained);
                         
                         U=U(:,(1+num_comp):end);

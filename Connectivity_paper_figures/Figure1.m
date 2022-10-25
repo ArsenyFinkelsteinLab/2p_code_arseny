@@ -1,7 +1,7 @@
 function Figure1
 close all;
 
-rel_roi=(IMG.ROI-IMG.ROIBad) -IMG.Mesoscope;
+rel_roi=(IMG.ROI& IMG.ROIGood-IMG.ROIBad) -IMG.Mesoscope;
 % rel_stats= LICK2D.ROILick2DmapStatsSpikes3bins*LICK2D.ROILick2DPSTHStatsSpikes* LICK2D.ROILick2DPSTHSimilarityAcrossPositionsSpikes3bins & rel_roi;
 rel_stats= LICK2D.ROILick2DmapStatsSpikes*LICK2D.ROILick2DPSTHStatsSpikes* LICK2D.ROILick2DPSTHSimilarityAcrossPositionsSpikes & rel_roi ...
     & 'number_of_bins=4';
@@ -11,9 +11,9 @@ rel_stats= LICK2D.ROILick2DmapStatsSpikes*LICK2D.ROILick2DPSTHStatsSpikes* LICK2
 % rel_stats=rel_stats & 'psth_position_concat_regular_odd_even_corr>0.25';
 
 rel_example = IMG.ROI*LICK2D.ROILick2DPSTHSpikesExample*LICK2D.ROILick2DmapSpikesExample*LICK2D.ROILick2DmapPSTHSpikesExample*LICK2D.ROILick2DmapPSTHStabilitySpikesExample;
-rel_map_single_session    = LICK2D.ROILick2DmapSpikes*LICK2D.ROILick2DmapStatsSpikes& rel_roi;
-key_single_session.subject_id = 480483;
-key_single_session.session = 2;
+rel_map_single_session    = LICK2D.ROILick2DmapSpikes*LICK2D.ROILick2DmapStatsSpikes& rel_roi & 'psth_position_concat_regular_odd_even_corr>=0.5';
+key_single_session.subject_id = 486668;
+key_single_session.session = 5;
 
 key_fov_example.subject_id = 480483;
 key_fov_example.session = 2;
@@ -319,18 +319,18 @@ fn_plot_single_cell_psth_example(rel_example,roi_number_uid, 0, 0);
 
 %% Single cell PSTH by position examples
 % Example Cell 1 PSTH
-roi_number_uid = 1304681;
+roi_number_uid = 1260652;%1304681;
 fn_plot_single_cell_psth_by_position_example (rel_example,roi_number_uid , 1, 1, position_x1_grid(1), position_y1_grid(1));
 
-roi_number_uid = 70899;
+roi_number_uid = 1261173; %70899;
 fn_plot_single_cell_psth_by_position_example(rel_example,roi_number_uid, 0, 0, position_x1_grid(2), position_y1_grid(1));
 
 % Example Cell 3 PSTH
-roi_number_uid = 73685;
+roi_number_uid = 1261985;
 fn_plot_single_cell_psth_by_position_example(rel_example,roi_number_uid, 0, 0, position_x1_grid(1), position_y1_grid(2));
 
 % Example Cell 3 PSTH
-roi_number_uid = 74265;
+roi_number_uid = 1261777;
 fn_plot_single_cell_psth_by_position_example(rel_example,roi_number_uid, 0, 0, position_x1_grid(2), position_y1_grid(2));
 
 %% 100 cells from one session

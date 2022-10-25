@@ -6,6 +6,10 @@ number_of_bins =P.number_of_bins;
 pos_x_bins_centers =P.pos_x_bins_centers;
 pos_z_bins_centers =P.pos_z_bins_centers';
 
+
+P.psth_per_position_regular = fn_map_2D_legalize_by_neighboring_psth(P.psth_per_position_regular);
+
+
 panel_width_map=0.025;
 panel_height_map=0.025;
 
@@ -13,7 +17,7 @@ panel_height_map=0.025;
 horizontal_dist1=(1/(number_of_bins+2))*0.1;
 vertical_dist1=(1/(number_of_bins+2))*0.1;
 panel_width1=(1/(number_of_bins+6))*0.15;
-panel_height1=(1/(number_of_bins+6))*0.15;
+panel_height1=(1/(number_of_bins+6))*0.125;
 for i=1:1:number_of_bins-1
     position_x1_grid(end+1)=position_x1_grid(end)+horizontal_dist1;
     position_y1_grid(end+1)=position_y1_grid(end)+vertical_dist1;
@@ -41,11 +45,11 @@ for  i_x=1:1:number_of_bins
         plot([0,0],[0,1],'-k','linewidth',0.25)
         temp_mean=P.psth_per_position_regular{i_z,i_x}./psth_max_all;
         temp_stem=P.psth_per_position_regular_stem{i_z,i_x}./psth_max_all;
-        try
-            plot(psth_time,P.psth_per_position_regular_odd{i_z,i_x}./psth_max_all,'-','Color',[0.4 0.4 0.4],'linewidth',0.5);
-            plot(psth_time,P.psth_per_position_regular_even{i_z,i_x}./psth_max_all,'-','Color',[0.1 0.1 0.1],'linewidth',0.5);
-        end
-        shadedErrorBar(psth_time,temp_mean, temp_stem,'lineprops',{'-','Color',[ 0 0 0.8],'linewidth',1});
+%         try
+%             plot(psth_time,P.psth_per_position_regular_odd{i_z,i_x}./psth_max_all,'-','Color',[0.4 0.4 0.4],'linewidth',0.5);
+%             plot(psth_time,P.psth_per_position_regular_even{i_z,i_x}./psth_max_all,'-','Color',[0.1 0.1 0.1],'linewidth',0.5);
+%         end
+        shadedErrorBar(psth_time,temp_mean, temp_stem,'lineprops',{'-','Color',[ 0 0 0.8],'linewidth',0.75});
         ylims=[0,1+eps];
         ylim(ylims);
         xlim(xl);

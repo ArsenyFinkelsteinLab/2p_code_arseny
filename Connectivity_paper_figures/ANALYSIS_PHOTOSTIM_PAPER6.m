@@ -14,7 +14,7 @@ populate(STIMANAL.NeuronOrControl);
 populate(STIMANAL.NeuronOrControlNumber);
 
 populate(STIMANAL.InfluenceDistance);
-populate(STIMANAL.ROIGraphAllETL2)
+populate(STIMANAL.ROIGraphAll) % ETL corrected
 populate(STIMANAL.OutDegree)
 populate(POP.ROICorrLocalPhoto2); %spikes
 populate(POP.ROICorrLocalPhoto); %delta F
@@ -35,8 +35,17 @@ populate(STIMANAL.InfluenceVsCorrTraceSpont);
 populate(STIMANAL.InfluenceVsCorrTraceSpontShuffled); 
 
 populate(STIMANAL.InfluenceVsCorrTraceSpontResidual); 
- 
+
 PLOT_InfluenceVsCorrTraceSpontResidual()
+
+
+populate(STIMANAL.Target2AllCorrTraceBehav);%based on spikes
+populate(STIMANAL.InfluenceVsCorrTraceBehav);
+populate(STIMANAL.InfluenceVsCorrTraceBehavShuffled); 
+
+populate(STIMANAL.InfluenceVsCorrTraceBehavResidual); 
+
+PLOT_InfluenceVsCorrTraceBehavResidual()
 
 
 %% Influence versus signal correlations (based on PSTH)

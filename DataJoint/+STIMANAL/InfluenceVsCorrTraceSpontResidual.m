@@ -48,7 +48,7 @@ classdef InfluenceVsCorrTraceSpontResidual < dj.Computed
             
             for i_n = 1:1:numel(neurons_or_control_flag)
                 key.neurons_or_control = neurons_or_control_flag(i_n);
-                rel_target = IMG.PhotostimGroup & (STIMANAL.NeuronOrControl2 & key);
+                rel_target = IMG.PhotostimGroup & (STIMANAL.NeuronOrControl & key);
                 rel_data_influence=STIM.ROIInfluence2   & rel_target & 'num_svd_components_removed=0';
                 
                 group_list = fetchn(rel_target,'photostim_group_num','ORDER BY photostim_group_num');

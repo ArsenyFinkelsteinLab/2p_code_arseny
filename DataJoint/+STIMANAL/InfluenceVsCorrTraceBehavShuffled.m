@@ -17,20 +17,24 @@ num_pairs                                       :int     # num pairs included
 
 classdef InfluenceVsCorrTraceBehavShuffled < dj.Computed
     properties
-        keySource = EXP2.SessionEpoch & STIMANAL.Target2AllCorrTraceBehav & (EXP2.Session & STIM.ROIInfluence5);
+        keySource = EXP2.SessionEpoch & STIMANAL.Target2AllCorrTraceBehav & (EXP2.Session & STIM.ROIInfluence2);
     end
     methods(Access=protected)
         function makeTuples(self, key)
-            close all;
+                        close all;
+            figure('visible','off')
+            rel_include = IMG.ROI-IMG.ROIBad;
             
             neurons_or_control_flag = [1,0]; % 1 neurons, 0 control sites
             neurons_or_control_label = { 'Neurons','Controls'};
             p_val=[1]; % for influence significance; %the code needs adjustment to include shuffling for other p-values
-            num_svd_components_removed_vector_corr =[0,1,3,5,10];
+%             num_svd_components_removed_vector_corr =[0,1,5];
+           num_svd_components_removed_vector_corr =[0];
+
             minimal_distance=25; %um, exlude all cells within minimal distance from target
             
             % bins
-         bins_corr = [ -0.1,linspace(-0.05,0.05,11),0.1, 0.15, 0.2, 0.3,0.4,0.5, inf]; 
+            bins_corr = [ -0.1,linspace(-0.05,0.05,11),0.1, 0.15, 0.2, 0.3,0.4,0.5, inf];
             bins_influence = [-inf, -0.3, linspace(-0.2,0.2,11),0.3, 0.4,0.5,0.75,1,1.25,1.5, inf];
             
             distance_lateral_bins = [0:10:500,inf]; % microns
@@ -38,19 +42,20 @@ classdef InfluenceVsCorrTraceBehavShuffled < dj.Computed
             
             
             dir_base = fetch1(IMG.Parameters & 'parameter_name="dir_root_save"', 'parameter_value');
-            dir_fig = [dir_base  '\Photostim\influence_vs_corr\corr_trace_behav\shuffled\'];
+            dir_fig = [dir_base  '\Photostim\Connectivity_vs_Tuning\single_sessions\tuning_by_trace_correlation\behav\\shuffled\'];
             session_date = fetch1(EXP2.Session & key,'session_date');
             
             
-            
+            rel_roi = rel_include & key;
+            rel_data_influence=STIM.ROIInfluence2  & rel_include;
             
             
             colormap=viridis(numel(num_svd_components_removed_vector_corr));
             
             for i_n = 1:1:numel(neurons_or_control_flag)
                 key.neurons_or_control = neurons_or_control_flag(i_n);
-                rel_target = IMG.PhotostimGroup & (STIMANAL.NeuronOrControl & key);
-                rel_data_influence=STIM.ROIInfluence5   & rel_target & 'num_svd_components_removed=0';
+                rel_target = IMG.PhotostimGroup & (STIMANAL.NeuronOrControl & key & rel_include);
+                rel_data_influence2=STIM.ROIInfluence2   & rel_target & 'num_svd_components_removed=0';
                 
                 group_list = fetchn(rel_target,'photostim_group_num','ORDER BY photostim_group_num');
                 if numel(group_list)<1
@@ -64,7 +69,7 @@ classdef InfluenceVsCorrTraceBehavShuffled < dj.Computed
                 Data_distance_axial=cell(numel(group_list),1);
                 
                 parfor i_g = 1:1:numel(group_list)
-                    rel_data_influence_current = [rel_data_influence & ['photostim_group_num=' num2str(group_list(i_g))]];
+                    rel_data_influence_current = [rel_data_influence2 & ['photostim_group_num=' num2str(group_list(i_g))]];
                     DataStim{i_g} = fetchn(rel_data_influence_current,'response_mean', 'ORDER BY roi_number')';
                     DataStim_pval{i_g} = fetchn(rel_data_influence_current,'response_p_value1', 'ORDER BY roi_number')';
                     DataStim_num_of_target_trials_used{i_g}=fetchn(rel_data_influence_current,'num_of_target_trials_used', 'ORDER BY roi_number')';
@@ -87,7 +92,7 @@ classdef InfluenceVsCorrTraceBehavShuffled < dj.Computed
                 
                 Data_distance_lateral = Data_distance_lateral(:);
                 Data_distance_axial = Data_distance_axial(:);
-
+                
                 
                 for i_p=1:1:numel(p_val)
                     
@@ -103,28 +108,28 @@ classdef InfluenceVsCorrTraceBehavShuffled < dj.Computed
                         
                         
                         
-                        rel_data_corr=STIMANAL.Target2AllCorrTraceBehav & rel_target & 'threshold_for_event=0' & key_component_corr;
+                        rel_data_corr=STIMANAL.Target2AllCorrTraceBehav & rel_target & 'threshold_for_event=0' & key_component_corr & rel_roi;
                         DataCorr = cell2mat(fetchn(rel_data_corr,'rois_corr', 'ORDER BY photostim_group_num'));
                         
                         if numel(DataCorr(:)) ~= numel(DataStim(:))
-                            a=1
+                            fprintf('Data mismatch')
                         end
                         
                         DataCorr(~idx_include)=NaN;
                         DataCorr=DataCorr(:);
                         
-
-                            
-                            distance_axial_bins = unique(Data_distance_axial);
-                            for i_l=1:1:numel(distance_lateral_bins)-1
-                                ix_l = Data_distance_lateral>=distance_lateral_bins(i_l) & Data_distance_lateral<distance_lateral_bins(i_l+1);
-                                for i_a = 1:1:numel(distance_axial_bins)
-                                    ix_a = Data_distance_axial==distance_axial_bins(i_a);
-                                    ix_bin = ix_l & ix_a;
-                                    data_in_bin = DataCorr(ix_bin);
-                                    DataCorr(ix_bin) =data_in_bin(randperm(numel(data_in_bin)));
-                                end
+                        
+                        
+                        distance_axial_bins = unique(Data_distance_axial);
+                        for i_l=1:1:numel(distance_lateral_bins)-1
+                            ix_l = Data_distance_lateral>=distance_lateral_bins(i_l) & Data_distance_lateral<distance_lateral_bins(i_l+1);
+                            for i_a = 1:1:numel(distance_axial_bins)
+                                ix_a = Data_distance_axial==distance_axial_bins(i_a);
+                                ix_bin = ix_l & ix_a;
+                                data_in_bin = DataCorr(ix_bin);
+                                DataCorr(ix_bin) =data_in_bin(randperm(numel(data_in_bin)));
                             end
+                        end
                         
                         
                         

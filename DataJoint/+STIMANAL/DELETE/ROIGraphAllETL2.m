@@ -1,6 +1,6 @@
 %{
 # Taking most responsive neurons
-# XYZ coordinate correction of ETL abberations based on anatomical fiducial
+# XYZ coordinate correction of ETL abberations based on ETL callibration
 
 -> EXP2.SessionEpoch
 ---
@@ -14,20 +14,20 @@ photostim_group_num_list          : blob                # (pixels)
 %}
 
 
-classdef ROIGraphAllETL3 < dj.Imported
+classdef ROIGraphAllETL2 < dj.Imported
     properties
         %         keySource = IMG.PhotostimGroup;
-        keySource = EXP2.SessionEpoch & 'flag_photostim_epoch =1' & IMG.FOV & STIMANAL.NeuronOrControl3;
+        keySource = EXP2.SessionEpoch & 'flag_photostim_epoch =1' & IMG.FOV & STIMANAL.NeuronOrControl;
     end
     methods(Access=protected)
         function makeTuples(self, key)
             dir_base =fetch1(IMG.Parameters & 'parameter_name="dir_root_save"', 'parameter_value');
-            dir_save_figure = [dir_base '\photostim\Graph_analysis\Graphs_on_map_ETL_depth3_ETL_anatomical_fiducial_correction\'];
+            dir_save_figure = [dir_base '\photostim\Graph_analysis\Graphs_on_map_ETL_depth2_ETL_callibration_correction\'];
             
             p_val_threshold =0.05;
             minimal_distance =25; %in microns
             
-            rel_roi = IMG.ROIPositionETL2*IMG.ROIdepth - IMG.ROIBad;
+            rel_roi = IMG.ROIPositionETL*IMG.ROIdepth - IMG.ROIBad;
             
             try
                 zoom =fetch1(IMG.FOVEpoch & key,'zoom');
@@ -39,8 +39,8 @@ classdef ROIGraphAllETL3 < dj.Imported
             
             roi_num=  fetchn( rel_roi & key ,'roi_number','ORDER BY roi_number');
             
-            group_num=  fetchn( (STIMANAL.NeuronOrControl3 & 'neurons_or_control=1') & key ,'photostim_group_num','ORDER BY photostim_group_num');
-            group_roi_num=  fetchn( STIM.ROIResponseDirect3 & key & (STIMANAL.NeuronOrControl3 & 'neurons_or_control=1'),'roi_number','ORDER BY photostim_group_num');
+            group_num=  fetchn( (STIMANAL.NeuronOrControl2 & 'neurons_or_control=1') & key ,'photostim_group_num','ORDER BY photostim_group_num');
+            group_roi_num=  fetchn( STIM.ROIResponseDirect2 & key & (STIMANAL.NeuronOrControl2 & 'neurons_or_control=1'),'roi_number','ORDER BY photostim_group_num');
             
             
             [group_roi_num, idxx,idxy ] = unique(group_roi_num,'stable');
@@ -49,8 +49,8 @@ classdef ROIGraphAllETL3 < dj.Imported
             roi_centroid_x=  fetchn( rel_roi  & key,'roi_centroid_x_corrected','ORDER BY roi_number')*pix2dist;
             roi_centroid_y=  fetchn(  rel_roi & key,'roi_centroid_y_corrected','ORDER BY roi_number')*pix2dist;
             
-            roi_centroid_x_direct = fetchn( rel_roi & (STIMANAL.NeuronOrControl3 & 'neurons_or_control=1') & key,'roi_centroid_x_corrected','ORDER BY roi_number')*pix2dist;
-            roi_centroid_y_direct = fetchn( rel_roi & (STIMANAL.NeuronOrControl3 & 'neurons_or_control=1') & key,'roi_centroid_y_corrected','ORDER BY roi_number')*pix2dist;
+            roi_centroid_x_direct = fetchn( rel_roi & (STIMANAL.NeuronOrControl2 & 'neurons_or_control=1') & key,'roi_centroid_x_corrected','ORDER BY roi_number')*pix2dist;
+            roi_centroid_y_direct = fetchn( rel_roi & (STIMANAL.NeuronOrControl2 & 'neurons_or_control=1') & key,'roi_centroid_y_corrected','ORDER BY roi_number')*pix2dist;
             
             
             roi_z=  fetchn( rel_roi  & key,'z_pos_relative','ORDER BY roi_number');
@@ -73,7 +73,7 @@ classdef ROIGraphAllETL3 < dj.Imported
             
             k1=key;
             tic
-            F=(fetch( STIM.ROIInfluence3 & key & 'response_mean>0' & sprintf('response_distance_lateral_um>=%.2f', minimal_distance) &  sprintf('response_p_value1<=%.5f', p_val_threshold),'*'));
+            F=(fetch( STIM.ROIInfluence2 & key & 'response_mean>0' & sprintf('response_distance_lateral_um>=%.2f', minimal_distance) &  sprintf('response_p_value1<=%.5f', p_val_threshold),'*'));
             if isempty(F)
                 return
             end

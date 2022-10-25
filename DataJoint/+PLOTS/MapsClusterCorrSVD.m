@@ -17,7 +17,9 @@ classdef MapsClusterCorrSVD < dj.Computed
             dir_current_fig = [dir_base  '\Lick2D\brain_maps\CorrClusters\clusters_corr_SVD\'];
             
             %             num_svd_components_removed_vector = [0, 1, 10];
-            num_svd_components_removed_vector = [0, 1, 5, 10];
+%             num_svd_components_removed_vector = [0, 1, 5, 10];
+            num_svd_components_removed_vector = [2,3,4];
+
 %             threshold_for_event_vector = [0, 0.25];
              threshold_for_event_vector = [0];
             n_clust_vector = [20, 100];

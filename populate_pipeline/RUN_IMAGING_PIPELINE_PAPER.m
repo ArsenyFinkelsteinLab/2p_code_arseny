@@ -257,6 +257,7 @@ populate(PLOTS.Dimensionality);
 populate(PLOTS.DimensionalityNeuropil);
 
 populate(PLOTS.MapsSVD);
+populate(PLOTS.MapsClusterCorrSVD);
 
 
 

@@ -14,7 +14,7 @@ classdef ROIClusterCorrSVD < dj.Computed
     properties
         
         keySource = (EXP2.SessionEpoch & IMG.ROIdeltaF & IMG.Mesoscope) - EXP2.SessionEpochSomatotopy;
-        
+
     end
     methods(Access=protected)
         function makeTuples(self, key)
@@ -26,8 +26,8 @@ classdef ROIClusterCorrSVD < dj.Computed
             %             threshold_for_event_vector = [0, 0.25];
             threshold_for_event_vector = [0];
             %             num_svd_components_removed_vector = [0, 1, 10];
-            num_svd_components_removed_vector = [0, 1,5, 10];
-            
+            num_svd_components_removed_vector = [0, 1, 2, 3, 4,  5, 10];
+
 
             dir_base =fetch1(IMG.Parameters & 'parameter_name="dir_root_save"', 'parameter_value');
             dir_save_figure_original = [dir_base 'Lick2D\Clusters\CorrSVD\'];

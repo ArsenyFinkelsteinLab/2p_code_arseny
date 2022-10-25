@@ -47,12 +47,13 @@ for i_y=1:1:cells_in_column
         if i_roi>total_roi
             return
         end
-        
+
         % Map
         ax6=axes('position',[position_x_grid(i_x), position_y_grid(i_y), panel_width1, panel_height1]);
         mmm=M.lickmap_fr_regular{i_roi};
         mmm=mmm./nanmax(mmm(:));
         mmm = fn_map_2D_legalize_by_neighboring(mmm, max_num_bins_to_legalize);
+%         mmm=imgaussfilt(mmm,'FilterSize',3);
         imagescnan(mmm);
         max_map=max(mmm(:));
         caxis([0 max_map]); % Scale the lowest value (deep blue) to 0
@@ -65,7 +66,6 @@ for i_y=1:1:cells_in_column
         if i_roi==7
             title(sprintf('Example session, Positional tuning of 100 neurons'), 'FontSize',6);
         end
-        
        
     end
 end

@@ -4,9 +4,9 @@ dir_current_fig = [dir_base  '\POP\SVD\'];
 filename = 'SVD_variance_and_spatial_scale_and_temporal_scale';
 close all
 
-rel_data1 = POP.ROISVDDistanceScale  & (IMG.Mesoscope & IMG.Volumetric);
-rel_data2 = POP.SVDSingularValues  & (IMG.Mesoscope & IMG.Volumetric) & 'threshold_for_event=0' & 'time_bin=1.5';
-rel_data3 = POP.SVDTemporalComponentsAutocorr	 & (IMG.Mesoscope & IMG.Volumetric);
+rel_data1 = POP.ROISVDDistanceScale  & (IMG.Mesoscope - IMG.Volumetric);
+rel_data2 = POP.SVDSingularValues  & (IMG.Mesoscope - IMG.Volumetric) & 'threshold_for_event=0' & 'time_bin=1.5';
+rel_data3 = POP.SVDTemporalComponentsAutocorr	 & (IMG.Mesoscope - IMG.Volumetric);
 
 smooth_window_scale = 3;
 
@@ -231,4 +231,4 @@ end
 %
 figure_name_out=[ dir_current_fig filename];
 eval(['print ', figure_name_out, ' -dtiff  -r200']);
-% eval(['print ', figure_name_out, ' -dpdf -r200']);
+eval(['print ', figure_name_out, ' -dpdf -r200']);

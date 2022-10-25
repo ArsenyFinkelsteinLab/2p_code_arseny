@@ -1,6 +1,6 @@
 %{
 # Taking most responsive neurons
-# XYZ coordinate correction of ETL abberations based on ETL callibration
+
 
 -> EXP2.SessionEpoch
 ---
@@ -14,20 +14,20 @@ photostim_group_num_list          : blob                # (pixels)
 %}
 
 
-classdef ROIGraphAllETL2 < dj.Imported
+classdef ROIGraphAll < dj.Imported
     properties
         %         keySource = IMG.PhotostimGroup;
-        keySource = EXP2.SessionEpoch & 'flag_photostim_epoch =1' & IMG.FOV & STIMANAL.NeuronOrControl2;
+%         keySource = EXP2.SessionEpoch & 'flag_photostim_epoch =1' & IMG.FOV & STIM.ROIInfluence5;
     end
     methods(Access=protected)
         function makeTuples(self, key)
             dir_base =fetch1(IMG.Parameters & 'parameter_name="dir_root_save"', 'parameter_value');
-            dir_save_figure = [dir_base '\photostim\Graph_analysis\Graphs_on_map_ETL_depth2_ETL_callibration_correction\'];
+            dir_save_figure = [dir_base '\photostim\Graph_analysis\Graphs_on_map_depth\'];
             
             p_val_threshold =0.05;
             minimal_distance =25; %in microns
             
-            rel_roi = IMG.ROIPositionETL*IMG.ROIdepth - IMG.ROIBad;
+            rel_roi = IMG.ROI*IMG.ROIdepth - IMG.ROIBad;
             
             try
                 zoom =fetch1(IMG.FOVEpoch & key,'zoom');
@@ -39,25 +39,21 @@ classdef ROIGraphAllETL2 < dj.Imported
             
             roi_num=  fetchn( rel_roi & key ,'roi_number','ORDER BY roi_number');
             
-            group_num=  fetchn( (STIMANAL.NeuronOrControl2 & 'neurons_or_control=1') & key ,'photostim_group_num','ORDER BY photostim_group_num');
-            group_roi_num=  fetchn( STIM.ROIResponseDirect2 & key & (STIMANAL.NeuronOrControl2 & 'neurons_or_control=1'),'roi_number','ORDER BY photostim_group_num');
+            group_num=  fetchn( (STIMANAL.NeuronOrControl5 & 'neurons_or_control=1') & key ,'photostim_group_num','ORDER BY photostim_group_num');
+            group_roi_num=  fetchn( STIM.ROIResponseDirect5 & key & (STIMANAL.NeuronOrControl5 & 'neurons_or_control=1'),'roi_number','ORDER BY photostim_group_num');
             
             
             [group_roi_num, idxx,idxy ] = unique(group_roi_num,'stable');
             group_num = group_num(idxx);
             
-            roi_centroid_x=  fetchn( rel_roi  & key,'roi_centroid_x_corrected','ORDER BY roi_number')*pix2dist;
-            roi_centroid_y=  fetchn(  rel_roi & key,'roi_centroid_y_corrected','ORDER BY roi_number')*pix2dist;
+            roi_centroid_x=  fetchn( rel_roi  & key,'roi_centroid_x','ORDER BY roi_number')*pix2dist;
+            roi_centroid_y=  fetchn(  rel_roi & key,'roi_centroid_y','ORDER BY roi_number')*pix2dist;
             
-            roi_centroid_x_direct = fetchn( rel_roi & (STIMANAL.NeuronOrControl2 & 'neurons_or_control=1') & key,'roi_centroid_x_corrected','ORDER BY roi_number')*pix2dist;
-            roi_centroid_y_direct = fetchn( rel_roi & (STIMANAL.NeuronOrControl2 & 'neurons_or_control=1') & key,'roi_centroid_y_corrected','ORDER BY roi_number')*pix2dist;
+            roi_centroid_x_direct = fetchn( rel_roi & (STIMANAL.NeuronOrControl5 & 'neurons_or_control=1') & key,'roi_centroid_x','ORDER BY roi_number')*pix2dist;
+            roi_centroid_y_direct = fetchn( rel_roi & (STIMANAL.NeuronOrControl5 & 'neurons_or_control=1') & key,'roi_centroid_y','ORDER BY roi_number')*pix2dist;
             
-            
-            roi_z=  fetchn( rel_roi  & key,'z_pos_relative','ORDER BY roi_number');
-            
-            %             depth=unique(roi_z);
-            
-            
+                        roi_z=  fetchn( rel_roi  & key,'z_pos_relative','ORDER BY roi_number');
+
             panel_width=0.8;
             panel_height=0.8;
             horizontal_distance=0.7;
@@ -73,7 +69,7 @@ classdef ROIGraphAllETL2 < dj.Imported
             
             k1=key;
             tic
-            F=(fetch( STIM.ROIInfluence2 & key & 'response_mean>0' & sprintf('response_distance_lateral_um>=%.2f', minimal_distance) &  sprintf('response_p_value1<=%.5f', p_val_threshold),'*'));
+            F=(fetch( STIM.ROIInfluence5 & key & 'response_mean>0' & sprintf('response_distance_lateral_um>=%.2f', minimal_distance) &  sprintf('response_p_value1<=%.5f', p_val_threshold),'*'));
             if isempty(F)
                 return
             end
@@ -157,7 +153,7 @@ classdef ROIGraphAllETL2 < dj.Imported
                         
                     end
                 else
-                    idx_indirectly_stimulated = [idx_indirectly_stimulated,i_r];
+                                       idx_indirectly_stimulated = [idx_indirectly_stimulated,i_r]; 
                 end
             end
             
@@ -173,17 +169,14 @@ classdef ROIGraphAllETL2 < dj.Imported
             
             axes('position',[position_x(1), position_y(1), panel_width, panel_height]);
             
-            % label the indirectly stimulate neurons
+              % label the indirectly stimulate neurons
             hold on
-            %             plot(roi_centroid_x(idx_indirectly_stimulated),roi_centroid_y(idx_indirectly_stimulated),'.','Color',[0.2 1 0.2],'MarkerSize',15);
-            %                         plot(roi_centroid_x(idx_indirectly_stimulated),roi_centroid_y(idx_indirectly_stimulated),'.','Color',[0.2 1 1],'MarkerSize',15);
-            
+%             plot(roi_centroid_x(idx_indirectly_stimulated),roi_centroid_y(idx_indirectly_stimulated),'.','Color',[0.2 1 0.2],'MarkerSize',10);
+
             idx_upper_plane = (roi_z==0);
             scatter(roi_centroid_x(idx_upper_plane),roi_centroid_y(idx_upper_plane),12,[0,0,0],'filled');
             scatter(roi_centroid_x(~idx_upper_plane),roi_centroid_y(~idx_upper_plane),12,[roi_z(~idx_upper_plane)*0.5,roi_z(~idx_upper_plane),roi_z(~idx_upper_plane)*0.5]./max(roi_z),'filled');
-            
-            
-            
+
             mean_img_enhanced = fetch1(IMG.Plane & key & 'plane_num=1','mean_img_enhanced');
             x_dim = [0:1:(size(mean_img_enhanced,1)-1)]*pix2dist;
             y_dim = [0:1:(size(mean_img_enhanced,2)-1)]*pix2dist;
@@ -205,7 +198,7 @@ classdef ROIGraphAllETL2 < dj.Imported
             %             end
             p.EdgeCData = table2array(G.Edges(:,2));
             %             p.NodeCData = Din+5;
-            p.NodeColor = [1 0 1];
+                         p.NodeColor = [1 0 1];
             %                         p.NodeCData = diagonal_values;
             
             p.MarkerSize = (Dout+0.01)/5;
@@ -228,13 +221,13 @@ classdef ROIGraphAllETL2 < dj.Imported
             %             axis off;
             %             box off;
             axis xy
-            %             set(gca,'YDir','reverse')
+%             set(gca,'YDir','reverse')
             axis equal
             xlabel('Anterior - Posterior (\mum)','FontSize',32);
             ylabel('Lateral - Medial (\mum)','FontSize',32);
             set(gca,'Xlim',[min(x_dim),max(x_dim)],'Xtick',[0, 400, 600],'XtickLabel',[0, 400, 600], 'Ylim',[min(y_dim),max(y_dim)],'Ytick',[0, 170,  570],'YtickLabel',[0, 0,  400],'TickLength',[0.01,0],'TickDir','out','FontSize',32)
             
-            
+                      
             
             %             axes('position',[position_x(1), position_y(2), panel_width, panel_height]);
             %             D = indegree(G);
@@ -282,8 +275,8 @@ classdef ROIGraphAllETL2 < dj.Imported
             xlim ([x_min, x_max]);
             ylim ([y_min, y_max]);
             
-            %             hold on
-            %             plot(roi_centroid_x_direct,roi_centroid_y_direct,'.b')
+%             hold on
+%             plot(roi_centroid_x_direct,roi_centroid_y_direct,'.b')
             
             %Saving the graph
             
@@ -293,8 +286,8 @@ classdef ROIGraphAllETL2 < dj.Imported
             end
             figure_name_out = [dir_current_figure  's' num2str(s.session ) '_' s.session_date '_epoch' num2str(key.session_epoch_number)];
             eval(['print ', figure_name_out, ' -dtiff  -r500']);
-            eval(['print ', figure_name_out, ' -dpdf  -r500']);
-            
+                        eval(['print ', figure_name_out, ' -dpdf  -r500']);
+
             
         end
     end

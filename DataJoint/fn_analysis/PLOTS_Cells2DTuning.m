@@ -100,8 +100,8 @@ panel_height3=0.15;
 
 %Graphics
 %---------------------------------
-% figure;
-figure("Visible",false);
+figure;
+% figure("Visible",false);
 set(gcf,'DefaultAxesFontName','helvetica');
 set(gcf,'PaperUnits','centimeters','PaperPosition',[0 0 23 30]);
 set(gcf,'PaperOrientation','portrait');
@@ -270,6 +270,9 @@ for i_roi=1:plot_one_in_x_cell:numel(roi_number)
         psth_max_all=max([psth_max_regular(:)]);
     end
     
+    
+   M.psth_per_position_regular{i_roi} = fn_map_2D_legalize_by_neighboring_psth(M.psth_per_position_regular{i_roi});
+    
     for  i_l=1:1:number_of_bins^2
         axes('position',[position_x1_grid(plots_order_mat_x(i_l)), position_y1_grid(plots_order_mat_y(i_l)), panel_width1, panel_height1]);
         hold on;
@@ -295,6 +298,8 @@ for i_roi=1:plot_one_in_x_cell:numel(roi_number)
     end
     
     %% 2 PSTH per position, for large reward
+       M.psth_per_position_large{i_roi} = fn_map_2D_legalize_by_neighboring_psth(M.psth_per_position_large{i_roi});
+
     psth_max_large= cell2mat(reshape(M.psth_per_position_large{i_roi},[number_of_bins^2,1])) + cell2mat(reshape(M.psth_per_position_large_stem{i_roi},[number_of_bins^2,1]));
     try
         odd=cell2mat(reshape(M.psth_per_position_large_odd{i_roi},[number_of_bins^2,1]));
@@ -328,6 +333,8 @@ for i_roi=1:plot_one_in_x_cell:numel(roi_number)
     end
     
     %% 3 PSTH per position, for small reward
+           M.psth_per_position_small{i_roi} = fn_map_2D_legalize_by_neighboring_psth(M.psth_per_position_small{i_roi});
+
     psth_max_small= cell2mat(reshape(M.psth_per_position_small{i_roi},[number_of_bins^2,1])) + cell2mat(reshape(M.psth_per_position_small_stem{i_roi},[number_of_bins^2,1]));
     try
         odd=cell2mat(reshape(M.psth_per_position_small_odd{i_roi},[number_of_bins^2,1]));
