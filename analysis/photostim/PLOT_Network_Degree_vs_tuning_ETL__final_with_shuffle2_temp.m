@@ -74,7 +74,9 @@ for i_s = 1:1:rel_session.count
     rel_signal2 = LICK2D.ROILick2DPSTHStatsSpikes  & k_s & key_epoch & rel_include;
     rel_signal3 = LICK2D.ROILick2DangleStatsSpikes3bins  & k_s & key_epoch & rel_include;
     rel_signal4 = IMG.ROIdeltaFStats  & k_s & key_epoch & rel_include;
+%     rel_signal5 = STIM.ROIResponseDirectUnique & k_s & k_degree & rel_include;
 
+    
     
     key_epoch2=key_epoch;
     
@@ -89,6 +91,8 @@ for i_s = 1:1:rel_session.count
     DATA_SIGNAL2 = struct2table(fetch(rel_signal2, 'psth_regular_odd_vs_even_corr', 'reward_peak_regular', 'reward_peak_small','reward_peak_large', 'ORDER BY roi_number'));
     DATA_SIGNAL3 = struct2table(fetch(rel_signal3, 'rayleigh_length_regular', 'theta_tuning_odd_even_corr_regular', 'goodness_of_fit_vmises_regular', 'ORDER BY roi_number'));
     DATA_SIGNAL4 = struct2table(fetch(rel_signal4, 'mean_dff'));
+%     DATA_SIGNAL5 = struct2table(fetch(rel_signal5, 'response_mean'));
+
     DATA_CORR = struct2table(fetch(rel_corr_local, '*'));
 
     
@@ -103,6 +107,7 @@ for i_s = 1:1:rel_session.count
     DATA_SIGNAL_ALL2 =[DATA_SIGNAL_ALL2; DATA_SIGNAL2(idx,:)];
     DATA_SIGNAL_ALL3 =[DATA_SIGNAL_ALL3; DATA_SIGNAL3(idx,:)];
     DATA_SIGNAL_ALL4 =[DATA_SIGNAL_ALL4; DATA_SIGNAL4(idx,:)];
+%     DATA_SIGNAL_ALL5 =[DATA_SIGNAL_ALL5; DATA_SIGNAL5(idx,:)];
 
 end
 
@@ -123,6 +128,7 @@ signal3.rayleigh = DATA_SIGNAL_ALL3.rayleigh_length_regular;
 
 signal4.mean_dff = DATA_SIGNAL_ALL4.mean_dff;
 
+% signal5.response_mean = DATA_SIGNAL_ALL5.response_mean;
 
 
 
@@ -291,7 +297,23 @@ ylabel(sprintf('Mean DeltaF/F \n'))
 title(sprintf('Flourescence \n'));
 box off;
 
-
+%% Connectivity vs Target response to direct photostimulation 
+axes('position',[position_x1(4), position_y1(4), panel_width1, panel_height1]);
+hold on
+y=DATA_DEGREE_ALL.response_mean;
+% excitatory
+k =out_degree_excitatory;
+hist_bins = linspace(0,ceil(max(k)),number_of_bins);
+hist_bins(end-2:end-1)=[];
+[hist_bins_centers, y_binned_mean,y_binned_stem, y_binned_shuffled_mean, y_binned_shuffled_stem] =fn_bin_and_shuffle (hist_bins, num_shuffles, k, y);
+shadedErrorBar(hist_bins_centers,y_binned_mean,y_binned_stem,'lineprops',{'.-','Color',[0 0 1]})
+shadedErrorBar(hist_bins_centers,y_binned_shuffled_mean,y_binned_shuffled_stem,'lineprops',{'.-','Color',[0 0 0]})
+ylim([min(y_binned_mean-y_binned_stem),max(y_binned_mean+y_binned_stem)])
+xlabel('Effective Connections')
+ylabel(sprintf('Targetr response to direct \n photostimulation DeltaF/F \n'))
+title(sprintf('Flourescence \n'));
+box off;
+ylim([0,2.5]);
 
 %% Excitatory connections, versus Random Network
 k=out_degree_excitatory;

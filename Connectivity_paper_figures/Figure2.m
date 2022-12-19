@@ -1,5 +1,6 @@
-function Figure1
+function Figure2
 close all;
+filename=[sprintf('Figure2')];
 
 rel_roi=(IMG.ROI& IMG.ROIGood-IMG.ROIBad) -IMG.Mesoscope;
 % rel_stats= LICK2D.ROILick2DmapStatsSpikes3bins*LICK2D.ROILick2DPSTHStatsSpikes* LICK2D.ROILick2DPSTHSimilarityAcrossPositionsSpikes3bins & rel_roi;
@@ -11,20 +12,14 @@ rel_stats= LICK2D.ROILick2DmapStatsSpikes*LICK2D.ROILick2DPSTHStatsSpikes* LICK2
 % rel_stats=rel_stats & 'psth_position_concat_regular_odd_even_corr>0.25';
 
 rel_example = IMG.ROI*LICK2D.ROILick2DPSTHSpikesExample*LICK2D.ROILick2DmapSpikesExample*LICK2D.ROILick2DmapPSTHSpikesExample*LICK2D.ROILick2DmapPSTHStabilitySpikesExample;
-rel_map_single_session    = LICK2D.ROILick2DmapSpikes*LICK2D.ROILick2DmapStatsSpikes& rel_roi & 'psth_position_concat_regular_odd_even_corr>=0.5';
-key_single_session.subject_id = 486668;
-key_single_session.session = 5;
 
-key_fov_example.subject_id = 480483;
-key_fov_example.session = 2;
-key_fov_example.session_epoch_type='behav_only';
+
 rel_psth = LICK2D.ROILick2DPSTHSpikes & rel_roi & rel_stats;
 
 dir_base = fetch1(IMG.Parameters & 'parameter_name="dir_root_save"', 'parameter_value');
 dir_current_fig = [dir_base  '\Connectivity_paper_figures\plots\'];
 dir_embeded_graphics=dir_current_fig;
 
-filename=[sprintf('Figure1')];
 %% Graphics
 %---------------------------------
 figure;
@@ -149,150 +144,6 @@ position_y4(end+1)=position_y4(end)-vertical_dist4;
 
 
 
-%% Behavior cartoon
-axes('position',[position_x1(1),position_y1(1), panel_width1, panel_height1])
-xl = [0 2680];
-yl = [0 1500];
-fig1_a = imread([dir_embeded_graphics 'Figure1_behavior_cartoon.tif']);
-% fig1_a=flipdim(fig1_a,1);
-imagesc(fig1_a);
-set(gca,'Xlim',xl,'Ylim',yl);
-text(xl(1)+diff(xl)*0.2, yl(1)-diff(yl)*0.1, 'a', ...
-    'fontsize', 12, 'fontname', 'helvetica', 'fontweight', 'bold');
-% text(xl(1)+diff(xl)*0.5, yl(1)+diff(yl)*1.1,'vS1','FontSize',8,'FontWeight','bold','Color',[0 1 0],'HorizontalAlignment','center');
-axis off;
-axis tight;
-axis equal;
-
-%% FOV
-ax1=axes('position',[position_x1_fov(4),position_y1_fov(4), panel_width1_fov, panel_height1_fov]);
-plane4=fetch1(IMG.Plane & key_single_session & 'plane_num=4','mean_img');
-imagesc(plane4);
-xl=[0,size(plane4,1)];
-yl=[0,size(plane4,2)];
-caxis([0 max(plane4(:))*0.4])
-axis off;
-axis tight;
-axis equal;
-colormap(ax1,gray)
-
-ax2=axes('position',[position_x1_fov(3),position_y1_fov(3), panel_width1_fov, panel_height1_fov]);
-plane3=fetch1(IMG.Plane & key_single_session & 'plane_num=3','mean_img');
-imagesc(plane3);
-caxis([0 max(plane3(:))*0.6])
-axis off;
-axis tight;
-axis equal;
-colormap(ax2,gray)
-
-ax3=axes('position',[position_x1_fov(2),position_y1_fov(2), panel_width1_fov, panel_height1_fov]);
-plane2=fetch1(IMG.Plane & key_single_session & 'plane_num=2','mean_img');
-imagesc(plane2);
-caxis([0 max(plane2(:))*0.8])
-axis off;
-axis tight;
-axis equal;
-colormap(ax3,gray)
-
-ax4=axes('position',[position_x1_fov(1),position_y1_fov(1), panel_width1_fov, panel_height1_fov]);
-plane1=fetch1(IMG.Plane & key_single_session & 'plane_num=1','mean_img');
-imagesc(plane1);
-caxis([0 max(plane1(:))*1.0])
-text(xl(1)-diff(xl)*0.5, yl(1)-diff(yl)*0.1, 'b', ...
-    'fontsize', 12, 'fontname', 'helvetica', 'fontweight', 'bold');
-axis off;
-axis tight;
-axis equal;
-colormap(ax4,gray)
-title(sprintf('Volumetric imaging'),'FontSize',6)
-text(xl(1)-diff(xl)*0.25,yl(1)+diff(yl)*1.6,sprintf('Anterior Lateral \nMotor cortex (ALM)'), 'FontSize',6,'HorizontalAlignment','left');
-
-
-%% ROI traces
-axes('position',[position_x1_trace(1),position_y1_trace(1), panel_width1_trace, panel_height1_trace]);
-hold on
-imaging_frame_rate = fetchn(IMG.FOVEpoch & key_fov_example,'imaging_frame_rate');
-key_fov_example_roi.roi_number=3;
-dff1 = fetch1(IMG.ROIdeltaF & key_fov_example & key_fov_example_roi & 'plane_num=1','dff_trace');
-time_trace = [0:1:numel(dff1)-1]/imaging_frame_rate;
-idx_time_2plot=(time_trace>10 & time_trace<=70);
-time_trace = time_trace(idx_time_2plot)-10;
-dff1 = dff1(idx_time_2plot);
-plot(time_trace,dff1,'Color',[0 0.5 0]);
-spikes1 = fetch1(IMG.ROISpikes & key_fov_example & key_fov_example_roi & 'plane_num=1','spikes_trace');
-spikes1 = spikes1(idx_time_2plot);
-spikes1=max(dff1)*(spikes1/max(spikes1));
-plot(time_trace,spikes1,'Color',[0 0 0]);
-box off
-xl=[0 ceil(max(time_trace))];
-yl=double([min(dff1), max(dff1)]);
-xlim(xl);
-ylim(yl);
-text(xl(1)-diff(xl)*0.3, yl(1)+diff(yl)*1.25, 'c', ...
-    'fontsize', 12, 'fontname', 'helvetica', 'fontweight', 'bold');
-text(xl(1)+diff(xl)*0.25, yl(1)+diff(yl)*1.25, sprintf('Plane 1'), ...
-    'fontsize', 6, 'fontname', 'helvetica','HorizontalAlignment','left');
-set(gca,'Xtick',xl,'XTickLabel',[],'Ytick',[0, floor(yl(2))],'FontSize',6)
-
-axes('position',[position_x1_trace(1),position_y1_trace(2), panel_width1_trace, panel_height1_trace]);
-hold on
-key_fov_example_roi.roi_number=794;
-dff1 = fetch1(IMG.ROIdeltaF & key_fov_example & 'plane_num=2' & key_fov_example_roi & key_fov_example_roi,'dff_trace');
-dff1 = dff1(idx_time_2plot);
-yl=double([min(dff1), max(dff1)]);
-plot(time_trace,dff1,'Color',[0 0.5 0]);
-spikes1 = fetch1(IMG.ROISpikes & key_fov_example &  'plane_num=2' & key_fov_example_roi ,'spikes_trace');
-spikes1 = spikes1(idx_time_2plot);
-spikes1=max(dff1)*(spikes1/max(spikes1));
-plot(time_trace,spikes1,'Color',[0 0 0]);
-box off
-text(xl(1)+diff(xl)*0.25, yl(1)+diff(yl)*1.25, sprintf('Plane 2'), ...
-    'fontsize', 6, 'fontname', 'helvetica','HorizontalAlignment','left');
-xl=[0 ceil(max(time_trace))];
-yl=double([min(dff1), max(dff1)]);
-xlim(xl);
-ylim(yl);
-set(gca,'Xtick',xl,'XTickLabel',[],'Ytick',[0, floor(yl(2))],'FontSize',6)
-
-axes('position',[position_x1_trace(1),position_y1_trace(3), panel_width1_trace, panel_height1_trace]);
-hold on
-key_fov_example_roi.roi_number=1520;
-dff1 = fetch1(IMG.ROIdeltaF & key_fov_example  & 'plane_num=3' & key_fov_example_roi,'dff_trace');
-dff1 = dff1(idx_time_2plot);
-yl=double([min(dff1), max(dff1)]);
-plot(time_trace,dff1,'Color',[0 0.5 0]);
-spikes1 = fetch1(IMG.ROISpikes & key_fov_example & 'plane_num=3' & key_fov_example_roi ,'spikes_trace');
-spikes1 = spikes1(idx_time_2plot);
-spikes1=max(dff1)*(spikes1/max(spikes1));
-plot(time_trace,spikes1,'Color',[0 0 0]);
-box off
-text(xl(1)+diff(xl)*0.25, yl(1)+diff(yl)*1.25, sprintf('Plane 3'), ...
-    'fontsize', 6, 'fontname', 'helvetica','HorizontalAlignment','left');
-yl=double([min(dff1), max(dff1)]);
-xlim(xl);
-ylim(yl);
-set(gca,'Xtick',xl,'XTickLabel',[],'Ytick',[0, floor(yl(2))],'FontSize',6)
-
-axes('position',[position_x1_trace(1),position_y1_trace(4), panel_width1_trace, panel_height1_trace]);
-hold on
-key_fov_example_roi.roi_number=2224;
-dff1 = fetch1(IMG.ROIdeltaF & key_fov_example & 'plane_num=4' & key_fov_example_roi ,'dff_trace','LIMIT 1');
-dff1 = dff1(idx_time_2plot);
-yl=double([min(dff1), max(dff1)]);
-plot(time_trace,dff1,'Color',[0 0.5 0]);
-spikes1 = fetch1(IMG.ROISpikes & key_fov_example & 'plane_num=4' & key_fov_example_roi ,'spikes_trace','LIMIT 1');
-spikes1 = spikes1(idx_time_2plot);
-spikes1=max(dff1)*(spikes1/max(spikes1));
-plot(time_trace,spikes1,'Color',[0 0 0]);
-box off
-text(xl(1)+diff(xl)*0.25, yl(1)+diff(yl)*1.25, sprintf('Plane 4'), ...
-    'fontsize', 6, 'fontname', 'helvetica','HorizontalAlignment','left');
-yl=double([min(dff1), max(dff1)]);
-xlim(xl);
-ylim(yl);
-text(xl(1)-diff(xl)*0.15,yl(1)+diff(yl)*0,sprintf('\\Delta F/F'),'Rotation',90, 'FontSize',6,'VerticalAlignment','bottom');
-text(xl(1)+diff(xl)*0.5,yl(1)-diff(yl)*0.5,sprintf('Time (s)'), 'FontSize',6,'HorizontalAlignment','center');
-set(gca,'Xtick',xl,'XTickLabel',xl,'Ytick',[0, floor(yl(2))],'FontSize',6)
 
 %% Single cell PSTH example
 
@@ -333,8 +184,6 @@ fn_plot_single_cell_psth_by_position_example(rel_example,roi_number_uid, 0, 0, p
 roi_number_uid = 1261777;
 fn_plot_single_cell_psth_by_position_example(rel_example,roi_number_uid, 0, 0, position_x1_grid(2), position_y1_grid(2));
 
-%% 100 cells from one session
-fn_PLOTS_Multiple_Cells2DTuning_for_one_session (key_single_session, rel_map_single_session, rel_roi, 10, 10, position_x2_grid(1), position_y2_grid(1))
 
 %% fetching stats
 D=fetch(rel_stats, 'psth_regular_odd_vs_even_corr', ...
@@ -358,6 +207,50 @@ D_tuned=fetch(rel_stats & 'information_per_spike_regular>=0.1', 'psth_regular_od
 
 
 %% Plotting Stats
+
+
+subplot(4,4,12)
+bin_mat_coordinate_ver= repmat([1:1:3],3,1);
+bin_mat_coordinate_hor= repmat([1:1:3]',1,3);
+XXX=[D.preferred_bin_deltamap_regular_vs_large];
+XXX(isnan(XXX))=[];
+[preferred_bin_mat] = histcounts2(bin_mat_coordinate_ver(XXX),bin_mat_coordinate_hor(XXX),[1:1:3+1],[1:1:3+1]);
+imagesc([-1,0,1],[-1,0,1],preferred_bin_mat);
+title(sprintf('Preferred position\ndelta regular vs large'));
+caxis([0,nanmax(preferred_bin_mat(:))])
+set(gca,'YDir','normal');
+
+
+subplot(4,4,13)
+bin_mat_coordinate_ver= repmat([1:1:3],3,1);
+bin_mat_coordinate_hor= repmat([1:1:3]',1,3);
+XXX=[D.preferred_bin_deltamap_regular_vs_small];
+XXX(isnan(XXX))=[];
+[preferred_bin_mat] = histcounts2(bin_mat_coordinate_ver(XXX),bin_mat_coordinate_hor(XXX),[1:1:3+1],[1:1:3+1]);
+imagesc([-1,0,1],[-1,0,1],preferred_bin_mat);
+title(sprintf('Preferred position\ndelta regular vs small'));
+caxis([0,nanmax(preferred_bin_mat(:))])
+set(gca,'YDir','normal');
+
+
+subplot(4,4,14)
+histogram([D.corr_deltamap_regular_vs_large_odd_even]);
+xlabel(sprintf('Stability delta regular vs large\ncorr (odd ,even) corr'))
+ylabel('Counts');
+xlim([-1,1]);
+
+subplot(4,4,15)
+histogram([D.corr_deltamap_regular_vs_small_odd_even]);
+xlabel(sprintf('Stability delta regular vs small\ncorr (odd ,even) corr'))
+ylabel('Counts');
+xlim([-1,1]);
+
+
+
+
+
+
+
 
 %% PSTH of all cells
 ax5=axes('position',[position_x2(1),position_y2(2), panel_width3, panel_height3]);

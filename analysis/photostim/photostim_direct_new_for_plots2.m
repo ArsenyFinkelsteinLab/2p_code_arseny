@@ -1,4 +1,4 @@
-function photostim_direct_new_for_plots()
+function photostim_direct_new_for_plots2()
 dir_base = fetch1(IMG.Parameters & 'parameter_name="dir_root_save"', 'parameter_value'); 
 dir_current_fig = [dir_base  '\Photostim\photostim_traces\new\'];
 
